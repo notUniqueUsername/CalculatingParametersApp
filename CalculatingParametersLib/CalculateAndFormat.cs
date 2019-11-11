@@ -85,18 +85,19 @@ namespace CalculatingParametersLib
             var list = new List<double>();
             Params.Zp1 = _calculator.Zp1(rc, rp, k, z0);
             Params.Zc1 = _calculator.Zc1(rc, rp, k, z0);
-            Params.L11 = _calculator.L11(erc, erp, Params.Zp1, Params.Zc1, rc, rp);
+            
+            Params.L11 = Math.Round(_calculator.L11(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -6), 3); 
             list.Add(Params.L11);
-            Params.L12 = _calculator.L12(erc, erp, Params.Zp1, Params.Zc1, rc, rp);
+            Params.L12 = Math.Round(_calculator.L12(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -6), 3);
             list.Add(Params.L12);
-            Params.L22 = _calculator.L22(erc, erp, Params.Zp1, Params.Zc1, rc, rp);
+            Params.L22 = Math.Round(_calculator.L22(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -6), 3);
             list.Add(Params.L22);
 
-            Params.C11 = _calculator.C11(erc, erp, Params.Zp1, Params.Zc1, rc, rp);
+            Params.C11 = Math.Round(_calculator.C11(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -12), 3);
             list.Add(Params.C11);
-            Params.C12 = _calculator.C12(erc, erp, Params.Zp1, Params.Zc1, rc, rp);
+            Params.C12 = Math.Round(_calculator.C12(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -12), 3);
             list.Add(Params.C12);
-            Params.C22 = _calculator.C22(erc, erp, Params.Zp1, Params.Zc1, rc, rp);
+            Params.C22 = Math.Round(_calculator.C22(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -12), 3);
             list.Add(Params.C22);
             //6
             list.Add(Params.Zc1);

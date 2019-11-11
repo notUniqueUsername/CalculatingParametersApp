@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateAndFormat.cs" />
+    <Compile Include="CalculateFrom.cs" />
+    <Compile Include="CalculateFromPogonie.cs" />
     <Compile Include="ParametersCalculator.cs" />
     <Compile Include="Params.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
