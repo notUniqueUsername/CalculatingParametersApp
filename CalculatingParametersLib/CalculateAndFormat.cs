@@ -14,7 +14,7 @@ namespace CalculatingParametersLib
             var list = new List<double>();
             Params.Z01 = _calculator.Z01(rc,zp1,rp,zc1);
             list.Add(Params.Z01);
-            Params.Z02 = _calculator.Z02(rc,zp2,rp,zc2);
+            Params.Z02 = _calculator.Z02(z0, Params.Z01);
             list.Add(Params.Z02);
             Params.Z1p = _calculator.Z1p(zc2,rc,zp2,rp);
             list.Add(Params.Z1p);
@@ -163,9 +163,9 @@ namespace CalculatingParametersLib
         {
             var list = new List<double>();
 
-            Params.Z1 = _calculator.Z1OrZ2(l11, c11);
+            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
             list.Add(Params.Z1);
-            Params.Z2 = _calculator.Z1OrZ2(l22, c22);
+            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22);
             list.Add(Params.Z2);
             Params.Zc = _calculator.Zc(Params.Z12, Params.Z11, Params.Z22);
             list.Add(Params.Zc);

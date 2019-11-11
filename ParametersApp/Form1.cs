@@ -17,7 +17,7 @@ namespace ParametersApp
         private CalculateFrom _calculatorfrom = new CalculateFrom();
         private readonly double mu = 1.2566370614 * Math.Pow(10, -6);
         private readonly double epsilon = 8.8541878128 * Math.Pow(10, -12);
-        private int SetOfParameters;
+        private int SetOfParameters = 3;
 
         public MainForm()
         {
@@ -179,8 +179,8 @@ namespace ParametersApp
 
             dataGridView1[1, 14].Value = Params.Z1;
             dataGridView1[1, 15].Value = Params.Z2;
-            dataGridView1[1, 12].Value = Params.Zc;
-            dataGridView1[1, 11].Value = Params.Zp;
+            dataGridView1[1, 11].Value = Params.Zc;
+            dataGridView1[1, 12].Value = Params.Zp;
             dataGridView2[1, 11].Value = Params.Zc1;
             dataGridView2[1, 12].Value = Params.Zc2;
             dataGridView2[1, 14].Value = Params.Zp1;
@@ -411,9 +411,9 @@ namespace ParametersApp
             ModaleNameTextBox("Zc2, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
             textBox3.Text = "1";
-            textBox3.ReadOnly = true;
+            //textBox3.ReadOnly = true;
             textBox4.Text = "-1E-10";
-            textBox4.ReadOnly = true;
+            //textBox4.ReadOnly = true;
             SetOfParameters = 6;
         }
 
@@ -423,8 +423,8 @@ namespace ParametersApp
             ClearTextBoxs();
             textBox3.Text = "1";
             textBox4.Text = "-1";
-            textBox3.ReadOnly = true;
-            textBox4.ReadOnly = true;
+            //textBox3.ReadOnly = true;
+            //textBox4.ReadOnly = true;
             SetOfParameters = 7;
         }
     }

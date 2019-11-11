@@ -17,8 +17,8 @@ namespace CalculatingParametersLib
             Params.L12 = l12 * Math.Pow(10, -6); 
             Params.L22 = l22 * Math.Pow(10, -6); 
 
-            Params.Z1 = _calculator.Z1OrZ2(l11, c11);
-            Params.Z2 = _calculator.Z1OrZ2(l22, c22);
+            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
+            Params.Z2 = _calculator.Z1OrZ2(Params.L11, Params.C11);
 
             Params.kl = _calculator.Kl(Params.L12, Params.L11, Params.L22);
             Params.kc = _calculator.Kc(Params.C12, Params.C11, Params.C22);
@@ -49,7 +49,7 @@ namespace CalculatingParametersLib
             Params.Zm = _calculator.Zm(Params.Z12, Params.Z0);
 
             Params.Z01 = _calculator.Z01(Params.Rc, Params.Zp1, Params.Rp, Params.Zc1);
-            Params.Z02 = _calculator.Z02(Params.Rc, Params.Zp2, Params.Rp, Params.Zc2);
+            Params.Z02 = _calculator.Z02(Params.Z0, Params.Z01);
 
             Params.Zc = _calculator.Zc(Params.Z12, Params.Z11, Params.Z22);
             Params.Zp = _calculator.Zp(Params.Z12, Params.Z11, Params.Z22);

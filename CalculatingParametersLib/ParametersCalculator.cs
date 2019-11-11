@@ -196,6 +196,10 @@ namespace CalculatingParametersLib
         {
             return Math.Sqrt((rc * zp2 - rp * zc2) / (rc * Math.Pow(zp2, -1) - rp * Math.Pow(zc2, -1)));
         }
+        public double Z02(double z0, double z01)
+        {
+            return Math.Pow(z0, 2) / z01;
+        }
 
         public double Ke(double erc, double erp)
         {

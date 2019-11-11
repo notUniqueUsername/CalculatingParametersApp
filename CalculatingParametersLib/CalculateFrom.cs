@@ -54,7 +54,7 @@ namespace CalculatingParametersLib
             Params.Zm = _calculator.Zm(Params.Z12, Params.Z0);
 
             Params.Z01 = _calculator.Z01(Params.Rc, Params.Zp1, Params.Rp, Params.Zc1);
-            Params.Z02 = _calculator.Z02(Params.Rc, Params.Zp2, Params.Rp, Params.Zc2);
+            Params.Z02 = _calculator.Z02(Params.Z0, Params.Z01);
 
             Params.Zc = _calculator.Zc(Params.Z12, Params.Z11, Params.Z22);
             Params.Zp = _calculator.Zp(Params.Z12, Params.Z11, Params.Z22);
@@ -133,7 +133,7 @@ namespace CalculatingParametersLib
             Params.Zm = _calculator.Zm(Params.Z12, Params.Z0);
 
             Params.Z01 = _calculator.Z01(Params.Rc, Params.Zp1, Params.Rp, Params.Zc1);
-            Params.Z02 = _calculator.Z02(Params.Rc, Params.Zp2, Params.Rp, Params.Zc2);
+            Params.Z02 = _calculator.Z02(Params.Z0, Params.Z01);
 
             Params.Zc = _calculator.Zc(Params.Z12, Params.Z11, Params.Z22);
             Params.Zp = _calculator.Zp(Params.Z12, Params.Z11, Params.Z22);
@@ -144,7 +144,8 @@ namespace CalculatingParametersLib
             Params.Z1c = _calculator.Z1с(Params.Z2p, Params.Z0);
 
             Params.S21 = -20 * Math.Log10(Params.k);
-
+            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
+            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22);
             Params.C11 = Math.Round(
                 Params.C11 *
                 Math.Pow(10, 12), 3);
@@ -165,8 +166,7 @@ namespace CalculatingParametersLib
                 _calculator.L12(Params.Erc, Params.Erp, Params.Zp1, Params.Zc1, Params.Rc, Params.Rp) *
                 Math.Pow(10, 6), 3);
 
-            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
-            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22);
+            
 
         }
     }
