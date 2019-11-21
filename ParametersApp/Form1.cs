@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,10 +23,16 @@ namespace ParametersApp
         public MainForm()
         {
             InitializeComponent();
+#if !DEBUG
+            button2.Visible = false;
+#endif
             ModaleNameTextBox("Z0", "k", "Rc", "Rп", "Erc", "Erп");
             FormatShit();
             FormatGridView1();
+            
             FormatGridView2();
+            button2_Click(null,null);
+            button1_Click(null, null);
         }
 
         private void FormatGridView1()
@@ -209,6 +216,7 @@ namespace ParametersApp
             dataGridView1[1, 24].Value = Params.S21;
 
             #endregion
+            dataGridView2[1, 24].Value = Params.PhysRelease();
         }
 
 
@@ -376,6 +384,8 @@ namespace ParametersApp
             ModaleNameTextBox("L11/μ\u2080", "L12/μ\u2080", "L22/μ\u2080", "C11/ε\u2080", "C12/ε\u2080", "C22/ε\u2080");
             ClearTextBoxs();
             SetOfParameters = 1;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -383,6 +393,8 @@ namespace ParametersApp
             ModaleNameTextBox("L11, μH/m", "L12, μH/m", "L22, μH/m", "C11, pF/m", "C12, pF/m", "C22, pF/m");
             ClearTextBoxs();
             SetOfParameters = 2;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
@@ -390,6 +402,8 @@ namespace ParametersApp
             ModaleNameTextBox("Z0, Ω", "k", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
             SetOfParameters = 3;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
@@ -397,6 +411,8 @@ namespace ParametersApp
             ModaleNameTextBox("Zc1, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
             SetOfParameters = 4;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
@@ -404,6 +420,8 @@ namespace ParametersApp
             ModaleNameTextBox("Zc2, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
             SetOfParameters = 5;
+            textBox3.ReadOnly = false;
+            textBox4.ReadOnly = false;
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
@@ -411,9 +429,9 @@ namespace ParametersApp
             ModaleNameTextBox("Zc2, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
             textBox3.Text = "1";
-            //textBox3.ReadOnly = true;
+            textBox3.ReadOnly = true;
             textBox4.Text = "-1E-10";
-            //textBox4.ReadOnly = true;
+            textBox4.ReadOnly = true;
             SetOfParameters = 6;
         }
 
@@ -423,9 +441,20 @@ namespace ParametersApp
             ClearTextBoxs();
             textBox3.Text = "1";
             textBox4.Text = "-1";
-            //textBox3.ReadOnly = true;
-            //textBox4.ReadOnly = true;
+            textBox3.ReadOnly = true;
+            textBox4.ReadOnly = true;
             SetOfParameters = 7;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(
+                "https://journal.tusur.ru/storage/124967/1-%D0%A1%D1%8B%D1%87%D0%B5%D0%B2-%D0%A0%D1%83%D0%B4%D1%8B%D0%B9.pdf?1553238272");
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
