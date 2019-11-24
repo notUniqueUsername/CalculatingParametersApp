@@ -5,8 +5,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -32,7 +34,6 @@ namespace ParametersApp
             
             FormatGridView2();
             button2_Click(null,null);
-            button1_Click(null, null);
         }
 
         private void FormatGridView1()
@@ -48,8 +49,8 @@ namespace ParametersApp
             dataGridView1.Columns[1].HeaderText = "Value";
             dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridView1.Rows[0].SetValues("C11, pF/m");
-            dataGridView1.Rows[1].SetValues("C12, pF/m");
-            dataGridView1.Rows[2].SetValues("C22, pF/m");
+            dataGridView1.Rows[1].SetValues("C22, pF/m");
+            dataGridView1.Rows[2].SetValues("C12, pF/m");
             dataGridView1.Rows[3].Height = 5;
             dataGridView1.Rows[3].DividerHeight = 5;
             dataGridView1.Rows[4].SetValues("Z0, Ω");
@@ -84,7 +85,7 @@ namespace ParametersApp
         {
             dataGridView2.Width = 203;
             dataGridView2.Height = 470;
-            dataGridView2.RowCount = 25;
+            dataGridView2.RowCount = 24;
             dataGridView2.ColumnCount = 2;
             dataGridView2.Columns[0].Width = 100;
             dataGridView2.Columns[0].HeaderText = "Parameter";
@@ -93,8 +94,8 @@ namespace ParametersApp
             dataGridView2.Columns[1].HeaderText = "Value";
             dataGridView2.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridView2.Rows[0].SetValues("L11, μH/m");
-            dataGridView2.Rows[1].SetValues("L12, μH/m");
-            dataGridView2.Rows[2].SetValues("L22, μH/m");
+            dataGridView2.Rows[1].SetValues("L22, μH/m");
+            dataGridView2.Rows[2].SetValues("L12, μH/m");
             dataGridView2.Rows[3].Height = 5;
             dataGridView2.Rows[3].DividerHeight = 5;
             dataGridView2.Rows[4].SetValues("kl");
@@ -103,26 +104,26 @@ namespace ParametersApp
             dataGridView2.Rows[7].SetValues("kε");
             dataGridView2.Rows[8].SetValues("kv");
             dataGridView2.Rows[9].SetValues("m");
-            dataGridView2.Rows[10].Height = 5;
-            dataGridView2.Rows[10].DividerHeight = 5;
+            dataGridView2.Rows[10].Height = 7;
+            dataGridView2.Rows[10].DividerHeight = 7;
             dataGridView2.Rows[11].SetValues("Zc1, Ω");
             dataGridView2.Rows[12].SetValues("Zc2, Ω");
-            dataGridView2.Rows[13].Height = 5;
-            dataGridView2.Rows[13].DividerHeight = 5;
-            dataGridView2.Rows[14].SetValues("Zп1, Ω");
-            dataGridView2.Rows[15].SetValues("Zп2, Ω");
-            dataGridView2.Rows[16].Height = 5;
-            dataGridView2.Rows[16].DividerHeight = 5;
-            dataGridView2.Rows[17].SetValues("Z11, Ω");
-            dataGridView2.Rows[18].SetValues("Z22, Ω");
-            dataGridView2.Rows[19].Height = 5;
-            dataGridView2.Rows[19].DividerHeight = 5;
-            dataGridView2.Rows[20].SetValues("Z1п, Ω");
-            dataGridView2.Rows[21].SetValues("Z2п, Ω");
-            dataGridView2.Rows[22].SetValues("Z12, Ω");
-            dataGridView2.Rows[23].Height = 5;
-            dataGridView2.Rows[23].DividerHeight = 5;
-            dataGridView2.Rows[24].SetValues("Result");
+            //dataGridView2.Rows[13].Height = 0;
+            //dataGridView2.Rows[13].DividerHeight = 0;
+            dataGridView2.Rows[13].SetValues("Zп1, Ω");
+            dataGridView2.Rows[14].SetValues("Zп2, Ω");
+            dataGridView2.Rows[15].Height = 8;
+            dataGridView2.Rows[15].DividerHeight = 8;
+            dataGridView2.Rows[16].SetValues("Z11, Ω");
+            dataGridView2.Rows[17].SetValues("Z22, Ω");
+            dataGridView2.Rows[18].Height = 5;
+            dataGridView2.Rows[18].DividerHeight = 5;
+            dataGridView2.Rows[19].SetValues("Z1п, Ω");
+            dataGridView2.Rows[20].SetValues("Z2п, Ω");
+            dataGridView2.Rows[21].SetValues("Z12, Ω");
+            dataGridView2.Rows[22].Height = 5;
+            dataGridView2.Rows[22].DividerHeight = 5;
+            dataGridView2.Rows[23].SetValues("Result");
         }
 
         private void ClearTextBoxs()
@@ -147,7 +148,7 @@ namespace ParametersApp
 
         private void FormatShit()
         {
-            radioButton1.Text = "(L11; L12; L22)/μ\u2080; (C11; C12; C22)/ε\u2080";
+            radioButton1.Text = "(L11; L22; L12)/μ\u2080; (C11; C22; C12)/ε\u2080";
         }
 
         private void WriteParams()
@@ -167,18 +168,18 @@ namespace ParametersApp
             #region Pogonie
 
             dataGridView1[1, 0].Value = Params.C11;
-            dataGridView1[1, 1].Value = Params.C12;
-            dataGridView1[1, 2].Value = Params.C22;
+            dataGridView1[1, 1].Value = Params.C22;
+            dataGridView1[1, 2].Value = Params.C12;
             dataGridView2[1, 0].Value = Params.L11;
-            dataGridView2[1, 1].Value = Params.L12;
-            dataGridView2[1, 2].Value = Params.L22;
+            dataGridView2[1, 1].Value = Params.L22;
+            dataGridView2[1, 2].Value = Params.L12;
 
             #endregion
             #region ImpedanceProvodimosti
 
-            dataGridView2[1, 17].Value = Params.Z11;
-            dataGridView2[1, 18].Value = Params.Z22;
-            dataGridView2[1, 22].Value = Params.Z12;
+            dataGridView2[1, 16].Value = Params.Z11;
+            dataGridView2[1, 17].Value = Params.Z22;
+            dataGridView2[1, 21].Value = Params.Z12;
             dataGridView1[1, 22].Value = Params.Zm;
 
             #endregion
@@ -190,8 +191,8 @@ namespace ParametersApp
             dataGridView1[1, 12].Value = Params.Zp;
             dataGridView2[1, 11].Value = Params.Zc1;
             dataGridView2[1, 12].Value = Params.Zc2;
-            dataGridView2[1, 14].Value = Params.Zp1;
-            dataGridView2[1, 15].Value = Params.Zp2;
+            dataGridView2[1, 13].Value = Params.Zp1;
+            dataGridView2[1, 14].Value = Params.Zp2;
 
             #endregion
 
@@ -209,26 +210,26 @@ namespace ParametersApp
 
             dataGridView1[1, 17].Value = Params.Z01;
             dataGridView1[1, 18].Value = Params.Z02;
-            dataGridView2[1, 20].Value = Params.Z1p;
-            dataGridView2[1, 21].Value = Params.Z2p;
+            dataGridView2[1, 19].Value = Params.Z1p;
+            dataGridView2[1, 20].Value = Params.Z2p;
             dataGridView1[1, 20].Value = Params.Z1c;
             dataGridView1[1, 21].Value = Params.Z2c;
             dataGridView1[1, 24].Value = Params.S21;
 
             #endregion
-            dataGridView2[1, 24].Value = Params.PhysRelease();
+            dataGridView2[1, 23].Value = Params.PhysRelease();
         }
 
 
         private void Rechnen()
         {
             var format = new CalculateAndFormat();
-            Params.Z0 = double.Parse(textBox1.Text);
-            Params.k = double.Parse(textBox2.Text);
-            Params.Rc = double.Parse(textBox3.Text);
-            Params.Rp = double.Parse(textBox4.Text);
-            Params.Erc = double.Parse(textBox5.Text);
-            Params.Erp = double.Parse(textBox6.Text);
+            Params.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
+            Params.k = double.Parse(textBox2.Text.Replace(".", ","));
+            Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+            Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+            Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+            Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
 
             var pogonie = format.CalculatePogonnie(Params.Z0, Params.k, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
@@ -260,23 +261,23 @@ namespace ParametersApp
             switch (SetOfParameters)
             {
                 case 1:
-                    
-                    Params.C11 = double.Parse(textBox4.Text)/mu;
-                    Params.C12 = double.Parse(textBox5.Text)/mu;
-                    Params.C22 = double.Parse(textBox6.Text)/mu;
-                    Params.L11 = double.Parse(textBox1.Text)/epsilon;
-                    Params.L12 = double.Parse(textBox2.Text)/epsilon;
-                    Params.L22 = double.Parse(textBox3.Text)/epsilon;
+
+                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ",")) / mu;
+                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ",")) / mu;
+                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ",")) / mu;
+                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ",")) / epsilon;
+                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ",")) / epsilon;
+                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ",")) / epsilon;
                     _calculatorFromPogonie.Calculate(Params.C11, Params.C12, Params.C22, Params.L11, Params.L12, Params.L22);
                     WriteParams();
                     break;
                 case 2:
-                    Params.C11 = double.Parse(textBox4.Text);
-                    Params.C12 = double.Parse(textBox5.Text);
-                    Params.C22 = double.Parse(textBox6.Text);
-                    Params.L11 = double.Parse(textBox1.Text);
-                    Params.L12 = double.Parse(textBox2.Text);
-                    Params.L22 = double.Parse(textBox3.Text);
+                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ","));
+                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ","));
+                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ","));
+                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ","));
+                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ","));
+                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ","));
                     _calculatorFromPogonie.Calculate(Params.C11, Params.C12, Params.C22, Params.L11, Params.L12, Params.L22);
                     WriteParams();
                     break;
@@ -284,32 +285,32 @@ namespace ParametersApp
                     Rechnen();
                     break;
                 case 4:
-                    Params.Zc1 = double.Parse(textBox1.Text);
-                    Params.Zp1 = double.Parse(textBox2.Text);
-                    Params.Rc = double.Parse(textBox3.Text);
-                    Params.Rp = double.Parse(textBox4.Text);
-                    Params.Erc = double.Parse(textBox5.Text);
-                    Params.Erp = double.Parse(textBox6.Text);
+                    Params.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
+                    Params.Zp1 = double.Parse(textBox2.Text.Replace(".", ","));
+                    Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
                     _calculatorfrom.Calculate(Params.Zc1, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
                     WriteParams();
                     break;
                 case 5:
-                    Params.Zc2 = double.Parse(textBox1.Text);
-                    Params.Zp1 = double.Parse(textBox2.Text);
-                    Params.Rc = double.Parse(textBox3.Text);
-                    Params.Rp = double.Parse(textBox4.Text);
-                    Params.Erc = double.Parse(textBox5.Text);
-                    Params.Erp = double.Parse(textBox6.Text);
+                    Params.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
+                    Params.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
+                    Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
                     _calculatorfrom.Calculate1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
                     WriteParams();
                     break;
                 case 6:
-                    Params.Zc2 = double.Parse(textBox1.Text);
-                    Params.Zp1 = double.Parse(textBox2.Text);
-                    Params.Rc = double.Parse(textBox3.Text);
-                    Params.Rp = double.Parse(textBox4.Text);
-                    Params.Erc = double.Parse(textBox5.Text);
-                    Params.Erp = double.Parse(textBox6.Text);
+                    Params.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
+                    Params.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
+                    Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
                     _calculatorfrom.Calculate1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
                     WriteParams();
                     break;
@@ -333,11 +334,11 @@ namespace ParametersApp
                     break;
                 case 2:
                     textBox1.Text = "0,588";
-                    textBox2.Text = "0,379";
-                    textBox3.Text = "0,801";
+                    textBox3.Text = "0,379";
+                    textBox2.Text = "0,801";
                     textBox4.Text = "158,298";
-                    textBox5.Text = "66,793";
-                    textBox6.Text = "112,058";
+                    textBox6.Text = "66,793";
+                    textBox5.Text = "112,058";
                     break;
                 case 3:
                     textBox1.Text = "70,5";
@@ -381,7 +382,7 @@ namespace ParametersApp
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            ModaleNameTextBox("L11/μ\u2080", "L12/μ\u2080", "L22/μ\u2080", "C11/ε\u2080", "C12/ε\u2080", "C22/ε\u2080");
+            ModaleNameTextBox("L11/μ\u2080", "L22/μ\u2080", "L12/μ\u2080", "C11/ε\u2080", "C22/ε\u2080", "C12/ε\u2080");
             ClearTextBoxs();
             SetOfParameters = 1;
             textBox3.ReadOnly = false;
@@ -390,7 +391,7 @@ namespace ParametersApp
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            ModaleNameTextBox("L11, μH/m", "L12, μH/m", "L22, μH/m", "C11, pF/m", "C12, pF/m", "C22, pF/m");
+            ModaleNameTextBox("L11, μH/m", "L22, μH/m", "L12, μH/m", "C11, pF/m", "C22, pF/m", "C12, pF/m");
             ClearTextBoxs();
             SetOfParameters = 2;
             textBox3.ReadOnly = false;
@@ -417,7 +418,7 @@ namespace ParametersApp
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
-            ModaleNameTextBox("Zc2, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
+            ModaleNameTextBox("Zп1, Ω", "Zc2, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
             SetOfParameters = 5;
             textBox3.ReadOnly = false;
@@ -426,7 +427,7 @@ namespace ParametersApp
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
-            ModaleNameTextBox("Zc2, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
+            ModaleNameTextBox("Zп1, Ω", "Zc2, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
             textBox3.Text = "1";
             textBox3.ReadOnly = true;
@@ -448,13 +449,90 @@ namespace ParametersApp
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(
-                "https://journal.tusur.ru/storage/124967/1-%D0%A1%D1%8B%D1%87%D0%B5%D0%B2-%D0%A0%D1%83%D0%B4%D1%8B%D0%B9.pdf?1553238272");
+            var form = new AboutForm();
+            form.ShowDialog();
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.AddExtension = true;
+            dialog.DefaultExt = "txt";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                
+                using (StreamWriter file = new StreamWriter(dialog.FileName, true))
+                {
+                    file.WriteLine(dataGridView1.Rows[0].Cells[0].Value.ToString() +"="+ dataGridView1.Rows[0].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[1].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[2].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[4].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[5].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[6].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[7].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[8].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[9].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[11].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[12].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[14].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[15].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[15].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[17].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[18].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[18].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[20].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[21].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[22].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[22].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView1.Rows[24].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[24].Cells[1].Value.ToString());
+
+                    file.WriteLine(dataGridView2.Rows[0].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[0].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[1].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[2].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[4].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[5].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[6].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[7].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[8].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[9].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[11].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[12].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[13].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[13].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[14].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[16].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[16].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[17].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[19].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[19].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[20].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[21].Cells[1].Value.ToString());
+                    file.WriteLine(dataGridView2.Rows[23].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[23].Cells[1].Value.ToString());
+                }
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
+            Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
+            TextBox textBox = (TextBox)sender;
+            string s = textBox.Text;
+            if (noDigit.IsMatch(s) || noDigit1.IsMatch(s))
+            {
+                button1.Enabled = true;
+                textBox.ResetForeColor();
+            }
+            else
+            {
+                button1.Enabled = false;
+                textBox.ForeColor = Color.Red;
+            }
         }
     }
 }

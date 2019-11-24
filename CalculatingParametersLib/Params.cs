@@ -257,46 +257,15 @@ namespace CalculatingParametersLib
 
         public static bool PhysRelease()
         {
-            var n = Math.Sqrt(-_rc * _rp);
-            bool result = false;
-            if (_c11 > 0 && _c12 > 0 && _c22 > 0 && _l11 > 0 && _l12 > 0 && _l22 > 0)
+            bool result = _c11 > 0 && _c12 > 0 && _c22 > 0 && _l11 > 0 && _l12 > 0 && _l22 > 0;
+            if (Rp>Rc)
             {
-                result = true;
-            }
-            if (_rc == -_rp)
-            {
-                if (_erc == _erp)
-                {
-                    if ((Math.Pow(_k, 2) <= Math.Pow(n, 2) && Math.Pow(n, 2) <= 1) || (1 <= Math.Pow(n, 2) && Math.Pow(n, 2) <= 1 / Math.Pow(_k, 2)))
-                    {
-                        result = true;
-                    }
-                    else
-                    {
-                        result = false;
-                    }
-                }
-                else if (Math.Max(Math.Pow(Math.Sqrt(_erc/_erp),1), Math.Pow(Math.Sqrt(_erc / _erp), -1)) *((1+_k)/(1-_k))<=Math.Abs((1+n)/(1-n)))
-                {
-                    result = true;
-                }
-                else
-                {
-                    result = false;
-                }
-
-                if (_rc == 1)
-                {
-                    if (Math.Min(Math.Pow(Math.Sqrt(_erc / _erp), 1), Math.Pow(Math.Sqrt(_erc / _erp), -1)) * (_zc / _zp) <= 1)
-                    {
-                        result = true;
-                    }
-                    else
-                    {
-                        result = false;
-                    }
-                }
-                
+                var swapData = Rc;
+                Rc = Rp;
+                Rp = swapData;
+                swapData = Erc;
+                Erc = Erp;
+                Erp = swapData;
             }
             return result;
         }
