@@ -517,16 +517,58 @@ namespace ParametersApp
             
         }
 
+        private bool TextBoxValidator()
+        {
+            Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
+            Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
+
+            if (textBox1.Text.Length == 0)
+            {
+                return false;
+            }
+            if (textBox2.Text.Length == 0)
+            {
+                return false;
+            }
+            if (textBox3.Text.Length == 0)
+            {
+                return false;
+            }
+            if (textBox4.Text.Length == 0)
+            {
+                return false;
+            }
+            if (textBox5.Text.Length == 0)
+            {
+                return false;
+            }
+            if (textBox6.Text.Length == 0)
+            {
+                return false;
+            }
+
+            bool text1 = noDigit.IsMatch(textBox1.Text) || noDigit1.IsMatch(textBox1.Text);
+            bool text2 = noDigit.IsMatch(textBox2.Text) || noDigit1.IsMatch(textBox2.Text);
+            bool text3 = noDigit.IsMatch(textBox3.Text) || noDigit1.IsMatch(textBox3.Text);
+            bool text4 = noDigit.IsMatch(textBox4.Text) || noDigit1.IsMatch(textBox4.Text);
+            bool text5 = noDigit.IsMatch(textBox5.Text) || noDigit1.IsMatch(textBox5.Text);
+            bool text6 = noDigit.IsMatch(textBox6.Text) || noDigit1.IsMatch(textBox6.Text);
+
+            return text1 && text2 && text3 && text4 && text5 && text6;
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
             Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
             TextBox textBox = (TextBox)sender;
             string s = textBox.Text;
+            button1.Enabled = TextBoxValidator();
             if (noDigit.IsMatch(s) || noDigit1.IsMatch(s))
             {
-                button1.Enabled = true;
+                
                 textBox.ResetForeColor();
+
             }
             else
             {
