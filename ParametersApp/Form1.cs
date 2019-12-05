@@ -107,10 +107,10 @@ namespace ParametersApp
             dataGridView2.Rows[10].Height = 7;
             dataGridView2.Rows[10].DividerHeight = 7;
             dataGridView2.Rows[11].SetValues("Zc1, Ω");
-            dataGridView2.Rows[12].SetValues("Zc2, Ω");
+            dataGridView2.Rows[13].SetValues("Zc2, Ω");
             //dataGridView2.Rows[13].Height = 0;
             //dataGridView2.Rows[13].DividerHeight = 0;
-            dataGridView2.Rows[13].SetValues("Zп1, Ω");
+            dataGridView2.Rows[12].SetValues("Zп1, Ω");
             dataGridView2.Rows[14].SetValues("Zп2, Ω");
             dataGridView2.Rows[15].Height = 8;
             dataGridView2.Rows[15].DividerHeight = 8;
@@ -190,8 +190,8 @@ namespace ParametersApp
             dataGridView1[1, 11].Value = Params.Zc;
             dataGridView1[1, 12].Value = Params.Zp;
             dataGridView2[1, 11].Value = Params.Zc1;
-            dataGridView2[1, 12].Value = Params.Zc2;
-            dataGridView2[1, 13].Value = Params.Zp1;
+            dataGridView2[1, 13].Value = Params.Zc2;
+            dataGridView2[1, 12].Value = Params.Zp1;
             dataGridView2[1, 14].Value = Params.Zp2;
 
             #endregion
