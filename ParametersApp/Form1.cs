@@ -153,7 +153,7 @@ namespace ParametersApp
 
         private void WriteParams()
         {
-
+            dataGridView2[1, 23].Value = Params.PhysRelease();
             #region Modal
 
             dataGridView1[1, 4].Value = Params.Z0;
@@ -217,7 +217,7 @@ namespace ParametersApp
             dataGridView1[1, 24].Value = Params.S21;
 
             #endregion
-            dataGridView2[1, 23].Value = Params.PhysRelease();
+            
         }
 
 
@@ -262,12 +262,12 @@ namespace ParametersApp
             {
                 case 1:
 
-                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ",")) / mu;
-                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ",")) / mu;
-                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ",")) / mu;
-                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ",")) / epsilon;
-                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ",")) / epsilon;
-                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ",")) / epsilon;
+                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ",")) * mu;
+                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ",")) * mu;
+                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ",")) * mu;
+                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ",")) * epsilon;
+                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ",")) * epsilon;
+                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ",")) * epsilon;
                     _calculatorFromPogonie.Calculate(Params.C11, Params.C12, Params.C22, Params.L11, Params.L12, Params.L22);
                     WriteParams();
                     break;
@@ -465,49 +465,60 @@ namespace ParametersApp
             dialog.DefaultExt = "txt";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                
-                using (StreamWriter file = new StreamWriter(dialog.FileName, true))
+                try
                 {
-                    file.WriteLine(dataGridView1.Rows[0].Cells[0].Value.ToString() +"="+ dataGridView1.Rows[0].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[1].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[2].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[4].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[5].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[6].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[7].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[8].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[9].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[11].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[12].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[14].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[15].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[15].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[17].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[18].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[18].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[20].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[21].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[22].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[22].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView1.Rows[24].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[24].Cells[1].Value.ToString());
+                    using (StreamWriter file = new StreamWriter(dialog.FileName, true))
+                    {
+                        file.WriteLine(dataGridView1.Rows[0].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[0].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[1].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[2].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[4].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[5].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[6].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[7].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[8].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[9].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[11].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[12].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[14].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[15].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[15].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[17].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[18].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[18].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[20].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[21].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[22].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[22].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[24].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[24].Cells[1].Value.ToString());
 
-                    file.WriteLine(dataGridView2.Rows[0].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[0].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[1].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[2].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[4].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[5].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[6].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[7].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[8].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[9].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[11].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[12].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[13].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[13].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[14].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[16].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[16].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[17].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[19].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[19].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[20].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[21].Cells[1].Value.ToString());
-                    file.WriteLine(dataGridView2.Rows[23].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[23].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[0].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[0].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[1].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[2].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[4].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[5].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[6].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[7].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[8].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[9].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[11].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[12].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[13].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[13].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[14].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[16].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[16].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[17].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[19].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[19].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[20].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[21].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[23].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[23].Cells[1].Value.ToString());
+                    }
                 }
+                catch (NullReferenceException exception)
+                {
+                    MessageBox.Show("you must first calculate the parameters","error",MessageBoxButtons.OKCancel);
+                    if (File.Exists(dialog.FileName))
+                    {
+                        File.Delete(dialog.FileName);
+                    }
+                }
+                
             }
         }
 
@@ -576,5 +587,6 @@ namespace ParametersApp
                 textBox.ForeColor = Color.Red;
             }
         }
+
     }
 }
