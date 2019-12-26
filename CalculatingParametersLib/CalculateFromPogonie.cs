@@ -18,7 +18,7 @@ namespace CalculatingParametersLib
             Params.L22 = l22 * Math.Pow(10, -6); 
 
             Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
-            Params.Z2 = _calculator.Z1OrZ2(Params.L11, Params.C11);
+            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22);
 
             Params.kl = _calculator.Kl(Params.L12, Params.L11, Params.L22);
             Params.kc = _calculator.Kc(Params.C12, Params.C11, Params.C22);

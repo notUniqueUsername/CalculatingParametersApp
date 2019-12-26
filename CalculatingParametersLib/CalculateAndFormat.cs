@@ -163,9 +163,9 @@ namespace CalculatingParametersLib
         {
             var list = new List<double>();
 
-            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
+            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11) * 1000;
             list.Add(Params.Z1);
-            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22);
+            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22) * 1000;
             list.Add(Params.Z2);
             Params.Zc = _calculator.Zc(Params.Z12, Params.Z11, Params.Z22);
             list.Add(Params.Zc);

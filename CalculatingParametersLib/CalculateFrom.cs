@@ -85,8 +85,8 @@ namespace CalculatingParametersLib
             Params.L12 = Math.Round(
                 _calculator.L12(Params.Erc, Params.Erp, Params.Zp1, Params.Zc1, Params.Rc, Params.Rp) *
                 Math.Pow(10, 6), 3);
-            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
-            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22);
+            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11) * 1000;
+            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22) * 1000;
         }
         public void Calculate1(double zc2, double zp1, double rc, double rp, double erc, double erp)
         {
