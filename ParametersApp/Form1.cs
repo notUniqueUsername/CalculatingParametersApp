@@ -525,7 +525,6 @@ namespace ParametersApp
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
-            
         }
 
         private bool TextBoxValidator()
