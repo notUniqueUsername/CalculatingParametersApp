@@ -18,8 +18,10 @@ namespace ParametersApp
     {
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
         private CalculateFrom _calculatorfrom = new CalculateFrom();
-        private readonly double mu = 1.2566370614 * Math.Pow(10, -6);
-        private readonly double epsilon = 8.8541878128 * Math.Pow(10, -12);
+        private readonly double mu = 1.2566370614;
+        private readonly double epsilon = 8.8541878128;
+        //private readonly double mu = 1.2566370614 * Math.Pow(10, -6);
+        //private readonly double epsilon = 8.8541878128 * Math.Pow(10, -12);
         private int SetOfParameters = 3;
 
         public MainForm()
@@ -262,12 +264,12 @@ namespace ParametersApp
             {
                 case 1:
 
-                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ",")) * mu;
-                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ",")) * mu;
-                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ",")) * mu;
-                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ",")) * epsilon;
-                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ",")) * epsilon;
-                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ",")) * epsilon;
+                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ",")) * epsilon;
+                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ",")) * epsilon;
+                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ",")) * epsilon;
+                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ",")) * mu;
+                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ",")) * mu;
+                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ",")) * mu;
                     _calculatorFromPogonie.Calculate(Params.C11, Params.C12, Params.C22, Params.L11, Params.L12, Params.L22);
                     WriteParams();
                     break;
@@ -325,12 +327,12 @@ namespace ParametersApp
             switch (SetOfParameters)
             {
                 case 1:
-                    textBox1.Text = "70,5";
-                    textBox2.Text = "0,527";
-                    textBox3.Text = "0,994";
-                    textBox4.Text = "-2,061";
-                    textBox5.Text = "6,387";
-                    textBox6.Text = "5,523";
+                    textBox1.Text = "4704e-4";
+                    textBox2.Text = "6453e-4";
+                    textBox3.Text = "3024e-4";
+                    textBox4.Text = "1788e-2";
+                    textBox5.Text = "1266e-2";
+                    textBox6.Text = "755e-2";
                     break;
                 case 2:
                     textBox1.Text = "0,588";
