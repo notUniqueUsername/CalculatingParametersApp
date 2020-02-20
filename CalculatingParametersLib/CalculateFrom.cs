@@ -2,12 +2,12 @@
 
 namespace CalculatingParametersLib
 {
-    public class CalculateFrom
+    public class CalculateFromZC12ZP12
     {
-        public CalculateFrom()
+        public CalculateFromZC12ZP12()
         { }
         private ParametersCalculator _calculator = new ParametersCalculator();
-        public void Calculate(double zc1, double zp1, double rc, double rp, double erc, double erp)
+        public void CalculateWithZc1Zp1(double zc1, double zp1, double rc, double rp, double erc, double erp)
         {
             Params.Zc1 = zc1;
             Params.Zp1 = zp1;
@@ -88,7 +88,7 @@ namespace CalculatingParametersLib
             Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11) * 1000;
             Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22) * 1000;
         }
-        public void Calculate1(double zc2, double zp1, double rc, double rp, double erc, double erp)
+        public void CalculateZc2Zp1(double zc2, double zp1, double rc, double rp, double erc, double erp)
         {
             Params.Zc2 = zc2;
             Params.Zp1 = zp1;

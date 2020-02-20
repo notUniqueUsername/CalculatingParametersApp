@@ -17,7 +17,7 @@ namespace ParametersApp
     public partial class MainForm : Form
     {
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
-        private CalculateFrom _calculatorfrom = new CalculateFrom();
+        private CalculateFromZC12ZP12 _calculatorfrom = new CalculateFromZC12ZP12();
         private readonly double mu = 1.2566370614;
         private readonly double epsilon = 8.8541878128;
         //private readonly double mu = 1.2566370614 * Math.Pow(10, -6);
@@ -293,7 +293,7 @@ namespace ParametersApp
                     Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
                     Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
-                    _calculatorfrom.Calculate(Params.Zc1, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
+                    _calculatorfrom.CalculateWithZc1Zp1(Params.Zc1, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
                     WriteParams();
                     break;
                 case 5:
@@ -303,7 +303,7 @@ namespace ParametersApp
                     Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
                     Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
-                    _calculatorfrom.Calculate1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
+                    _calculatorfrom.CalculateZc2Zp1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
                     WriteParams();
                     break;
                 case 6:
@@ -313,7 +313,7 @@ namespace ParametersApp
                     Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
                     Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
-                    _calculatorfrom.Calculate1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
+                    _calculatorfrom.CalculateZc2Zp1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
                     WriteParams();
                     break;
                 case 7:
