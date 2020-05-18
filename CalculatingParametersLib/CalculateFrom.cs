@@ -144,8 +144,8 @@ namespace CalculatingParametersLib
             Params.Z1c = _calculator.Z1с(Params.Z2p, Params.Z0);
 
             Params.S21 = -20 * Math.Log10(Params.k);
-            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11)*1000;
-            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22)*1000;
+            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11);
+            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22);
             Params.C11 = Math.Round(
                 Params.C11 *
                 Math.Pow(10, 12), 3);
