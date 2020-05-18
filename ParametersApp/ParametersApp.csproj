@@ -104,6 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\String_low_.png" />
+    <None Include="Resources\String_up1.png" />
+    <None Include="Resources\String_low_1.png" />
     <Content Include="Resources\String_up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
