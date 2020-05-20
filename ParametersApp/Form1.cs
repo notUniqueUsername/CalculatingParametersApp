@@ -36,6 +36,8 @@ namespace ParametersApp
             
             FormatGridView2();
             button2_Click(null,null);
+            button1.FlatStyle = FlatStyle.System;
+            button2.FlatStyle = FlatStyle.System;
         }
 
         private void FormatGridView1()
