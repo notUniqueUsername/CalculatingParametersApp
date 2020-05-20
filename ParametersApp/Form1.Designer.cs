@@ -291,9 +291,7 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -303,8 +301,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(203, 470);
+            this.dataGridView1.Size = new System.Drawing.Size(187, 431);
             this.dataGridView1.TabIndex = 31;
             // 
             // dataGridView2
@@ -313,9 +310,7 @@
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -325,8 +320,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView2.Size = new System.Drawing.Size(203, 470);
+            this.dataGridView2.Size = new System.Drawing.Size(187, 431);
             this.dataGridView2.TabIndex = 32;
             // 
             // menuStrip1
@@ -422,7 +416,7 @@
             this.pictureBoxUp.Image = global::ParametersApp.Properties.Resources.String_up;
             this.pictureBoxUp.Location = new System.Drawing.Point(12, 27);
             this.pictureBoxUp.Name = "pictureBoxUp";
-            this.pictureBoxUp.Size = new System.Drawing.Size(507, 103);
+            this.pictureBoxUp.Size = new System.Drawing.Size(507, 121);
             this.pictureBoxUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxUp.TabIndex = 37;
             this.pictureBoxUp.TabStop = false;
@@ -433,9 +427,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::ParametersApp.Properties.Resources.String_low_;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 136);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 154);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(507, 177);
+            this.pictureBox1.Size = new System.Drawing.Size(507, 159);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
