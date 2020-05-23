@@ -18,12 +18,10 @@ namespace ParametersApp
     {
         private Params1 _currentParams = new Params1();
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
-        private CalculateFromZC1ZC2ZP1ZP2 _calculatorfrom = new CalculateFromZC1ZC2ZP1ZP2();
-        private CalculateFromModal _format = new CalculateFromModal();
+        private CalculateFromZC1ZC2ZP1ZP2 _calculatorFromZc1Zc2Zp1Zp2 = new CalculateFromZC1ZC2ZP1ZP2();
+        private CalculateFromModal _calculateFromModal = new CalculateFromModal();
         private readonly double mu = 1.2566370614;
         private readonly double epsilon = 8.8541878128;
-        //private readonly double mu = 1.2566370614 * Math.Pow(10, -6);
-        //private readonly double epsilon = 8.8541878128 * Math.Pow(10, -12);
         private int SetOfParameters = 3;
 
         public MainForm()
@@ -226,20 +224,6 @@ namespace ParametersApp
 
         }
 
-        //private void Rechnen()
-        //{
-        //    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
-        //    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
-        //    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-        //    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-        //    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-        //    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
-
-        //    _currentParams = _format.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
-
-        //    WriteParams();
-        //}
-
         private void button1_Click(object sender, EventArgs e)
         {
             switch (SetOfParameters)
@@ -279,7 +263,7 @@ namespace ParametersApp
                     _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
-                    _currentParams = _format.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+                    _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams();
                     break;
@@ -291,7 +275,7 @@ namespace ParametersApp
                     _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
-                    _currentParams = _calculatorfrom.CalculateWithZc1Zp1(_currentParams.Zc1, _currentParams.Zp1, _currentParams.Rc,
+                    _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateWithZc1Zp1(_currentParams.Zc1, _currentParams.Zp1, _currentParams.Rc,
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams();
@@ -304,7 +288,7 @@ namespace ParametersApp
                     _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
-                    _currentParams = _calculatorfrom.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
+                    _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams();
@@ -317,7 +301,7 @@ namespace ParametersApp
                     _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
-                    _currentParams = _calculatorfrom.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
+                    _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams();
@@ -330,7 +314,7 @@ namespace ParametersApp
                     _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
                     _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
-                    _currentParams = _format.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc,
+                    _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc,
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams();
@@ -397,7 +381,11 @@ namespace ParametersApp
             }
             
         }
-
+        /// <summary>
+        /// Погонные
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("L11/μ\u2080", "L22/μ\u2080", "L12/μ\u2080", "C11/ε\u2080", "C22/ε\u2080", "C12/ε\u2080");
@@ -406,7 +394,11 @@ namespace ParametersApp
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
-
+        /// <summary>
+        /// Погонные пФ нГн
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("L11, μH/m", "L22, μH/m", "L12, μH/m", "C11, pF/m", "C22, pF/m", "C12, pF/m");
@@ -415,7 +407,11 @@ namespace ParametersApp
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
-
+        /// <summary>
+        /// Модальные
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Z0, Ω", "k", "Rc", "Rп", "Erc", "Erп");
@@ -424,7 +420,11 @@ namespace ParametersApp
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
-
+        /// <summary>
+        /// Zc1 Zp1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Zc1, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
@@ -433,7 +433,11 @@ namespace ParametersApp
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
-
+        /// <summary>
+        /// Zp1 Zc2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Zп1, Ω", "Zc2, Ω", "Rc", "Rп", "Erc", "Erп");
@@ -442,7 +446,11 @@ namespace ParametersApp
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
-
+        /// <summary>
+        /// Zp1 Zc2 Rc=1 Rp=0
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Zп1, Ω", "Zc2, Ω", "Rc", "Rп", "Erc", "Erп");
@@ -453,7 +461,11 @@ namespace ParametersApp
             textBox4.ReadOnly = true;
             SetOfParameters = 6;
         }
-
+        /// <summary>
+        /// Модальные симметрич rc=1 rp=-1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButton7_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Z0, Ω", "k", "Rc", "Rп", "Erc", "Erп");
