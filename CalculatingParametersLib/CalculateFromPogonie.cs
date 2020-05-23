@@ -2,15 +2,18 @@
 
 namespace CalculatingParametersLib
 {
+    /// <summary>
+    /// Калькулятор для расчета из погонных
+    /// </summary>
     public class CalculateFromPogonie
     {
-        private Params1 _currentParams = new Params1();
+        private Params _currentParams = new Params();
         public CalculateFromPogonie()
         { }
         private ParametersCalculator _calculator = new ParametersCalculator();
-        public Params1 Calculate(double c11, double c12, double c22, double l11, double l12, double l22)
+        public Params Calculate(double c11, double c12, double c22, double l11, double l12, double l22)
         {
-            _currentParams = new Params1();
+            _currentParams = new Params();
             _currentParams.C11 = c11 * Math.Pow(10,-12);
             _currentParams.C12 = c12 * Math.Pow(10, -12); 
             _currentParams.C22 = c22 * Math.Pow(10, -12); 

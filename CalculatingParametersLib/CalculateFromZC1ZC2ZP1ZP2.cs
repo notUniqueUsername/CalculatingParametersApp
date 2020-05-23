@@ -4,13 +4,16 @@ namespace CalculatingParametersLib
 {
     public class CalculateFromZC1ZC2ZP1ZP2
     {
-        private Params1 _currentParams = new Params1();
+        /// <summary>
+        /// Для расчета из импендансов
+        /// </summary>
+        private Params _currentParams = new Params();
         public CalculateFromZC1ZC2ZP1ZP2()
         { }
         private ParametersCalculator _calculator = new ParametersCalculator();
-        public Params1 CalculateWithZc1Zp1(double zc1, double zp1, double rc, double rp, double erc, double erp)
+        public Params CalculateWithZc1Zp1(double zc1, double zp1, double rc, double rp, double erc, double erp)
         {
-            _currentParams = new Params1();
+            _currentParams = new Params();
             _currentParams.Zc1 = zc1;
             _currentParams.Zp1 = zp1;
             _currentParams.Erc = erc;
@@ -91,9 +94,9 @@ namespace CalculatingParametersLib
             _currentParams.Z2 = _calculator.Z1OrZ2(_currentParams.L22, _currentParams.C22) * 1000;
             return _currentParams;
         }
-        public Params1 CalculateZc2Zp1(double zc2, double zp1, double rc, double rp, double erc, double erp)
+        public Params CalculateZc2Zp1(double zc2, double zp1, double rc, double rp, double erc, double erp)
         {
-            _currentParams = new Params1();
+            _currentParams = new Params();
             _currentParams.Zc2 = zc2;
             _currentParams.Zp1 = zp1;
             _currentParams.Erc = erc;

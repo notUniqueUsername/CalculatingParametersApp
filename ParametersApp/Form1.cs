@@ -1,28 +1,22 @@
 ﻿using CalculatingParametersLib;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ParametersApp
 {
     public partial class MainForm : Form
     {
-        private Params1 _currentParams = new Params1();
+        private Params _currentParams = new Params();
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
         private CalculateFromZC1ZC2ZP1ZP2 _calculatorFromZc1Zc2Zp1Zp2 = new CalculateFromZC1ZC2ZP1ZP2();
         private CalculateFromModal _calculateFromModal = new CalculateFromModal();
         private readonly double mu = 1.2566370614;
         private readonly double epsilon = 8.8541878128;
-        private int SetOfParameters = 3;
+        private SetOfParametersEnum _setOfParameters = SetOfParametersEnum.Modalnie;
 
         public MainForm()
         {
@@ -226,10 +220,9 @@ namespace ParametersApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            switch (SetOfParameters)
+            switch (_setOfParameters)
             {
-                case 1:
-
+                case SetOfParametersEnum.Pogonie:
                     _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ",")) * epsilon;
                     _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ",")) * epsilon;
                     _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ",")) * epsilon;
@@ -242,7 +235,7 @@ namespace ParametersApp
 
                     WriteParams();
                     break;
-                case 2:
+                case SetOfParametersEnum.Pogonie_pF_nGn:
                     _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ","));
                     _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ","));
                     _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ","));
@@ -255,7 +248,7 @@ namespace ParametersApp
 
                     WriteParams();
                     break;
-                case 3:
+                case SetOfParametersEnum.Modalnie:
                     _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
                     _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
                     _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
@@ -267,7 +260,7 @@ namespace ParametersApp
 
                     WriteParams();
                     break;
-                case 4:
+                case SetOfParametersEnum.Zc1_Zp1:
                     _currentParams.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
                     _currentParams.Zp1 = double.Parse(textBox2.Text.Replace(".", ","));
                     _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
@@ -280,7 +273,7 @@ namespace ParametersApp
 
                     WriteParams();
                     break;
-                case 5:
+                case SetOfParametersEnum.Zp1_Zc2:
                     _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
                     _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
                     _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
@@ -293,7 +286,7 @@ namespace ParametersApp
 
                     WriteParams();
                     break;
-                case 6:
+                case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
                     _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
                     _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
                     _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
@@ -306,7 +299,7 @@ namespace ParametersApp
 
                     WriteParams();
                     break;
-                case 7:
+                case SetOfParametersEnum.ModalnieSymm:
                     _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
                     _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
                     _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
@@ -324,9 +317,9 @@ namespace ParametersApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            switch (SetOfParameters)
+            switch (_setOfParameters)
             {
-                case 1:
+                case SetOfParametersEnum.Pogonie:
                     textBox1.Text = "4704e-4";
                     textBox2.Text = "6453e-4";
                     textBox3.Text = "3024e-4";
@@ -334,7 +327,7 @@ namespace ParametersApp
                     textBox5.Text = "1266e-2";
                     textBox6.Text = "755e-2";
                     break;
-                case 2:
+                case SetOfParametersEnum.Pogonie_pF_nGn:
                     textBox1.Text = "0,588";
                     textBox3.Text = "0,379";
                     textBox2.Text = "0,801";
@@ -342,7 +335,7 @@ namespace ParametersApp
                     textBox6.Text = "66,793";
                     textBox5.Text = "112,058";
                     break;
-                case 3:
+                case SetOfParametersEnum.Modalnie:
                     textBox1.Text = "70,5";
                     textBox2.Text = "0,527";
                     textBox3.Text = "0,994";
@@ -350,7 +343,7 @@ namespace ParametersApp
                     textBox5.Text = "6,387";
                     textBox6.Text = "5,523";
                     break;
-                case 4:
+                case SetOfParametersEnum.Zc1_Zp1:
                     textBox1.Text = "91,661";
                     textBox2.Text = "26,469";
                     textBox3.Text = "0,994";
@@ -358,7 +351,7 @@ namespace ParametersApp
                     textBox5.Text = "6,387";
                     textBox6.Text = "5,523";
                     break;
-                case 5:
+                case SetOfParametersEnum.Zp1_Zc2:
                     textBox1.Text = "187,78";
                     textBox2.Text = "26,469";
                     textBox3.Text = "0,994";
@@ -366,13 +359,13 @@ namespace ParametersApp
                     textBox5.Text = "6,387";
                     textBox6.Text = "5,523";
                     break;
-                case 6:
+                case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
                     textBox1.Text = "187,78";
                     textBox2.Text = "26,469";
                     textBox5.Text = "6,387";
                     textBox6.Text = "5,523";
                     break;
-                case 7:
+                case SetOfParametersEnum.ModalnieSymm:
                     textBox1.Text = "70,5";
                     textBox2.Text = "0,527";
                     textBox5.Text = "6,387";
@@ -390,7 +383,7 @@ namespace ParametersApp
         {
             ModaleNameTextBox("L11/μ\u2080", "L22/μ\u2080", "L12/μ\u2080", "C11/ε\u2080", "C22/ε\u2080", "C12/ε\u2080");
             ClearTextBoxs();
-            SetOfParameters = 1;
+            _setOfParameters = SetOfParametersEnum.Pogonie;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
@@ -403,7 +396,7 @@ namespace ParametersApp
         {
             ModaleNameTextBox("L11, μH/m", "L22, μH/m", "L12, μH/m", "C11, pF/m", "C22, pF/m", "C12, pF/m");
             ClearTextBoxs();
-            SetOfParameters = 2;
+            _setOfParameters = SetOfParametersEnum.Pogonie_pF_nGn;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
@@ -416,7 +409,7 @@ namespace ParametersApp
         {
             ModaleNameTextBox("Z0, Ω", "k", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
-            SetOfParameters = 3;
+            _setOfParameters = SetOfParametersEnum.Modalnie;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
@@ -429,7 +422,7 @@ namespace ParametersApp
         {
             ModaleNameTextBox("Zc1, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
-            SetOfParameters = 4;
+            _setOfParameters = SetOfParametersEnum.Zc1_Zp1;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
@@ -442,7 +435,7 @@ namespace ParametersApp
         {
             ModaleNameTextBox("Zп1, Ω", "Zc2, Ω", "Rc", "Rп", "Erc", "Erп");
             ClearTextBoxs();
-            SetOfParameters = 5;
+            _setOfParameters = SetOfParametersEnum.Zp1_Zc2;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
@@ -459,7 +452,7 @@ namespace ParametersApp
             textBox3.ReadOnly = true;
             textBox4.Text = "-1E-10";
             textBox4.ReadOnly = true;
-            SetOfParameters = 6;
+            _setOfParameters = SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero;
         }
         /// <summary>
         /// Модальные симметрич rc=1 rp=-1
@@ -474,7 +467,7 @@ namespace ParametersApp
             textBox4.Text = "-1";
             textBox3.ReadOnly = true;
             textBox4.ReadOnly = true;
-            SetOfParameters = 7;
+            _setOfParameters = SetOfParametersEnum.ModalnieSymm;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -656,7 +649,21 @@ namespace ParametersApp
                         textBox6.Text = erp;
                     }
                 }
-                button1_Click(sender, e);
+
+                try
+                {
+                    button1_Click(sender, e);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(
+                        "Файл поврежден, нажмите ОК",
+                        "Ошмбка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                }
             }
             
         }
