@@ -457,7 +457,7 @@ namespace ParametersApp
             form.ShowDialog();
         }
 
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -591,5 +591,69 @@ namespace ParametersApp
             }
         }
 
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter ="txt files (*.txt)|*.txt";
+            dialog.FilterIndex = 1;
+            
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                radioButton3.Checked = true;
+                //radioButton3_CheckedChanged(sender, e);
+                var pathToFile = dialog.FileName;
+                var z0= "";
+                var k = "";
+                var rc = "";
+                var rp = "";
+                var erc = "";
+                var erp = "";
+                using (StreamReader sr = new StreamReader(pathToFile, Encoding.UTF8))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (line.Contains("Z0, Ω="))
+                        {
+                            var index = line.IndexOf('=');
+                            z0 = line.Substring(index+1);
+                        }
+                        if (line.Contains("k="))
+                        {
+                            var index = line.IndexOf('=');
+                            k = line.Substring(index+1);
+                        }
+                        if (line.Contains("Rc="))
+                        {
+                            var index = line.IndexOf('=');
+                            rc = line.Substring(index+1);
+                        }
+                        if (line.Contains("Rп="))
+                        {
+                            var index = line.IndexOf('=');
+                            rp = line.Substring(index+1);
+                        }
+                        if (line.Contains("Erc"))
+                        {
+                            var index = line.IndexOf('=');
+                            erc = line.Substring(index+1);
+                        }
+                        if (line.Contains("Erп="))
+                        {
+                            var index = line.IndexOf('=');
+                            erp = line.Substring(index+1);
+                        }
+                        textBox1.Text = z0;
+                        textBox2.Text = k;
+                        textBox3.Text = rc;
+                        textBox4.Text = rp;
+                        textBox5.Text = erc;
+                        textBox6.Text = erp;
+                    }
+                }
+                button1_Click(sender, e);
+            }
+            
+        }
     }
 }
