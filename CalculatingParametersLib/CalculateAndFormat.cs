@@ -7,7 +7,30 @@ namespace CalculatingParametersLib
 {
     public class CalculateAndFormat
     {
+        private Params1 _currentParams = new Params1();
+
         private ParametersCalculator _calculator = new ParametersCalculator();
+
+        public Params1 CalculateAll(double z0, double k, double rc, double rp, double erc, double erp)
+        {
+            _currentParams.Z0 = z0;
+            _currentParams.k = k;
+            _currentParams.Rc = rc;
+            _currentParams.Rp = rp;
+            _currentParams.Erc = erc;
+            _currentParams.Erp = erp;
+            CalculatePogonnie(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+
+            CalculateImpedanceProvodimosti(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1, _currentParams.Zp1, _currentParams.Z0);
+
+            CalculateImpedance(_currentParams.L11, _currentParams.C11, _currentParams.L22, _currentParams.C22, _currentParams.Zc1, _currentParams.Zp1, _currentParams.Rc, _currentParams.Rp);
+
+            CalculateKoeff(_currentParams.Erc, _currentParams.Erp);
+
+            CalculateResistors(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1, _currentParams.Zp2, _currentParams.Z0, _currentParams.Zc1, _currentParams.Zc2, _currentParams.Z12);
+
+            return _currentParams;
+        }
 
         public List<double> CalculateResistors(double rc, double rp, double zp1, double zp2, double z0, double zc1, double zc2, double z12)
         {

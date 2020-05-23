@@ -224,7 +224,6 @@ namespace ParametersApp
             
         }
 
-
         private void Rechnen()
         {
             var format = new CalculateAndFormat();

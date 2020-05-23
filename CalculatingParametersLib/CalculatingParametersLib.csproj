@@ -47,6 +47,7 @@
     <Compile Include="CalculateFrom.cs" />
     <Compile Include="CalculateFromPogonie.cs" />
     <Compile Include="ParametersCalculator.cs" />
+    <Compile Include="Params1.cs" />
     <Compile Include="Params.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
