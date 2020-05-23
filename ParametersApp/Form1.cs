@@ -571,27 +571,7 @@ namespace ParametersApp
             return text1 && text2 && text3 && text4 && text5 && text6;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
-            Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
-            TextBox textBox = (TextBox)sender;
-            string s = textBox.Text;
-            button1.Enabled = TextBoxValidator();
-            if (noDigit.IsMatch(s) || noDigit1.IsMatch(s))
-            {
-                
-                textBox.ResetForeColor();
-
-            }
-            else
-            {
-                button1.Enabled = false;
-                textBox.ForeColor = Color.Red;
-            }
-        }
-
-        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog();
             dialog.Filter ="txt files (*.txt)|*.txt";
@@ -600,7 +580,6 @@ namespace ParametersApp
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 radioButton3.Checked = true;
-                //radioButton3_CheckedChanged(sender, e);
                 var pathToFile = dialog.FileName;
                 var z0= "";
                 var k = "";
@@ -654,6 +633,26 @@ namespace ParametersApp
                 button1_Click(sender, e);
             }
             
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
+            Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
+            TextBox textBox = (TextBox)sender;
+            string s = textBox.Text;
+            button1.Enabled = TextBoxValidator();
+            if (noDigit.IsMatch(s) || noDigit1.IsMatch(s))
+            {
+                
+                textBox.ResetForeColor();
+
+            }
+            else
+            {
+                button1.Enabled = false;
+                textBox.ForeColor = Color.Red;
+            }
         }
     }
 }
