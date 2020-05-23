@@ -182,31 +182,87 @@ namespace CalculatingParametersLib
         public static double Zp
         {
             get => _zp;
-            set => _zp = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _zp = value;
+                }
+                else
+                {
+                    _zp = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
+            //set => _zp = value;
             //set => _zp = Math.Round(value / Math.Pow(10, 0), 3);
         }
         public static double Zc1
         {
             get => _zc1;
-            set => _zc1 = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _zc1 = value;
+                }
+                else
+                {
+                    _zc1 = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
+            
+            //set => _zc1 = value;
             //set => _zc1 = Math.Round(value / Math.Pow(10, 0), 3);
         }
         public static double Zp1
         {
             get => _zp1;
-            set => _zp1 = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _zp1 = value;
+                }
+                else
+                {
+                    _zp1 = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
+            //set => _zp1 = value;
             //set => _zp1 = Math.Round(value / Math.Pow(10, 0), 3);
         }
         public static double Zc2
         {
             get => _zc2;
-            set => _zc2 = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _zc2 = value;
+                }
+                else
+                {
+                    _zc2 = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
+            //set => _zc2 = value;
             //set => _zc2 = Math.Round(value / Math.Pow(10, 0), 3);
         }
         public static double Zp2
         {
             get => _zp2;
-            set => _zp2 = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _zp2 = value;
+                }
+                else
+                {
+                    _zp2 = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
+            //set => _zp2 = value;
             //set => _zp2 = Math.Round(value / Math.Pow(10, 0), 3);
         }
 
@@ -231,13 +287,33 @@ namespace CalculatingParametersLib
         public static double Z1c
         {
             get => _z1c;
-            set => _z1c = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _z1c = value;
+                }
+                else
+                {
+                    _z1c = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
             //set => _z1c = Math.Round(value / Math.Pow(10, 0), 3);
         }
         public static double Z2c
         {
             get => _z2c;
-            set => _z2c = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _z2c = value;
+                }
+                else
+                {
+                    _z2c = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
             //set => _z2c = Math.Round(value / Math.Pow(10, 0), 3);
         }
         public static double Zm
@@ -248,13 +324,34 @@ namespace CalculatingParametersLib
         public static double Z1p
         {
             get => _z1p;
-            set => _z1p = value;
+            set
+            {
+                if (value<Math.Pow(10,-3) || value>Math.Pow(10,5))
+                {
+                   _z1p = value; 
+                }
+                else
+                {
+                    _z1p = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
+            
             //set => _z1p = Math.Round(value / Math.Pow(10, 0), 3);
         }
         public static double Z2p
         {
             get => _z2p;
-            set => _z2p = value;
+            set
+            {
+                if (value < Math.Pow(10, -3) || value > Math.Pow(10, 5))
+                {
+                    _z2p = value;
+                }
+                else
+                {
+                    _z2p = Math.Round(value / Math.Pow(10, 0), 3);
+                }
+            }
             //set => _z2p = Math.Round(value / Math.Pow(10, 0), 3);
         }
 
