@@ -13,6 +13,7 @@ namespace CalculatingParametersLib
 
         public Params1 CalculateAll(double z0, double k, double rc, double rp, double erc, double erp)
         {
+            _currentParams = new Params1();
             _currentParams.Z0 = z0;
             _currentParams.k = k;
             _currentParams.Rc = rc;
@@ -35,20 +36,20 @@ namespace CalculatingParametersLib
         public List<double> CalculateResistors(double rc, double rp, double zp1, double zp2, double z0, double zc1, double zc2, double z12)
         {
             var list = new List<double>();
-            Params.Z01 = _calculator.Z01(rc,zp1,rp,zc1);
-            list.Add(Params.Z01);
-            Params.Z02 = _calculator.Z02(z0, Params.Z01);
-            list.Add(Params.Z02);
-            Params.Z1p = _calculator.Z1p(zc2,rc,zp2,rp);
-            list.Add(Params.Z1p);
-            Params.Z2p = _calculator.Z2p(zc2, rc, zp2 ,rp);
-            list.Add(Params.Z2p);
-            Params.Z1c = _calculator.Z1с(Params.Z2p,z0);
-            list.Add(Params.Z1c);
-            Params.Z2c = _calculator.Z2с(Params.Z1p,z0);
-            list.Add(Params.Z2c);
-            Params.Zm = _calculator.Zm(z12,z0);
-            list.Add(Params.Zm);
+            _currentParams.Z01 = _calculator.Z01(rc,zp1,rp,zc1);
+            list.Add(_currentParams.Z01);
+            _currentParams.Z02 = _calculator.Z02(z0, _currentParams.Z01);
+            list.Add(_currentParams.Z02);
+            _currentParams.Z1p = _calculator.Z1p(zc2,rc,zp2,rp);
+            list.Add(_currentParams.Z1p);
+            _currentParams.Z2p = _calculator.Z2p(zc2, rc, zp2 ,rp);
+            list.Add(_currentParams.Z2p);
+            _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p,z0);
+            list.Add(_currentParams.Z1c);
+            _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p,z0);
+            list.Add(_currentParams.Z2c);
+            _currentParams.Zm = _calculator.Zm(z12,z0);
+            list.Add(_currentParams.Zm);
             
             list.Add(z12);
 
@@ -74,18 +75,18 @@ namespace CalculatingParametersLib
         public List<double> CalculateKoeff(double erc, double erp)
         {
             var list = new List<double>();
-            Params.kl = _calculator.Kl(Params.L12, Params.L11, Params.L22);
-            list.Add(Params.kl);
-            Params.kc = _calculator.Kc(Params.C12, Params.C11, Params.C22);
-            list.Add(Params.kc);
-            Params.klc = _calculator.Klc(Params.kl, Params.kc);
-            list.Add(Params.klc);
-            Params.ke = _calculator.Ke(erc,erp);
-            list.Add(Params.ke);
-            Params.kv = _calculator.Kv(erc,erp);
-            list.Add(Params.kv);
-            Params.m = Math.Sqrt(Params.Erp)/ Math.Sqrt(Params.Erc);
-            Params.S21 = -20 * Math.Log10(Params.k);
+            _currentParams.kl = _calculator.Kl(_currentParams.L12, _currentParams.L11, _currentParams.L22);
+            list.Add(_currentParams.kl);
+            _currentParams.kc = _calculator.Kc(_currentParams.C12, _currentParams.C11, _currentParams.C22);
+            list.Add(_currentParams.kc);
+            _currentParams.klc = _calculator.Klc(_currentParams.kl, _currentParams.kc);
+            list.Add(_currentParams.klc);
+            _currentParams.ke = _calculator.Ke(erc,erp);
+            list.Add(_currentParams.ke);
+            _currentParams.kv = _calculator.Kv(erc,erp);
+            list.Add(_currentParams.kv);
+            _currentParams.m = Math.Sqrt(_currentParams.Erp)/ Math.Sqrt(_currentParams.Erc);
+            _currentParams.S21 = -20 * Math.Log10(_currentParams.k);
             return list;
         }
 
@@ -106,26 +107,26 @@ namespace CalculatingParametersLib
         public List<double> CalculatePogonnie(double z0, double k, double rc, double rp, double erc, double erp)
         {
             var list = new List<double>();
-            Params.Zp1 = _calculator.Zp1(rc, rp, k, z0);
-            Params.Zc1 = _calculator.Zc1(rc, rp, k, z0);
+            _currentParams.Zp1 = _calculator.Zp1(rc, rp, k, z0);
+            _currentParams.Zc1 = _calculator.Zc1(rc, rp, k, z0);
             
-            Params.L11 = Math.Round(_calculator.L11(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -6), 3); 
-            list.Add(Params.L11);
-            Params.L12 = Math.Round(_calculator.L12(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -6), 3);
-            list.Add(Params.L12);
-            Params.L22 = Math.Round(_calculator.L22(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -6), 3);
-            list.Add(Params.L22);
+            _currentParams.L11 = Math.Round(_calculator.L11(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 3); 
+            list.Add(_currentParams.L11);
+            _currentParams.L12 = Math.Round(_calculator.L12(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 3);
+            list.Add(_currentParams.L12);
+            _currentParams.L22 = Math.Round(_calculator.L22(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 3);
+            list.Add(_currentParams.L22);
 
-            Params.C11 = Math.Round(_calculator.C11(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -12), 3);
-            list.Add(Params.C11);
-            Params.C12 = Math.Round(_calculator.C12(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -12), 3);
-            list.Add(Params.C12);
-            Params.C22 = Math.Round(_calculator.C22(erc, erp, Params.Zp1, Params.Zc1, rc, rp) / Math.Pow(10, -12), 3);
-            list.Add(Params.C22);
+            _currentParams.C11 = Math.Round(_calculator.C11(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
+            list.Add(_currentParams.C11);
+            _currentParams.C12 = Math.Round(_calculator.C12(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
+            list.Add(_currentParams.C12);
+            _currentParams.C22 = Math.Round(_calculator.C22(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
+            list.Add(_currentParams.C22);
             //6
-            list.Add(Params.Zc1);
+            list.Add(_currentParams.Zc1);
             //7
-            list.Add(Params.Zp1);
+            list.Add(_currentParams.Zp1);
             return list;
         }
 
@@ -151,19 +152,19 @@ namespace CalculatingParametersLib
             var list = new List<double>();
             
             var d = _calculator.DForImpedance(rc, rp);
-            Params.Z11 = _calculator.Z11(rc, rp, zc1, zp1, d);
-            list.Add(Params.Z11);
-            Params.Z12 = _calculator.Z12(rc, rp, zc1, zp1, d);
-            list.Add(Params.Z12);
-            Params.Zm = _calculator.Zm(Params.Z12, z0);
-            Params.Z22 = _calculator.Z22(rc, rp, zc1, zp1, d);
-            list.Add(Params.Z22);
-            Params.Y11 = _calculator.Y11(Params.Z11, Params.Z12, Params.Z22);
-            list.Add(Params.Y11);
-            Params.Y12 = _calculator.Y12(Params.Zm, Params.Z12, Params.Z22);
-            list.Add(Params.Y12);
-            Params.Y22 = _calculator.Y22(Params.Z11, Params.Z12, Params.Z22);
-            list.Add(Params.Y22);
+            _currentParams.Z11 = _calculator.Z11(rc, rp, zc1, zp1, d);
+            list.Add(_currentParams.Z11);
+            _currentParams.Z12 = _calculator.Z12(rc, rp, zc1, zp1, d);
+            list.Add(_currentParams.Z12);
+            _currentParams.Zm = _calculator.Zm(_currentParams.Z12, z0);
+            _currentParams.Z22 = _calculator.Z22(rc, rp, zc1, zp1, d);
+            list.Add(_currentParams.Z22);
+            _currentParams.Y11 = _calculator.Y11(_currentParams.Z11, _currentParams.Z12, _currentParams.Z22);
+            list.Add(_currentParams.Y11);
+            _currentParams.Y12 = _calculator.Y12(_currentParams.Zm, _currentParams.Z12, _currentParams.Z22);
+            list.Add(_currentParams.Y12);
+            _currentParams.Y22 = _calculator.Y22(_currentParams.Z11, _currentParams.Z12, _currentParams.Z22);
+            list.Add(_currentParams.Y22);
             return list;
         }
 
@@ -186,20 +187,20 @@ namespace CalculatingParametersLib
         {
             var list = new List<double>();
 
-            Params.Z1 = _calculator.Z1OrZ2(Params.L11, Params.C11) * 1000;
-            list.Add(Params.Z1);
-            Params.Z2 = _calculator.Z1OrZ2(Params.L22, Params.C22) * 1000;
-            list.Add(Params.Z2);
-            Params.Zc = _calculator.Zc(Params.Z12, Params.Z11, Params.Z22);
-            list.Add(Params.Zc);
-            Params.Zp = _calculator.Zp(Params.Z12, Params.Z11, Params.Z22);
-            list.Add(Params.Zp);
-            list.Add(Params.Zc1);
-            list.Add(Params.Zp1);
-            Params.Zc2 = _calculator.Zc2OrZp2(rc,rp,zc1);
-            list.Add(Params.Zc2);
-            Params.Zp2 = _calculator.Zc2OrZp2(rc, rp, zp1);
-            list.Add(Params.Zp2);
+            _currentParams.Z1 = _calculator.Z1OrZ2(_currentParams.L11, _currentParams.C11) * 1000;
+            list.Add(_currentParams.Z1);
+            _currentParams.Z2 = _calculator.Z1OrZ2(_currentParams.L22, _currentParams.C22) * 1000;
+            list.Add(_currentParams.Z2);
+            _currentParams.Zc = _calculator.Zc(_currentParams.Z12, _currentParams.Z11, _currentParams.Z22);
+            list.Add(_currentParams.Zc);
+            _currentParams.Zp = _calculator.Zp(_currentParams.Z12, _currentParams.Z11, _currentParams.Z22);
+            list.Add(_currentParams.Zp);
+            list.Add(_currentParams.Zc1);
+            list.Add(_currentParams.Zp1);
+            _currentParams.Zc2 = _calculator.Zc2OrZp2(rc,rp,zc1);
+            list.Add(_currentParams.Zc2);
+            _currentParams.Zp2 = _calculator.Zc2OrZp2(rc, rp, zp1);
+            list.Add(_currentParams.Zp2);
             return list;
         }
 
