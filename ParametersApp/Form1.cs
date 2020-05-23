@@ -16,8 +16,10 @@ namespace ParametersApp
 {
     public partial class MainForm : Form
     {
+        private Params1 _currentParams = new Params1();
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
-        private CalculateFromZC12ZP12 _calculatorfrom = new CalculateFromZC12ZP12();
+        private CalculateFromZC1ZC2ZP1ZP2 _calculatorfrom = new CalculateFromZC1ZC2ZP1ZP2();
+        private CalculateFromModal _format = new CalculateFromModal();
         private readonly double mu = 1.2566370614;
         private readonly double epsilon = 8.8541878128;
         //private readonly double mu = 1.2566370614 * Math.Pow(10, -6);
@@ -31,7 +33,7 @@ namespace ParametersApp
             button2.Visible = false;
 #endif
             ModaleNameTextBox("Z0", "k", "Rc", "Rп", "Erc", "Erп");
-            FormatShit();
+            FormatRadioButton1();
             FormatGridView1();
             
             FormatGridView2();
@@ -150,183 +152,93 @@ namespace ParametersApp
             label6.Text = l6;
         }
 
-        private void FormatShit()
+        private void FormatRadioButton1()
         {
             radioButton1.Text = "(L11; L22; L12)/μ\u2080; (C11; C22; C12)/ε\u2080";
         }
 
         private void WriteParams()
         {
-            dataGridView2[1, 23].Value = Params.PhysRelease();
+            dataGridView2[1, 23].Value = _currentParams.PhysRelease();
             #region Modal
 
-            dataGridView1[1, 4].Value = Params.Z0;
-            dataGridView1[1, 5].Value = Params.k;
-            dataGridView1[1, 6].Value = Params.Rc;
-            dataGridView1[1, 7].Value = Params.Rp;
-            dataGridView1[1, 8].Value = Params.Erc;
-            dataGridView1[1, 9].Value = Params.Erp;
+            dataGridView1[1, 4].Value = _currentParams.Z0;
+            dataGridView1[1, 5].Value = _currentParams.k;
+            dataGridView1[1, 6].Value = _currentParams.Rc;
+            dataGridView1[1, 7].Value = _currentParams.Rp;
+            dataGridView1[1, 8].Value = _currentParams.Erc;
+            dataGridView1[1, 9].Value = _currentParams.Erp;
 
             #endregion
 
             #region Pogonie
 
-            dataGridView1[1, 0].Value = Params.C11;
-            dataGridView1[1, 1].Value = Params.C22;
-            dataGridView1[1, 2].Value = Params.C12;
-            dataGridView2[1, 0].Value = Params.L11;
-            dataGridView2[1, 1].Value = Params.L22;
-            dataGridView2[1, 2].Value = Params.L12;
+            dataGridView1[1, 0].Value = _currentParams.C11;
+            dataGridView1[1, 1].Value = _currentParams.C22;
+            dataGridView1[1, 2].Value = _currentParams.C12;
+            dataGridView2[1, 0].Value = _currentParams.L11;
+            dataGridView2[1, 1].Value = _currentParams.L22;
+            dataGridView2[1, 2].Value = _currentParams.L12;
 
             #endregion
             #region ImpedanceProvodimosti
 
-            dataGridView2[1, 16].Value = Params.Z11;
-            dataGridView2[1, 17].Value = Params.Z22;
-            dataGridView2[1, 21].Value = Params.Z12;
-            dataGridView1[1, 22].Value = Params.Zm;
+            dataGridView2[1, 16].Value = _currentParams.Z11;
+            dataGridView2[1, 17].Value = _currentParams.Z22;
+            dataGridView2[1, 21].Value = _currentParams.Z12;
+            dataGridView1[1, 22].Value = _currentParams.Zm;
 
             #endregion
             #region Impedance
 
-            dataGridView1[1, 14].Value = Params.Z1;
-            dataGridView1[1, 15].Value = Params.Z2;
-            dataGridView1[1, 11].Value = Params.Zc;
-            dataGridView1[1, 12].Value = Params.Zp;
-            dataGridView2[1, 11].Value = Params.Zc1;
-            dataGridView2[1, 13].Value = Params.Zc2;
-            dataGridView2[1, 12].Value = Params.Zp1;
-            dataGridView2[1, 14].Value = Params.Zp2;
+            dataGridView1[1, 14].Value = _currentParams.Z1;
+            dataGridView1[1, 15].Value = _currentParams.Z2;
+            dataGridView1[1, 11].Value = _currentParams.Zc;
+            dataGridView1[1, 12].Value = _currentParams.Zp;
+            dataGridView2[1, 11].Value = _currentParams.Zc1;
+            dataGridView2[1, 13].Value = _currentParams.Zc2;
+            dataGridView2[1, 12].Value = _currentParams.Zp1;
+            dataGridView2[1, 14].Value = _currentParams.Zp2;
 
             #endregion
 
             #region Koeff
 
-            dataGridView2[1, 4].Value = Params.kl;
-            dataGridView2[1, 5].Value = Params.kc;
-            dataGridView2[1, 6].Value = Params.klc;
-            dataGridView2[1, 7].Value = Params.ke;
-            dataGridView2[1, 8].Value = Params.kv;
-            dataGridView2[1, 9].Value = Params.m;
+            dataGridView2[1, 4].Value = _currentParams.kl;
+            dataGridView2[1, 5].Value = _currentParams.kc;
+            dataGridView2[1, 6].Value = _currentParams.klc;
+            dataGridView2[1, 7].Value = _currentParams.ke;
+            dataGridView2[1, 8].Value = _currentParams.kv;
+            dataGridView2[1, 9].Value = _currentParams.m;
 
             #endregion
             #region Resistors
 
-            dataGridView1[1, 17].Value = Params.Z01;
-            dataGridView1[1, 18].Value = Params.Z02;
-            dataGridView2[1, 19].Value = Params.Z1p;
-            dataGridView2[1, 20].Value = Params.Z2p;
-            dataGridView1[1, 20].Value = Params.Z1c;
-            dataGridView1[1, 21].Value = Params.Z2c;
-            dataGridView1[1, 24].Value = Params.S21;
-
-            #endregion
-            
-        }
-
-        private void WriteParams1(Params1 Params)
-        {
-            dataGridView2[1, 23].Value = Params.PhysRelease();
-            #region Modal
-
-            dataGridView1[1, 4].Value = Params.Z0;
-            dataGridView1[1, 5].Value = Params.k;
-            dataGridView1[1, 6].Value = Params.Rc;
-            dataGridView1[1, 7].Value = Params.Rp;
-            dataGridView1[1, 8].Value = Params.Erc;
-            dataGridView1[1, 9].Value = Params.Erp;
-
-            #endregion
-
-            #region Pogonie
-
-            dataGridView1[1, 0].Value = Params.C11;
-            dataGridView1[1, 1].Value = Params.C22;
-            dataGridView1[1, 2].Value = Params.C12;
-            dataGridView2[1, 0].Value = Params.L11;
-            dataGridView2[1, 1].Value = Params.L22;
-            dataGridView2[1, 2].Value = Params.L12;
-
-            #endregion
-            #region ImpedanceProvodimosti
-
-            dataGridView2[1, 16].Value = Params.Z11;
-            dataGridView2[1, 17].Value = Params.Z22;
-            dataGridView2[1, 21].Value = Params.Z12;
-            dataGridView1[1, 22].Value = Params.Zm;
-
-            #endregion
-            #region Impedance
-
-            dataGridView1[1, 14].Value = Params.Z1;
-            dataGridView1[1, 15].Value = Params.Z2;
-            dataGridView1[1, 11].Value = Params.Zc;
-            dataGridView1[1, 12].Value = Params.Zp;
-            dataGridView2[1, 11].Value = Params.Zc1;
-            dataGridView2[1, 13].Value = Params.Zc2;
-            dataGridView2[1, 12].Value = Params.Zp1;
-            dataGridView2[1, 14].Value = Params.Zp2;
-
-            #endregion
-
-            #region Koeff
-
-            dataGridView2[1, 4].Value = Params.kl;
-            dataGridView2[1, 5].Value = Params.kc;
-            dataGridView2[1, 6].Value = Params.klc;
-            dataGridView2[1, 7].Value = Params.ke;
-            dataGridView2[1, 8].Value = Params.kv;
-            dataGridView2[1, 9].Value = Params.m;
-
-            #endregion
-            #region Resistors
-
-            dataGridView1[1, 17].Value = Params.Z01;
-            dataGridView1[1, 18].Value = Params.Z02;
-            dataGridView2[1, 19].Value = Params.Z1p;
-            dataGridView2[1, 20].Value = Params.Z2p;
-            dataGridView1[1, 20].Value = Params.Z1c;
-            dataGridView1[1, 21].Value = Params.Z2c;
-            dataGridView1[1, 24].Value = Params.S21;
+            dataGridView1[1, 17].Value = _currentParams.Z01;
+            dataGridView1[1, 18].Value = _currentParams.Z02;
+            dataGridView2[1, 19].Value = _currentParams.Z1p;
+            dataGridView2[1, 20].Value = _currentParams.Z2p;
+            dataGridView1[1, 20].Value = _currentParams.Z1c;
+            dataGridView1[1, 21].Value = _currentParams.Z2c;
+            dataGridView1[1, 24].Value = _currentParams.S21;
 
             #endregion
 
         }
 
-        private void Rechnen()
-        {
-            var format = new CalculateAndFormat();
-            Params.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
-            Params.k = double.Parse(textBox2.Text.Replace(".", ","));
-            Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-            Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-            Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-            Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+        //private void Rechnen()
+        //{
+        //    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
+        //    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
+        //    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+        //    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+        //    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+        //    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
-            var params1 = format.CalculateAll(Params.Z0, Params.k, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
-            //var pogonie = format.CalculatePogonnie(Params.Z0, Params.k, Params.Rc, Params.Rp, Params.Erc, Params.Erp);
+        //    _currentParams = _format.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
-
-
-            //var impedance1 =
-            //    format.CalculateImpedanceProvodimosti(Params.Rc, Params.Rp, Params.Zc1, Params.Zp1, Params.Z0);
-
-
-            //var impedance = format.CalculateImpedance(Params.L11, Params.C11, Params.L22, Params.C22, Params.Zc1,
-            //    Params.Zp1, Params.Rc, Params.Rp);
-
-
-
-
-            //var koeff = format.CalculateKoeff(Params.Erc, Params.Erp);
-
-
-
-            //var resistors = format.CalculateResistors(Params.Rc, Params.Rp, Params.Zp1, Params.Zp2, Params.Z0,
-            //    Params.Zc1, Params.Zc2, Params.Z12);
-
-            WriteParams1(params1);
-        }
+        //    WriteParams();
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -334,58 +246,94 @@ namespace ParametersApp
             {
                 case 1:
 
-                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ",")) * epsilon;
-                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ",")) * epsilon;
-                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ",")) * epsilon;
-                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ",")) * mu;
-                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ",")) * mu;
-                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ",")) * mu;
-                    WriteParams1(_calculatorFromPogonie.Calculate(Params.C11, Params.C12, Params.C22, Params.L11, Params.L12, Params.L22));
+                    _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ",")) * epsilon;
+                    _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ",")) * epsilon;
+                    _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ",")) * epsilon;
+                    _currentParams.L11 = double.Parse(textBox1.Text.Replace(".", ",")) * mu;
+                    _currentParams.L12 = double.Parse(textBox3.Text.Replace(".", ",")) * mu;
+                    _currentParams.L22 = double.Parse(textBox2.Text.Replace(".", ",")) * mu;
+
+                    _currentParams = _calculatorFromPogonie.Calculate(_currentParams.C11, _currentParams.C12,
+                        _currentParams.C22, _currentParams.L11, _currentParams.L12, _currentParams.L22);
+
+                    WriteParams();
                     break;
                 case 2:
-                    Params.C11 = double.Parse(textBox4.Text.Replace(".", ","));
-                    Params.C12 = double.Parse(textBox6.Text.Replace(".", ","));
-                    Params.C22 = double.Parse(textBox5.Text.Replace(".", ","));
-                    Params.L11 = double.Parse(textBox1.Text.Replace(".", ","));
-                    Params.L12 = double.Parse(textBox3.Text.Replace(".", ","));
-                    Params.L22 = double.Parse(textBox2.Text.Replace(".", ","));
-                    WriteParams1(_calculatorFromPogonie.Calculate(Params.C11, Params.C12, Params.C22, Params.L11, Params.L12, Params.L22));
+                    _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ","));
+                    _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ","));
+                    _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ","));
+                    _currentParams.L11 = double.Parse(textBox1.Text.Replace(".", ","));
+                    _currentParams.L12 = double.Parse(textBox3.Text.Replace(".", ","));
+                    _currentParams.L22 = double.Parse(textBox2.Text.Replace(".", ","));
+
+                    _currentParams = _calculatorFromPogonie.Calculate(_currentParams.C11, _currentParams.C12, _currentParams.C22,
+                        _currentParams.L11, _currentParams.L12, _currentParams.L22);
+
+                    WriteParams();
                     break;
                 case 3:
-                    Rechnen();
+                    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
+                    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+
+                    _currentParams = _format.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+
+                    WriteParams();
                     break;
                 case 4:
-                    Params.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
-                    Params.Zp1 = double.Parse(textBox2.Text.Replace(".", ","));
-                    Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
-                    
-                    WriteParams1(_calculatorfrom.CalculateWithZc1Zp1(Params.Zc1, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp));
+                    _currentParams.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
+                    _currentParams.Zp1 = double.Parse(textBox2.Text.Replace(".", ","));
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+
+                    _currentParams = _calculatorfrom.CalculateWithZc1Zp1(_currentParams.Zc1, _currentParams.Zp1, _currentParams.Rc,
+                        _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+
+                    WriteParams();
                     break;
                 case 5:
-                    Params.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
-                    Params.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
-                    Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
-                    
-                    WriteParams1(_calculatorfrom.CalculateZc2Zp1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp));
+                    _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
+                    _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+
+                    _currentParams = _calculatorfrom.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
+                        _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+
+                    WriteParams();
                     break;
                 case 6:
-                    Params.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
-                    Params.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
-                    Params.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    Params.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    Params.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    Params.Erp = double.Parse(textBox6.Text.Replace(".", ","));
-                    
-                    WriteParams1(_calculatorfrom.CalculateZc2Zp1(Params.Zc2, Params.Zp1, Params.Rc, Params.Rp, Params.Erc, Params.Erp));
+                    _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
+                    _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+
+                    _currentParams = _calculatorfrom.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
+                        _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+
+                    WriteParams();
                     break;
                 case 7:
-                    Rechnen();
+                    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
+                    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+
+                    _currentParams = _format.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc,
+                        _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+
+                    WriteParams();
                     break;
             }
         }

@@ -2,10 +2,10 @@
 
 namespace CalculatingParametersLib
 {
-    public class CalculateFromZC12ZP12
+    public class CalculateFromZC1ZC2ZP1ZP2
     {
         private Params1 _currentParams = new Params1();
-        public CalculateFromZC12ZP12()
+        public CalculateFromZC1ZC2ZP1ZP2()
         { }
         private ParametersCalculator _calculator = new ParametersCalculator();
         public Params1 CalculateWithZc1Zp1(double zc1, double zp1, double rc, double rp, double erc, double erp)

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace CalculatingParametersLib
 {
-    public class CalculateAndFormat
+    public class CalculateFromModal
     {
         private Params1 _currentParams = new Params1();
 

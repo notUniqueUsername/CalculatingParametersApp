@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculateAndFormat.cs" />
-    <Compile Include="CalculateFrom.cs" />
+    <Compile Include="CalculateFromModal.cs" />
+    <Compile Include="CalculateFromZC1ZC2ZP1ZP2.cs" />
     <Compile Include="CalculateFromPogonie.cs" />
     <Compile Include="ParametersCalculator.cs" />
     <Compile Include="Params1.cs" />
