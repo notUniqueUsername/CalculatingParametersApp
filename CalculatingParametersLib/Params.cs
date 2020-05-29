@@ -363,7 +363,12 @@ namespace CalculatingParametersLib
 
         public bool PhysRelease()
         {
-            bool result = _c11 > 0 && _c12 > 0 && _c22 > 0 && _l11 > 0 && _l12 > 0 && _l22 > 0;
+            bool result = _c11 - _c12 > 0
+                          && _c22 - _c12 > 0 
+                          && _c12 > 0 
+                          && _l11 - _l12 > 0 
+                          && _l22 - _l12 > 0 
+                          && _l12 > 0;
             if (Rp>Rc)
             {
                 var swapData = Rc;
