@@ -64,6 +64,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBoxUp = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -280,9 +285,9 @@
             this.radioButton7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.radioButton7.Location = new System.Drawing.Point(12, 477);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(238, 20);
+            this.radioButton7.Size = new System.Drawing.Size(251, 20);
             this.radioButton7.TabIndex = 29;
-            this.radioButton7.Text = "Z0, Ω; Rc=1; Rп=-1; Erc; Erп (Symm)";
+            this.radioButton7.Text = "Z0, Ω; k; Rc=1; Rп=-1; Erc; Erп (Symm)";
             this.radioButton7.UseVisualStyleBackColor = true;
             this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
             // 
@@ -296,13 +301,13 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(525, 27);
+            this.dataGridView1.Location = new System.Drawing.Point(528, 27);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(187, 431);
+            this.dataGridView1.Size = new System.Drawing.Size(190, 431);
             this.dataGridView1.TabIndex = 31;
             // 
             // dataGridView2
@@ -315,13 +320,13 @@
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(734, 27);
+            this.dataGridView2.Location = new System.Drawing.Point(737, 27);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(187, 431);
+            this.dataGridView2.Size = new System.Drawing.Size(190, 431);
             this.dataGridView2.TabIndex = 32;
             // 
             // menuStrip1
@@ -332,7 +337,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(949, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(952, 24);
             this.menuStrip1.TabIndex = 34;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -349,21 +354,21 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.closeToolStripMenuItem.Text = "Exit";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -423,9 +428,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxUp.Image = global::ParametersApp.Properties.Resources.String_up;
-            this.pictureBoxUp.Location = new System.Drawing.Point(12, 27);
+            this.pictureBoxUp.Location = new System.Drawing.Point(12, 53);
             this.pictureBoxUp.Name = "pictureBoxUp";
-            this.pictureBoxUp.Size = new System.Drawing.Size(507, 121);
+            this.pictureBoxUp.Size = new System.Drawing.Size(507, 104);
             this.pictureBoxUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxUp.TabIndex = 37;
             this.pictureBoxUp.TabStop = false;
@@ -436,19 +441,74 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::ParametersApp.Properties.Resources.String_low_;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 154);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 179);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(507, 159);
+            this.pictureBox1.Size = new System.Drawing.Size(507, 134);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.label9.Location = new System.Drawing.Point(12, 160);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(147, 16);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "Equivalent circuit (x=0)";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.label10.Location = new System.Drawing.Point(237, 160);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(90, 16);
+            this.label10.TabIndex = 40;
+            this.label10.Text = "Coupled lines";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.label11.Location = new System.Drawing.Point(410, 160);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(109, 16);
+            this.label11.TabIndex = 41;
+            this.label11.Text = "Termination load";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.label12.Location = new System.Drawing.Point(273, 34);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(246, 16);
+            this.label12.TabIndex = 43;
+            this.label12.Text = "Termination loads: Delta () and Star (Y)";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.label13.Location = new System.Drawing.Point(9, 34);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(233, 16);
+            this.label13.TabIndex = 42;
+            this.label13.Text = "Partial Capacitances and Inductances";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(949, 508);
+            this.ClientSize = new System.Drawing.Size(952, 508);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBoxUp);
             this.Controls.Add(this.label8);
@@ -478,8 +538,8 @@
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(965, 547);
-            this.MinimumSize = new System.Drawing.Size(965, 547);
+            this.MaximumSize = new System.Drawing.Size(968, 547);
+            this.MinimumSize = new System.Drawing.Size(968, 547);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Parameters of asymmetric coupled lines with inhomogeneous dielectics";
@@ -532,6 +592,11 @@
         private System.Windows.Forms.PictureBox pictureBoxUp;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
 

@@ -600,6 +600,12 @@ namespace ParametersApp
             {
                 radioButton3.Checked = true;
                 var pathToFile = dialog.FileName;
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                textBox4.Clear();
+                textBox5.Clear();
+                textBox6.Clear();
                 var z0= "";
                 var k = "";
                 var rc = "";
@@ -663,6 +669,7 @@ namespace ParametersApp
                         MessageBoxIcon.Information,
                         MessageBoxDefaultButton.Button1,
                         MessageBoxOptions.DefaultDesktopOnly);
+                    this.Activate();
                 }
             }
             
