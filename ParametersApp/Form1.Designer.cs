@@ -537,12 +537,13 @@
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(968, 547);
             this.MinimumSize = new System.Drawing.Size(968, 547);
             this.Name = "MainForm";
             this.ShowIcon = false;
-            this.Text = "Parameters of asymmetric coupled lines with inhomogeneous dielectics";
+            this.Text = "Parameters of asymmetric coupled lines with inhomogeneous dielectrics";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.menuStrip1.ResumeLayout(false);

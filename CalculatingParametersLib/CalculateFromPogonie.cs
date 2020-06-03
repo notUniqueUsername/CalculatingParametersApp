@@ -8,8 +8,6 @@ namespace CalculatingParametersLib
     public class CalculateFromPogonie
     {
         private Params _currentParams = new Params();
-        public CalculateFromPogonie()
-        { }
         private ParametersCalculator _calculator = new ParametersCalculator();
         public Params Calculate(double c11, double c12, double c22, double l11, double l12, double l22)
         {
@@ -33,6 +31,7 @@ namespace CalculatingParametersLib
             _currentParams.Erp = _calculator.Erp(_currentParams.C11, _currentParams.C12, _currentParams.C22, _currentParams.L11, _currentParams.L12, _currentParams.L22);
             _currentParams.Rp = _calculator.Rp(_currentParams.C11, _currentParams.C12, _currentParams.C22, _currentParams.L11, _currentParams.L12, _currentParams.L22);
             _currentParams.Rc = _calculator.Rc(_currentParams.C11, _currentParams.C12, _currentParams.C22, _currentParams.L11, _currentParams.L12, _currentParams.L22);
+            _currentParams.RpRcCheck();
             _currentParams.Zc1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erc, _currentParams.Rc);
             _currentParams.Zp1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erp, _currentParams.Rp);
             _currentParams.Zp2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1);

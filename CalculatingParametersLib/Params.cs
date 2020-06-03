@@ -360,6 +360,34 @@ namespace CalculatingParametersLib
             get => _s21;
             set => _s21 = Math.Round(value / Math.Pow(10, 0), 3);
         }
+        /// <summary>
+        /// Необходимо выполнять перед расчетом параметров зависящих от Erc Erp Rc Rp, но после расчета Rc Rp Erc Erp
+        /// </summary>
+        public void RpRcCheck()
+        {
+            if (Rc == null || Rp == null || Erc == null || Erp == null)
+            {
+                throw new ArgumentNullException("Необходимо выполнять перед расчетом параметров зависящих от Erc Erp Rc Rp, но после расчета Rc Rp Erc Erp");
+            }
+            if (Rp > Rc)
+            {
+                var swapData = Rc;
+                Rc = Rp;
+                Rp = swapData;
+                swapData = Erc;
+                Erc = Erp;
+                Erp = swapData;
+                if (Rp > 0 && Rc > 0)
+                {
+                    swapData = Rc;
+                    Rc = Rp;
+                    Rp = swapData;
+                    swapData = Erc;
+                    Erc = Erp;
+                    Erp = swapData;
+                }
+            }
+        }
 
         public bool PhysRelease()
         {
@@ -368,16 +396,8 @@ namespace CalculatingParametersLib
                           && _c12 > 0 
                           && _l11 - _l12 > 0 
                           && _l22 - _l12 > 0 
-                          && _l12 > 0;
-            if (Rp>Rc)
-            {
-                var swapData = Rc;
-                Rc = Rp;
-                Rp = swapData;
-                swapData = Erc;
-                Erc = Erp;
-                Erp = swapData;
-            }
+                          && _l12 > -1e-10;
+
             return result;
         }
     }

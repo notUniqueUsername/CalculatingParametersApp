@@ -23,6 +23,7 @@ namespace CalculatingParametersLib
             _currentParams.Rp = rp;
             _currentParams.Erc = erc;
             _currentParams.Erp = erp;
+            _currentParams.RpRcCheck();
             CalculatePogonnie(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
             CalculateImpedanceProvodimosti(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1, _currentParams.Zp1, _currentParams.Z0);

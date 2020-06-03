@@ -32,6 +32,13 @@ namespace ParametersApp
             button2_Click(null,null);
             button1.FlatStyle = FlatStyle.System;
             button2.FlatStyle = FlatStyle.System;
+            LabelFilling();
+        }
+
+        private void LabelFilling()
+        {
+            label12.Text = "Termination loads: Delta (\u0394) and Star (Y)";
+            label9.Text = "Equivalent circuit (\u0394x=0)";
         }
 
         private void FormatGridView1()

@@ -20,6 +20,7 @@ namespace CalculatingParametersLib
             _currentParams.Erp = erp;
             _currentParams.Rp = rp;
             _currentParams.Rc = rc;
+            _currentParams.RpRcCheck();
             _currentParams.Zp2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1);
             _currentParams.Zc2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1);
             _currentParams.C11 = _calculator.C11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp);
@@ -103,6 +104,7 @@ namespace CalculatingParametersLib
             _currentParams.Erp = erp;
             _currentParams.Rp = rp;
             _currentParams.Rc = rc;
+            _currentParams.RpRcCheck();
             _currentParams.Zp2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1);
             _currentParams.Zc1 = _currentParams.Zc2 / (-_currentParams.Rc * _currentParams.Rp);
             _currentParams.C11 = _calculator.C11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1,_currentParams.Rc,_currentParams.Rp);
