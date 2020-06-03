@@ -605,7 +605,6 @@ namespace ParametersApp
             
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                radioButton3.Checked = true;
                 var pathToFile = dialog.FileName;
                 textBox1.Clear();
                 textBox2.Clear();
@@ -613,53 +612,120 @@ namespace ParametersApp
                 textBox4.Clear();
                 textBox5.Clear();
                 textBox6.Clear();
-                var z0= "";
-                var k = "";
-                var rc = "";
-                var rp = "";
-                var erc = "";
-                var erp = "";
+                var setOfParams = SetOfParametersEnum.Pogonie_pF_nGn;
                 using (StreamReader sr = new StreamReader(pathToFile, Encoding.UTF8))
                 {
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        if (line.Contains("Z0, Ω="))
+                        if (line.Contains("Rп=-1E-10"))
                         {
-                            var index = line.IndexOf('=');
-                            z0 = line.Substring(index+1);
+                            setOfParams = SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero;
                         }
-                        if (line.Contains("k="))
-                        {
-                            var index = line.IndexOf('=');
-                            k = line.Substring(index+1);
-                        }
-                        if (line.Contains("Rc="))
-                        {
-                            var index = line.IndexOf('=');
-                            rc = line.Substring(index+1);
-                        }
-                        if (line.Contains("Rп="))
-                        {
-                            var index = line.IndexOf('=');
-                            rp = line.Substring(index+1);
-                        }
-                        if (line.Contains("Erc"))
-                        {
-                            var index = line.IndexOf('=');
-                            erc = line.Substring(index+1);
-                        }
-                        if (line.Contains("Erп="))
-                        {
-                            var index = line.IndexOf('=');
-                            erp = line.Substring(index+1);
-                        }
-                        textBox1.Text = z0;
-                        textBox2.Text = k;
-                        textBox3.Text = rc;
-                        textBox4.Text = rp;
-                        textBox5.Text = erc;
-                        textBox6.Text = erp;
+                    }
+                }
+
+                using (StreamReader sr = new StreamReader(pathToFile, Encoding.UTF8))
+                {
+                    string line;
+                    var c11 = "";
+                    var c22 = "";
+                    var c12 = "";
+                    var l11 = "";
+                    var l22 = "";
+                    var l12 = "";
+                    var zc1 = "";
+                    var zp2 = "";
+                    var rc = "";
+                    var rp = "";
+                    var erc = "";
+                    var erp = "";
+                    switch (setOfParams)
+                    {
+                        case SetOfParametersEnum.Pogonie_pF_nGn:
+                            radioButton2.Checked = true;
+                            while ((line = sr.ReadLine()) != null)
+                            {
+                                if (line.Contains("C11, pF/m="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    c11 = line.Substring(index + 1);
+                                }
+                                if (line.Contains("C22, pF/m="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    c22 = line.Substring(index + 1);
+                                }
+                                if (line.Contains("C12, pF/m="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    c12 = line.Substring(index + 1);
+                                }
+                                if (line.Contains("L11, μH/m="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    l11 = line.Substring(index + 1);
+                                }
+                                if (line.Contains("L22, μH/m="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    l22 = line.Substring(index + 1);
+                                }
+                                if (line.Contains("L12, μH/m="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    l12 = line.Substring(index + 1);
+                                }
+                                textBox4.Text = c11;
+                                textBox5.Text = c22;
+                                textBox6.Text = c12;
+                                textBox1.Text = l11;
+                                textBox2.Text = l22;
+                                textBox3.Text = l12;
+                            }
+                            break;
+                        case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
+                            radioButton6.Checked = true;
+                            while ((line = sr.ReadLine()) != null)
+                            {
+                                if (line.Contains("Zп1, Ω="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    zc1 = line.Substring(index + 1);
+                                }
+                                if (line.Contains("Zc2, Ω="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    zp2 = line.Substring(index + 1);
+                                }
+                                if (line.Contains("Rc="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    rc = line.Substring(index + 1);
+                                }
+                                if (line.Contains("Rп="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    rp = line.Substring(index + 1);
+                                }
+                                if (line.Contains("Erc="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    erc = line.Substring(index + 1);
+                                }
+                                if (line.Contains("Erп="))
+                                {
+                                    var index = line.IndexOf('=');
+                                    erp = line.Substring(index + 1);
+                                }
+                                textBox4.Text = rp;
+                                textBox5.Text = erc;
+                                textBox6.Text = erp;
+                                textBox1.Text = zc1;
+                                textBox2.Text = zp2;
+                                textBox3.Text = rc;
+                            }
+                            break;
                     }
                 }
 
@@ -671,7 +737,7 @@ namespace ParametersApp
                 {
                     MessageBox.Show(
                         "Файл поврежден, нажмите ОК",
-                        "Ошмбка",
+                        "Ошибка",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information,
                         MessageBoxDefaultButton.Button1,

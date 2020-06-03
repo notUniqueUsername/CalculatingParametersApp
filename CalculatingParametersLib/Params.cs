@@ -67,7 +67,17 @@ namespace CalculatingParametersLib
         public double Rp
         {
             get => _rp;
-            set => _rp = value;
+            set
+            {
+                if (value == 0)
+                {
+                    _rp = -1e-10;
+                }
+                else
+                {
+                    _rp = value;
+                }
+            }
         }
         public double Erc
         {

@@ -12,7 +12,7 @@ namespace CalculatingParametersLib
         public Params Calculate(double c11, double c12, double c22, double l11, double l12, double l22)
         {
             _currentParams = new Params();
-            _currentParams.C11 = c11 * Math.Pow(10,-12);
+            _currentParams.C11 = c11 * Math.Pow(10, -12);
             _currentParams.C12 = c12 * Math.Pow(10, -12); 
             _currentParams.C22 = c22 * Math.Pow(10, -12); 
 
