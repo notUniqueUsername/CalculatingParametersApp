@@ -367,7 +367,7 @@ namespace CalculatingParametersLib
         {
             if (Rc == null || Rp == null || Erc == null || Erp == null)
             {
-                throw new ArgumentNullException("Необходимо выполнять перед расчетом параметров зависящих от Erc Erp Rc Rp, но после расчета Rc Rp Erc Erp");
+                throw new ArgumentNullException("RpRcCheck()", "Необходимо выполнять перед расчетом параметров зависящих от Erc Erp Rc Rp, но после расчета Rc Rp Erc Erp");
             }
             if (Rp > Rc)
             {

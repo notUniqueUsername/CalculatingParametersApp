@@ -80,11 +80,11 @@ namespace CalculatingParametersLib
 
             _currentParams.Zc1 = _calculator.Zc1(rc, rp, k, z0);
             
-            _currentParams.L11 = Math.Round(_calculator.L11(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 3); 
+            _currentParams.L11 = Math.Round(_calculator.L11(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 4); 
  
-            _currentParams.L12 = Math.Round(_calculator.L12(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 3);
+            _currentParams.L12 = Math.Round(_calculator.L12(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 4);
 
-            _currentParams.L22 = Math.Round(_calculator.L22(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 3);
+            _currentParams.L22 = Math.Round(_calculator.L22(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 4);
 
             _currentParams.C11 = Math.Round(_calculator.C11(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
 

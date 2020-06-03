@@ -160,20 +160,20 @@ namespace CalculatingParametersLib
                 Math.Pow(10, 12), 3);
             _currentParams.L11 = Math.Round(
                 _calculator.L11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 6), 3);
+                Math.Pow(10, 6), 4);
             _currentParams.C22 = Math.Round(
                 _calculator.C22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
                 Math.Pow(10, 12), 3);
             _currentParams.L22 =
                 Math.Round(
                     _calculator.L22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                    Math.Pow(10, 6), 3);
+                    Math.Pow(10, 6), 4);
             _currentParams.C12 = Math.Round(
                 _calculator.C12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
                 Math.Pow(10, 12), 3);
             _currentParams.L12 = Math.Round(
                 _calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 6), 3);
+                Math.Pow(10, 6), 4);
 
             return _currentParams;
 
