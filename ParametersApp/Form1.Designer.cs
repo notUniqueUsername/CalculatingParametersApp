@@ -79,10 +79,10 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton1.Location = new System.Drawing.Point(12, 340);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(240, 20);
+            this.radioButton1.Size = new System.Drawing.Size(233, 19);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.Text = "(L11; L22; L12)/μ0; (C11; C22; C12)/ε0";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -92,10 +92,10 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Checked = true;
-            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton3.Location = new System.Drawing.Point(12, 386);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(170, 20);
+            this.radioButton3.Size = new System.Drawing.Size(159, 19);
             this.radioButton3.TabIndex = 1;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Z0, Ω; k; Rc; Rп; Erc; Erп";
@@ -234,10 +234,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton2.Location = new System.Drawing.Point(12, 363);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(279, 20);
+            this.radioButton2.Size = new System.Drawing.Size(270, 19);
             this.radioButton2.TabIndex = 25;
             this.radioButton2.Text = "(L11; L22; L12), μH/m; (C11; C22; C12), pF/m";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -246,10 +246,10 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton4.Location = new System.Drawing.Point(12, 409);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(201, 20);
+            this.radioButton4.Size = new System.Drawing.Size(188, 19);
             this.radioButton4.TabIndex = 26;
             this.radioButton4.Text = "(Zc1, Zп1), Ω; Rc; Rп; Erc; Erп";
             this.radioButton4.UseVisualStyleBackColor = true;
@@ -258,10 +258,10 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton5.Location = new System.Drawing.Point(12, 432);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(201, 20);
+            this.radioButton5.Size = new System.Drawing.Size(188, 19);
             this.radioButton5.TabIndex = 27;
             this.radioButton5.Text = "(Zп1, Zc2), Ω; Rc; Rп; Erc; Erп";
             this.radioButton5.UseVisualStyleBackColor = true;
@@ -270,10 +270,10 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.radioButton6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton6.Location = new System.Drawing.Point(12, 455);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(277, 20);
+            this.radioButton6.Size = new System.Drawing.Size(263, 19);
             this.radioButton6.TabIndex = 28;
             this.radioButton6.Text = "(Zп1, Zc2), Ω; Rc=1; Rп=0; Erc; Erп (C01=0)";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -282,10 +282,10 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.radioButton7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton7.Location = new System.Drawing.Point(12, 477);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(251, 20);
+            this.radioButton7.Size = new System.Drawing.Size(237, 19);
             this.radioButton7.TabIndex = 29;
             this.radioButton7.Text = "Z0, Ω; k; Rc=1; Rп=-1; Erc; Erп (Symm)";
             this.radioButton7.UseVisualStyleBackColor = true;
@@ -307,6 +307,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dataGridView1.Size = new System.Drawing.Size(190, 431);
             this.dataGridView1.TabIndex = 31;
             // 
@@ -450,16 +451,22 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.label9.Location = new System.Drawing.Point(9, 160);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(147, 16);
+            this.label9.Size = new System.Drawing.Size(108, 16);
             this.label9.TabIndex = 39;
-            this.label9.Text = "Equivalent circuit (x=0)";
+            this.label9.Text = "Equivalent circuit";
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.label10.Location = new System.Drawing.Point(237, 160);
@@ -470,9 +477,12 @@
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label11.Location = new System.Drawing.Point(410, 160);
+            this.label11.Location = new System.Drawing.Point(407, 160);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(109, 16);
             this.label11.TabIndex = 41;
@@ -480,16 +490,22 @@
             // 
             // label12
             // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label12.Location = new System.Drawing.Point(276, 34);
+            this.label12.Location = new System.Drawing.Point(306, 34);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(246, 16);
+            this.label12.Size = new System.Drawing.Size(207, 16);
             this.label12.TabIndex = 43;
-            this.label12.Text = "Termination loads: Delta () and Star (Y)";
+            this.label12.Text = "Termination loads: Delta and Star";
             // 
             // label13
             // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.label13.Location = new System.Drawing.Point(9, 34);

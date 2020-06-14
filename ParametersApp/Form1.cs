@@ -32,13 +32,23 @@ namespace ParametersApp
             button2_Click(null,null);
             button1.FlatStyle = FlatStyle.System;
             button2.FlatStyle = FlatStyle.System;
-            LabelFilling();
-        }
-
-        private void LabelFilling()
-        {
-            label12.Text = "Termination loads: Delta (\u0394) and Star (Y)";
-            label9.Text = "Equivalent circuit (\u0394x=0)";
+#if DEBUG
+            var FileName = @"C:\Users\Valeriy\Desktop\nirs\SizeInPixel.txt";
+            using (StreamWriter file = new StreamWriter(FileName, false))
+            {
+                var lengthRadio2 = TextRenderer.MeasureText(radioButton2.Text, radioButton2.Font).Width;
+                file.WriteLine("label(12+13) size= " + lengthRadio2);
+                var length12 = TextRenderer.MeasureText(label12.Text, label12.Font).Width;
+                var length13= TextRenderer.MeasureText(label13.Text, label13.Font).Width;
+                var length1213 = length12 + length13;
+                file.WriteLine("label(12+13) size= " + length1213);
+                var length9 = TextRenderer.MeasureText(label9.Text, label9.Font).Width;
+                var length10 = TextRenderer.MeasureText(label10.Text, label10.Font).Width;
+                var length11 = TextRenderer.MeasureText(label11.Text, label11.Font).Width;
+                var length91011 = length11 + length9 + length10;
+                file.WriteLine("label(9+10+11) size= " + length91011);
+            }
+#endif
         }
 
         private void FormatGridView1()
