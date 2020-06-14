@@ -4,11 +4,22 @@ namespace CalculatingParametersLib
 {
     public class Params
     {
+        private bool _invert_D;
         private double _d;
         public double D
         {
             get => _d;
-            set => _d = value;
+            set
+            {
+                if (_invert_D)
+                {
+                    _d = -value;
+                }
+                else
+                {
+                    _d = value;
+                }
+            }
         }
         private double _q11;
         public double Q11
@@ -413,7 +424,14 @@ namespace CalculatingParametersLib
             {
                 if (Rp > Rc)
                 {
-                    D = -D;
+                    if (D == 0)
+                    {
+                        _invert_D = true;
+                    }
+                    else
+                    {
+                        D = -D;
+                    }
                     var swapData = Rp;
                     Rp = Rc;
                     Rc = swapData;
@@ -423,7 +441,14 @@ namespace CalculatingParametersLib
             {
                 if (Rp < Rc)
                 {
-                    D = -D;
+                    if (D == 0)
+                    {
+                        _invert_D = true;
+                    }
+                    else
+                    {
+                        D = -D;
+                    }
                     var swapData = Rp;
                     Rp = Rc;
                     Rc = swapData;
