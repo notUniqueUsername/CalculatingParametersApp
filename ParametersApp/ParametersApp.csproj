@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Paramico1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -103,6 +106,8 @@
     <None Include="Resources\8.JPG" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="iconca.ico" />
+    <Content Include="Paramico1.ico" />
     <Content Include="Resources\String_low_.png" />
     <None Include="Resources\String_up1.png" />
     <None Include="Resources\String_low_1.png" />

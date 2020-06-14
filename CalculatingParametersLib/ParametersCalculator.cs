@@ -44,44 +44,64 @@ namespace CalculatingParametersLib
         {
             return Math.Sqrt(Math.Pow(q11-q22,2)+4*q12*q21);
         }
-
-        public double Erc(double c11, double c12, double c22, double l11, double l12, double l22)
+        public double Q11(double l11, double c11, double l12, double c12)
         {
-            double q11 = l11 * c11 - l12 * c12;
-            double q22 = -l12 * c12 + l22 * c22;
-            double q12 = -l11 * c12 + l12 * c22;
-            double q21 = l12 * c11 - l22 * c12;
-            double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
+            return l11 * c11 - l12 * c12;
+        }
+        public double Q22(double l12, double c12, double l22, double c22)
+        {
+            return -l12 * c12 + l22 * c22;
+        }
+        public double Q12(double l11, double c22, double l12, double c12)
+        {
+            return -l11 * c12 + l12 * c22;
+        }
+        public double Q21(double l22, double c11, double l12, double c12)
+        {
+            return l12 * c11 - l22 * c12;
+        }
+
+        public double Erc(double q11, double q22, double d)
+        {
+            //double q11 = l11 * c11 - l12 * c12;
+            //double q22 = -l12 * c12 + l22 * c22;
+            //double q12 = -l11 * c12 + l12 * c22;
+            //double q21 = l12 * c11 - l22 * c12;
+            //double d = D(q11,q12,q22,q21);
+            //double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
             return (Math.Pow(SpeedOfLight,2)/2) * (q11+q22+d);
         }
 
-        public double Erp(double c11, double c12, double c22, double l11, double l12, double l22)
+        public double Erp(double q11, double q22, double d)
         {
-            double q11 = l11 * c11 - l12 * c12;
-            double q22 = -l12 * c12 + l22 * c22;
-            double q12 = -l11 * c12 + l12 * c22;
-            double q21 = l12 * c11 - l22 * c12;
-            double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
+            //double q11 = l11 * c11 - l12 * c12;
+            //double q22 = -l12 * c12 + l22 * c22;
+            //double q12 = -l11 * c12 + l12 * c22;
+            //double q21 = l12 * c11 - l22 * c12;
+            //double d = D(q11, q12, q22, q21);
+            //double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
             return (Math.Pow(SpeedOfLight, 2) / 2) * (q11 + q22 - d);
         }
 
-        public double Rc(double c11, double c12, double c22, double l11, double l12, double l22)
+        public double Rc(double q11, double q22, double d, double q12)
         {
-            double q11 = l11 * c11 - l12 * c12;
-            double q22 = -l12 * c12 + l22 * c22;
-            double q12 = -l11 * c12 + l12 * c22;
-            double q21 = l12 * c11 - l22 * c12;
-            double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
+            //double q11 = l11 * c11 - l12 * c12;
+            //double q22 = -l12 * c12 + l22 * c22;
+            //double q12 = -l11 * c12 + l12 * c22;
+            //double q21 = l12 * c11 - l22 * c12;
+            //double d = D(q11, q12, q22, q21);
+            //double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
             return (q22 - q11 + d)/(2 * q12);
         }
 
-        public double Rp(double c11, double c12, double c22, double l11, double l12, double l22)
+        public double Rp(double q11, double q22, double d, double q12)
         {
-            double q11 = l11 * c11 - l12 * c12;
-            double q22 = -l12 * c12 + l22 * c22;
-            double q12 = -l11 * c12 + l12 * c22;
-            double q21 = l12 * c11 - l22 * c12;
-            double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
+            //double q11 = l11 * c11 - l12 * c12;
+            //double q22 = -l12 * c12 + l22 * c22;
+            //double q12 = -l11 * c12 + l12 * c22;
+            //double q21 = l12 * c11 - l22 * c12;
+            //double d = D(q11, q12, q22, q21);
+            //double d = Math.Sqrt(Math.Pow(q11 - q22, 2) + 4 * q12 * q21);
             return (q22 - q11 - d) / (2 * q12);
         }
 

@@ -4,6 +4,36 @@ namespace CalculatingParametersLib
 {
     public class Params
     {
+        private double _d;
+        public double D
+        {
+            get => _d;
+            set => _d = value;
+        }
+        private double _q11;
+        public double Q11
+        {
+            get => _q11;
+            set => _q11 = value;
+        }
+        private double _q12;
+        public double Q12
+        {
+            get => _q12;
+            set => _q12 = value;
+        }
+        private double _q22;
+        public double Q22
+        {
+            get => _q22;
+            set => _q22 = value;
+        }
+        private double _q21;
+        public double Q21
+        {
+            get => _q21;
+            set => _q21 = value;
+        }
         private double _l11;
         private double _l12;
         private double _l22;

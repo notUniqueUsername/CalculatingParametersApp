@@ -90,6 +90,12 @@ namespace CalculatingParametersLib
 
             _currentParams.C22 = Math.Round(_calculator.C22(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
 
+            _currentParams.Q11 = _calculator.Q11(_currentParams.L11, _currentParams.C11, _currentParams.L12, _currentParams.C12);
+            _currentParams.Q12 = _calculator.Q12(_currentParams.L11, _currentParams.C22, _currentParams.L12, _currentParams.C12);
+            _currentParams.Q21 = _calculator.Q21(_currentParams.L22, _currentParams.C11, _currentParams.L12, _currentParams.C12);
+            _currentParams.Q22 = _calculator.Q22(_currentParams.L12, _currentParams.C12, _currentParams.L22, _currentParams.C22);
+            _currentParams.D = _calculator.D(_currentParams.Q11, _currentParams.Q12, _currentParams.Q22, _currentParams.Q21);
+
         }
 
         private void CalculateImpedanceProvodimosti(double rc, double rp, double zc1, double zp1,double z0)
