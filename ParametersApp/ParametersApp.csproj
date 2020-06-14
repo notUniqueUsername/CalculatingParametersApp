@@ -106,7 +106,6 @@
     <None Include="Resources\8.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="iconca.ico" />
     <Content Include="Paramico1.ico" />
     <Content Include="Resources\String_low_.png" />
     <None Include="Resources\String_up1.png" />
