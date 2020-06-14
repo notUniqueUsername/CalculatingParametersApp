@@ -408,24 +408,46 @@ namespace CalculatingParametersLib
             {
                 throw new ArgumentNullException("RpRcCheck()", "Необходимо выполнять перед расчетом параметров зависящих от Erc Erp Rc Rp, но после расчета Rc Rp Erc Erp");
             }
-            if (Rp > Rc)
+
+            if (Rc * Rp < 0)
             {
-                var swapData = Rc;
-                Rc = Rp;
-                Rp = swapData;
-                swapData = Erc;
-                Erc = Erp;
-                Erp = swapData;
-                if (Rp > 0 && Rc > 0)
+                if (Rp > Rc)
                 {
-                    swapData = Rc;
-                    Rc = Rp;
-                    Rp = swapData;
-                    swapData = Erc;
-                    Erc = Erp;
-                    Erp = swapData;
+                    D = -D;
+                    var swapData = Rp;
+                    Rp = Rc;
+                    Rc = swapData;
                 }
             }
+            else
+            {
+                if (Rp < Rc)
+                {
+                    D = -D;
+                    var swapData = Rp;
+                    Rp = Rc;
+                    Rc = swapData;
+                }
+            }
+
+            //if (Rp > Rc)
+            //{
+            //    var swapData = Rc;
+            //    Rc = Rp;
+            //    Rp = swapData;
+            //    swapData = Erc;
+            //    Erc = Erp;
+            //    Erp = swapData;
+            //    if (Rp > 0 && Rc > 0)
+            //    {
+            //        swapData = Rc;
+            //        Rc = Rp;
+            //        Rp = swapData;
+            //        swapData = Erc;
+            //        Erc = Erp;
+            //        Erp = swapData;
+            //    }
+            //}
         }
 
         public bool PhysRelease()
