@@ -451,7 +451,7 @@ namespace ParametersApp
             ClearTextBoxs();
             textBox3.Text = "1";
             textBox3.ReadOnly = true;
-            textBox4.Text = "-1E-10";
+            textBox4.Text = "-1e-3";
             textBox4.ReadOnly = true;
             _setOfParameters = SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero;
         }
@@ -612,7 +612,7 @@ namespace ParametersApp
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        if (line.Contains("Rп=-1E-10"))
+                        if (line.Contains("Rп=-1e-3"))
                         {
                             setOfParams = SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero;
                         }

@@ -111,7 +111,7 @@ namespace CalculatingParametersLib
             {
                 if (value == 0)
                 {
-                    _rp = -1e-10;
+                    _rp = -1e-3;
                 }
                 else
                 {
