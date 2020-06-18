@@ -66,7 +66,8 @@ namespace CalculatingParametersLib
 
             _currentParams.kv = _calculator.Kv(erc,erp);
 
-            _currentParams.m = Math.Sqrt(_currentParams.Erp)/ Math.Sqrt(_currentParams.Erc);
+            _currentParams.m = _calculator.M(_currentParams.Erc, _currentParams.Erp);
+            //_currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
 
             _currentParams.S21 = -20 * Math.Log10(_currentParams.k);
 

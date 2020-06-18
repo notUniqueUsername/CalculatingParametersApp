@@ -33,11 +33,17 @@ namespace CalculatingParametersLib
             _currentParams.Q22 = _calculator.Q22(_currentParams.L12, _currentParams.C12, _currentParams.L22, _currentParams.C22);
             _currentParams.D = _calculator.D(_currentParams.Q11,_currentParams.Q12,_currentParams.Q22,_currentParams.Q21);
 
-            _currentParams.Erc = _calculator.Erc(_currentParams.Q11, _currentParams.Q22, _currentParams.D);
-            _currentParams.Erp = _calculator.Erp(_currentParams.Q11, _currentParams.Q22, _currentParams.D);
+            #region Rp_Rc_Erc_Erp_Calculate
+
             _currentParams.Rp = _calculator.Rp(_currentParams.Q11, _currentParams.Q22, _currentParams.D, _currentParams.Q12);
             _currentParams.Rc = _calculator.Rc(_currentParams.Q11, _currentParams.Q22, _currentParams.D, _currentParams.Q12);
             _currentParams.RpRcCheck();
+            _currentParams.Erc = _calculator.Erc(_currentParams.Q11, _currentParams.Q22, _currentParams.D);
+            _currentParams.Erp = _calculator.Erp(_currentParams.Q11, _currentParams.Q22, _currentParams.D);
+
+            #endregion
+
+
             _currentParams.Zc1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erc, _currentParams.Rc);
             _currentParams.Zp1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erp, _currentParams.Rp);
             _currentParams.Zp2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1);
@@ -55,7 +61,8 @@ namespace CalculatingParametersLib
             _currentParams.klc = _calculator.Klc(_currentParams.kl, _currentParams.kc);
             _currentParams.kv = _calculator.Kv(_currentParams.Erc, _currentParams.Erp);
             _currentParams.ke = _calculator.Ke(_currentParams.Erc, _currentParams.Erp);
-            _currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
+            _currentParams.m = _calculator.M(_currentParams.Erc, _currentParams.Erp);
+            //_currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
             _currentParams.Zm = _calculator.Zm(_currentParams.Z12, _currentParams.Z0);
 
             _currentParams.Z01 = _calculator.Z01(_currentParams.Rc, _currentParams.Zp1, _currentParams.Rp, _currentParams.Zc1);

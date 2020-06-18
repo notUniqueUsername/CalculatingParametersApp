@@ -64,7 +64,8 @@ namespace CalculatingParametersLib
             _currentParams.klc = _calculator.Klc(_currentParams.kl, _currentParams.kc);
             _currentParams.kv = _calculator.Kv(_currentParams.Erc, _currentParams.Erp);
             _currentParams.ke = _calculator.Ke(_currentParams.Erc, _currentParams.Erp);
-            _currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
+            _currentParams.m = _calculator.M(_currentParams.Erc, _currentParams.Erp);
+            //_currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
             _currentParams.Zm = _calculator.Zm(_currentParams.Z12, _currentParams.Z0);
 
             _currentParams.Z01 = _calculator.Z01(_currentParams.Rc, _currentParams.Zp1, _currentParams.Rp, _currentParams.Zc1);
@@ -150,7 +151,8 @@ namespace CalculatingParametersLib
             _currentParams.klc = _calculator.Klc(_currentParams.kl, _currentParams.kc);
             _currentParams.kv = _calculator.Kv(_currentParams.Erc, _currentParams.Erp);
             _currentParams.ke = _calculator.Ke(_currentParams.Erc, _currentParams.Erp);
-            _currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
+            _currentParams.m = _calculator.M(_currentParams.Erc, _currentParams.Erp);
+            //_currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
             _currentParams.Zm = _calculator.Zm(_currentParams.Z12, _currentParams.Z0);
 
             _currentParams.Z01 = _calculator.Z01(_currentParams.Rc, _currentParams.Zp1, _currentParams.Rp, _currentParams.Zc1);

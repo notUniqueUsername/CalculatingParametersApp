@@ -272,5 +272,10 @@ namespace CalculatingParametersLib
         {
             return -1 / zm;
         }
+
+        public double M(double erc, double erp)
+        {
+            return Math.Sqrt(erp) / Math.Sqrt(erc);
+        }
     }
 }
