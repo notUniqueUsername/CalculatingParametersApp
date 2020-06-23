@@ -375,6 +375,17 @@ namespace ParametersApp
             }
             
         }
+
+        private void LabelTransport()
+        {
+            label1.Location = new Point(347, label1.Location.Y);
+            label2.Location = new Point(347, label2.Location.Y);
+            label3.Location = new Point(347, label3.Location.Y);
+            label4.Location = new Point(347, label4.Location.Y);
+            label5.Location = new Point(347, label5.Location.Y);
+            label6.Location = new Point(347, label6.Location.Y);
+        }
+
         /// <summary>
         /// Погонные
         /// </summary>
@@ -387,6 +398,7 @@ namespace ParametersApp
             _setOfParameters = SetOfParametersEnum.Pogonie;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
+            LabelTransport();
         }
         /// <summary>
         /// Погонные пФ нГн
@@ -398,6 +410,12 @@ namespace ParametersApp
             ModaleNameTextBox("L11, μH/m", "L22, μH/m", "L12, μH/m", "C11, pF/m", "C22, pF/m", "C12, pF/m");
             ClearTextBoxs();
             _setOfParameters = SetOfParametersEnum.Pogonie_pF_nGn;
+            label1.Location = new Point(label1.Location.X - 9, label1.Location.Y);
+            label2.Location = new Point(label2.Location.X - 9, label2.Location.Y);
+            label3.Location = new Point(label3.Location.X - 9, label3.Location.Y);
+            label4.Location = new Point(label4.Location.X - 9, label4.Location.Y);
+            label5.Location = new Point(label5.Location.X - 9, label5.Location.Y);
+            label6.Location = new Point(label6.Location.X - 9, label6.Location.Y);
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
@@ -413,6 +431,7 @@ namespace ParametersApp
             _setOfParameters = SetOfParametersEnum.Modalnie;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
+            LabelTransport();
         }
         /// <summary>
         /// Zc1 Zp1
@@ -426,6 +445,7 @@ namespace ParametersApp
             _setOfParameters = SetOfParametersEnum.Zc1_Zp1;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
+            LabelTransport();
         }
         /// <summary>
         /// Zp1 Zc2
@@ -439,6 +459,7 @@ namespace ParametersApp
             _setOfParameters = SetOfParametersEnum.Zp1_Zc2;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
+            LabelTransport();
         }
         /// <summary>
         /// Zp1 Zc2 Rc=1 Rp=0
@@ -454,6 +475,7 @@ namespace ParametersApp
             textBox4.Text = "-1e-3";
             textBox4.ReadOnly = true;
             _setOfParameters = SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero;
+            LabelTransport();
         }
         /// <summary>
         /// Модальные симметрич rc=1 rp=-1
@@ -469,6 +491,7 @@ namespace ParametersApp
             textBox3.ReadOnly = true;
             textBox4.ReadOnly = true;
             _setOfParameters = SetOfParametersEnum.ModalnieSymm;
+            LabelTransport();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

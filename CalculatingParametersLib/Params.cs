@@ -4,23 +4,14 @@ namespace CalculatingParametersLib
 {
     public class Params
     {
-        private bool _invert_D;
         private double _d;
+
         public double D
         {
             get => _d;
-            set
-            {
-                if (_invert_D)
-                {
-                    _d = -value;
-                }
-                else
-                {
-                    _d = value;
-                }
-            }
+            set => _d = value; 
         }
+
         private double _q11;
         public double Q11
         {
@@ -415,7 +406,7 @@ namespace CalculatingParametersLib
         /// </summary>
         public void RpRcCheck()
         {
-            if (Rc == null || Rp == null || Erc == null || Erp == null)
+            if (Rc == null || Rp == null)
             {
                 throw new ArgumentNullException("RpRcCheck()", "Необходимо выполнять перед расчетом параметров зависящих от Rc Rp, но после расчета Rc Rp");
             }
@@ -424,14 +415,7 @@ namespace CalculatingParametersLib
             {
                 if (Rp > Rc)
                 {
-                    if (D == 0)
-                    {
-                        _invert_D = true;
-                    }
-                    else
-                    {
-                        D = -D;
-                    }
+                    D = -D;
                     var swapData = Rp;
                     Rp = Rc;
                     Rc = swapData;
@@ -441,38 +425,13 @@ namespace CalculatingParametersLib
             {
                 if (Rp < Rc)
                 {
-                    if (D == 0)
-                    {
-                        _invert_D = true;
-                    }
-                    else
-                    {
-                        D = -D;
-                    }
+                    D = -D;
                     var swapData = Rp;
                     Rp = Rc;
                     Rc = swapData;
                 }
             }
 
-            //if (Rp > Rc)
-            //{
-            //    var swapData = Rc;
-            //    Rc = Rp;
-            //    Rp = swapData;
-            //    swapData = Erc;
-            //    Erc = Erp;
-            //    Erp = swapData;
-            //    if (Rp > 0 && Rc > 0)
-            //    {
-            //        swapData = Rc;
-            //        Rc = Rp;
-            //        Rp = swapData;
-            //        swapData = Erc;
-            //        Erc = Erp;
-            //        Erp = swapData;
-            //    }
-            //}
         }
 
         public bool PhysRelease()
