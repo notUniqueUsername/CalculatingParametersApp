@@ -15,14 +15,14 @@ namespace CalculatingParametersLib
         {
             var x = (1-Math.Pow(k,2)*(rc/rp+rp/rc)/2)/(1 - Math.Pow(k, 2));
             var e = Math.Sqrt(x+Math.Sqrt(Math.Pow(x,2)-1));
-            return z0*e/Math.Sqrt(-rc*rp);
+            return z0*e/Math.Sqrt(-rc * rp);
         }
 
         public double Zp1(double rc, double rp, double k, double z0)
         {
             var x = (1 - Math.Pow(k, 2) * (rc / rp + rp / rc) / 2) / (1 - Math.Pow(k, 2));
             var e = Math.Sqrt(x + Math.Sqrt(Math.Pow(x, 2) - 1));
-            return z0 / (Math.Sqrt(-rc * rp)* e) ;
+            return z0 / (Math.Sqrt(-rc * rp) * e) ;
         }
 
         public double Z1OrZ2(double l, double c)
