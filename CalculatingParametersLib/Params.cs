@@ -6,6 +6,14 @@ namespace CalculatingParametersLib
     {
         private double _d;
 
+        private double _rz;
+
+        public double Rz
+        {
+            get => _rz;
+            set => _rz = Math.Round(value / Math.Pow(10, 0), 3);
+        }
+
         public double D
         {
             get => _d;

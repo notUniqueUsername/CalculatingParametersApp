@@ -6,6 +6,11 @@ namespace CalculatingParametersLib
     {
         private const double SpeedOfLight = 300000000;
 
+        public double Rz(double z2p, double z1p)
+        {
+            return z2p / z1p;
+        }
+
         public double Zc1(double rc, double rp, double k,double z0)
         {
             var x = (1-Math.Pow(k,2)*(rc/rp+rp/rc)/2)/(1 - Math.Pow(k, 2));

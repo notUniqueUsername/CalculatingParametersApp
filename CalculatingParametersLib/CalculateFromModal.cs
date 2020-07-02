@@ -44,6 +44,8 @@ namespace CalculatingParametersLib
 
             _currentParams.Z2p = _calculator.Z2p(zc2, rc, zp2 ,rp);
 
+            _currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
+
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p,z0);
 
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p,z0);

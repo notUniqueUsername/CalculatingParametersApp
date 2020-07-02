@@ -101,8 +101,10 @@ namespace ParametersApp
             dataGridView2.Rows[5].SetValues("kc");
             dataGridView2.Rows[6].SetValues("klc");
             dataGridView2.Rows[7].SetValues("kε");
-            dataGridView2.Rows[8].SetValues("kv");
-            dataGridView2.Rows[9].SetValues("m");
+            dataGridView2.Rows[8].SetValues("m");
+            dataGridView2.Rows[9].SetValues("Rz");
+            //dataGridView2.Rows[8].SetValues("kv");
+            //dataGridView2.Rows[9].SetValues("m");
             dataGridView2.Rows[10].Height = 7;
             dataGridView2.Rows[10].DividerHeight = 7;
             dataGridView2.Rows[11].SetValues("Zc1, Ω");
@@ -201,8 +203,8 @@ namespace ParametersApp
             dataGridView2[1, 5].Value = _currentParams.kc;
             dataGridView2[1, 6].Value = _currentParams.klc;
             dataGridView2[1, 7].Value = _currentParams.ke;
-            dataGridView2[1, 8].Value = _currentParams.kv;
-            dataGridView2[1, 9].Value = _currentParams.m;
+            dataGridView2[1, 8].Value = _currentParams.m;
+            dataGridView2[1, 9].Value = _currentParams.Rz;
 
             #endregion
             #region Resistors
