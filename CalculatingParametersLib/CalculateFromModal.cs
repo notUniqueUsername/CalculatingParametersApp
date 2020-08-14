@@ -21,43 +21,43 @@ namespace CalculatingParametersLib
             _currentParams.Rp = rp;
             _currentParams.Erc = erc;
             _currentParams.Erp = erp;
-            CalculatePogonnie(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
+            CalculatePogonnie();
 
-            CalculateImpedanceProvodimosti(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1, _currentParams.Zp1, _currentParams.Z0);
+            CalculateImpedanceProvodimosti();
 
-            CalculateImpedance(_currentParams.L11, _currentParams.C11, _currentParams.L22, _currentParams.C22, _currentParams.Zc1, _currentParams.Zp1, _currentParams.Rc, _currentParams.Rp);
+            CalculateImpedance();
 
-            CalculateKoeff(_currentParams.Erc, _currentParams.Erp);
+            CalculateKoeff();
 
-            CalculateResistors(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1, _currentParams.Zp2, _currentParams.Z0, _currentParams.Zc1, _currentParams.Zc2, _currentParams.Z12);
+            CalculateResistors();
 
             return _currentParams;
         }
 
-        private void CalculateResistors(double rc, double rp, double zp1, double zp2, double z0, double zc1, double zc2, double z12)
+        private void CalculateResistors()
         {
-            _currentParams.Z01 = _calculator.Z01(rc,zp1,rp,zc1);
+            _currentParams.Z01 = _calculator.Z01(_currentParams.Rc, _currentParams.Zp1, _currentParams.Rp, _currentParams.Zc1);
 
-            _currentParams.Z02 = _calculator.Z02(z0, _currentParams.Z01);
+            _currentParams.Z02 = _calculator.Z02(_currentParams.Z0, _currentParams.Z01);
 
-            _currentParams.Z1p = _calculator.Z1p(zc2,rc,zp2,rp);
+            _currentParams.Z1p = _calculator.Z1p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
 
-            _currentParams.Z2p = _calculator.Z2p(zc2, rc, zp2 ,rp);
+            _currentParams.Z2p = _calculator.Z2p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
 
             _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11,
                 _currentParams.Rc, _currentParams.Rp);
             //_currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
 
-            _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p,z0);
+            _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 
-            _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p,z0);
+            _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
 
-            _currentParams.Zm = _calculator.Zm(z12,z0);
+            _currentParams.Zm = _calculator.Zm(_currentParams.Z12, _currentParams.Z0);
 
 
         }
 
-        private void CalculateKoeff(double erc, double erp)
+        private void CalculateKoeff()
         {
             _currentParams.kl = _calculator.Kl(_currentParams.L12, _currentParams.L11, _currentParams.L22);
 
@@ -65,9 +65,9 @@ namespace CalculatingParametersLib
 
             _currentParams.klc = _calculator.Klc(_currentParams.kl, _currentParams.kc);
 
-            _currentParams.ke = _calculator.Ke(erc,erp);
+            _currentParams.ke = _calculator.Ke(_currentParams.Erc, _currentParams.Erp);
 
-            _currentParams.kv = _calculator.Kv(erc,erp);
+            _currentParams.kv = _calculator.Kv(_currentParams.Erc, _currentParams.Erp);
 
             _currentParams.m = _calculator.M(_currentParams.Erc, _currentParams.Erp);
             //_currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
@@ -76,7 +76,7 @@ namespace CalculatingParametersLib
 
         }
 
-        private void CalculatePogonnie(double z0, double k, double rc, double rp, double erc, double erp)
+        private void CalculatePogonnie()
         {
             _currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k);
 
@@ -88,21 +88,21 @@ namespace CalculatingParametersLib
 
             _currentParams.Z22 = _calculator.Z22(_currentParams.Zok, _currentParams.N);
 
-            _currentParams.Zp1 = _calculator.Zp1(rc, rp, k, z0);
+            _currentParams.Zp1 = _calculator.Zp1(_currentParams.Rc, _currentParams.Rp, _currentParams.k, _currentParams.Z0);
 
-            _currentParams.Zc1 = _calculator.Zc1(rc, rp, k, z0);
+            _currentParams.Zc1 = _calculator.Zc1(_currentParams.Rc, _currentParams.Rp, _currentParams.k, _currentParams.Z0);
             
-            _currentParams.L11 = Math.Round(_calculator.L11(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 4); 
+            _currentParams.L11 = Math.Round(_calculator.L11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) / Math.Pow(10, -6), 4); 
  
-            _currentParams.L12 = Math.Round(_calculator.L12(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 4);
+            _currentParams.L12 = Math.Round(_calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) / Math.Pow(10, -6), 4);
 
-            _currentParams.L22 = Math.Round(_calculator.L22(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -6), 4);
+            _currentParams.L22 = Math.Round(_calculator.L22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) / Math.Pow(10, -6), 4);
 
-            _currentParams.C11 = Math.Round(_calculator.C11(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
+            _currentParams.C11 = Math.Round(_calculator.C11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) / Math.Pow(10, -12), 3);
 
-            _currentParams.C12 = Math.Round(_calculator.C12(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
+            _currentParams.C12 = Math.Round(_calculator.C12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) / Math.Pow(10, -12), 3);
 
-            _currentParams.C22 = Math.Round(_calculator.C22(erc, erp, _currentParams.Zp1, _currentParams.Zc1, rc, rp) / Math.Pow(10, -12), 3);
+            _currentParams.C22 = Math.Round(_calculator.C22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) / Math.Pow(10, -12), 3);
 
             _currentParams.Q11 = _calculator.Q11(_currentParams.L11, _currentParams.C11, _currentParams.L12, _currentParams.C12);
             _currentParams.Q12 = _calculator.Q12(_currentParams.L11, _currentParams.C22, _currentParams.L12, _currentParams.C12);
@@ -112,15 +112,15 @@ namespace CalculatingParametersLib
 
         }
 
-        private void CalculateImpedanceProvodimosti(double rc, double rp, double zc1, double zp1,double z0)
+        private void CalculateImpedanceProvodimosti()
         {
-            var d = _calculator.DForImpedance(rc, rp);
+            var d = _calculator.DForImpedance(_currentParams.Rc, _currentParams.Rp);
 
             //_currentParams.Z11 = _calculator.Z11(rc, rp, zc1, zp1, d);
 
             //_currentParams.Z12 = _calculator.Z12(rc, rp, zc1, zp1, d);
 
-            _currentParams.Zm = _calculator.Zm(_currentParams.Z12, z0);
+            _currentParams.Zm = _calculator.Zm(_currentParams.Z12, _currentParams.Z0);
 
             //_currentParams.Z22 = _calculator.Z22(rc, rp, zc1, zp1, d);
 
@@ -131,7 +131,7 @@ namespace CalculatingParametersLib
             _currentParams.Y22 = _calculator.Y22(_currentParams.Z11, _currentParams.Z12, _currentParams.Z22);
         }
 
-        private void CalculateImpedance(double l11, double c11, double l22, double c22, double zc1,double zp1, double rc, double rp)
+        private void CalculateImpedance()
         {
             _currentParams.Z1 = _calculator.Z1OrZ2(_currentParams.L11, _currentParams.C11) * 1000;
 
@@ -141,9 +141,9 @@ namespace CalculatingParametersLib
 
             _currentParams.Zp = _calculator.Zp(_currentParams.Z12, _currentParams.Z11, _currentParams.Z22);
 
-            _currentParams.Zc2 = _calculator.Zc2OrZp2(rc,rp,zc1);
+            _currentParams.Zc2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1);
 
-            _currentParams.Zp2 = _calculator.Zc2OrZp2(rc, rp, zp1);
+            _currentParams.Zp2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1);
         }
 
     }
