@@ -11,16 +11,51 @@ namespace CalculatingParametersLib
             return z2p / z1p;
         }
 
+        #region New Formuls
+
         public double N(double rc, double rp, double k)
         {
             var x = (rc + rp) * k / 2;
             return x + Math.Sqrt(Math.Pow(x, 2) - rc * rp);
         }
 
-        public double Zc1(double rc, double rp, double k)
+        public double Zok(double z0, double k)
         {
-            return 1;
+            return z0/Math.Sqrt(1-Math.Pow(k,2));
         }
+
+        public double Zc1(double z11, double z12, double rp)
+        {
+            return z11 - z12 / rp;
+        }
+
+        public double Zp1(double z11, double z12, double rc)
+        {
+            return z11 - z12 / rc;
+        }
+
+        public double Rz(double z12, double z22, double z11, double rc, double rp)
+        {
+            return (z22 - z12 / rp) / (z11 - z12 / rc);
+        }
+
+        public double Z11(double zok, double n)
+        {
+            return zok / n;
+        }
+
+        public double Z22(double zok, double n)
+        {
+            return zok * n;
+        }
+
+        public double Z12(double zok, double k)
+        {
+            return zok * k;
+        }
+
+        #endregion
+
 
         public double Zc1(double rc, double rp, double k,double z0)
         {

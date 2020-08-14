@@ -44,7 +44,9 @@ namespace CalculatingParametersLib
 
             _currentParams.Z2p = _calculator.Z2p(zc2, rc, zp2 ,rp);
 
-            _currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
+            _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11,
+                _currentParams.Rc, _currentParams.Rp);
+            //_currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
 
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p,z0);
 
@@ -76,6 +78,16 @@ namespace CalculatingParametersLib
 
         private void CalculatePogonnie(double z0, double k, double rc, double rp, double erc, double erp)
         {
+            _currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k);
+
+            _currentParams.Zok = _calculator.Zok(_currentParams.Z0, _currentParams.k);
+
+            _currentParams.Z11 = _calculator.Z11(_currentParams.Zok, _currentParams.N);
+
+            _currentParams.Z12 = _calculator.Z12(_currentParams.Zok, _currentParams.k);
+
+            _currentParams.Z22 = _calculator.Z22(_currentParams.Zok, _currentParams.N);
+
             _currentParams.Zp1 = _calculator.Zp1(rc, rp, k, z0);
 
             _currentParams.Zc1 = _calculator.Zc1(rc, rp, k, z0);
@@ -104,13 +116,13 @@ namespace CalculatingParametersLib
         {
             var d = _calculator.DForImpedance(rc, rp);
 
-            _currentParams.Z11 = _calculator.Z11(rc, rp, zc1, zp1, d);
+            //_currentParams.Z11 = _calculator.Z11(rc, rp, zc1, zp1, d);
 
-            _currentParams.Z12 = _calculator.Z12(rc, rp, zc1, zp1, d);
+            //_currentParams.Z12 = _calculator.Z12(rc, rp, zc1, zp1, d);
 
             _currentParams.Zm = _calculator.Zm(_currentParams.Z12, z0);
 
-            _currentParams.Z22 = _calculator.Z22(rc, rp, zc1, zp1, d);
+            //_currentParams.Z22 = _calculator.Z22(rc, rp, zc1, zp1, d);
 
             _currentParams.Y11 = _calculator.Y11(_currentParams.Z11, _currentParams.Z12, _currentParams.Z22);
 
