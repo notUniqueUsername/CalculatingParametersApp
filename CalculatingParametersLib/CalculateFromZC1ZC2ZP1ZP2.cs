@@ -46,8 +46,8 @@ namespace CalculatingParametersLib
             //_currentParams.Rc = _calculator.Rc(_currentParams.Q11, _currentParams.Q22, _currentParams.D, _currentParams.Q12);
 
 
-            _currentParams.Zc1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erc, _currentParams.Rc);
-            _currentParams.Zp1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erp, _currentParams.Rp);
+            //_currentParams.Zc1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erc, _currentParams.Rc);
+            //_currentParams.Zp1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erp, _currentParams.Rp);
             _currentParams.Zp2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1);
             _currentParams.Zc2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1);
             _currentParams.Z0 = _calculator.Z0(_currentParams.Zc2, _currentParams.Zp1);
@@ -75,7 +75,9 @@ namespace CalculatingParametersLib
 
             _currentParams.Z2p = _calculator.Z2p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
             _currentParams.Z1p = _calculator.Z1p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
-            _currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
+            _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11,
+                _currentParams.Rc, _currentParams.Rp);
+            //_currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 
@@ -162,7 +164,9 @@ namespace CalculatingParametersLib
 
             _currentParams.Z2p = _calculator.Z2p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
             _currentParams.Z1p = _calculator.Z1p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
-            _currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
+            _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11,
+                _currentParams.Rc, _currentParams.Rp);
+            //_currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 

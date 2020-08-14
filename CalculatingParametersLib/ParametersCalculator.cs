@@ -13,6 +13,11 @@ namespace CalculatingParametersLib
 
         #region New Formuls
 
+        public double K(double rz, double n)
+        {
+            return (rz/n-n)/(rz-1);
+        }
+
         public double N(double rc, double rp, double k)
         {
             var x = (rc + rp) * k / 2;

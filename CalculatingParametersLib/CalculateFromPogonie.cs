@@ -43,12 +43,36 @@ namespace CalculatingParametersLib
 
             #endregion
 
-
             _currentParams.Zc1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erc, _currentParams.Rc);
             _currentParams.Zp1 = _calculator.Zc1OrZp1(_currentParams.C11, _currentParams.C12, _currentParams.Erp, _currentParams.Rp);
             _currentParams.Zp2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zp1);
             _currentParams.Zc2 = _calculator.Zc2OrZp2(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1);
             _currentParams.Z0 = _calculator.Z0(_currentParams.Zc2, _currentParams.Zp1);
+
+            //#region NewFormulsUse
+
+            //_currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k);
+
+            //_currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11,
+            //    _currentParams.Rc, _currentParams.Rp);
+
+            //_currentParams.k = _calculator.K(_currentParams.Rz, _currentParams.N);
+
+            //_currentParams.Zok = _calculator.Zok(_currentParams.Z0, _currentParams.k);
+
+            //_currentParams.Z11 = _calculator.Z11(_currentParams.Zok, _currentParams.N);
+
+            //_currentParams.Z12 = _calculator.Z12(_currentParams.Zok, _currentParams.k);
+
+            //_currentParams.Z22 = _calculator.Z22(_currentParams.Zok, _currentParams.N);
+
+            
+            //_currentParams.Zp1 = _calculator.Zp1(_currentParams.Z11, _currentParams.Z12, _currentParams.Rc);
+
+            //_currentParams.Zc1 = _calculator.Zc1(_currentParams.Z11, _currentParams.Z12, _currentParams.Rp);
+
+            //#endregion
+
             _currentParams.Z11 = _calculator.Z11(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1, _currentParams.Zp1,
                 _calculator.DForImpedance(_currentParams.Rc, _currentParams.Rp));
             _currentParams.Z12 = _calculator.Z12(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1, _currentParams.Zp1,
@@ -56,6 +80,7 @@ namespace CalculatingParametersLib
             _currentParams.Z22 = _calculator.Z22(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1, _currentParams.Zp1,
                 _calculator.DForImpedance(_currentParams.Rc, _currentParams.Rp));
             _currentParams.k = _calculator.K(_currentParams.Z12,_currentParams.Z11,_currentParams.Z22);
+            
             _currentParams.kl = _calculator.Kl(_currentParams.L12, _currentParams.L11, _currentParams.L22);
             _currentParams.kc = _calculator.Kc(_currentParams.C12, _currentParams.C11, _currentParams.C22);
             _currentParams.klc = _calculator.Klc(_currentParams.kl, _currentParams.kc);
@@ -73,7 +98,9 @@ namespace CalculatingParametersLib
 
             _currentParams.Z2p = _calculator.Z2p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
             _currentParams.Z1p = _calculator.Z1p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
-            _currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
+            _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11,
+                    _currentParams.Rc, _currentParams.Rp);
+            //_currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 
