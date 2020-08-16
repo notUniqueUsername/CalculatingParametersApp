@@ -11,6 +11,16 @@ namespace CalculatingParametersLib
             return z2p / z1p;
         }
 
+        public double Rz(double z12, double z22, double z11, double rc, double rp)
+        {
+            return (z22 - z12 / rp) / (z11 - z12 / rc);
+        }
+
+        public double Rz(double z12, double z22, double z11)
+        {
+            return (z22 - z12) / (z11 - z12);
+        }
+
         #region New Formuls
 
         public double K(double rz, double n)
@@ -18,9 +28,13 @@ namespace CalculatingParametersLib
             return (rz/n-n)/(rz-1);
         }
 
-        public double N(double rc, double rp, double k)
+        public double N(double rc, double rp, double k, bool rzNegativeStatus)
         {
             var x = (rc + rp) * k / 2;
+            if (rzNegativeStatus)
+            {
+                return x - Math.Sqrt(Math.Pow(x, 2) - rc * rp);
+            }
             return x + Math.Sqrt(Math.Pow(x, 2) - rc * rp);
         }
 
@@ -37,11 +51,6 @@ namespace CalculatingParametersLib
         public double Zp1(double z11, double z12, double rc)
         {
             return z11 - z12 / rc;
-        }
-
-        public double Rz(double z12, double z22, double z11, double rc, double rp)
-        {
-            return (z22 - z12 / rp) / (z11 - z12 / rc);
         }
 
         public double Z11(double zok, double n)

@@ -44,7 +44,11 @@ namespace CalculatingParametersLib
 
             _currentParams.Z2p = _calculator.Z2p(_currentParams.Zc2, _currentParams.Rc, _currentParams.Zp2, _currentParams.Rp);
 
-            _currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
+            //_currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
+
+            _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11);
+
+            _currentParams.RzCheck();
 
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 
@@ -76,7 +80,7 @@ namespace CalculatingParametersLib
 
         private void CalculatePogonnie()
         {
-            _currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k);
+            _currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k, _currentParams.RzNegativeStatus);
 
             _currentParams.Zok = _calculator.Zok(_currentParams.Z0, _currentParams.k);
 

@@ -221,6 +221,11 @@ namespace ParametersApp
 
         }
 
+        private void WriteParamsRzNegative()
+        {
+            dataGridView2[1, 23].Value = _currentParams.PhysRelease();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             switch (_setOfParameters)
@@ -260,8 +265,14 @@ namespace ParametersApp
                     _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
                     _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
-
-                    WriteParams();
+                    if (_currentParams.RzNegativeStatus)
+                    {
+                        WriteParamsRzNegative();
+                    }
+                    else
+                    {
+                        WriteParams();
+                    }
                     break;
                 case SetOfParametersEnum.Zc1_Zp1:
                     _currentParams.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
@@ -313,7 +324,14 @@ namespace ParametersApp
                     _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc,
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
-                    WriteParams();
+                    if (_currentParams.RzNegativeStatus)
+                    {
+                        WriteParamsRzNegative();
+                    }
+                    else
+                    {
+                        WriteParams();
+                    }
                     break;
             }
         }

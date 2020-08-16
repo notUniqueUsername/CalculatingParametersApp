@@ -113,4 +113,8 @@
     <Content Include="Resources\String_up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd C:\Users\Valeriy\Desktop\nirs
+C:\Users\Valeriy\Desktop\nirs\FormArch.bat</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -6,6 +6,29 @@ namespace CalculatingParametersLib
     {
         private double _d;
 
+        private bool _rzNegativeStatus;
+
+        public bool RzNegativeStatus 
+        {
+            get => _rzNegativeStatus;
+            set => _rzNegativeStatus = value;
+        }
+
+        public void RzCheck()
+        {
+            if (Rz < 0)
+            {
+                RzNegativeStatus = true;
+                var calculator = new ParametersCalculator();
+                N = calculator.N(Rc, Rp, k, RzNegativeStatus);
+                Z11 = calculator.Z11(Zok, N);
+                Z22 = calculator.Z22(Zok, N);
+                Z12 = calculator.Z12(Zok, k);
+                Rz = calculator.Rz(Z12, Z22, Z11);
+                RzNegativeStatus = Rz < 0;
+            }
+        }
+
         private double _zok;
 
         public double Zok
@@ -430,7 +453,7 @@ namespace CalculatingParametersLib
         /// </summary>
         public void RpRcCheck()
         {
-            if (Rc == null || Rp == null)
+            if (Rc == 0 || Rp == 0)
             {
                 throw new ArgumentNullException("RpRcCheck()", "Необходимо выполнять перед расчетом параметров зависящих от Rc Rp, но после расчета Rc Rp");
             }
