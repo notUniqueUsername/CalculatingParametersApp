@@ -46,10 +46,6 @@ namespace CalculatingParametersLib
 
             //_currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
 
-            _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11);
-
-            _currentParams.RzCheck();
-
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
@@ -89,6 +85,10 @@ namespace CalculatingParametersLib
             _currentParams.Z12 = _calculator.Z12(_currentParams.Zok, _currentParams.k);
 
             _currentParams.Z22 = _calculator.Z22(_currentParams.Zok, _currentParams.N);
+
+            _currentParams.Rz = _calculator.Rz(_currentParams.Z12, _currentParams.Z22, _currentParams.Z11);
+
+            _currentParams.RzCheck();
 
             _currentParams.Zp1 = _calculator.Zp1(_currentParams.Z11, _currentParams.Z12, _currentParams.Rc);
 
