@@ -80,7 +80,9 @@ namespace CalculatingParametersLib
             _currentParams.Z22 = _calculator.Z22(_currentParams.Rc, _currentParams.Rp, _currentParams.Zc1, _currentParams.Zp1,
                 _calculator.DForImpedance(_currentParams.Rc, _currentParams.Rp));
             _currentParams.k = _calculator.K(_currentParams.Z12,_currentParams.Z11,_currentParams.Z22);
-            
+
+            _currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k, _currentParams.RzNegativeStatus);
+
             _currentParams.kl = _calculator.Kl(_currentParams.L12, _currentParams.L11, _currentParams.L22);
             _currentParams.kc = _calculator.Kc(_currentParams.C12, _currentParams.C11, _currentParams.C22);
             _currentParams.klc = _calculator.Klc(_currentParams.kl, _currentParams.kc);
@@ -101,6 +103,8 @@ namespace CalculatingParametersLib
             _currentParams.Rz = _calculator.Rz(_currentParams.Z2p, _currentParams.Z1p);
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
+
+            _currentParams.EEE = _calculator.EEE(_currentParams.Erp, _currentParams.Erc);
 
             _currentParams.S21 = -20 * Math.Log10(_currentParams.k);
 

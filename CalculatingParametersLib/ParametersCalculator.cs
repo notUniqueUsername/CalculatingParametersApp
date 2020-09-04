@@ -6,6 +6,11 @@ namespace CalculatingParametersLib
     {
         private const double SpeedOfLight = 300000000;
 
+        public double EEE(double erp, double erc)
+        {
+            return erp / erc;
+        }
+
         public double Rz(double z2p, double z1p)
         {
             return z2p / z1p;

@@ -90,6 +90,8 @@ namespace CalculatingParametersLib
 
             _currentParams.RzCheck();
 
+            _currentParams.EEE = _calculator.EEE(_currentParams.Erp, _currentParams.Erc);
+
             _currentParams.Zp1 = _calculator.Zp1(_currentParams.Z11, _currentParams.Z12, _currentParams.Rc);
 
             _currentParams.Zc1 = _calculator.Zc1(_currentParams.Z11, _currentParams.Z12, _currentParams.Rp);

@@ -4,6 +4,14 @@ namespace CalculatingParametersLib
 {
     public class Params
     {
+        private double _eee;
+
+        public double EEE
+        {
+            get => _eee;
+            set => _eee = value;
+        }
+
         private double _d;
 
         private bool _rzNegativeStatus;
