@@ -223,7 +223,15 @@ namespace ParametersApp
 
         private void WriteParamsRzNegative()
         {
-            dataGridView2[1, 23].Value = _currentParams.PhysRelease();
+            //dataGridView2[1, 23].Value = _currentParams.PhysRelease();
+            WriteParams();
+            MessageBox.Show(
+                "Rz<0",
+                "Ошибка",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void button1_Click(object sender, EventArgs e)

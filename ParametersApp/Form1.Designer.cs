@@ -416,7 +416,7 @@
             // 
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
             this.verToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.verToolStripMenuItem.Text = "version from 4.09.20";
+            this.verToolStripMenuItem.Text = "version from 7.09.20";
             // 
             // label7
             // 
