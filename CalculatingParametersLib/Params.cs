@@ -42,7 +42,7 @@ namespace CalculatingParametersLib
         public double Zok
         {
             get => _zok;
-            set => _zok = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _zok = value;
         }
 
         private double _n;
@@ -50,7 +50,7 @@ namespace CalculatingParametersLib
         public double N
         {
             get => _n;
-            set => _n = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _n = value;
         }
 
         private double _rz;
@@ -58,7 +58,7 @@ namespace CalculatingParametersLib
         public double Rz
         {
             get => _rz;
-            set => _rz = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _rz = value;
         }
 
         public double D
@@ -138,17 +138,17 @@ namespace CalculatingParametersLib
         public double Z0
         {
             get => _z0;
-            set => _z0 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z0 = value;
         }
         public double k
         {
             get => _k;
-            set => _k = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _k = value;
         }
         public double Rc
         {
             get => _rc;
-            set => _rc = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _rc = value;
         }
         public double Rp
         {
@@ -168,12 +168,12 @@ namespace CalculatingParametersLib
         public double Erc
         {
             get => _erc;
-            set => _erc = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _erc = value;
         }
         public double Erp
         {
             get => _erp;
-            set => _erp = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _erp = value;
         }
 
 
@@ -186,32 +186,32 @@ namespace CalculatingParametersLib
         public double kl
         {
             get => _kl;
-            set => _kl = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _kl = value;
         }
         public double kc
         {
             get => _kc;
-            set => _kc = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _kc = value;
         }
         public double klc
         {
             get => _klc;
-            set => _klc = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _klc = value;
         }
         public double ke
         {
             get => _ke;
-            set => _ke= Math.Round(value / Math.Pow(10, 0), 3);
+            set => _ke= value;
         }
         public double kv
         {
             get => _kv;
-            set => _kv = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _kv = value;
         }
         public double m
         {
             get => _m;
-            set => _m = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _m = value;
         }
 
         private double _z11;
@@ -220,17 +220,17 @@ namespace CalculatingParametersLib
         public double Z11
         {
             get => _z11;
-            set => _z11 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z11 = value;
         }
         public double Z12
         {
             get => _z12;
-            set => _z12 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z12 = value;
         }
         public double Z22
         {
             get => _z22;
-            set => _z22 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z22 = value;
         }
 
         private double _y11;
@@ -239,17 +239,17 @@ namespace CalculatingParametersLib
         public double Y11
         {
             get => _y11;
-            set => _y11 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _y11 = value;
         }
         public double Y12
         {
             get => _y12;
-            set => _y12 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _y12 = value;
         }
         public double Y22
         {
             get => _y22;
-            set => _y22 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _y22 = value;
         }
 
         private double _z1;
@@ -263,17 +263,17 @@ namespace CalculatingParametersLib
         public double Z1
         {
             get => _z1;
-            set => _z1 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z1 = value;
         }
         public double Z2
         {
             get => _z2;
-            set => _z2 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z2 = value;
         }
         public double Zc
         {
             get => _zc;
-            set => _zc = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _zc = value;
         }
         public double Zp
         {
@@ -286,11 +286,11 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _zp = Math.Round(value / Math.Pow(10, 0), 3);
+                    _zp = value;
                 }
             }
             //set => _zp = value;
-            //set => _zp = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _zp = value;
         }
         public double Zc1
         {
@@ -303,12 +303,12 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _zc1 = Math.Round(value / Math.Pow(10, 0), 3);
+                    _zc1 = value;
                 }
             }
             
             //set => _zc1 = value;
-            //set => _zc1 = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _zc1 = value;
         }
         public double Zp1
         {
@@ -321,11 +321,11 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _zp1 = Math.Round(value / Math.Pow(10, 0), 3);
+                    _zp1 = value;
                 }
             }
             //set => _zp1 = value;
-            //set => _zp1 = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _zp1 = value;
         }
         public double Zc2
         {
@@ -338,11 +338,11 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _zc2 = Math.Round(value / Math.Pow(10, 0), 3);
+                    _zc2 = value;
                 }
             }
             //set => _zc2 = value;
-            //set => _zc2 = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _zc2 = value;
         }
         public double Zp2
         {
@@ -355,11 +355,11 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _zp2 = Math.Round(value / Math.Pow(10, 0), 3);
+                    _zp2 = value;
                 }
             }
             //set => _zp2 = value;
-            //set => _zp2 = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _zp2 = value;
         }
 
         private double _z01;
@@ -373,12 +373,12 @@ namespace CalculatingParametersLib
         public double Z01
         {
             get => _z01;
-            set => _z01 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z01 = value;
         }
         public double Z02
         {
             get => _z02;
-            set => _z02 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _z02 = value;
         }
         public double Z1c
         {
@@ -391,10 +391,10 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _z1c = Math.Round(value / Math.Pow(10, 0), 3);
+                    _z1c = value;
                 }
             }
-            //set => _z1c = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _z1c = value;
         }
         public double Z2c
         {
@@ -407,15 +407,15 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _z2c = Math.Round(value / Math.Pow(10, 0), 3);
+                    _z2c = value;
                 }
             }
-            //set => _z2c = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _z2c = value;
         }
         public double Zm
         {
             get => _zm;
-            set => _zm = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _zm = value;
         }
         public double Z1p
         {
@@ -428,11 +428,11 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _z1p = Math.Round(value / Math.Pow(10, 0), 3);
+                    _z1p = value;
                 }
             }
             
-            //set => _z1p = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _z1p = value;
         }
         public double Z2p
         {
@@ -445,16 +445,16 @@ namespace CalculatingParametersLib
                 }
                 else
                 {
-                    _z2p = Math.Round(value / Math.Pow(10, 0), 3);
+                    _z2p = value;
                 }
             }
-            //set => _z2p = Math.Round(value / Math.Pow(10, 0), 3);
+            //set => _z2p = value;
         }
 
         public double S21
         {
             get => _s21;
-            set => _s21 = Math.Round(value / Math.Pow(10, 0), 3);
+            set => _s21 = value;
         }
         /// <summary>
         /// Необходимо выполнять перед расчетом параметров зависящих от Erc Erp Rc Rp, но после расчета Rc Rp Erc Erp
@@ -491,14 +491,69 @@ namespace CalculatingParametersLib
 
         public bool PhysRelease()
         {
-            bool result = _c11 - _c12 > 0
+            Result = _c11 - _c12 > 0
                           && _c22 - _c12 > 0 
                           && _c12 > 0 
                           && _l11 - _l12 > 0 
                           && _l22 - _l12 > 0 
                           && _l12 > -1e-10;
 
-            return result;
+            return Result;
+        }
+
+        private bool _result;
+
+        public bool Result
+        {
+            get => _result;
+            set => _result = value;
+        }
+
+        public Params GetForamttedParams()
+        {
+            PhysRelease();
+            var formattedParams = new Params
+            {
+                C11 = Math.Round(C11, 3),
+                C12 = Math.Round(C12, 3),
+                C22 = Math.Round(C22, 3),
+                Z0 = Math.Round(Z0, 3),
+                k = Math.Round(k, 3),
+                Rc = Math.Round(Rc, 3),
+                Rp = Math.Round(Rp, 3),
+                Erc = Math.Round(Erc, 3),
+                Erp = Math.Round(Erp, 3),
+                Zc = Math.Round(Zc, 3),
+                Zp = Math.Round(Zp, 3),
+                Z1 = Math.Round(Z1, 3),
+                Z2 = Math.Round(Rz, 3),
+                N = Math.Round(N, 3),
+                Rz = Math.Round(Rz, 3),
+                Z1c = Math.Round(Z1c, 3),
+                Z2c = Math.Round(Z2c, 3),
+                Zm = Math.Round(Zm, 3),
+                S21 = Math.Round(S21, 3),
+                L11 = Math.Round(L11, 3),
+                L12 = Math.Round(L12, 3),
+                L22 = Math.Round(L22, 3),
+                kl = Math.Round(kl, 3),
+                kc = Math.Round(kc, 3),
+                klc = Math.Round(klc, 3),
+                ke = Math.Round(ke, 3),
+                m = Math.Round(m, 3),
+                EEE = Math.Round(EEE, 3),
+                Zc1 = Math.Round(Zc1, 3),
+                Zp1 = Math.Round(Zp1, 3),
+                Zc2 = Math.Round(Zc2, 3),
+                Zp2 = Math.Round(Zp2, 3),
+                Z11 = Math.Round(Z11, 3),
+                Z22 = Math.Round(Z22, 3),
+                Z1p = Math.Round(Z1p, 3),
+                Z2p = Math.Round(Z2p, 3),
+                Z12 = Math.Round(Z12, 3),
+                Result = Result
+            };
+            return formattedParams;
         }
     }
 }

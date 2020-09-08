@@ -152,86 +152,73 @@ namespace ParametersApp
             radioButton1.Text = "(L11; L22; L12)/μ\u2080; (C11; C22; C12)/ε\u2080";
         }
 
-        private void WriteParams()
+        private void WriteParams(Params CurrentParams)
         {
-            dataGridView2[1, 23].Value = _currentParams.PhysRelease();
+            dataGridView2[1, 23].Value = CurrentParams.Result;
             #region Modal
 
-            dataGridView1[1, 4].Value = _currentParams.Z0;
-            dataGridView1[1, 5].Value = _currentParams.k;
-            dataGridView1[1, 6].Value = _currentParams.Rc;
-            dataGridView1[1, 7].Value = _currentParams.Rp;
-            dataGridView1[1, 8].Value = _currentParams.Erc;
-            dataGridView1[1, 9].Value = _currentParams.Erp;
+            dataGridView1[1, 4].Value = CurrentParams.Z0;
+            dataGridView1[1, 5].Value = CurrentParams.k;
+            dataGridView1[1, 6].Value = CurrentParams.Rc;
+            dataGridView1[1, 7].Value = CurrentParams.Rp;
+            dataGridView1[1, 8].Value = CurrentParams.Erc;
+            dataGridView1[1, 9].Value = CurrentParams.Erp;
 
             #endregion
 
             #region Pogonie
 
-            dataGridView1[1, 0].Value = _currentParams.C11;
-            dataGridView1[1, 1].Value = _currentParams.C22;
-            dataGridView1[1, 2].Value = _currentParams.C12;
-            dataGridView2[1, 0].Value = _currentParams.L11;
-            dataGridView2[1, 1].Value = _currentParams.L22;
-            dataGridView2[1, 2].Value = _currentParams.L12;
+            dataGridView1[1, 0].Value = CurrentParams.C11;
+            dataGridView1[1, 1].Value = CurrentParams.C22;
+            dataGridView1[1, 2].Value = CurrentParams.C12;
+            dataGridView2[1, 0].Value = CurrentParams.L11;
+            dataGridView2[1, 1].Value = CurrentParams.L22;
+            dataGridView2[1, 2].Value = CurrentParams.L12;
 
             #endregion
             #region ImpedanceProvodimosti
 
-            dataGridView2[1, 16].Value = _currentParams.Z11;
-            dataGridView2[1, 17].Value = _currentParams.Z22;
-            dataGridView2[1, 21].Value = _currentParams.Z12;
-            dataGridView1[1, 22].Value = _currentParams.Zm;
+            dataGridView2[1, 16].Value = CurrentParams.Z11;
+            dataGridView2[1, 17].Value = CurrentParams.Z22;
+            dataGridView2[1, 21].Value = CurrentParams.Z12;
+            dataGridView1[1, 22].Value = CurrentParams.Zm;
 
             #endregion
             #region Impedance
 
-            dataGridView1[1, 14].Value = _currentParams.Z1;
-            dataGridView1[1, 15].Value = _currentParams.Z2;
-            dataGridView1[1, 11].Value = _currentParams.Zc;
-            dataGridView1[1, 12].Value = _currentParams.Zp;
-            dataGridView2[1, 11].Value = _currentParams.Zc1;
-            dataGridView2[1, 13].Value = _currentParams.Zc2;
-            dataGridView2[1, 12].Value = _currentParams.Zp1;
-            dataGridView2[1, 14].Value = _currentParams.Zp2;
+            dataGridView1[1, 14].Value = CurrentParams.Z1;
+            dataGridView1[1, 15].Value = CurrentParams.Z2;
+            dataGridView1[1, 11].Value = CurrentParams.Zc;
+            dataGridView1[1, 12].Value = CurrentParams.Zp;
+            dataGridView2[1, 11].Value = CurrentParams.Zc1;
+            dataGridView2[1, 13].Value = CurrentParams.Zc2;
+            dataGridView2[1, 12].Value = CurrentParams.Zp1;
+            dataGridView2[1, 14].Value = CurrentParams.Zp2;
 
             #endregion
 
             #region Koeff
 
-            dataGridView2[1, 4].Value = _currentParams.kl;
-            dataGridView2[1, 5].Value = _currentParams.kc;
-            dataGridView2[1, 6].Value = _currentParams.klc;
-            dataGridView2[1, 7].Value = _currentParams.ke;
-            dataGridView2[1, 8].Value = _currentParams.m;
-            dataGridView2[1, 9].Value = _currentParams.EEE;
+            dataGridView2[1, 4].Value = CurrentParams.kl;
+            dataGridView2[1, 5].Value = CurrentParams.kc;
+            dataGridView2[1, 6].Value = CurrentParams.klc;
+            dataGridView2[1, 7].Value = CurrentParams.ke;
+            dataGridView2[1, 8].Value = CurrentParams.m;
+            dataGridView2[1, 9].Value = CurrentParams.EEE;
 
             #endregion
             #region Resistors
 
-            dataGridView1[1, 17].Value = _currentParams.N;
-            dataGridView1[1, 18].Value = _currentParams.Rz;
-            dataGridView2[1, 19].Value = _currentParams.Z1p;
-            dataGridView2[1, 20].Value = _currentParams.Z2p;
-            dataGridView1[1, 20].Value = _currentParams.Z1c;
-            dataGridView1[1, 21].Value = _currentParams.Z2c;
-            dataGridView1[1, 24].Value = _currentParams.S21;
+            dataGridView1[1, 17].Value = CurrentParams.N;
+            dataGridView1[1, 18].Value = CurrentParams.Rz;
+            dataGridView2[1, 19].Value = CurrentParams.Z1p;
+            dataGridView2[1, 20].Value = CurrentParams.Z2p;
+            dataGridView1[1, 20].Value = CurrentParams.Z1c;
+            dataGridView1[1, 21].Value = CurrentParams.Z2c;
+            dataGridView1[1, 24].Value = CurrentParams.S21;
 
             #endregion
 
-        }
-
-        private void WriteParamsRzNegative()
-        {
-            //dataGridView2[1, 23].Value = _currentParams.PhysRelease();
-            WriteParams();
-            MessageBox.Show(
-                "Rz<0",
-                "Ошибка",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -249,7 +236,7 @@ namespace ParametersApp
                     _currentParams = _calculatorFromPogonie.Calculate(_currentParams.C11, _currentParams.C12,
                         _currentParams.C22, _currentParams.L11, _currentParams.L12, _currentParams.L22);
 
-                    WriteParams();
+                    WriteParams(_currentParams.GetForamttedParams());
                     break;
                 case SetOfParametersEnum.Pogonie_pF_nGn:
                     _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ","));
@@ -262,7 +249,7 @@ namespace ParametersApp
                     _currentParams = _calculatorFromPogonie.Calculate(_currentParams.C11, _currentParams.C12, _currentParams.C22,
                         _currentParams.L11, _currentParams.L12, _currentParams.L22);
 
-                    WriteParams();
+                    WriteParams(_currentParams.GetForamttedParams());
                     break;
                 case SetOfParametersEnum.Modalnie:
                     _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
@@ -273,14 +260,7 @@ namespace ParametersApp
                     _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
 
                     _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
-                    if (_currentParams.RzNegativeStatus)
-                    {
-                        WriteParamsRzNegative();
-                    }
-                    else
-                    {
-                        WriteParams();
-                    }
+                    WriteParams(_currentParams.GetForamttedParams());
                     break;
                 case SetOfParametersEnum.Zc1_Zp1:
                     _currentParams.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
@@ -293,7 +273,7 @@ namespace ParametersApp
                     _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateWithZc1Zp1(_currentParams.Zc1, _currentParams.Zp1, _currentParams.Rc,
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
-                    WriteParams();
+                    WriteParams(_currentParams.GetForamttedParams());
                     break;
                 case SetOfParametersEnum.Zp1_Zc2:
                     _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
@@ -306,7 +286,7 @@ namespace ParametersApp
                     _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
-                    WriteParams();
+                    WriteParams(_currentParams.GetForamttedParams());
                     break;
                 case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
                     _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
@@ -319,7 +299,7 @@ namespace ParametersApp
                     _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
-                    WriteParams();
+                    WriteParams(_currentParams.GetForamttedParams());
                     break;
                 case SetOfParametersEnum.ModalnieSymm:
                     _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
@@ -332,14 +312,7 @@ namespace ParametersApp
                     _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc,
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
-                    if (_currentParams.RzNegativeStatus)
-                    {
-                        WriteParamsRzNegative();
-                    }
-                    else
-                    {
-                        WriteParams();
-                    }
+                    WriteParams(_currentParams.GetForamttedParams());
                     break;
             }
         }
@@ -544,45 +517,45 @@ namespace ParametersApp
                 {
                     using (StreamWriter file = new StreamWriter(dialog.FileName, true))
                     {
-                        file.WriteLine(dataGridView1.Rows[0].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[0].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[1].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[2].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[4].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[5].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[6].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[7].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[8].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[9].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[11].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[12].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[14].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[15].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[15].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[17].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[18].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[18].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[20].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[21].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[22].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[22].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView1.Rows[24].Cells[0].Value.ToString() + "=" + dataGridView1.Rows[24].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView1.Rows[0].Cells[0].Value.ToString() + "=" + _currentParams.C11.ToString());
+                        file.WriteLine(dataGridView1.Rows[1].Cells[0].Value.ToString() + "=" + _currentParams.C22.ToString());
+                        file.WriteLine(dataGridView1.Rows[2].Cells[0].Value.ToString() + "=" + _currentParams.C12.ToString());
+                        file.WriteLine(dataGridView1.Rows[4].Cells[0].Value.ToString() + "=" + _currentParams.Z0.ToString());
+                        file.WriteLine(dataGridView1.Rows[5].Cells[0].Value.ToString() + "=" + _currentParams.k.ToString());
+                        file.WriteLine(dataGridView1.Rows[6].Cells[0].Value.ToString() + "=" + _currentParams.Rc.ToString());
+                        file.WriteLine(dataGridView1.Rows[7].Cells[0].Value.ToString() + "=" + _currentParams.Rp.ToString());
+                        file.WriteLine(dataGridView1.Rows[8].Cells[0].Value.ToString() + "=" + _currentParams.Erc.ToString());
+                        file.WriteLine(dataGridView1.Rows[9].Cells[0].Value.ToString() + "=" + _currentParams.Erp.ToString());
+                        file.WriteLine(dataGridView1.Rows[11].Cells[0].Value.ToString() + "=" + _currentParams.Zc.ToString());
+                        file.WriteLine(dataGridView1.Rows[12].Cells[0].Value.ToString() + "=" + _currentParams.Zp.ToString());
+                        file.WriteLine(dataGridView1.Rows[14].Cells[0].Value.ToString() + "=" + _currentParams.Z1.ToString());
+                        file.WriteLine(dataGridView1.Rows[15].Cells[0].Value.ToString() + "=" + _currentParams.Z2.ToString());
+                        file.WriteLine(dataGridView1.Rows[17].Cells[0].Value.ToString() + "=" + _currentParams.N.ToString());
+                        file.WriteLine(dataGridView1.Rows[18].Cells[0].Value.ToString() + "=" + _currentParams.Rz.ToString());
+                        file.WriteLine(dataGridView1.Rows[20].Cells[0].Value.ToString() + "=" + _currentParams.Z1c.ToString());
+                        file.WriteLine(dataGridView1.Rows[21].Cells[0].Value.ToString() + "=" + _currentParams.Z2c.ToString());
+                        file.WriteLine(dataGridView1.Rows[22].Cells[0].Value.ToString() + "=" + _currentParams.Zm.ToString());
+                        file.WriteLine(dataGridView1.Rows[24].Cells[0].Value.ToString() + "=" + _currentParams.S21.ToString());
 
-                        file.WriteLine(dataGridView2.Rows[0].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[0].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[1].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[1].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[2].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[2].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[4].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[4].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[5].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[5].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[6].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[6].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[7].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[7].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[8].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[8].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[9].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[9].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[11].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[11].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[12].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[12].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[13].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[13].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[14].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[14].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[16].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[16].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[17].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[17].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[19].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[19].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[20].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[20].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[21].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[21].Cells[1].Value.ToString());
-                        file.WriteLine(dataGridView2.Rows[23].Cells[0].Value.ToString() + "=" + dataGridView2.Rows[23].Cells[1].Value.ToString());
+                        file.WriteLine(dataGridView2.Rows[0].Cells[0].Value.ToString() + "=" + _currentParams.L11.ToString());
+                        file.WriteLine(dataGridView2.Rows[1].Cells[0].Value.ToString() + "=" + _currentParams.L22.ToString());
+                        file.WriteLine(dataGridView2.Rows[2].Cells[0].Value.ToString() + "=" + _currentParams.L12.ToString());
+                        file.WriteLine(dataGridView2.Rows[4].Cells[0].Value.ToString() + "=" + _currentParams.kl.ToString());
+                        file.WriteLine(dataGridView2.Rows[5].Cells[0].Value.ToString() + "=" + _currentParams.kc.ToString());
+                        file.WriteLine(dataGridView2.Rows[6].Cells[0].Value.ToString() + "=" + _currentParams.klc.ToString());
+                        file.WriteLine(dataGridView2.Rows[7].Cells[0].Value.ToString() + "=" + _currentParams.ke.ToString());
+                        file.WriteLine(dataGridView2.Rows[8].Cells[0].Value.ToString() + "=" + _currentParams.m.ToString());
+                        file.WriteLine(dataGridView2.Rows[9].Cells[0].Value.ToString() + "=" + _currentParams.EEE.ToString());
+                        file.WriteLine(dataGridView2.Rows[11].Cells[0].Value.ToString() + "=" + _currentParams.Zc1.ToString());
+                        file.WriteLine(dataGridView2.Rows[12].Cells[0].Value.ToString() + "=" + _currentParams.Zp1.ToString());
+                        file.WriteLine(dataGridView2.Rows[13].Cells[0].Value.ToString() + "=" + _currentParams.Zc2.ToString());
+                        file.WriteLine(dataGridView2.Rows[14].Cells[0].Value.ToString() + "=" + _currentParams.Zp2.ToString());
+                        file.WriteLine(dataGridView2.Rows[16].Cells[0].Value.ToString() + "=" + _currentParams.Z11.ToString());
+                        file.WriteLine(dataGridView2.Rows[17].Cells[0].Value.ToString() + "=" + _currentParams.Z22.ToString());
+                        file.WriteLine(dataGridView2.Rows[19].Cells[0].Value.ToString() + "=" + _currentParams.Z1p.ToString());
+                        file.WriteLine(dataGridView2.Rows[20].Cells[0].Value.ToString() + "=" + _currentParams.Z2p.ToString());
+                        file.WriteLine(dataGridView2.Rows[21].Cells[0].Value.ToString() + "=" + _currentParams.Z12.ToString());
+                        file.WriteLine(dataGridView2.Rows[23].Cells[0].Value.ToString() + "=" + _currentParams.Result.ToString());
                     }
                 }
                 catch (NullReferenceException exception)
