@@ -788,7 +788,19 @@ namespace ParametersApp
 
         private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CouplLinesInFreqRange qwe = new CouplLinesInFreqRange(_currentParams);
+            Params testParams = new Params();
+            testParams.Erp = 9.9;
+            testParams.Erc = 1.1;
+            testParams.Rz = 0.2;
+            testParams.Z0 = 50;
+            testParams.Zp1 = 24.142136;
+            testParams.Zc2 = 64.142136;
+            testParams.Zc1 = 320.5;
+            testParams.Zp2 = 4.82;
+            testParams.k = 0.783;
+            testParams.Rc = 1;
+            testParams.Rp = -0.2;
+            CouplLinesInFreqRange qwe = new CouplLinesInFreqRange(testParams);
         }
     }
 }
