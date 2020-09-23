@@ -37,10 +37,10 @@ namespace CalculatingParametersLib
             _um[2, 2] = currentParams.Rp;
 
             _im = Matrix<double>.Build.Dense(2, 2);
-            _im[1, 1] = 1;
-            _im[1, 2] = 1;
-            _im[2, 1] = currentParams.Rc;
-            _im[2, 2] = currentParams.Rp;
+            _im[1, 1] = Math.Pow(currentParams.Zc1,-1);
+            _im[1, 2] = Math.Pow(currentParams.Zp1, -1);
+            _im[2, 1] = Math.Pow(-currentParams.Zc1 * currentParams.Rp, -1);
+            _im[2, 2] = Math.Pow(-currentParams.Zp1 * currentParams.Rp, -1);
 
         }
     }
