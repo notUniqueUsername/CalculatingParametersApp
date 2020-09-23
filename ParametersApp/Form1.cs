@@ -785,5 +785,10 @@ namespace ParametersApp
                 textBox.ForeColor = Color.Red;
             }
         }
+
+        private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CouplLinesInFreqRange qwe = new CouplLinesInFreqRange(_currentParams);
+        }
     }
 }

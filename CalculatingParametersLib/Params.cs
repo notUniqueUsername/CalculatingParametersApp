@@ -526,7 +526,7 @@ namespace CalculatingParametersLib
                 Zc = Math.Round(Zc, 3),
                 Zp = Math.Round(Zp, 3),
                 Z1 = Math.Round(Z1, 3),
-                Z2 = Math.Round(Rz, 3),
+                Z2 = Math.Round(Z2, 3),
                 N = Math.Round(N, 3),
                 Rz = Math.Round(Rz, 3),
                 Z1c = Math.Round(Z1c, 3),
