@@ -242,5 +242,10 @@ namespace CalculatingParametersLib
                 {F11.ToArray(), F12.ToArray(), F13.ToArray(), F14.ToArray(), F22.ToArray(), F24.ToArray()};
             return sParamPhase;
         }
+
+        public double[] GetFi()
+        {
+            return Fi.ToArray();
+        }
     }
 }
