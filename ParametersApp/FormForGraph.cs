@@ -14,54 +14,36 @@ namespace ParametersApp
 {
     public partial class FormForGraph : Form
     {
+        private LineItem _11Curve;
+        private LineItem _12Curve;
+        private LineItem _13Curve;
+        private LineItem _14Curve;
+        private LineItem _22Curve;
+        private LineItem _24Curve;
         private double[][] _sParamMagnitudes;
         private double[][] _sParamPhases;
         private Params _currentParams;
         private GraphPane _graphPane;
+        private CouplLinesInFreqRange _sParamData;
+        private double[] _fi;
 
         private void SetLineWidth(LineItem curve)
         {
             curve.Line.Width = 2.0f;
         }
 
-        private void SetTextToTextboxes()
+        private void SetTextToListBox(string sOrF)
         {
-            ErcLabel.Text = _currentParams.Erc.ToString();
+            SParamListBox.Items[0] = sOrF + "11";
+            SParamListBox.Items[1] = sOrF + "12";
+            SParamListBox.Items[2] = sOrF + "13";
+            SParamListBox.Items[3] = sOrF + "14";
+            SParamListBox.Items[4] = sOrF + "22";
+            SParamListBox.Items[5] = sOrF + "24";
         }
-        public FormForGraph(CouplLinesInFreqRange sParamData, Params currentParams)
-        {
-            InitializeComponent();
-            _currentParams = currentParams;
-            _sParamMagnitudes = sParamData.GetSParamMagnitude();
-            _sParamPhases = sParamData.GetSParamPhase();
 
-            _graphPane = GraphControl.GraphPane;
-            var s11curve = _graphPane.AddCurve("S11", sParamData.GetFi(), _sParamMagnitudes[0], Color.Red, SymbolType.None);
-            s11curve.Line.Style = DashStyle.Dot;
-            s11curve.Line.IsSmooth = true;
-            SetLineWidth(s11curve);
-            var s22curve = _graphPane.AddCurve("S22", sParamData.GetFi(), _sParamMagnitudes[4], Color.Black, SymbolType.None);
-            s22curve.Line.Style = DashStyle.Dot;
-            s22curve.Line.IsSmooth = true;
-            SetLineWidth(s22curve);
-            var s12curve = _graphPane.AddCurve("S12", sParamData.GetFi(), _sParamMagnitudes[1], Color.Blue, SymbolType.None);
-            s12curve.Line.Style = DashStyle.Dash;
-            s12curve.Line.IsSmooth = true;
-            SetLineWidth(s12curve);
-            var s13curve = _graphPane.AddCurve("S13", sParamData.GetFi(), _sParamMagnitudes[2], Color.Red, SymbolType.None);
-            //s13curve.Line.Style = DashStyle.Dot;
-            //s13curve.Line.IsSmooth = true;
-            SetLineWidth(s13curve);
-            var s24curve = _graphPane.AddCurve("S24", sParamData.GetFi(), _sParamMagnitudes[5], Color.Black, SymbolType.None);
-            //s24curve.Line.Style = DashStyle.Dot;
-            //s24curve.Line.IsSmooth = true;
-            SetLineWidth(s24curve);
-            var s14curve = _graphPane.AddCurve("S14", sParamData.GetFi(), _sParamMagnitudes[3], Color.Blue, SymbolType.None);
-            s14curve.Line.Style = DashStyle.DashDot;
-            s14curve.Line.IsSmooth = true;
-            SetLineWidth(s14curve);
-            _graphPane.XAxis.Scale.Max = Math.Round(sParamData.GetFi().Max());
-            _graphPane.XAxis.Scale.Min = Math.Round(sParamData.GetFi().Min());
+        private void FormatAxis()
+        {
             _graphPane.XAxis.MajorGrid.IsVisible = true;
             _graphPane.XAxis.MajorGrid.DashOff = 0;
             _graphPane.XAxis.MajorGrid.Color = Color.Green;
@@ -73,28 +55,138 @@ namespace ParametersApp
             yTitle.Text = "Magnitude (dB)";
             var xTitle = _graphPane.XAxis.Title;
             xTitle.Text = "Frequency (GHz)";
-            double yMax = _sParamMagnitudes[0].Max();
-            double yMin = _sParamMagnitudes[0].Min();
-            for (int i = 1; i < _sParamMagnitudes.GetLength(0); i++)
+
+            _graphPane.XAxis.Scale.IsSkipLastLabel = false;
+            _graphPane.XAxis.Scale.MajorStep = 5;
+        }
+
+        private void SetMaxMinAxes(double xMin, double xMax, double[][] sParamMagnitudeOrPhase)
+        {
+            _graphPane.XAxis.Scale.Max = xMax;
+            _graphPane.XAxis.Scale.Min = xMin;
+            double yMax = sParamMagnitudeOrPhase[0].Max();
+            double yMin = sParamMagnitudeOrPhase[0].Min();
+            for (int i = 1; i < sParamMagnitudeOrPhase.GetLength(0); i++)
             {
-                if (_sParamMagnitudes[i].Max() > yMax)
+                if (sParamMagnitudeOrPhase[i].Max() > yMax)
                 {
-                    yMax = _sParamMagnitudes[i].Max();
+                    yMax = sParamMagnitudeOrPhase[i].Max();
                 }
-                if (_sParamMagnitudes[i].Min() < yMin)
+                if (sParamMagnitudeOrPhase[i].Min() < yMin)
                 {
-                    yMin = _sParamMagnitudes[i].Min();
+                    yMin = sParamMagnitudeOrPhase[i].Min();
                 }
             }
             _graphPane.YAxis.Scale.Max = Math.Round(yMax);
             _graphPane.YAxis.Scale.Min = Math.Round(yMin);
+        }
 
-            _graphPane.XAxis.Scale.IsSkipLastLabel = false;
-            _graphPane.XAxis.Scale.MajorStep = 5;
+        private void SetTextToTextBoxes()
+        {
+            FreqMaxTextBox.Text = "15";
+            FreqMinTextBox.Text = "0";
+            LengthTextBox.Text = "10";
+            Z1inTextBox.Text = "25";
+            Z2inTextBox.Text = "50";
+            Z1outTextBox.Text = "25";
+            Z2outTextBox.Text = "50";
+        }
+
+        private void DrawCurves(string sOrF, double[][] sParamMagnitudeOrPhase)
+        {
+            SetTextToListBox(sOrF);
+            _11Curve = _graphPane.AddCurve(sOrF + "11", _fi, sParamMagnitudeOrPhase[0], Color.Red, SymbolType.None);
+            _11Curve.Line.Style = DashStyle.Dot;
+            _11Curve.Line.IsSmooth = true;
+            SetLineWidth(_11Curve);
+            _22Curve = _graphPane.AddCurve(sOrF + "22", _fi, sParamMagnitudeOrPhase[4], Color.Black, SymbolType.None);
+            _22Curve.Line.Style = DashStyle.Dot;
+            _22Curve.Line.IsSmooth = true;
+            SetLineWidth(_22Curve);
+            _12Curve = _graphPane.AddCurve(sOrF + "12", _fi, sParamMagnitudeOrPhase[1], Color.Blue, SymbolType.None);
+            _12Curve.Line.Style = DashStyle.Dash;
+            _12Curve.Line.IsSmooth = true;
+            SetLineWidth(_12Curve);
+            _13Curve = _graphPane.AddCurve(sOrF + "13", _fi, sParamMagnitudeOrPhase[2], Color.Red, SymbolType.None);
+            //s13curve.Line.Style = DashStyle.Dot;
+            //s13curve.Line.IsSmooth = true;
+            SetLineWidth(_13Curve);
+            _24Curve = _graphPane.AddCurve(sOrF + "24", _fi, sParamMagnitudeOrPhase[5], Color.Black, SymbolType.None);
+            //s24curve.Line.Style = DashStyle.Dot;
+            //s24curve.Line.IsSmooth = true;
+            SetLineWidth(_24Curve);
+            _14Curve = _graphPane.AddCurve(sOrF + "14", _fi, sParamMagnitudeOrPhase[3], Color.Blue, SymbolType.None);
+            _14Curve.Line.Style = DashStyle.DashDot;
+            _14Curve.Line.IsSmooth = true;
+            SetLineWidth(_14Curve);
 
             GraphControl.AxisChange();
-            
             GraphControl.Invalidate();
+        }
+
+        private void SetTextToLabels()
+        {
+            ErcLabel.Text ="Erc = " + Math.Round(_currentParams.Erc, 3).ToString();
+            ErpLabel.Text = "Erп = " + Math.Round(_currentParams.Erp, 3).ToString();
+            RcLabel.Text = "Rc = " + Math.Round(_currentParams.Rc, 3).ToString();
+            RpLabel.Text = "Rп = " + Math.Round(_currentParams.Rp, 3).ToString();
+            Zc1Label.Text = "Zc1, Ω = " + Math.Round(_currentParams.Zc1, 3).ToString();
+            Zp1Label.Text = "Zп1, Ω = " + Math.Round(_currentParams.Zp1, 3).ToString();
+            Zc2Label.Text = "Zc2, Ω = " + Math.Round(_currentParams.Zc2, 3).ToString();
+            Zp2Label.Text = "Zп2, Ω = " + Math.Round(_currentParams.Zp2, 3).ToString();
+            RzLabel.Text = "Rz = " + Math.Round(_currentParams.Rz, 3).ToString();
+            Z0Label.Text = "Z0, Ω = " + Math.Round(_currentParams.Z0, 3).ToString();
+            KLabel.Text = "k = " + Math.Round(_currentParams.k, 3).ToString();
+            ZoLabel.Text = "Zo, Ω = " + Math.Round(_sParamData.GetZo(),3).ToString();
+        }
+        public FormForGraph(CouplLinesInFreqRange sParamData, Params currentParams)
+        {
+            InitializeComponent();
+            SetTextToTextBoxes();
+            _sParamData = sParamData;
+            _currentParams = currentParams;
+            _sParamMagnitudes = sParamData.GetSParamMagnitude();
+            _sParamPhases = sParamData.GetSParamPhase();
+            SetTextToLabels();
+            _fi = sParamData.GetFi();
+            _graphPane = GraphControl.GraphPane;
+            FormatAxis();
+            
+            //SetMaxMinAxes(xMin,xMax, _sParamMagnitudes);
+            //DrawCurves("S", _sParamMagnitudes);
+        }
+
+        private void DrawButton_Click(object sender, EventArgs e)
+        {
+            double xMin;
+            double.TryParse(FreqMinTextBox.Text, out xMin);
+            double xMax;
+            double.TryParse(FreqMaxTextBox.Text, out xMax);
+            if (MagnitudeRadioButton.Checked)
+            {
+                _graphPane.CurveList.Clear();
+                SetMaxMinAxes(xMin, xMax, _sParamMagnitudes);
+                DrawCurves("S", _sParamMagnitudes);
+            }
+            else if (PhaseRadioButton.Checked)
+            {
+                _graphPane.CurveList.Clear();
+                SetMaxMinAxes(xMin, xMax, _sParamPhases);
+                DrawCurves("F", _sParamPhases);
+            }
+        }
+
+        private void SParamListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (SParamListBox.CheckedIndices.Contains(i))
+                {
+                    
+                }
+            }
+
+            //_11Curve.IsVisible = SParamListBox.CheckedIndices;
         }
     }
 }

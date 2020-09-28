@@ -243,6 +243,11 @@ namespace CalculatingParametersLib
             return sParamPhase;
         }
 
+        public double GetZo()
+        {
+            return Zo;
+        }
+
         public double[] GetFi()
         {
             return Fi.ToArray();
