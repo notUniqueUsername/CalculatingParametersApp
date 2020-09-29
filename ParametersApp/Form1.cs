@@ -800,8 +800,7 @@ namespace ParametersApp
             testParams.k = 0.783;
             testParams.Rc = 1;
             testParams.Rp = -0.2;
-            CouplLinesInFreqRange qwe = new CouplLinesInFreqRange(testParams,0.01,0,15);
-            var graphForm = new FormForGraph(qwe, testParams);
+            var graphForm = new FormForGraph(testParams);
             graphForm.Show();
         }
     }

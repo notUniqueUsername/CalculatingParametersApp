@@ -48,14 +48,14 @@ namespace CalculatingParametersLib
         private Matrix<Complex>[] Y { get; }
 
         private readonly Complex _j = Complex.ImaginaryOne;
-        public CouplLinesInFreqRange(Params currentParams,double l, double fmin, double fmax)
+        public CouplLinesInFreqRange(Params currentParams, double l, double fmin, double fmax, double z1In, double z2In, double z1Out, double z2Out)
         {
-            L = l;
+            L = l * Math.Pow(10,-3);
             C = 0.2998;
-            Z1In = 25;
-            Z2in = 50;
-            Z1Out = 25;
-            Z2Out = 50;
+            Z1In = z1In;
+            Z2in = z2In;
+            Z1Out = z1Out;
+            Z2Out = z2Out;
             Fmin = fmin;
             Fmax = fmax;
             Nf = 500;

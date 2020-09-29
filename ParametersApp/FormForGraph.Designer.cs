@@ -366,6 +366,7 @@
             this.MagnitudeRadioButton.TabStop = true;
             this.MagnitudeRadioButton.Text = "Magnitude (dB)";
             this.MagnitudeRadioButton.UseVisualStyleBackColor = true;
+            this.MagnitudeRadioButton.CheckedChanged += new System.EventHandler(this.MagnitudeRadioButton_CheckedChanged);
             // 
             // PhaseRadioButton
             // 
@@ -376,6 +377,7 @@
             this.PhaseRadioButton.TabIndex = 39;
             this.PhaseRadioButton.Text = "Phase (deg)";
             this.PhaseRadioButton.UseVisualStyleBackColor = true;
+            this.PhaseRadioButton.CheckedChanged += new System.EventHandler(this.PhaseRadioButton_CheckedChanged);
             // 
             // DrawButton
             // 
