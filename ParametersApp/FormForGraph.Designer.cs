@@ -346,13 +346,14 @@
             "S13",
             "S14",
             "S22",
-            "S24"});
+            "S24",
+            "All"});
             this.SParamListBox.Location = new System.Drawing.Point(213, 189);
             this.SParamListBox.MultiColumn = true;
             this.SParamListBox.Name = "SParamListBox";
-            this.SParamListBox.Size = new System.Drawing.Size(46, 94);
+            this.SParamListBox.Size = new System.Drawing.Size(46, 109);
             this.SParamListBox.TabIndex = 37;
-            this.SParamListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.SParamListBox_ItemCheck);
+            this.SParamListBox.SelectedIndexChanged += new System.EventHandler(this.SParamListBox_SelectedIndexChanged);
             // 
             // MagnitudeRadioButton
             // 

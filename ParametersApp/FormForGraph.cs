@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace ParametersApp
             SParamListBox.Items[3] = sOrF + "14";
             SParamListBox.Items[4] = sOrF + "22";
             SParamListBox.Items[5] = sOrF + "24";
+            SParamListBox.Items[6] = "All";
         }
 
         private void FormatAxis()
@@ -58,6 +60,8 @@ namespace ParametersApp
 
             _graphPane.XAxis.Scale.IsSkipLastLabel = false;
             _graphPane.XAxis.Scale.MajorStep = 5;
+            _graphPane.YAxis.Scale.IsSkipLastLabel = false;
+            _graphPane.YAxis.Scale.MajorStep = 30;
         }
 
         private void SetMaxMinAxes(double xMin, double xMax, double[][] sParamMagnitudeOrPhase)
@@ -176,17 +180,97 @@ namespace ParametersApp
             }
         }
 
-        private void SParamListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void AllCurvesToggleVisible(bool isVisible)
         {
-            for (int i = 0; i < 5; i++)
+            _11Curve.IsVisible = isVisible;
+            _11Curve.Label.IsVisible = isVisible;
+            _12Curve.IsVisible = isVisible;
+            _12Curve.Label.IsVisible = isVisible;
+            _13Curve.IsVisible = isVisible;
+            _13Curve.Label.IsVisible = isVisible;
+            _14Curve.IsVisible = isVisible;
+            _14Curve.Label.IsVisible = isVisible;
+            _22Curve.IsVisible = isVisible;
+            _22Curve.Label.IsVisible = isVisible;
+            _24Curve.IsVisible = isVisible;
+            _24Curve.Label.IsVisible = isVisible;
+        }
+
+        private void SParamListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AllCurvesToggleVisible(false);
+            if (SParamListBox.SelectedIndex == 6)
             {
-                if (SParamListBox.CheckedIndices.Contains(i))
+                if (SParamListBox.GetItemCheckState(6) == CheckState.Checked)
                 {
-                    
+                    SParamListBox.SetItemCheckState(0, CheckState.Checked);
+                    SParamListBox.SetItemCheckState(1, CheckState.Checked);
+                    SParamListBox.SetItemCheckState(2, CheckState.Checked);
+                    SParamListBox.SetItemCheckState(3, CheckState.Checked);
+                    SParamListBox.SetItemCheckState(4, CheckState.Checked);
+                    SParamListBox.SetItemCheckState(5, CheckState.Checked);
+                    AllCurvesToggleVisible(true);
+                }
+                else
+                {
+                    SParamListBox.SetItemCheckState(0, CheckState.Unchecked);
+                    SParamListBox.SetItemCheckState(1, CheckState.Unchecked);
+                    SParamListBox.SetItemCheckState(2, CheckState.Unchecked);
+                    SParamListBox.SetItemCheckState(3, CheckState.Unchecked);
+                    SParamListBox.SetItemCheckState(4, CheckState.Unchecked);
+                    SParamListBox.SetItemCheckState(5, CheckState.Unchecked);
+                    AllCurvesToggleVisible(false);
+                }
+            }
+            else
+            {
+                for (int i = 0; i <= 6; i++)
+                {
+                    if (SParamListBox.CheckedIndices.Contains(i))
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                _11Curve.IsVisible = true;
+                                _11Curve.Label.IsVisible = true;
+                                break;
+                            case 1:
+                                _12Curve.IsVisible = true;
+                                _12Curve.Label.IsVisible = true;
+                                break;
+                            case 2:
+                                _13Curve.IsVisible = true;
+                                _13Curve.Label.IsVisible = true;
+                                break;
+                            case 3:
+                                _14Curve.IsVisible = true;
+                                _14Curve.Label.IsVisible = true;
+                                break;
+                            case 4:
+                                _22Curve.IsVisible = true;
+                                _22Curve.Label.IsVisible = true;
+                                break;
+                            case 5:
+                                _24Curve.IsVisible = true;
+                                _24Curve.Label.IsVisible = true;
+                                break;
+                            case 6:
+                                break;
+                        }
+                    }
                 }
             }
 
-            //_11Curve.IsVisible = SParamListBox.CheckedIndices;
+            if (!(_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _24Curve.IsVisible))
+            {
+                SParamListBox.SetItemCheckState(6, CheckState.Unchecked);
+            }
+            if (_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _24Curve.IsVisible)
+            {
+                SParamListBox.SetItemCheckState(6, CheckState.Checked);
+            }
+            GraphControl.AxisChange();
+            GraphControl.Invalidate();
         }
     }
 }
