@@ -28,6 +28,8 @@ namespace ParametersApp
         private CouplLinesInFreqRange _sParamData;
         private double[] _fi;
 
+
+
         private void SetLineWidth(LineItem curve)
         {
             curve.Line.Width = 2.0f;
@@ -89,7 +91,7 @@ namespace ParametersApp
         {
             FreqMaxTextBox.Text = "15";
             FreqMinTextBox.Text = "0";
-            LengthTextBox.Text = "10";
+            NTextBox.Text = "10";
             Z1inTextBox.Text = "25";
             Z2inTextBox.Text = "50";
             Z1outTextBox.Text = "25";
@@ -133,19 +135,19 @@ namespace ParametersApp
             ErpLabel.Text = "Erп = " + Math.Round(_currentParams.Erp, 3).ToString();
             RcLabel.Text = "Rc = " + Math.Round(_currentParams.Rc, 3).ToString();
             RpLabel.Text = "Rп = " + Math.Round(_currentParams.Rp, 3).ToString();
-            Zc1Label.Text = "Zc1, Ω = " + Math.Round(_currentParams.Zc1, 3).ToString();
+            Z1Label.Text = "Zc1, Ω = " + Math.Round(_currentParams.Zc1, 3).ToString();
             Zp1Label.Text = "Zп1, Ω = " + Math.Round(_currentParams.Zp1, 3).ToString();
             Zc2Label.Text = "Zc2, Ω = " + Math.Round(_currentParams.Zc2, 3).ToString();
-            Zp2Label.Text = "Zп2, Ω = " + Math.Round(_currentParams.Zp2, 3).ToString();
+            Z2Label.Text = "Zп2, Ω = " + Math.Round(_currentParams.Zp2, 3).ToString();
             RzLabel.Text = "Rz = " + Math.Round(_currentParams.Rz, 3).ToString();
             Z0Label.Text = "Z0, Ω = " + Math.Round(_currentParams.Z0, 3).ToString();
             KLabel.Text = "k = " + Math.Round(_currentParams.k, 3).ToString();
-            ZoLabel.Text = "Zo, Ω = ";
+            Z0Label.Text = "Zo, Ω = ";
         }
 
         private void CalculateSParamData()
         {
-            double.TryParse(LengthTextBox.Text, out var l);
+            double.TryParse(NTextBox.Text, out var l);
             double.TryParse(FreqMinTextBox.Text, out var fmin);
             double.TryParse(FreqMaxTextBox.Text, out var fmax);
             double.TryParse(Z1inTextBox.Text, out var z1in);
@@ -157,7 +159,7 @@ namespace ParametersApp
             _sParamMagnitudes = _sParamData.GetSParamMagnitude();
             _sParamPhases = _sParamData.GetSParamPhase();
             _fi = _sParamData.GetFi();
-            ZoLabel.Text = "Zo, Ω = " + Math.Round(_sParamData.GetZo(), 3).ToString();
+            Z0Label.Text = "Zo, Ω = " + Math.Round(_sParamData.GetZo(), 3).ToString();
 
         }
 
@@ -169,8 +171,6 @@ namespace ParametersApp
             SetTextToTextBoxes();
             SetTextToLabels();
             FormatAxis();
-            //SetMaxMinAxes(xMin,xMax, _sParamMagnitudes);
-            //DrawCurves("S", _sParamMagnitudes);
         }
 
         private void DrawButton_Click(object sender, EventArgs e)
@@ -228,7 +228,7 @@ namespace ParametersApp
             {
                 AllCurvesToggleVisible(false);
             }
-            catch (NullReferenceException exception)
+            catch (NullReferenceException)
             {
                 DrawButton.PerformClick();
             }
