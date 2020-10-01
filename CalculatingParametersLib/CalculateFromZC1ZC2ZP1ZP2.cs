@@ -81,7 +81,7 @@ namespace CalculatingParametersLib
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 
-            _currentParams.S21 = -20 * Math.Log10(_currentParams.k);
+            _currentParams.S21 = _calculator.S21(_currentParams.k);
 
             _currentParams.C11 = Math.Round(
                 _currentParams.C11 *
@@ -104,6 +104,10 @@ namespace CalculatingParametersLib
                 Math.Pow(10, 6), 3);
             _currentParams.Z1 = _calculator.Z1OrZ2(_currentParams.L11, _currentParams.C11) * 1000;
             _currentParams.Z2 = _calculator.Z1OrZ2(_currentParams.L22, _currentParams.C22) * 1000;
+
+            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+                _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
+
             return _currentParams;
         }
         public Params CalculateZc2Zp1(double zc2, double zp1, double rc, double rp, double erc, double erp)
@@ -170,7 +174,7 @@ namespace CalculatingParametersLib
             _currentParams.Z2c = _calculator.Z2с(_currentParams.Z1p, _currentParams.Z0);
             _currentParams.Z1c = _calculator.Z1с(_currentParams.Z2p, _currentParams.Z0);
 
-            _currentParams.S21 = -20 * Math.Log10(_currentParams.k);
+            _currentParams.S21 = _calculator.S21(_currentParams.k);
             _currentParams.Z1 = _calculator.Z1OrZ2(_currentParams.L11, _currentParams.C11);
             _currentParams.Z2 = _calculator.Z1OrZ2(_currentParams.L22, _currentParams.C22);
             _currentParams.C11 = Math.Round(
@@ -192,6 +196,9 @@ namespace CalculatingParametersLib
             _currentParams.L12 = Math.Round(
                 _calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
                 Math.Pow(10, 6), 4);
+
+            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+                _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
 
             return _currentParams;
 

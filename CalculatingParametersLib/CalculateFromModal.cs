@@ -52,7 +52,8 @@ namespace CalculatingParametersLib
 
             _currentParams.Zm = _calculator.Zm(_currentParams.Z12, _currentParams.Z0);
 
-
+            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+                _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
         }
 
         private void CalculateKoeff()
@@ -70,7 +71,7 @@ namespace CalculatingParametersLib
             _currentParams.m = _calculator.M(_currentParams.Erc, _currentParams.Erp);
             //_currentParams.m = Math.Sqrt(_currentParams.Erp) / Math.Sqrt(_currentParams.Erc);
 
-            _currentParams.S21 = -20 * Math.Log10(_currentParams.k);
+            _currentParams.S21 = _calculator.S21(_currentParams.k);
 
         }
 

@@ -21,8 +21,10 @@ namespace ParametersApp
         public MainForm()
         {
             InitializeComponent();
+            this.MaximizeBox = false;
 #if !DEBUG
             button2.Visible = false;
+            test2ToolStripMenuItem.Visible = false;
 #endif
             ModaleNameTextBox("Z0", "k", "Rc", "Rп", "Erc", "Erп");
             FormatRadioButton1();
@@ -32,7 +34,7 @@ namespace ParametersApp
             button2_Click(null,null);
             button1.FlatStyle = FlatStyle.System;
             button2.FlatStyle = FlatStyle.System;
-
+            graphToolStripMenuItem.Enabled = false;
         }
 
         private void FormatGridView1()
@@ -237,6 +239,7 @@ namespace ParametersApp
                         _currentParams.C22, _currentParams.L11, _currentParams.L12, _currentParams.L22);
 
                     WriteParams(_currentParams.GetForamttedParams());
+                    graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Pogonie_pF_nGn:
                     _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ","));
@@ -250,6 +253,7 @@ namespace ParametersApp
                         _currentParams.L11, _currentParams.L12, _currentParams.L22);
 
                     WriteParams(_currentParams.GetForamttedParams());
+                    graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Modalnie:
                     _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
@@ -261,6 +265,7 @@ namespace ParametersApp
 
                     _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
                     WriteParams(_currentParams.GetForamttedParams());
+                    graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Zc1_Zp1:
                     _currentParams.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
@@ -274,6 +279,7 @@ namespace ParametersApp
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams(_currentParams.GetForamttedParams());
+                    graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Zp1_Zc2:
                     _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
@@ -287,6 +293,7 @@ namespace ParametersApp
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams(_currentParams.GetForamttedParams());
+                    graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
                     _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
@@ -300,6 +307,7 @@ namespace ParametersApp
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams(_currentParams.GetForamttedParams());
+                    graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.ModalnieSymm:
                     _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
@@ -313,6 +321,7 @@ namespace ParametersApp
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
 
                     WriteParams(_currentParams.GetForamttedParams());
+                    graphToolStripMenuItem.Enabled = true;
                     break;
             }
         }
@@ -788,21 +797,15 @@ namespace ParametersApp
 
         private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Params testParams = new Params
-            {
-                Erp = 9.9,
-                Erc = 1.1,
-                Rz = 0.2,
-                Z0 = 50,
-                Zp1 = 24.142136,
-                Zc2 = 64.142136,
-                Zc1 = 320.5,
-                Zp2 = 4.82,
-                k = 0.783,
-                Rc = 1,
-                Rp = -0.2
-            };
+            Params testParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(64.142136, 24.142136, 1, -0.2, 1.1, 9.9);
+
             var graphForm = new FormForGraph(testParams);
+            graphForm.Show();
+        }
+
+        private void graphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var graphForm = new FormForGraph(_currentParams);
             graphForm.Show();
         }
     }

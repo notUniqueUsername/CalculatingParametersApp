@@ -4,8 +4,18 @@ namespace CalculatingParametersLib
 {
     public class Params
     {
-        private double _eee;
+        private double _mMax;
 
+        public double Mmax
+        {
+            get => _mMax;
+            set => _mMax = value;
+        }
+
+        private double _eee;
+        /// <summary>
+        /// Erп/Erc
+        /// </summary>
         public double EEE
         {
             get => _eee;

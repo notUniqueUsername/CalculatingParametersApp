@@ -28,27 +28,34 @@ namespace CalculatingParametersLib
         private double Z2Out { get; }
         private double L { get; }
         private double C { get; }
-        private double Zo { get; }
 
         private Vector<double> S11 { get; }
         private Vector<double> S12 { get; }
         private Vector<double> S13 { get; }
         private Vector<double> S14 { get; }
         private Vector<double> S22 { get; }
+        private Vector<double> S23 { get; }
         private Vector<double> S24 { get; }
+        private Vector<double> S33 { get; }
+        private Vector<double> S34 { get; }
+        private Vector<double> S44 { get; }
         private Vector<double> F11 { get; }
         private Vector<double> F12 { get; }
         private Vector<double> F13 { get; }
         private Vector<double> F14 { get; }
         private Vector<double> F22 { get; }
+        private Vector<double> F23 { get; }
         private Vector<double> F24 { get; }
+        private Vector<double> F33 { get; }
+        private Vector<double> F34 { get; }
+        private Vector<double> F44 { get; }
 
         private Matrix<Complex> ZlComplex { get; }
         private Matrix<Complex> E4Complex { get; }
         private Matrix<Complex>[] Y { get; }
 
         private readonly Complex _j = Complex.ImaginaryOne;
-        public CouplLinesInFreqRange(Params currentParams, double l, double fmin, double fmax, double z1In, double z2In, double z1Out, double z2Out)
+        public CouplLinesInFreqRange(Params currentParams, double l, double fmin, double fmax, int nf, double z1In, double z2In, double z1Out, double z2Out)
         {
             L = l * Math.Pow(10,-3);
             C = 0.2998;
@@ -58,7 +65,7 @@ namespace CalculatingParametersLib
             Z2Out = z2Out;
             Fmin = fmin;
             Fmax = fmax;
-            Nf = 500;
+            Nf = nf;
 
             S11 = Vector<double>.Build.Dense(Nf);
             S12 = Vector<double>.Build.Dense(Nf);
@@ -66,14 +73,21 @@ namespace CalculatingParametersLib
             S14 = Vector<double>.Build.Dense(Nf);
             S22 = Vector<double>.Build.Dense(Nf);
             S24 = Vector<double>.Build.Dense(Nf);
+            S23 = Vector<double>.Build.Dense(Nf);
+            S33 = Vector<double>.Build.Dense(Nf);
+            S34 = Vector<double>.Build.Dense(Nf);
+            S44 = Vector<double>.Build.Dense(Nf);
             F11 = Vector<double>.Build.Dense(Nf);
             F12 = Vector<double>.Build.Dense(Nf);
             F13 = Vector<double>.Build.Dense(Nf);
             F14 = Vector<double>.Build.Dense(Nf);
             F22 = Vector<double>.Build.Dense(Nf);
             F24 = Vector<double>.Build.Dense(Nf);
+            F23 = Vector<double>.Build.Dense(Nf);
+            F33 = Vector<double>.Build.Dense(Nf);
+            F34 = Vector<double>.Build.Dense(Nf);
+            F44 = Vector<double>.Build.Dense(Nf);
 
-            
 
             E4 = Matrix<double>.Build.DenseIdentity(4);
             Zl = Matrix<double>.Build.DenseIdentity(4);
@@ -84,8 +98,7 @@ namespace CalculatingParametersLib
             ZlComplex = Zl.ToComplex();
             E4Complex = E4.ToComplex();
             Y = new Matrix<Complex>[Nf];
-
-            Zo = Math.Sqrt(currentParams.Zp1 * currentParams.Zc2);
+            
             Fi = Vector<double>.Build.Dense(Nf, i => ((Fmax - Fmin) / (Nf - 1)) * (i+1) + Fmin);
             Wi = Fi.Multiply(2 * Math.PI);
             Um = Matrix<double>.Build.Dense(2, 2);
@@ -190,6 +203,10 @@ namespace CalculatingParametersLib
             var SS14 = Vector<Complex>.Build.Dense(Nf);
             var SS22 = Vector<Complex>.Build.Dense(Nf);
             var SS24 = Vector<Complex>.Build.Dense(Nf);
+            var SS23 = Vector<Complex>.Build.Dense(Nf);
+            var SS33 = Vector<Complex>.Build.Dense(Nf);
+            var SS34 = Vector<Complex>.Build.Dense(Nf);
+            var SS44 = Vector<Complex>.Build.Dense(Nf);
             for (int i = 0; i < Nf; i++)
             {
                 SS11[i] = SS[i][0, 0];
@@ -198,6 +215,10 @@ namespace CalculatingParametersLib
                 SS14[i] = SS[i][0, 3];
                 SS22[i] = SS[i][1, 1];
                 SS24[i] = SS[i][1, 3];
+                SS23[i] = SS[i][1, 2];
+                SS33[i] = SS[i][2, 2];
+                SS34[i] = SS[i][2, 3];
+                SS44[i] = SS[i][3, 3];
             }
 
             for (int i = 0; i < Nf; i++)
@@ -208,6 +229,10 @@ namespace CalculatingParametersLib
                 S14[i] = 20 * Math.Log10(SS14.PointwiseAbs()[i].Real);
                 S22[i] = 20 * Math.Log10(SS22.PointwiseAbs()[i].Real);
                 S24[i] = 20 * Math.Log10(SS24.PointwiseAbs()[i].Real);
+                S23[i] = 20 * Math.Log10(SS23.PointwiseAbs()[i].Real);
+                S33[i] = 20 * Math.Log10(SS33.PointwiseAbs()[i].Real);
+                S34[i] = 20 * Math.Log10(SS34.PointwiseAbs()[i].Real);
+                S44[i] = 20 * Math.Log10(SS44.PointwiseAbs()[i].Real);
 
                 F11[i] = 180 / Math.PI * SS11[i].Phase;
                 F12[i] = 180 / Math.PI * SS12[i].Phase;
@@ -215,37 +240,36 @@ namespace CalculatingParametersLib
                 F14[i] = 180 / Math.PI * SS14[i].Phase;
                 F22[i] = 180 / Math.PI * SS22[i].Phase;
                 F24[i] = 180 / Math.PI * SS24[i].Phase;
+                F23[i] = 180 / Math.PI * SS23[i].Phase;
+                F33[i] = 180 / Math.PI * SS33[i].Phase;
+                F34[i] = 180 / Math.PI * SS34[i].Phase;
+                F44[i] = 180 / Math.PI * SS44[i].Phase;
             }
         }
         /// <summary>
-        /// Возвращает амплитуды S11, S12, S13, S14, S22, S24.
+        /// Возвращает амплитуды S11, S12, S13, S14, S22, S23, S24, S33, S34, S44.
         /// </summary>
         /// <returns>
-        /// S11, S12, S13, S14, S22, S24.
+        /// S11, S12, S13, S14, S22, S23, S24, S33, S34, S44.
         /// </returns>
         public double[][] GetSParamMagnitude()
         {
             double[][] sParamMagnitudes =
-                {S11.ToArray(), S12.ToArray(), S13.ToArray(), S14.ToArray(), S22.ToArray(), S24.ToArray()};
+                {S11.ToArray(), S12.ToArray(), S13.ToArray(), S14.ToArray(), S22.ToArray(), S23.ToArray(), S24.ToArray(), S33.ToArray(), S34.ToArray(), S44.ToArray()};
             return sParamMagnitudes;
         }
 
         /// <summary>
-        /// Возвращает фазы F11, F12, F13, F14, F22, F24.
+        /// Возвращает фазы F11, F12, F13, F14, F22, F23, F24, F33, F34, F44.
         /// </summary>
         /// <returns>
-        /// F11, F12, F13, F14, F22, F24.
+        /// F11, F12, F13, F14, F22, F23, F24, F33, F34, F44.
         /// </returns>
         public double[][] GetSParamPhase()
         {
             double[][] sParamPhase =
-                {F11.ToArray(), F12.ToArray(), F13.ToArray(), F14.ToArray(), F22.ToArray(), F24.ToArray()};
+                {F11.ToArray(), F12.ToArray(), F13.ToArray(), F14.ToArray(), F22.ToArray(), F23.ToArray(), F24.ToArray(), F33.ToArray(), F34.ToArray(), F44.ToArray()};
             return sParamPhase;
-        }
-
-        public double GetZo()
-        {
-            return Zo;
         }
 
         public double[] GetFi()

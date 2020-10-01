@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CalculatingParametersLib;
 using ZedGraph;
@@ -20,7 +21,21 @@ namespace ParametersApp
         private LineItem _13Curve;
         private LineItem _14Curve;
         private LineItem _22Curve;
+        private LineItem _23Curve;
         private LineItem _24Curve;
+        private LineItem _33Curve;
+        private LineItem _34Curve;
+        private LineItem _44Curve;
+        private double _z2out;
+        private double _z1out;
+        private double _z2in;
+        private double _z1in;
+        private double _xMin;
+        private double _xMax;
+        private int _nf;
+        private double _fmin;
+        private double _l;
+        private double _fmax;
         private double[][] _sParamMagnitudes;
         private double[][] _sParamPhases;
         private Params _currentParams;
@@ -28,6 +43,18 @@ namespace ParametersApp
         private CouplLinesInFreqRange _sParamData;
         private double[] _fi;
 
+        public FormForGraph(Params currentParams)
+        {
+            InitializeComponent();
+            this.MaximizeBox = false;
+            _currentParams = currentParams;
+            _graphPane = GraphControl.GraphPane;
+            SetTextToTextBoxes();
+            SetTextToLabels();
+            FormatAxis();
+            
+            GeneralRadioButton.Checked = true;
+        }
 
 
         private void SetLineWidth(LineItem curve)
@@ -37,13 +64,17 @@ namespace ParametersApp
 
         private void SetTextToListBox(string sOrF)
         {
-            SParamListBox.Items[0] = sOrF + "11";
-            SParamListBox.Items[1] = sOrF + "12";
-            SParamListBox.Items[2] = sOrF + "13";
-            SParamListBox.Items[3] = sOrF + "14";
-            SParamListBox.Items[4] = sOrF + "22";
-            SParamListBox.Items[5] = sOrF + "24";
-            SParamListBox.Items[6] = "All";
+            SParamListBox.Items[0] = "All";
+            SParamListBox.Items[1] = sOrF + "11";
+            SParamListBox.Items[2] = sOrF + "12";
+            SParamListBox.Items[3] = sOrF + "13";
+            SParamListBox.Items[4] = sOrF + "14";
+            SParamListBox.Items[5] = sOrF + "22";
+            SParamListBox.Items[6] = sOrF + "23";
+            SParamListBox.Items[7] = sOrF + "24";
+            SParamListBox.Items[8] = sOrF + "33";
+            SParamListBox.Items[9] = sOrF + "34";
+            SParamListBox.Items[10] = sOrF + "44";
         }
 
         private void FormatAxis()
@@ -91,39 +122,72 @@ namespace ParametersApp
         {
             FreqMaxTextBox.Text = "15";
             FreqMinTextBox.Text = "0";
-            NTextBox.Text = "10";
+            LengthTextBox.Text = "10";
+            NfTextBox.Text = "500";
             Z1inTextBox.Text = "25";
             Z2inTextBox.Text = "50";
             Z1outTextBox.Text = "25";
             Z2outTextBox.Text = "50";
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sOrF"></param>
+        /// <param name="sParamMagnitudeOrPhase">
+        /// фазы или магнитуды 11 = 0, 12 = 1, 13 = 2, 14 = 3, 22 = 4, 23 = 5, 24 = 6, 33 = 7, 34 = 8, 44 = 9.
+        /// </param>
         private void DrawCurves(string sOrF, double[][] sParamMagnitudeOrPhase)
         {
+
             _11Curve = _graphPane.AddCurve(sOrF + "11", _fi, sParamMagnitudeOrPhase[0], Color.Red, SymbolType.None);
             _11Curve.Line.Style = DashStyle.Dot;
             _11Curve.Line.IsSmooth = true;
             SetLineWidth(_11Curve);
-            _22Curve = _graphPane.AddCurve(sOrF + "22", _fi, sParamMagnitudeOrPhase[4], Color.Black, SymbolType.None);
-            _22Curve.Line.Style = DashStyle.Dot;
-            _22Curve.Line.IsSmooth = true;
-            SetLineWidth(_22Curve);
+
             _12Curve = _graphPane.AddCurve(sOrF + "12", _fi, sParamMagnitudeOrPhase[1], Color.Blue, SymbolType.None);
             _12Curve.Line.Style = DashStyle.Dash;
             _12Curve.Line.IsSmooth = true;
             SetLineWidth(_12Curve);
+
             _13Curve = _graphPane.AddCurve(sOrF + "13", _fi, sParamMagnitudeOrPhase[2], Color.Red, SymbolType.None);
             //s13curve.Line.Style = DashStyle.Dot;
             //s13curve.Line.IsSmooth = true;
             SetLineWidth(_13Curve);
-            _24Curve = _graphPane.AddCurve(sOrF + "24", _fi, sParamMagnitudeOrPhase[5], Color.Black, SymbolType.None);
-            //s24curve.Line.Style = DashStyle.Dot;
-            //s24curve.Line.IsSmooth = true;
-            SetLineWidth(_24Curve);
-            _14Curve = _graphPane.AddCurve(sOrF + "14", _fi, sParamMagnitudeOrPhase[3], Color.Blue, SymbolType.None);
+
+            _14Curve = _graphPane.AddCurve(sOrF + "14", _fi, sParamMagnitudeOrPhase[3], Color.Black, SymbolType.None);
             _14Curve.Line.Style = DashStyle.DashDot;
             _14Curve.Line.IsSmooth = true;
             SetLineWidth(_14Curve);
+
+            _22Curve = _graphPane.AddCurve(sOrF + "22", _fi, sParamMagnitudeOrPhase[4], Color.Black, SymbolType.None);
+            _22Curve.Line.Style = DashStyle.Dot;
+            _22Curve.Line.IsSmooth = true;
+            SetLineWidth(_22Curve);
+
+            _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Yellow, SymbolType.None);
+            _23Curve.Line.Style = DashStyle.DashDot;
+            _23Curve.Line.IsSmooth = true;
+            SetLineWidth(_23Curve);
+
+            _24Curve = _graphPane.AddCurve(sOrF + "24", _fi, sParamMagnitudeOrPhase[6], Color.Black, SymbolType.None);
+            //s24curve.Line.Style = DashStyle.Dot;
+            //s24curve.Line.IsSmooth = true;
+            SetLineWidth(_24Curve);
+
+            _33Curve = _graphPane.AddCurve(sOrF + "33", _fi, sParamMagnitudeOrPhase[7], Color.Blue, SymbolType.None);
+            _33Curve.Line.Style = DashStyle.Dot;
+            _33Curve.Line.IsSmooth = true;
+            SetLineWidth(_33Curve);
+
+            _34Curve = _graphPane.AddCurve(sOrF + "34", _fi, sParamMagnitudeOrPhase[8], Color.Green, SymbolType.None);
+            _34Curve.Line.Style = DashStyle.Dash;
+            _34Curve.Line.IsSmooth = true;
+            SetLineWidth(_34Curve);
+
+            _44Curve = _graphPane.AddCurve(sOrF + "44", _fi, sParamMagnitudeOrPhase[9], Color.Green, SymbolType.None);
+            _44Curve.Line.Style = DashStyle.Dot;
+            _44Curve.Line.IsSmooth = true;
+            SetLineWidth(_44Curve);
 
             GraphControl.AxisChange();
             GraphControl.Invalidate();
@@ -131,79 +195,95 @@ namespace ParametersApp
 
         private void SetTextToLabels()
         {
-            ErcLabel.Text ="Erc = " + Math.Round(_currentParams.Erc, 3).ToString();
+            ErcLabel.Text = "Erc = " + Math.Round(_currentParams.Erc, 3).ToString();
             ErpLabel.Text = "Erп = " + Math.Round(_currentParams.Erp, 3).ToString();
+            EEELabel.Text = "Erп/Erc = " + Math.Round(_currentParams.EEE, 1).ToString();
+
+            S21Label.Text = "S21, dB = " + Math.Round(_currentParams.S21, 1).ToString();
             RcLabel.Text = "Rc = " + Math.Round(_currentParams.Rc, 3).ToString();
             RpLabel.Text = "Rп = " + Math.Round(_currentParams.Rp, 3).ToString();
-            Z1Label.Text = "Zc1, Ω = " + Math.Round(_currentParams.Zc1, 3).ToString();
-            Zp1Label.Text = "Zп1, Ω = " + Math.Round(_currentParams.Zp1, 3).ToString();
-            Zc2Label.Text = "Zc2, Ω = " + Math.Round(_currentParams.Zc2, 3).ToString();
-            Z2Label.Text = "Zп2, Ω = " + Math.Round(_currentParams.Zp2, 3).ToString();
-            RzLabel.Text = "Rz = " + Math.Round(_currentParams.Rz, 3).ToString();
-            Z0Label.Text = "Z0, Ω = " + Math.Round(_currentParams.Z0, 3).ToString();
+
             KLabel.Text = "k = " + Math.Round(_currentParams.k, 3).ToString();
-            Z0Label.Text = "Zo, Ω = ";
+            NLabel.Text = "n = " + Math.Round(_currentParams.N, 3).ToString();
+            RzLabel.Text = "Rz = " + Math.Round(_currentParams.Rz, 3).ToString();
+
+            Z1pLabel.Text = "Z1п, Ω = " + Math.Round(_currentParams.Z1p, 3).ToString();
+            Z2cLabel.Text = "Z2c, Ω = " + Math.Round(_currentParams.Z2c, 3).ToString();
+            MLabel.Text = "Mmax = " + Math.Round(_currentParams.Mmax, 3).ToString();
+
+            Z0Label.Text = "Z0, Ω = " + Math.Round(_currentParams.Z0, 1).ToString();
+            Z1Label.Text = "Z1, Ω = " + Math.Round(_currentParams.Z1, 1).ToString();
+            Z2Label.Text = "Z2, Ω = " + Math.Round(_currentParams.Z2, 1).ToString();
+            
         }
 
         private void CalculateSParamData()
         {
-            double.TryParse(NTextBox.Text, out var l);
-            double.TryParse(FreqMinTextBox.Text, out var fmin);
-            double.TryParse(FreqMaxTextBox.Text, out var fmax);
-            double.TryParse(Z1inTextBox.Text, out var z1in);
-            double.TryParse(Z2inTextBox.Text, out var z2in);
-            double.TryParse(Z1outTextBox.Text, out var z1out);
-            double.TryParse(Z2outTextBox.Text, out var z2out);
-            var sParamData = new CouplLinesInFreqRange(_currentParams, l, fmin, fmax, z1in, z2in, z1out, z2out);
+            var sParamData = new CouplLinesInFreqRange(_currentParams, _l, _fmin, _fmax, _nf, _z1in, _z2in, _z1out, _z2out);
             _sParamData = sParamData;
             _sParamMagnitudes = _sParamData.GetSParamMagnitude();
             _sParamPhases = _sParamData.GetSParamPhase();
             _fi = _sParamData.GetFi();
-            Z0Label.Text = "Zo, Ω = " + Math.Round(_sParamData.GetZo(), 3).ToString();
 
         }
 
-        public FormForGraph(Params currentParams)
+        private void ChangeGraph()
         {
-            InitializeComponent();
-            _currentParams = currentParams;
-            _graphPane = GraphControl.GraphPane;
-            SetTextToTextBoxes();
-            SetTextToLabels();
-            FormatAxis();
-        }
-
-        private void DrawButton_Click(object sender, EventArgs e)
-        {
-            CalculateSParamData();
-            AllCurvesCheckState(CheckState.Checked);
-            SParamListBox.SetItemCheckState(6, CheckState.Checked);
-            double xMin;
-            double.TryParse(FreqMinTextBox.Text, out xMin);
-            double xMax;
-            double.TryParse(FreqMaxTextBox.Text, out xMax);
             if (MagnitudeRadioButton.Checked)
             {
                 _graphPane.CurveList.Clear();
-                SetMaxMinAxes(xMin, xMax, _sParamMagnitudes);
+                SetMaxMinAxes(_xMin, _xMax, _sParamMagnitudes);
                 DrawCurves("S", _sParamMagnitudes);
             }
             else if (PhaseRadioButton.Checked)
             {
                 _graphPane.CurveList.Clear();
-                SetMaxMinAxes(xMin, xMax, _sParamPhases);
-                DrawCurves("F", _sParamPhases);
+                SetMaxMinAxes(_xMin, _xMax, _sParamPhases);
+                DrawCurves("Φ", _sParamPhases);
             }
+        }
+
+        private void DrawButton_Click(object sender, EventArgs e)
+        {
+            double.TryParse(LengthTextBox.Text, out _l);
+            double.TryParse(FreqMinTextBox.Text, out _fmin);
+            double.TryParse(FreqMaxTextBox.Text, out _fmax);
+            int.TryParse(NfTextBox.Text, out _nf);
+            if (GeneralRadioButton.Checked)
+            {
+                double.TryParse(Z1inTextBox.Text, out _z1in);
+                double.TryParse(Z2inTextBox.Text, out _z2in);
+                double.TryParse(Z1outTextBox.Text, out _z1out);
+                double.TryParse(Z2outTextBox.Text, out _z2out);
+            }
+            else if (LineToLineRadioButton.Checked)
+            {
+                double.TryParse(Z01TextBox.Text, out _z1in);
+                double.TryParse(Z02TextBox.Text, out _z2in);
+                double.TryParse(Z01TextBox.Text, out _z1out);
+                double.TryParse(Z02TextBox.Text, out _z2out);
+            }
+
+            CalculateSParamData();
+            AllCurvesCheckState(CheckState.Checked);
+            SParamListBox.SetItemCheckState(0, CheckState.Checked);
+            double.TryParse(FreqMinTextBox.Text, out _xMin);
+            double.TryParse(FreqMaxTextBox.Text, out _xMax);
+            ChangeGraph();
         }
 
         private void AllCurvesCheckState(CheckState checkState)
         {
-            SParamListBox.SetItemCheckState(0, checkState);
             SParamListBox.SetItemCheckState(1, checkState);
             SParamListBox.SetItemCheckState(2, checkState);
             SParamListBox.SetItemCheckState(3, checkState);
             SParamListBox.SetItemCheckState(4, checkState);
             SParamListBox.SetItemCheckState(5, checkState);
+            SParamListBox.SetItemCheckState(6, checkState);
+            SParamListBox.SetItemCheckState(7, checkState);
+            SParamListBox.SetItemCheckState(8, checkState);
+            SParamListBox.SetItemCheckState(9, checkState);
+            SParamListBox.SetItemCheckState(10, checkState);
         }
 
         private void AllCurvesToggleVisible(bool isVisible)
@@ -218,8 +298,16 @@ namespace ParametersApp
             _14Curve.Label.IsVisible = isVisible;
             _22Curve.IsVisible = isVisible;
             _22Curve.Label.IsVisible = isVisible;
+            _23Curve.IsVisible = isVisible;
+            _23Curve.Label.IsVisible = isVisible;
             _24Curve.IsVisible = isVisible;
             _24Curve.Label.IsVisible = isVisible;
+            _33Curve.IsVisible = isVisible;
+            _33Curve.Label.IsVisible = isVisible;
+            _34Curve.IsVisible = isVisible;
+            _34Curve.Label.IsVisible = isVisible;
+            _44Curve.IsVisible = isVisible;
+            _44Curve.Label.IsVisible = isVisible;
         }
 
         private void SParamListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -233,9 +321,9 @@ namespace ParametersApp
                 DrawButton.PerformClick();
             }
             
-            if (SParamListBox.SelectedIndex == 6)
+            if (SParamListBox.SelectedIndex == 0)
             {
-                if (SParamListBox.GetItemCheckState(6) == CheckState.Checked)
+                if (SParamListBox.GetItemCheckState(0) == CheckState.Checked)
                 {
                     AllCurvesCheckState(CheckState.Checked);
                     AllCurvesToggleVisible(true);
@@ -248,50 +336,68 @@ namespace ParametersApp
             }
             else
             {
-                for (int i = 0; i <= 6; i++)
+                for (int i = 0; i < SParamListBox.Items.Count; i++)
                 {
                     if (SParamListBox.CheckedIndices.Contains(i))
                     {
                         switch (i)
                         {
-                            case 0:
+                            case 1:
                                 _11Curve.IsVisible = true;
                                 _11Curve.Label.IsVisible = true;
                                 break;
-                            case 1:
+                            case 2:
                                 _12Curve.IsVisible = true;
                                 _12Curve.Label.IsVisible = true;
                                 break;
-                            case 2:
+                            case 3:
                                 _13Curve.IsVisible = true;
                                 _13Curve.Label.IsVisible = true;
                                 break;
-                            case 3:
+                            case 4:
                                 _14Curve.IsVisible = true;
                                 _14Curve.Label.IsVisible = true;
                                 break;
-                            case 4:
+                            case 5:
                                 _22Curve.IsVisible = true;
                                 _22Curve.Label.IsVisible = true;
                                 break;
-                            case 5:
+                            case 6:
+                                _23Curve.IsVisible = true;
+                                _23Curve.Label.IsVisible = true;
+                                break;
+                            case 7:
                                 _24Curve.IsVisible = true;
                                 _24Curve.Label.IsVisible = true;
                                 break;
-                            case 6:
+                            case 8:
+                                _33Curve.IsVisible = true;
+                                _33Curve.Label.IsVisible = true;
+                                break;
+                            case 9:
+                                _34Curve.IsVisible = true;
+                                _34Curve.Label.IsVisible = true;
+                                break;
+                            case 10:
+                                _44Curve.IsVisible = true;
+                                _44Curve.Label.IsVisible = true;
+                                break;
+                            case 0:
                                 break;
                         }
                     }
                 }
             }
 
-            if (!(_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _24Curve.IsVisible))
+            if (!(_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _23Curve.IsVisible 
+                  && _24Curve.IsVisible && _33Curve.IsVisible && _34Curve.IsVisible && _44Curve.IsVisible))
             {
-                SParamListBox.SetItemCheckState(6, CheckState.Unchecked);
+                SParamListBox.SetItemCheckState(0, CheckState.Unchecked);
             }
-            if (_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _24Curve.IsVisible)
+            if (_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _23Curve.IsVisible
+                && _24Curve.IsVisible && _33Curve.IsVisible && _34Curve.IsVisible && _44Curve.IsVisible)
             {
-                SParamListBox.SetItemCheckState(6, CheckState.Checked);
+                SParamListBox.SetItemCheckState(0, CheckState.Checked);
             }
             GraphControl.AxisChange();
             GraphControl.Invalidate();
@@ -300,13 +406,114 @@ namespace ParametersApp
         private void MagnitudeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             SetTextToListBox("S");
-            DrawButton.PerformClick();
+            //DrawButton.PerformClick();
+            ChangeGraph();
         }
 
         private void PhaseRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            SetTextToListBox("F");
-            DrawButton.PerformClick();
+            SetTextToListBox("Φ");
+            //DrawButton.PerformClick();
+            ChangeGraph();
+        }
+
+        private void GeneralRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            var ss = (RadioButton) sender;
+            ZInOutFlowLayoutPanel.Enabled = ss.Checked;
+            Z01Z02FlowLayoutPanel.Enabled = !ss.Checked;
+            DrawButton.Enabled = TextBoxValidator();
+        }
+
+        private bool TextBoxValidator()
+        {
+            Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
+            Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
+            double.TryParse(FreqMinTextBox.Text, out var freqMin);
+            double.TryParse(FreqMaxTextBox.Text, out var freqMax);
+            bool text7 = (noDigit.IsMatch(FreqMinTextBox.Text) || noDigit1.IsMatch(FreqMinTextBox.Text)) &
+                         freqMin >= 0;
+            bool text8 = (noDigit.IsMatch(FreqMaxTextBox.Text) || noDigit1.IsMatch(FreqMaxTextBox.Text)) &
+                         freqMax > 0;
+            bool text9 = int.TryParse(LengthTextBox.Text, out var l) & l > 0;
+            bool text10 = int.TryParse(NfTextBox.Text, out var nf) & nf > 0;
+            bool text11 = freqMax > freqMin;
+
+            if (GeneralRadioButton.Checked)
+            {
+                if (Z1inTextBox.Text.Length == 0)
+                {
+                    return false;
+                }
+                if (Z2inTextBox.Text.Length == 0)
+                {
+                    return false;
+                }
+                if (Z1outTextBox.Text.Length == 0)
+                {
+                    return false;
+                }
+                if (Z2outTextBox.Text.Length == 0)
+                {
+                    return false;
+                }
+                bool text1 = noDigit.IsMatch(Z1inTextBox.Text) || noDigit1.IsMatch(Z1inTextBox.Text);
+                bool text2 = noDigit.IsMatch(Z2inTextBox.Text) || noDigit1.IsMatch(Z2inTextBox.Text);
+                bool text3 = noDigit.IsMatch(Z1outTextBox.Text) || noDigit1.IsMatch(Z1outTextBox.Text);
+                bool text4 = noDigit.IsMatch(Z2outTextBox.Text) || noDigit1.IsMatch(Z2outTextBox.Text);
+                return text1 && text2 && text3 && text4 && text7 && text8 && text9 && text10 && text11;
+            }
+            if (Z01TextBox.Text.Length == 0)
+            {
+                return false;
+            }
+
+            if (Z02TextBox.Text.Length == 0)
+            {
+                return false;
+            }
+
+            bool text5 = noDigit.IsMatch(Z01TextBox.Text) || noDigit1.IsMatch(Z01TextBox.Text);
+            bool text6 = noDigit.IsMatch(Z02TextBox.Text) || noDigit1.IsMatch(Z02TextBox.Text);
+            return text5 && text6 && text7 && text8 && text9 && text10 && text11;
+        }
+
+        private void textBox_TextChangedForDouble(object sender, EventArgs e)
+        {
+            Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
+            Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
+            TextBox textBox = (TextBox)sender;
+            string s = textBox.Text;
+            DrawButton.Enabled = TextBoxValidator();
+            if (noDigit.IsMatch(s) || noDigit1.IsMatch(s))
+            {
+
+                textBox.ResetForeColor();
+
+            }
+            else
+            {
+                DrawButton.Enabled = false;
+                textBox.ForeColor = Color.Red;
+            }
+        }
+
+        private void textBox_TextChangedForInt(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string s = textBox.Text;
+            DrawButton.Enabled = TextBoxValidator();
+            if (int.TryParse(s, out var result) & result > 0)
+            {
+
+                textBox.ResetForeColor();
+
+            }
+            else
+            {
+                DrawButton.Enabled = false;
+                textBox.ForeColor = Color.Red;
+            }
         }
     }
 }

@@ -124,11 +124,14 @@
     <Content Include="Resources\String_low_.png" />
     <None Include="Resources\String_up1.png" />
     <None Include="Resources\String_low_1.png" />
+    <None Include="Resources\String_low_Midl.png" />
     <Content Include="Resources\String_up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd C:\Users\Valeriy\Desktop\nirs
-C:\Users\Valeriy\Desktop\nirs\FormArch.bat</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+  cd C:\Users\Valeriy\Desktop\nirs
+call C:\Users\Valeriy\Desktop\nirs\FormArch.bat
+)</PostBuildEvent>
   </PropertyGroup>
 </Project>

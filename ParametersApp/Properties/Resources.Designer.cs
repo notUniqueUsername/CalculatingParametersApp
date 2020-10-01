@@ -93,6 +93,16 @@ namespace ParametersApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap String_low_Midl {
+            get {
+                object obj = ResourceManager.GetObject("String_low_Midl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap String_up {
             get {
                 object obj = ResourceManager.GetObject("String_up", resourceCulture);

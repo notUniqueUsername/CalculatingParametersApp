@@ -106,7 +106,7 @@ namespace CalculatingParametersLib
 
             _currentParams.EEE = _calculator.EEE(_currentParams.Erp, _currentParams.Erc);
 
-            _currentParams.S21 = -20 * Math.Log10(_currentParams.k);
+            _currentParams.S21 = _calculator.S21(_currentParams.k);
 
             _currentParams.C11 = c11;
             _currentParams.C12 = c12;
@@ -115,6 +115,9 @@ namespace CalculatingParametersLib
             _currentParams.L11 = l11;
             _currentParams.L12 = l12;
             _currentParams.L22 = l22;
+
+            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+                _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
 
             return _currentParams;
         }

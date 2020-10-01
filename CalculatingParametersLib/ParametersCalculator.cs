@@ -1,10 +1,26 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CalculatingParametersLib
 {
     public class ParametersCalculator
     {
         private const double SpeedOfLight = 300000000;
+
+        public double Mmax(double rc, double rp, double erc, double erp, double zc1, double zp1)
+        {
+            var m1 = zc1 / zp1;
+            var m3 = (1 / rp - 1) / (1 / rc - 1) * (zp1 / zc1);
+            var m2 = (rp - 1) / (rc - 1) * (zp1 / zc1);
+            var mArray = new[] {Math.Pow(m1, 2), Math.Pow(m2, 2), Math.Pow(m3, 2)};
+            return mArray.Min();
+        }
+
+        public double S21(double k)
+        {
+            return -20 * Math.Log10(k);
+        }
 
         public double EEE(double erp, double erc)
         {
