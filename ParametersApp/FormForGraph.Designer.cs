@@ -86,6 +86,7 @@
             this.ShematicPictureBox = new System.Windows.Forms.PictureBox();
             this.ImageNameLabel = new System.Windows.Forms.Label();
             this.GraphNameLabel = new System.Windows.Forms.Label();
+            this.Test1Button = new System.Windows.Forms.Button();
             this.ZInOutFlowLayoutPanel.SuspendLayout();
             this.InputFlowLayoutPanel1.SuspendLayout();
             this.Z1pToEEEFlowLayoutPanel.SuspendLayout();
@@ -103,6 +104,7 @@
             // GraphControl
             // 
             this.GraphControl.Location = new System.Drawing.Point(246, 107);
+            this.GraphControl.Margin = new System.Windows.Forms.Padding(4);
             this.GraphControl.Name = "GraphControl";
             this.GraphControl.ScrollGrace = 0D;
             this.GraphControl.ScrollMaxX = 0D;
@@ -369,7 +371,7 @@
             "S33",
             "S34",
             "S44"});
-            this.SParamListBox.Location = new System.Drawing.Point(814, 136);
+            this.SParamListBox.Location = new System.Drawing.Point(812, 107);
             this.SParamListBox.MultiColumn = true;
             this.SParamListBox.Name = "SParamListBox";
             this.SParamListBox.Size = new System.Drawing.Size(46, 176);
@@ -402,7 +404,7 @@
             // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(814, 107);
+            this.DrawButton.Location = new System.Drawing.Point(812, 289);
             this.DrawButton.Name = "DrawButton";
             this.DrawButton.Size = new System.Drawing.Size(46, 23);
             this.DrawButton.TabIndex = 40;
@@ -528,9 +530,9 @@
             this.Z1pToEEEFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Z1pToEEEFlowLayoutPanel.Controls.Add(this.Z1pToEEEColumn1FlowLayoutPanel);
             this.Z1pToEEEFlowLayoutPanel.Controls.Add(this.Z1pToEEEColumn2FlowLayoutPanel);
-            this.Z1pToEEEFlowLayoutPanel.Location = new System.Drawing.Point(452, 13);
+            this.Z1pToEEEFlowLayoutPanel.Location = new System.Drawing.Point(447, 13);
             this.Z1pToEEEFlowLayoutPanel.Name = "Z1pToEEEFlowLayoutPanel";
-            this.Z1pToEEEFlowLayoutPanel.Size = new System.Drawing.Size(204, 66);
+            this.Z1pToEEEFlowLayoutPanel.Size = new System.Drawing.Size(209, 66);
             this.Z1pToEEEFlowLayoutPanel.TabIndex = 51;
             // 
             // Z1pToEEEColumn1FlowLayoutPanel
@@ -542,7 +544,7 @@
             this.Z1pToEEEColumn1FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z1pToEEEColumn1FlowLayoutPanel.Name = "Z1pToEEEColumn1FlowLayoutPanel";
             this.Z1pToEEEColumn1FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.Z1pToEEEColumn1FlowLayoutPanel.Size = new System.Drawing.Size(104, 61);
+            this.Z1pToEEEColumn1FlowLayoutPanel.Size = new System.Drawing.Size(110, 61);
             this.Z1pToEEEColumn1FlowLayoutPanel.TabIndex = 57;
             // 
             // Z1pToEEEColumn2FlowLayoutPanel
@@ -550,7 +552,7 @@
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.ErcLabel);
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.ErpLabel);
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.EEELabel);
-            this.Z1pToEEEColumn2FlowLayoutPanel.Location = new System.Drawing.Point(104, 0);
+            this.Z1pToEEEColumn2FlowLayoutPanel.Location = new System.Drawing.Point(110, 0);
             this.Z1pToEEEColumn2FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z1pToEEEColumn2FlowLayoutPanel.Name = "Z1pToEEEColumn2FlowLayoutPanel";
             this.Z1pToEEEColumn2FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
@@ -565,7 +567,7 @@
             this.Z0ToRpFlowLayoutPanel.Controls.Add(this.Z0ToRpColumn3FlowLayoutPanel);
             this.Z0ToRpFlowLayoutPanel.Location = new System.Drawing.Point(165, 13);
             this.Z0ToRpFlowLayoutPanel.Name = "Z0ToRpFlowLayoutPanel";
-            this.Z0ToRpFlowLayoutPanel.Size = new System.Drawing.Size(286, 66);
+            this.Z0ToRpFlowLayoutPanel.Size = new System.Drawing.Size(281, 66);
             this.Z0ToRpFlowLayoutPanel.TabIndex = 52;
             // 
             // Z0ToRpColumn1FlowLayoutPanel
@@ -589,7 +591,7 @@
             this.Z0ToRpColumn2FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z0ToRpColumn2FlowLayoutPanel.Name = "Z0ToRpColumn2FlowLayoutPanel";
             this.Z0ToRpColumn2FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.Z0ToRpColumn2FlowLayoutPanel.Size = new System.Drawing.Size(84, 64);
+            this.Z0ToRpColumn2FlowLayoutPanel.Size = new System.Drawing.Size(71, 64);
             this.Z0ToRpColumn2FlowLayoutPanel.TabIndex = 58;
             // 
             // NLabel
@@ -609,11 +611,11 @@
             this.Z0ToRpColumn3FlowLayoutPanel.Controls.Add(this.S21Label);
             this.Z0ToRpColumn3FlowLayoutPanel.Controls.Add(this.RcLabel);
             this.Z0ToRpColumn3FlowLayoutPanel.Controls.Add(this.RpLabel);
-            this.Z0ToRpColumn3FlowLayoutPanel.Location = new System.Drawing.Point(176, 0);
+            this.Z0ToRpColumn3FlowLayoutPanel.Location = new System.Drawing.Point(163, 0);
             this.Z0ToRpColumn3FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z0ToRpColumn3FlowLayoutPanel.Name = "Z0ToRpColumn3FlowLayoutPanel";
             this.Z0ToRpColumn3FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.Z0ToRpColumn3FlowLayoutPanel.Size = new System.Drawing.Size(103, 64);
+            this.Z0ToRpColumn3FlowLayoutPanel.Size = new System.Drawing.Size(114, 64);
             this.Z0ToRpColumn3FlowLayoutPanel.TabIndex = 57;
             // 
             // S21Label
@@ -750,10 +752,23 @@
             this.GraphNameLabel.TabIndex = 57;
             this.GraphNameLabel.Text = "S - parameters";
             // 
+            // Test1Button
+            // 
+            this.Test1Button.Location = new System.Drawing.Point(811, 318);
+            this.Test1Button.Name = "Test1Button";
+            this.Test1Button.Size = new System.Drawing.Size(46, 23);
+            this.Test1Button.TabIndex = 58;
+            this.Test1Button.Text = "Test";
+            this.Test1Button.UseVisualStyleBackColor = true;
+            this.Test1Button.Click += new System.EventHandler(this.Test1Button_Click);
+            // 
             // FormForGraph
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(866, 423);
+            this.Controls.Add(this.Test1Button);
             this.Controls.Add(this.GraphNameLabel);
             this.Controls.Add(this.ImageNameLabel);
             this.Controls.Add(this.ShematicPictureBox);
@@ -768,9 +783,7 @@
             this.Controls.Add(this.MagnitudeRadioButton);
             this.Controls.Add(this.SParamListBox);
             this.Controls.Add(this.GraphControl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(882, 462);
             this.MinimumSize = new System.Drawing.Size(882, 462);
             this.Name = "FormForGraph";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -861,5 +874,6 @@
         private System.Windows.Forms.FlowLayoutPanel Z1pToEEEColumn1FlowLayoutPanel;
         private System.Windows.Forms.FlowLayoutPanel Z1pToEEEColumn2FlowLayoutPanel;
         private System.Windows.Forms.Label GraphNameLabel;
+        private System.Windows.Forms.Button Test1Button;
     }
 }

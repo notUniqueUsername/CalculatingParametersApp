@@ -39,6 +39,12 @@ namespace CalculatingParametersLib
         private Vector<double> S33 { get; }
         private Vector<double> S34 { get; }
         private Vector<double> S44 { get; }
+        private Vector<double> S21 { get; }
+        private Vector<double> S31 { get; }
+        private Vector<double> S32 { get; }
+        private Vector<double> S41 { get; }
+        private Vector<double> S42 { get; }
+        private Vector<double> S43 { get; }
         private Vector<double> F11 { get; }
         private Vector<double> F12 { get; }
         private Vector<double> F13 { get; }
@@ -49,6 +55,12 @@ namespace CalculatingParametersLib
         private Vector<double> F33 { get; }
         private Vector<double> F34 { get; }
         private Vector<double> F44 { get; }
+        private Vector<double> F21 { get; }
+        private Vector<double> F31 { get; }
+        private Vector<double> F32 { get; }
+        private Vector<double> F41 { get; }
+        private Vector<double> F42 { get; }
+        private Vector<double> F43 { get; }
 
         private Matrix<Complex> ZlComplex { get; }
         private Matrix<Complex> E4Complex { get; }
@@ -77,6 +89,13 @@ namespace CalculatingParametersLib
             S33 = Vector<double>.Build.Dense(Nf);
             S34 = Vector<double>.Build.Dense(Nf);
             S44 = Vector<double>.Build.Dense(Nf);
+            S21 = Vector<double>.Build.Dense(Nf);
+            S31 = Vector<double>.Build.Dense(Nf);
+            S32 = Vector<double>.Build.Dense(Nf);
+            S41 = Vector<double>.Build.Dense(Nf);
+            S42 = Vector<double>.Build.Dense(Nf);
+            S43 = Vector<double>.Build.Dense(Nf);
+
             F11 = Vector<double>.Build.Dense(Nf);
             F12 = Vector<double>.Build.Dense(Nf);
             F13 = Vector<double>.Build.Dense(Nf);
@@ -87,6 +106,12 @@ namespace CalculatingParametersLib
             F33 = Vector<double>.Build.Dense(Nf);
             F34 = Vector<double>.Build.Dense(Nf);
             F44 = Vector<double>.Build.Dense(Nf);
+            F21 = Vector<double>.Build.Dense(Nf);
+            F31 = Vector<double>.Build.Dense(Nf);
+            F32 = Vector<double>.Build.Dense(Nf);
+            F41 = Vector<double>.Build.Dense(Nf);
+            F42 = Vector<double>.Build.Dense(Nf);
+            F43 = Vector<double>.Build.Dense(Nf);
 
 
             E4 = Matrix<double>.Build.DenseIdentity(4);
@@ -207,6 +232,12 @@ namespace CalculatingParametersLib
             var SS33 = Vector<Complex>.Build.Dense(Nf);
             var SS34 = Vector<Complex>.Build.Dense(Nf);
             var SS44 = Vector<Complex>.Build.Dense(Nf);
+            var SS21 = Vector<Complex>.Build.Dense(Nf);
+            var SS31 = Vector<Complex>.Build.Dense(Nf);
+            var SS32 = Vector<Complex>.Build.Dense(Nf);
+            var SS41 = Vector<Complex>.Build.Dense(Nf);
+            var SS42 = Vector<Complex>.Build.Dense(Nf);
+            var SS43 = Vector<Complex>.Build.Dense(Nf);
             for (int i = 0; i < Nf; i++)
             {
                 SS11[i] = SS[i][0, 0];
@@ -219,6 +250,12 @@ namespace CalculatingParametersLib
                 SS33[i] = SS[i][2, 2];
                 SS34[i] = SS[i][2, 3];
                 SS44[i] = SS[i][3, 3];
+                SS21[i] = SS[i][1, 0];
+                SS31[i] = SS[i][2, 0];
+                SS32[i] = SS[i][2, 1];
+                SS41[i] = SS[i][3, 0];
+                SS42[i] = SS[i][3, 1];
+                SS43[i] = SS[i][3, 2];
             }
 
             for (int i = 0; i < Nf; i++)
@@ -233,6 +270,12 @@ namespace CalculatingParametersLib
                 S33[i] = 20 * Math.Log10(SS33.PointwiseAbs()[i].Real);
                 S34[i] = 20 * Math.Log10(SS34.PointwiseAbs()[i].Real);
                 S44[i] = 20 * Math.Log10(SS44.PointwiseAbs()[i].Real);
+                S21[i] = 20 * Math.Log10(SS21.PointwiseAbs()[i].Real);
+                S31[i] = 20 * Math.Log10(SS31.PointwiseAbs()[i].Real);
+                S32[i] = 20 * Math.Log10(SS32.PointwiseAbs()[i].Real);
+                S41[i] = 20 * Math.Log10(SS41.PointwiseAbs()[i].Real);
+                S42[i] = 20 * Math.Log10(SS42.PointwiseAbs()[i].Real);
+                S43[i] = 20 * Math.Log10(SS43.PointwiseAbs()[i].Real);
 
                 F11[i] = 180 / Math.PI * SS11[i].Phase;
                 F12[i] = 180 / Math.PI * SS12[i].Phase;
@@ -244,6 +287,12 @@ namespace CalculatingParametersLib
                 F33[i] = 180 / Math.PI * SS33[i].Phase;
                 F34[i] = 180 / Math.PI * SS34[i].Phase;
                 F44[i] = 180 / Math.PI * SS44[i].Phase;
+                F21[i] = 180 / Math.PI * SS21[i].Phase;
+                F31[i] = 180 / Math.PI * SS31[i].Phase;
+                F32[i] = 180 / Math.PI * SS32[i].Phase;
+                F41[i] = 180 / Math.PI * SS41[i].Phase;
+                F42[i] = 180 / Math.PI * SS42[i].Phase;
+                F43[i] = 180 / Math.PI * SS43[i].Phase;
             }
         }
         /// <summary>
@@ -275,6 +324,29 @@ namespace CalculatingParametersLib
         public double[] GetFi()
         {
             return Fi.ToArray();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>
+        /// 0 = Magnitudes, 1 = Phases
+        /// </returns>
+        public double[][][] GetS4pFile()
+        {
+            double[][] sParamMagnitudes =
+            {
+                S11.ToArray(), S12.ToArray(), S13.ToArray(), S14.ToArray(), S21.ToArray(), S22.ToArray(), S23.ToArray(),
+                S24.ToArray(), S31.ToArray(), S32.ToArray(), S33.ToArray(), S34.ToArray(), S41.ToArray(), S42.ToArray(),
+                S43.ToArray(), S44.ToArray()
+            };
+            double[][] sParamPhase =
+            {
+                F11.ToArray(), F12.ToArray(), F13.ToArray(), F14.ToArray(), F21.ToArray(), F22.ToArray(), F23.ToArray(),
+                F24.ToArray(), F31.ToArray(), F32.ToArray(), F33.ToArray(), F34.ToArray(), F41.ToArray(), F42.ToArray(),
+                F43.ToArray(), F44.ToArray()
+            };
+            double[][][] sParams = { sParamMagnitudes, sParamPhase };
+            return sParams;
         }
     }
 }

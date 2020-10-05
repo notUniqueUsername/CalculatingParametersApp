@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -513,6 +514,49 @@ namespace ParametersApp
             {
                 DrawButton.Enabled = false;
                 textBox.ForeColor = Color.Red;
+            }
+        }
+
+        private string sssss(double freq, double magn1, double phn1, double magn2, double phn2, double magn3, double phn3, double magn4, double phn4)
+        {
+            var returningString = " " + freq.ToString() + "\t" + magn1 + "\t" + phn1 + "\t" + magn2 + "\t" + phn2 + "\t" + magn3 + "\t" + phn3 + "\t" + magn4 + "\t" + phn4;
+            returningString = returningString.Replace(',', '.');
+            return returningString;
+        }
+
+        private string sssss(double magn1, double phn1, double magn2, double phn2, double magn3, double phn3, double magn4, double phn4)
+        {
+            var returningString = "\t" + magn1 + "\t" + phn1 + "\t" + magn2 + "\t" + phn2 + "\t" + magn3 + "\t" + phn3 + "\t" + magn4 + "\t" + phn4;
+            returningString = returningString.Replace(',', '.');
+            return returningString;
+        }
+
+        private void Test1Button_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.AddExtension = true;
+            dialog.DefaultExt = "s4p";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var data = _sParamData.GetS4pFile();
+                using (StreamWriter file = new StreamWriter(dialog.FileName, true))
+                {
+                    file.WriteLine("# GHz S DB R 50");
+                    file.WriteLine("! ParamApp");
+                    file.WriteLine("! " + DateTime.Now.ToString());
+                    file.WriteLine("! Data: Calculations");
+                    for (int i = 0; i < _fi.Length; i++)
+                    {
+                        file.WriteLine(sssss(_fi[i], data[0][0][i], data[1][0][i], data[0][1][i], data[1][1][i], data[0][2][i],
+                            data[1][2][i], data[0][3][i], data[1][3][i]));
+                        file.WriteLine(sssss(data[0][4][i], data[1][4][i], data[0][5][i], data[1][5][i], data[0][6][i],
+                            data[1][6][i], data[0][7][i], data[1][7][i]));
+                        file.WriteLine(sssss(data[0][8][i], data[1][8][i], data[0][9][i], data[1][9][i], data[0][10][i],
+                            data[1][10][i], data[0][11][i], data[1][11][i]));
+                        file.WriteLine(sssss(data[0][12][i], data[1][12][i], data[0][13][i], data[1][13][i], data[0][14][i],
+                            data[1][14][i], data[0][15][i], data[1][15][i]));
+                    }
+                }
             }
         }
     }
