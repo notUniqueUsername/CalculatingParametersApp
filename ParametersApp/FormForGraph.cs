@@ -65,17 +65,17 @@ namespace ParametersApp
 
         private void SetTextToListBox(string sOrF)
         {
-            SParamListBox.Items[0] = "All";
-            SParamListBox.Items[1] = sOrF + "11";
-            SParamListBox.Items[2] = sOrF + "12";
-            SParamListBox.Items[3] = sOrF + "13";
-            SParamListBox.Items[4] = sOrF + "14";
-            SParamListBox.Items[5] = sOrF + "22";
-            SParamListBox.Items[6] = sOrF + "23";
-            SParamListBox.Items[7] = sOrF + "24";
-            SParamListBox.Items[8] = sOrF + "33";
-            SParamListBox.Items[9] = sOrF + "34";
-            SParamListBox.Items[10] = sOrF + "44";
+            SParamListBox.Items[10] = "All";
+            SParamListBox.Items[0] = sOrF + "11";
+            SParamListBox.Items[1] = sOrF + "12";
+            SParamListBox.Items[2] = sOrF + "13";
+            SParamListBox.Items[3] = sOrF + "14";
+            SParamListBox.Items[4] = sOrF + "22";
+            SParamListBox.Items[5] = sOrF + "23";
+            SParamListBox.Items[6] = sOrF + "24";
+            SParamListBox.Items[7] = sOrF + "33";
+            SParamListBox.Items[8] = sOrF + "34";
+            SParamListBox.Items[9] = sOrF + "44";
         }
 
         private void FormatAxis()
@@ -267,7 +267,7 @@ namespace ParametersApp
 
             CalculateSParamData();
             AllCurvesCheckState(CheckState.Checked);
-            SParamListBox.SetItemCheckState(0, CheckState.Checked);
+            SParamListBox.SetItemCheckState(10, CheckState.Checked);
             double.TryParse(FreqMinTextBox.Text, out _xMin);
             double.TryParse(FreqMaxTextBox.Text, out _xMax);
             ChangeGraph();
@@ -275,6 +275,7 @@ namespace ParametersApp
 
         private void AllCurvesCheckState(CheckState checkState)
         {
+            SParamListBox.SetItemCheckState(0, checkState);
             SParamListBox.SetItemCheckState(1, checkState);
             SParamListBox.SetItemCheckState(2, checkState);
             SParamListBox.SetItemCheckState(3, checkState);
@@ -284,7 +285,6 @@ namespace ParametersApp
             SParamListBox.SetItemCheckState(7, checkState);
             SParamListBox.SetItemCheckState(8, checkState);
             SParamListBox.SetItemCheckState(9, checkState);
-            SParamListBox.SetItemCheckState(10, checkState);
         }
 
         private void AllCurvesToggleVisible(bool isVisible)
@@ -322,9 +322,9 @@ namespace ParametersApp
                 DrawButton.PerformClick();
             }
             
-            if (SParamListBox.SelectedIndex == 0)
+            if (SParamListBox.SelectedIndex == 10)
             {
-                if (SParamListBox.GetItemCheckState(0) == CheckState.Checked)
+                if (SParamListBox.GetItemCheckState(10) == CheckState.Checked)
                 {
                     AllCurvesCheckState(CheckState.Checked);
                     AllCurvesToggleVisible(true);
@@ -343,47 +343,47 @@ namespace ParametersApp
                     {
                         switch (i)
                         {
-                            case 1:
+                            case 0:
                                 _11Curve.IsVisible = true;
                                 _11Curve.Label.IsVisible = true;
                                 break;
-                            case 2:
+                            case 1:
                                 _12Curve.IsVisible = true;
                                 _12Curve.Label.IsVisible = true;
                                 break;
-                            case 3:
+                            case 2:
                                 _13Curve.IsVisible = true;
                                 _13Curve.Label.IsVisible = true;
                                 break;
-                            case 4:
+                            case 3:
                                 _14Curve.IsVisible = true;
                                 _14Curve.Label.IsVisible = true;
                                 break;
-                            case 5:
+                            case 4:
                                 _22Curve.IsVisible = true;
                                 _22Curve.Label.IsVisible = true;
                                 break;
-                            case 6:
+                            case 5:
                                 _23Curve.IsVisible = true;
                                 _23Curve.Label.IsVisible = true;
                                 break;
-                            case 7:
+                            case 6:
                                 _24Curve.IsVisible = true;
                                 _24Curve.Label.IsVisible = true;
                                 break;
-                            case 8:
+                            case 7:
                                 _33Curve.IsVisible = true;
                                 _33Curve.Label.IsVisible = true;
                                 break;
-                            case 9:
+                            case 8:
                                 _34Curve.IsVisible = true;
                                 _34Curve.Label.IsVisible = true;
                                 break;
-                            case 10:
+                            case 9:
                                 _44Curve.IsVisible = true;
                                 _44Curve.Label.IsVisible = true;
                                 break;
-                            case 0:
+                            case 10:
                                 break;
                         }
                     }
@@ -393,12 +393,12 @@ namespace ParametersApp
             if (!(_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _23Curve.IsVisible 
                   && _24Curve.IsVisible && _33Curve.IsVisible && _34Curve.IsVisible && _44Curve.IsVisible))
             {
-                SParamListBox.SetItemCheckState(0, CheckState.Unchecked);
+                SParamListBox.SetItemCheckState(10, CheckState.Unchecked);
             }
             if (_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _23Curve.IsVisible
                 && _24Curve.IsVisible && _33Curve.IsVisible && _34Curve.IsVisible && _44Curve.IsVisible)
             {
-                SParamListBox.SetItemCheckState(0, CheckState.Checked);
+                SParamListBox.SetItemCheckState(10, CheckState.Checked);
             }
             GraphControl.AxisChange();
             GraphControl.Invalidate();
@@ -424,6 +424,14 @@ namespace ParametersApp
             ZInOutFlowLayoutPanel.Enabled = ss.Checked;
             Z01Z02FlowLayoutPanel.Enabled = !ss.Checked;
             DrawButton.Enabled = TextBoxValidator();
+            if (ss.Checked)
+            {
+                ShematicPictureBox.Image = Properties.Resources.String_low_MidlZInOut;
+            }
+            else
+            {
+                ShematicPictureBox.Image = Properties.Resources.String_low_MidlZ02Z01;
+            }
         }
 
         private bool TextBoxValidator()
