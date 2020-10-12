@@ -87,6 +87,7 @@
             this.GraphNameLabel = new System.Windows.Forms.Label();
             this.SaveS4pButton = new System.Windows.Forms.Button();
             this.ShematicPictureBox = new System.Windows.Forms.PictureBox();
+            this.SelectDeSelectButton = new System.Windows.Forms.Button();
             this.ZInOutFlowLayoutPanel.SuspendLayout();
             this.InputFlowLayoutPanel1.SuspendLayout();
             this.Z1pToEEEFlowLayoutPanel.SuspendLayout();
@@ -116,13 +117,14 @@
             this.GraphControl.Size = new System.Drawing.Size(562, 304);
             this.GraphControl.TabIndex = 0;
             this.GraphControl.UseExtendedPrintDialog = true;
+            this.GraphControl.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.zedGraph_ContextMenuBuilder);
+            this.GraphControl.ZoomEvent += new ZedGraph.ZedGraphControl.ZoomEventHandler(this.zedGraph_ZoomEvent);
             // 
             // FreqMinLabel
             // 
-            this.FreqMinLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.FreqMinLabel.AutoSize = true;
             this.FreqMinLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.FreqMinLabel.Location = new System.Drawing.Point(2, 13);
+            this.FreqMinLabel.Location = new System.Drawing.Point(2, 5);
             this.FreqMinLabel.Margin = new System.Windows.Forms.Padding(2);
             this.FreqMinLabel.Name = "FreqMinLabel";
             this.FreqMinLabel.Size = new System.Drawing.Size(81, 16);
@@ -131,10 +133,9 @@
             // 
             // DotDotLabel
             // 
-            this.DotDotLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DotDotLabel.AutoSize = true;
             this.DotDotLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DotDotLabel.Location = new System.Drawing.Point(138, 6);
+            this.DotDotLabel.Location = new System.Drawing.Point(138, 3);
             this.DotDotLabel.Margin = new System.Windows.Forms.Padding(0);
             this.DotDotLabel.Name = "DotDotLabel";
             this.DotDotLabel.Size = new System.Drawing.Size(24, 25);
@@ -143,8 +144,8 @@
             // 
             // FreqMinTextBox
             // 
-            this.FreqMinTextBox.Location = new System.Drawing.Point(89, 7);
-            this.FreqMinTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.FreqMinTextBox.Location = new System.Drawing.Point(89, 3);
+            this.FreqMinTextBox.Margin = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.FreqMinTextBox.Name = "FreqMinTextBox";
             this.FreqMinTextBox.Size = new System.Drawing.Size(45, 20);
             this.FreqMinTextBox.TabIndex = 13;
@@ -152,8 +153,8 @@
             // 
             // FreqMaxTextBox
             // 
-            this.FreqMaxTextBox.Location = new System.Drawing.Point(166, 7);
-            this.FreqMaxTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.FreqMaxTextBox.Location = new System.Drawing.Point(166, 3);
+            this.FreqMaxTextBox.Margin = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.FreqMaxTextBox.Name = "FreqMaxTextBox";
             this.FreqMaxTextBox.Size = new System.Drawing.Size(45, 20);
             this.FreqMaxTextBox.TabIndex = 14;
@@ -161,10 +162,9 @@
             // 
             // LengthLabel
             // 
-            this.LengthLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.LengthLabel.AutoSize = true;
             this.LengthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.LengthLabel.Location = new System.Drawing.Point(217, 13);
+            this.LengthLabel.Location = new System.Drawing.Point(217, 5);
             this.LengthLabel.Margin = new System.Windows.Forms.Padding(2);
             this.LengthLabel.Name = "LengthLabel";
             this.LengthLabel.Size = new System.Drawing.Size(82, 16);
@@ -173,8 +173,8 @@
             // 
             // NfTextBox
             // 
-            this.NfTextBox.Location = new System.Drawing.Point(382, 6);
-            this.NfTextBox.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.NfTextBox.Location = new System.Drawing.Point(382, 3);
+            this.NfTextBox.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.NfTextBox.Name = "NfTextBox";
             this.NfTextBox.Size = new System.Drawing.Size(45, 20);
             this.NfTextBox.TabIndex = 16;
@@ -369,12 +369,11 @@
             "S24",
             "S33",
             "S34",
-            "S44",
-            "All"});
+            "S44"});
             this.SParamListBox.Location = new System.Drawing.Point(858, 181);
             this.SParamListBox.MultiColumn = true;
             this.SParamListBox.Name = "SParamListBox";
-            this.SParamListBox.Size = new System.Drawing.Size(55, 304);
+            this.SParamListBox.Size = new System.Drawing.Size(55, 160);
             this.SParamListBox.TabIndex = 37;
             this.SParamListBox.SelectedIndexChanged += new System.EventHandler(this.SParamListBox_SelectedIndexChanged);
             // 
@@ -394,7 +393,7 @@
             // PhaseRadioButton
             // 
             this.PhaseRadioButton.AutoSize = true;
-            this.PhaseRadioButton.Location = new System.Drawing.Point(408, 155);
+            this.PhaseRadioButton.Location = new System.Drawing.Point(435, 155);
             this.PhaseRadioButton.Name = "PhaseRadioButton";
             this.PhaseRadioButton.Size = new System.Drawing.Size(82, 17);
             this.PhaseRadioButton.TabIndex = 39;
@@ -404,9 +403,9 @@
             // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(858, 459);
+            this.DrawButton.Location = new System.Drawing.Point(858, 376);
             this.DrawButton.Name = "DrawButton";
-            this.DrawButton.Size = new System.Drawing.Size(46, 23);
+            this.DrawButton.Size = new System.Drawing.Size(62, 23);
             this.DrawButton.TabIndex = 40;
             this.DrawButton.Text = "Draw";
             this.DrawButton.UseVisualStyleBackColor = true;
@@ -425,15 +424,14 @@
             this.ZInOutFlowLayoutPanel.Controls.Add(this.Z2outTextBox);
             this.ZInOutFlowLayoutPanel.Location = new System.Drawing.Point(13, 352);
             this.ZInOutFlowLayoutPanel.Name = "ZInOutFlowLayoutPanel";
-            this.ZInOutFlowLayoutPanel.Size = new System.Drawing.Size(270, 63);
+            this.ZInOutFlowLayoutPanel.Size = new System.Drawing.Size(260, 63);
             this.ZInOutFlowLayoutPanel.TabIndex = 42;
             // 
             // NfLabel
             // 
-            this.NfLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.NfLabel.AutoSize = true;
             this.NfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.NfLabel.Location = new System.Drawing.Point(354, 13);
+            this.NfLabel.Location = new System.Drawing.Point(354, 5);
             this.NfLabel.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.NfLabel.Name = "NfLabel";
             this.NfLabel.Size = new System.Drawing.Size(28, 16);
@@ -442,11 +440,12 @@
             // 
             // LengthTextBox
             // 
-            this.LengthTextBox.Location = new System.Drawing.Point(304, 6);
+            this.LengthTextBox.Location = new System.Drawing.Point(304, 3);
+            this.LengthTextBox.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.LengthTextBox.Name = "LengthTextBox";
             this.LengthTextBox.Size = new System.Drawing.Size(45, 20);
             this.LengthTextBox.TabIndex = 44;
-            this.LengthTextBox.TextChanged += new System.EventHandler(this.textBox_TextChangedForInt);
+            this.LengthTextBox.TextChanged += new System.EventHandler(this.textBox_TextChangedForDouble);
             // 
             // InputFlowLayoutPanel1
             // 
@@ -532,7 +531,7 @@
             this.Z1pToEEEFlowLayoutPanel.Controls.Add(this.Z1pToEEEColumn2FlowLayoutPanel);
             this.Z1pToEEEFlowLayoutPanel.Location = new System.Drawing.Point(633, 12);
             this.Z1pToEEEFlowLayoutPanel.Name = "Z1pToEEEFlowLayoutPanel";
-            this.Z1pToEEEFlowLayoutPanel.Size = new System.Drawing.Size(280, 82);
+            this.Z1pToEEEFlowLayoutPanel.Size = new System.Drawing.Size(287, 82);
             this.Z1pToEEEFlowLayoutPanel.TabIndex = 51;
             // 
             // Z1pToEEEColumn1FlowLayoutPanel
@@ -649,9 +648,10 @@
             this.LineToLineRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.LineToLineRadioButton.Location = new System.Drawing.Point(1, 41);
             this.LineToLineRadioButton.Name = "LineToLineRadioButton";
-            this.LineToLineRadioButton.Size = new System.Drawing.Size(149, 20);
+            this.LineToLineRadioButton.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.LineToLineRadioButton.Size = new System.Drawing.Size(187, 20);
             this.LineToLineRadioButton.TabIndex = 1;
-            this.LineToLineRadioButton.Text = "Line-to-line transform";
+            this.LineToLineRadioButton.Text = "Line-to-line transformation";
             this.LineToLineRadioButton.UseVisualStyleBackColor = true;
             // 
             // GeneralRadioButton
@@ -660,7 +660,8 @@
             this.GeneralRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.GeneralRadioButton.Location = new System.Drawing.Point(1, 18);
             this.GeneralRadioButton.Name = "GeneralRadioButton";
-            this.GeneralRadioButton.Size = new System.Drawing.Size(142, 20);
+            this.GeneralRadioButton.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.GeneralRadioButton.Size = new System.Drawing.Size(151, 20);
             this.GeneralRadioButton.TabIndex = 0;
             this.GeneralRadioButton.Text = "General termination";
             this.GeneralRadioButton.UseVisualStyleBackColor = true;
@@ -736,7 +737,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GraphNameLabel.AutoSize = true;
             this.GraphNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.GraphNameLabel.Location = new System.Drawing.Point(516, 156);
+            this.GraphNameLabel.Location = new System.Drawing.Point(545, 156);
             this.GraphNameLabel.Name = "GraphNameLabel";
             this.GraphNameLabel.Size = new System.Drawing.Size(96, 16);
             this.GraphNameLabel.TabIndex = 57;
@@ -746,7 +747,7 @@
             // 
             this.SaveS4pButton.Location = new System.Drawing.Point(801, 97);
             this.SaveS4pButton.Name = "SaveS4pButton";
-            this.SaveS4pButton.Size = new System.Drawing.Size(112, 23);
+            this.SaveS4pButton.Size = new System.Drawing.Size(119, 23);
             this.SaveS4pButton.TabIndex = 58;
             this.SaveS4pButton.Text = "Save to .s4p";
             this.SaveS4pButton.UseVisualStyleBackColor = true;
@@ -762,12 +763,24 @@
             this.ShematicPictureBox.TabIndex = 55;
             this.ShematicPictureBox.TabStop = false;
             // 
+            // SelectDeSelectButton
+            // 
+            this.SelectDeSelectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.SelectDeSelectButton.Location = new System.Drawing.Point(858, 347);
+            this.SelectDeSelectButton.Name = "SelectDeSelectButton";
+            this.SelectDeSelectButton.Size = new System.Drawing.Size(62, 23);
+            this.SelectDeSelectButton.TabIndex = 59;
+            this.SelectDeSelectButton.Text = "Deselect";
+            this.SelectDeSelectButton.UseVisualStyleBackColor = true;
+            this.SelectDeSelectButton.Click += new System.EventHandler(this.SelectDeSelectButton_Click);
+            // 
             // FormForGraph
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(920, 496);
+            this.ClientSize = new System.Drawing.Size(925, 496);
+            this.Controls.Add(this.SelectDeSelectButton);
             this.Controls.Add(this.InputFlowLayoutPanel1);
             this.Controls.Add(this.SaveS4pButton);
             this.Controls.Add(this.GraphNameLabel);
@@ -784,7 +797,7 @@
             this.Controls.Add(this.SParamListBox);
             this.Controls.Add(this.GraphControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(936, 535);
+            this.MaximumSize = new System.Drawing.Size(941, 535);
             this.MinimumSize = new System.Drawing.Size(882, 462);
             this.Name = "FormForGraph";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -876,5 +889,6 @@
         private System.Windows.Forms.FlowLayoutPanel Z1pToEEEColumn2FlowLayoutPanel;
         private System.Windows.Forms.Label GraphNameLabel;
         private System.Windows.Forms.Button SaveS4pButton;
+        private System.Windows.Forms.Button SelectDeSelectButton;
     }
 }

@@ -33,6 +33,8 @@ namespace ParametersApp
         private double _z1in;
         private double _xMin;
         private double _xMax;
+        private double _yMin;
+        private double _yMax;
         private int _nf;
         private double _fmin;
         private double _l;
@@ -52,11 +54,48 @@ namespace ParametersApp
             _graphPane = GraphControl.GraphPane;
             SetTextToTextBoxes();
             SetTextToLabels();
-            FormatAxis();
-            
             GeneralRadioButton.Checked = true;
+            AllCurvesCheckState(CheckState.Checked);
         }
 
+        void zedGraph_ContextMenuBuilder(ZedGraphControl sender,
+            ContextMenuStrip menuStrip,
+            Point mousePt,
+            ZedGraphControl.ContextMenuObjectState objState)
+        {
+            menuStrip.Items[6].Enabled = false;
+        }
+
+        void zedGraph_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)
+        {
+            GraphPane pane = sender.GraphPane;
+
+            // Для простоты примера будем ограничивать масштабирование
+            // только в сторону уменьшения размера графика
+
+            // Проверим интервал для каждой оси и
+            // при необходимости скорректируем его
+
+            if (pane.XAxis.Scale.Min <= Math.Round(_xMin))
+            {
+                pane.XAxis.Scale.Min = Math.Round(_xMin);
+            }
+
+            if (pane.XAxis.Scale.Max >= Math.Round(_xMax))
+            {
+                pane.XAxis.Scale.Max = Math.Round(_xMax);
+            }
+
+            if (pane.YAxis.Scale.Min <= Math.Round(_yMin))
+            {
+                pane.YAxis.Scale.Min = Math.Round(_yMin);
+            }
+
+            if (pane.YAxis.Scale.Max >= Math.Round(_yMax))
+            {
+                pane.YAxis.Scale.Max = Math.Round(_yMax);
+            }
+        }
 
         private void SetLineWidth(LineItem curve)
         {
@@ -65,7 +104,6 @@ namespace ParametersApp
 
         private void SetTextToListBox(string sOrF)
         {
-            SParamListBox.Items[10] = "All";
             SParamListBox.Items[0] = sOrF + "11";
             SParamListBox.Items[1] = sOrF + "12";
             SParamListBox.Items[2] = sOrF + "13";
@@ -77,8 +115,13 @@ namespace ParametersApp
             SParamListBox.Items[8] = sOrF + "34";
             SParamListBox.Items[9] = sOrF + "44";
         }
-
-        private void FormatAxis()
+        /// <summary>
+        /// Форматирует график
+        /// </summary>
+        /// <param name="phase">
+        /// true = формат для фазы, false = формат для амплитуды
+        /// </param>
+        private void FormatAxis(bool forPhase)
         {
             _graphPane.XAxis.MajorGrid.IsVisible = true;
             _graphPane.XAxis.MajorGrid.DashOff = 0;
@@ -87,36 +130,54 @@ namespace ParametersApp
             _graphPane.YAxis.MajorGrid.DashOff = 0;
             _graphPane.YAxis.MajorGrid.Color = Color.Green;
             _graphPane.Title.IsVisible = false;
+            
             var yTitle = _graphPane.YAxis.Title;
-            yTitle.Text = "Magnitude (dB)";
             var xTitle = _graphPane.XAxis.Title;
             xTitle.Text = "Frequency (GHz)";
 
             _graphPane.XAxis.Scale.IsSkipLastLabel = false;
-            _graphPane.XAxis.Scale.MajorStep = 5;
             _graphPane.YAxis.Scale.IsSkipLastLabel = false;
-            _graphPane.YAxis.Scale.MajorStep = 30;
+            
+            if (forPhase)
+            {
+                yTitle.Text = "Phase (deg)";
+                _graphPane.XAxis.MinorGrid.PenWidth = 0.5f;
+                _graphPane.XAxis.MinorGrid.IsVisible = false;
+                _graphPane.YAxis.MinorGrid.PenWidth = 0.5f;
+                _graphPane.YAxis.MinorGrid.IsVisible = false;
+            }
+            else
+            {
+                yTitle.Text = "Magnitude (dB)";
+                _graphPane.XAxis.MinorGrid.PenWidth = 0.5f;
+                _graphPane.XAxis.MinorGrid.IsVisible = true;
+                _graphPane.YAxis.MinorGrid.PenWidth = 0.5f;
+                _graphPane.YAxis.MinorGrid.IsVisible = true;
+            }
+            _graphPane.ZoomStack.Push(_graphPane, ZoomState.StateType.Zoom);
+            _graphPane.XAxis.ResetAutoScale(_graphPane, CreateGraphics());
         }
 
         private void SetMaxMinAxes(double xMin, double xMax, double[][] sParamMagnitudeOrPhase)
         {
-            _graphPane.XAxis.Scale.Max = xMax;
-            _graphPane.XAxis.Scale.Min = xMin;
-            double yMax = sParamMagnitudeOrPhase[0].Max();
-            double yMin = sParamMagnitudeOrPhase[0].Min();
+            _graphPane.XAxis.Scale.Max = Math.Round(xMax);
+            _graphPane.XAxis.Scale.Min = Math.Round(xMin);
+            _yMax = sParamMagnitudeOrPhase[0].Max();
+            _yMin = sParamMagnitudeOrPhase[0].Min();
             for (int i = 1; i < sParamMagnitudeOrPhase.GetLength(0); i++)
             {
-                if (sParamMagnitudeOrPhase[i].Max() > yMax)
+                if (sParamMagnitudeOrPhase[i].Max() > _yMax)
                 {
-                    yMax = sParamMagnitudeOrPhase[i].Max();
+                    _yMax = sParamMagnitudeOrPhase[i].Max();
                 }
-                if (sParamMagnitudeOrPhase[i].Min() < yMin)
+                if (sParamMagnitudeOrPhase[i].Min() < _yMin)
                 {
-                    yMin = sParamMagnitudeOrPhase[i].Min();
+                    _yMin = sParamMagnitudeOrPhase[i].Min();
                 }
             }
-            _graphPane.YAxis.Scale.Max = Math.Round(yMax);
-            _graphPane.YAxis.Scale.Min = Math.Round(yMin);
+            _graphPane.YAxis.Scale.Max = Math.Round(_yMax);
+            _graphPane.YAxis.Scale.Min = Math.Round(_yMin);
+            _graphPane.ZoomStack.Clear();
         }
 
         private void SetTextToTextBoxes()
@@ -190,6 +251,8 @@ namespace ParametersApp
             _44Curve.Line.IsSmooth = true;
             SetLineWidth(_44Curve);
 
+            SParamListBox_SelectedIndexChanged(new object(), new EventArgs());
+
             GraphControl.AxisChange();
             GraphControl.Invalidate();
         }
@@ -233,43 +296,43 @@ namespace ParametersApp
             if (MagnitudeRadioButton.Checked)
             {
                 _graphPane.CurveList.Clear();
-                SetMaxMinAxes(_xMin, _xMax, _sParamMagnitudes);
+                FormatAxis(false);
+                SetMaxMinAxes(_xMin, _xMax, _sParamMagnitudes); 
                 DrawCurves("S", _sParamMagnitudes);
             }
             else if (PhaseRadioButton.Checked)
             {
                 _graphPane.CurveList.Clear();
-                SetMaxMinAxes(_xMin, _xMax, _sParamPhases);
+                FormatAxis(true);
+                SetMaxMinAxes(_xMin, _xMax, _sParamPhases); 
                 DrawCurves("Φ", _sParamPhases);
             }
         }
 
         private void DrawButton_Click(object sender, EventArgs e)
         {
-            double.TryParse(LengthTextBox.Text, out _l);
-            double.TryParse(FreqMinTextBox.Text, out _fmin);
-            double.TryParse(FreqMaxTextBox.Text, out _fmax);
+            double.TryParse(LengthTextBox.Text.Replace(".", ","), out _l);
+            double.TryParse(FreqMinTextBox.Text.Replace(".", ","), out _fmin);
+            double.TryParse(FreqMaxTextBox.Text.Replace(".", ","), out _fmax);
             int.TryParse(NfTextBox.Text, out _nf);
             if (GeneralRadioButton.Checked)
             {
-                double.TryParse(Z1inTextBox.Text, out _z1in);
-                double.TryParse(Z2inTextBox.Text, out _z2in);
-                double.TryParse(Z1outTextBox.Text, out _z1out);
-                double.TryParse(Z2outTextBox.Text, out _z2out);
+                double.TryParse(Z1inTextBox.Text.Replace(".", ","), out _z1in);
+                double.TryParse(Z2inTextBox.Text.Replace(".", ","), out _z2in);
+                double.TryParse(Z1outTextBox.Text.Replace(".", ","), out _z1out);
+                double.TryParse(Z2outTextBox.Text.Replace(".", ","), out _z2out);
             }
             else if (LineToLineRadioButton.Checked)
             {
-                double.TryParse(Z01TextBox.Text, out _z1in);
-                double.TryParse(Z02TextBox.Text, out _z2in);
-                double.TryParse(Z01TextBox.Text, out _z1out);
-                double.TryParse(Z02TextBox.Text, out _z2out);
+                double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1in);
+                double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2in);
+                double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1out);
+                double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2out);
             }
 
             CalculateSParamData();
-            AllCurvesCheckState(CheckState.Checked);
-            SParamListBox.SetItemCheckState(10, CheckState.Checked);
-            double.TryParse(FreqMinTextBox.Text, out _xMin);
-            double.TryParse(FreqMaxTextBox.Text, out _xMax);
+            double.TryParse(FreqMinTextBox.Text.Replace(".", ","), out _xMin);
+            double.TryParse(FreqMaxTextBox.Text.Replace(".", ","), out _xMax);
             ChangeGraph();
         }
 
@@ -319,86 +382,80 @@ namespace ParametersApp
             }
             catch (NullReferenceException)
             {
-                DrawButton.PerformClick();
-            }
-            
-            if (SParamListBox.SelectedIndex == 10)
-            {
-                if (SParamListBox.GetItemCheckState(10) == CheckState.Checked)
+                if (DrawButton.Enabled)
                 {
-                    AllCurvesCheckState(CheckState.Checked);
-                    AllCurvesToggleVisible(true);
+                    DrawButton.PerformClick();
                 }
                 else
                 {
-                    AllCurvesCheckState(CheckState.Unchecked);
-                    AllCurvesToggleVisible(false);
+                    MessageBox.Show(
+                        "Необходимо ввести все значения и затем нажать кнопку draw",
+                        "Предупреждение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.DefaultDesktopOnly);
+                    this.Activate();
                 }
             }
-            else
+
+            for (int i = 0; i < SParamListBox.Items.Count; i++)
             {
-                for (int i = 0; i < SParamListBox.Items.Count; i++)
+                if (SParamListBox.CheckedIndices.Contains(i))
                 {
-                    if (SParamListBox.CheckedIndices.Contains(i))
+                    switch (i)
                     {
-                        switch (i)
-                        {
-                            case 0:
-                                _11Curve.IsVisible = true;
-                                _11Curve.Label.IsVisible = true;
-                                break;
-                            case 1:
-                                _12Curve.IsVisible = true;
-                                _12Curve.Label.IsVisible = true;
-                                break;
-                            case 2:
-                                _13Curve.IsVisible = true;
-                                _13Curve.Label.IsVisible = true;
-                                break;
-                            case 3:
-                                _14Curve.IsVisible = true;
-                                _14Curve.Label.IsVisible = true;
-                                break;
-                            case 4:
-                                _22Curve.IsVisible = true;
-                                _22Curve.Label.IsVisible = true;
-                                break;
-                            case 5:
-                                _23Curve.IsVisible = true;
-                                _23Curve.Label.IsVisible = true;
-                                break;
-                            case 6:
-                                _24Curve.IsVisible = true;
-                                _24Curve.Label.IsVisible = true;
-                                break;
-                            case 7:
-                                _33Curve.IsVisible = true;
-                                _33Curve.Label.IsVisible = true;
-                                break;
-                            case 8:
-                                _34Curve.IsVisible = true;
-                                _34Curve.Label.IsVisible = true;
-                                break;
-                            case 9:
-                                _44Curve.IsVisible = true;
-                                _44Curve.Label.IsVisible = true;
-                                break;
-                            case 10:
-                                break;
-                        }
+                        case 0:
+                            _11Curve.IsVisible = true;
+                            _11Curve.Label.IsVisible = true;
+                            break;
+                        case 1:
+                            _12Curve.IsVisible = true;
+                            _12Curve.Label.IsVisible = true;
+                            break;
+                        case 2:
+                            _13Curve.IsVisible = true;
+                            _13Curve.Label.IsVisible = true;
+                            break;
+                        case 3:
+                            _14Curve.IsVisible = true;
+                            _14Curve.Label.IsVisible = true;
+                            break;
+                        case 4:
+                            _22Curve.IsVisible = true;
+                            _22Curve.Label.IsVisible = true;
+                            break;
+                        case 5:
+                            _23Curve.IsVisible = true;
+                            _23Curve.Label.IsVisible = true;
+                            break;
+                        case 6:
+                            _24Curve.IsVisible = true;
+                            _24Curve.Label.IsVisible = true;
+                            break;
+                        case 7:
+                            _33Curve.IsVisible = true;
+                            _33Curve.Label.IsVisible = true;
+                            break;
+                        case 8:
+                            _34Curve.IsVisible = true;
+                            _34Curve.Label.IsVisible = true;
+                            break;
+                        case 9:
+                            _44Curve.IsVisible = true;
+                            _44Curve.Label.IsVisible = true;
+                            break;
                     }
                 }
             }
 
-            if (!(_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _23Curve.IsVisible 
-                  && _24Curve.IsVisible && _33Curve.IsVisible && _34Curve.IsVisible && _44Curve.IsVisible))
+            if (0 == SParamListBox.CheckedIndices.Count)
             {
-                SParamListBox.SetItemCheckState(10, CheckState.Unchecked);
+                SelectDeSelectButton.Text = "Select";
             }
-            if (_11Curve.IsVisible && _12Curve.IsVisible && _13Curve.IsVisible && _14Curve.IsVisible && _22Curve.IsVisible && _23Curve.IsVisible
-                && _24Curve.IsVisible && _33Curve.IsVisible && _34Curve.IsVisible && _44Curve.IsVisible)
+            else
             {
-                SParamListBox.SetItemCheckState(10, CheckState.Checked);
+                SelectDeSelectButton.Text = "Deselect";
             }
             GraphControl.AxisChange();
             GraphControl.Invalidate();
@@ -438,13 +495,14 @@ namespace ParametersApp
         {
             Regex noDigit = new Regex(@"^[-]*[0-9]*(?:[.,][0-9]+)?\r?$");
             Regex noDigit1 = new Regex(@"^[-]*[0-9]+[eE]*[-]*[0-9]+\r?$");
-            double.TryParse(FreqMinTextBox.Text, out var freqMin);
-            double.TryParse(FreqMaxTextBox.Text, out var freqMax);
+            double.TryParse(FreqMinTextBox.Text.Replace(".", ","), out var freqMin);
+            double.TryParse(FreqMaxTextBox.Text.Replace(".", ","), out var freqMax);
+            double.TryParse(LengthTextBox.Text.Replace(".", ","), out var l);
             bool text7 = (noDigit.IsMatch(FreqMinTextBox.Text) || noDigit1.IsMatch(FreqMinTextBox.Text)) &
                          freqMin >= 0;
             bool text8 = (noDigit.IsMatch(FreqMaxTextBox.Text) || noDigit1.IsMatch(FreqMaxTextBox.Text)) &
                          freqMax > 0;
-            bool text9 = int.TryParse(LengthTextBox.Text, out var l) & l > 0;
+            bool text9 = (noDigit.IsMatch(LengthTextBox.Text) || noDigit1.IsMatch(LengthTextBox.Text)) & l > 0;
             bool text10 = int.TryParse(NfTextBox.Text, out var nf) & nf > 0;
             bool text11 = freqMax > freqMin;
 
@@ -551,8 +609,8 @@ namespace ParametersApp
                 {
                     file.WriteLine("# GHz S DB R 50");
                     file.WriteLine("! ParamApp");
-                    file.WriteLine("! " + DateTime.Now.ToString());
-                    file.WriteLine("! Data: Calculations");
+                    file.WriteLine("! Calculation date:" + DateTime.Now.ToString());
+                    file.WriteLine("! ");
                     for (int i = 0; i < _fi.Length; i++)
                     {
                         file.WriteLine(sssss(_fi[i], data[0][0][i], data[1][0][i], data[0][1][i], data[1][1][i], data[0][2][i],
@@ -566,6 +624,21 @@ namespace ParametersApp
                     }
                 }
             }
+        }
+
+        private void SelectDeSelectButton_Click(object sender, EventArgs e)
+        {
+            if (SelectDeSelectButton.Text == "Select")
+            {
+                AllCurvesCheckState(CheckState.Checked);
+                SelectDeSelectButton.Text = "Deselect";
+            }
+            else
+            {
+                AllCurvesCheckState(CheckState.Unchecked);
+                SelectDeSelectButton.Text = "Select";
+            }
+            SParamListBox_SelectedIndexChanged(sender, e);
         }
     }
 }
