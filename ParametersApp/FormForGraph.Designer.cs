@@ -88,6 +88,7 @@
             this.SaveS4pButton = new System.Windows.Forms.Button();
             this.ShematicPictureBox = new System.Windows.Forms.PictureBox();
             this.SelectDeSelectButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.ZInOutFlowLayoutPanel.SuspendLayout();
             this.InputFlowLayoutPanel1.SuspendLayout();
             this.Z1pToEEEFlowLayoutPanel.SuspendLayout();
@@ -100,10 +101,12 @@
             this.ShematicGroupBox.SuspendLayout();
             this.Z01Z02FlowLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShematicPictureBox)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // GraphControl
             // 
+            this.GraphControl.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GraphControl.Location = new System.Drawing.Point(289, 181);
             this.GraphControl.Margin = new System.Windows.Forms.Padding(4);
             this.GraphControl.Name = "GraphControl";
@@ -182,8 +185,8 @@
             // 
             // ErpLabel
             // 
-            this.ErpLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ErpLabel.AutoSize = true;
+            this.ErpLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ErpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.ErpLabel.Location = new System.Drawing.Point(0, 25);
             this.ErpLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -194,8 +197,8 @@
             // 
             // KLabel
             // 
-            this.KLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.KLabel.AutoSize = true;
+            this.KLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.KLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.KLabel.Location = new System.Drawing.Point(0, 5);
             this.KLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -206,8 +209,8 @@
             // 
             // RpLabel
             // 
-            this.RpLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RpLabel.AutoSize = true;
+            this.RpLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.RpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.RpLabel.Location = new System.Drawing.Point(0, 45);
             this.RpLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -218,8 +221,8 @@
             // 
             // RzLabel
             // 
-            this.RzLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RzLabel.AutoSize = true;
+            this.RzLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.RzLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.RzLabel.Location = new System.Drawing.Point(0, 45);
             this.RzLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -230,8 +233,8 @@
             // 
             // Z1Label
             // 
-            this.Z1Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Z1Label.AutoSize = true;
+            this.Z1Label.Dock = System.Windows.Forms.DockStyle.Left;
             this.Z1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.Z1Label.Location = new System.Drawing.Point(0, 25);
             this.Z1Label.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -242,8 +245,8 @@
             // 
             // ErcLabel
             // 
-            this.ErcLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ErcLabel.AutoSize = true;
+            this.ErcLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ErcLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.ErcLabel.Location = new System.Drawing.Point(0, 5);
             this.ErcLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -254,8 +257,8 @@
             // 
             // RcLabel
             // 
-            this.RcLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RcLabel.AutoSize = true;
+            this.RcLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.RcLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.RcLabel.Location = new System.Drawing.Point(0, 25);
             this.RcLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -266,8 +269,8 @@
             // 
             // Z2Label
             // 
-            this.Z2Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Z2Label.AutoSize = true;
+            this.Z2Label.Dock = System.Windows.Forms.DockStyle.Left;
             this.Z2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.Z2Label.Location = new System.Drawing.Point(0, 45);
             this.Z2Label.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -370,10 +373,10 @@
             "S33",
             "S34",
             "S44"});
-            this.SParamListBox.Location = new System.Drawing.Point(858, 181);
+            this.SParamListBox.Location = new System.Drawing.Point(3, 6);
             this.SParamListBox.MultiColumn = true;
             this.SParamListBox.Name = "SParamListBox";
-            this.SParamListBox.Size = new System.Drawing.Size(55, 160);
+            this.SParamListBox.Size = new System.Drawing.Size(55, 208);
             this.SParamListBox.TabIndex = 37;
             this.SParamListBox.SelectedIndexChanged += new System.EventHandler(this.SParamListBox_SelectedIndexChanged);
             // 
@@ -403,7 +406,8 @@
             // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(858, 376);
+            this.DrawButton.Location = new System.Drawing.Point(0, 249);
+            this.DrawButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.DrawButton.Name = "DrawButton";
             this.DrawButton.Size = new System.Drawing.Size(62, 23);
             this.DrawButton.TabIndex = 40;
@@ -466,8 +470,8 @@
             // 
             // EEELabel
             // 
-            this.EEELabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.EEELabel.AutoSize = true;
+            this.EEELabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.EEELabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.EEELabel.Location = new System.Drawing.Point(0, 45);
             this.EEELabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -478,8 +482,8 @@
             // 
             // Z0Label
             // 
-            this.Z0Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Z0Label.AutoSize = true;
+            this.Z0Label.Dock = System.Windows.Forms.DockStyle.Left;
             this.Z0Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.Z0Label.Location = new System.Drawing.Point(0, 5);
             this.Z0Label.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -490,8 +494,8 @@
             // 
             // Z2cLabel
             // 
-            this.Z2cLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Z2cLabel.AutoSize = true;
+            this.Z2cLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.Z2cLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.Z2cLabel.Location = new System.Drawing.Point(0, 25);
             this.Z2cLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -502,8 +506,8 @@
             // 
             // Z1pLabel
             // 
-            this.Z1pLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Z1pLabel.AutoSize = true;
+            this.Z1pLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.Z1pLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.Z1pLabel.Location = new System.Drawing.Point(0, 5);
             this.Z1pLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -514,8 +518,8 @@
             // 
             // MLabel
             // 
-            this.MLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.MLabel.AutoSize = true;
+            this.MLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.MLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.MLabel.Location = new System.Drawing.Point(0, 45);
             this.MLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -539,6 +543,7 @@
             this.Z1pToEEEColumn1FlowLayoutPanel.Controls.Add(this.Z1pLabel);
             this.Z1pToEEEColumn1FlowLayoutPanel.Controls.Add(this.Z2cLabel);
             this.Z1pToEEEColumn1FlowLayoutPanel.Controls.Add(this.MLabel);
+            this.Z1pToEEEColumn1FlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Z1pToEEEColumn1FlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.Z1pToEEEColumn1FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z1pToEEEColumn1FlowLayoutPanel.Name = "Z1pToEEEColumn1FlowLayoutPanel";
@@ -551,11 +556,12 @@
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.ErcLabel);
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.ErpLabel);
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.EEELabel);
+            this.Z1pToEEEColumn2FlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Z1pToEEEColumn2FlowLayoutPanel.Location = new System.Drawing.Point(160, 0);
             this.Z1pToEEEColumn2FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z1pToEEEColumn2FlowLayoutPanel.Name = "Z1pToEEEColumn2FlowLayoutPanel";
             this.Z1pToEEEColumn2FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.Z1pToEEEColumn2FlowLayoutPanel.Size = new System.Drawing.Size(116, 80);
+            this.Z1pToEEEColumn2FlowLayoutPanel.Size = new System.Drawing.Size(121, 80);
             this.Z1pToEEEColumn2FlowLayoutPanel.TabIndex = 58;
             // 
             // Z0ToRpFlowLayoutPanel
@@ -574,6 +580,7 @@
             this.Z0ToRpColumn1FlowLayoutPanel.Controls.Add(this.Z0Label);
             this.Z0ToRpColumn1FlowLayoutPanel.Controls.Add(this.Z1Label);
             this.Z0ToRpColumn1FlowLayoutPanel.Controls.Add(this.Z2Label);
+            this.Z0ToRpColumn1FlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Z0ToRpColumn1FlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.Z0ToRpColumn1FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z0ToRpColumn1FlowLayoutPanel.Name = "Z0ToRpColumn1FlowLayoutPanel";
@@ -586,6 +593,7 @@
             this.Z0ToRpColumn2FlowLayoutPanel.Controls.Add(this.KLabel);
             this.Z0ToRpColumn2FlowLayoutPanel.Controls.Add(this.NLabel);
             this.Z0ToRpColumn2FlowLayoutPanel.Controls.Add(this.RzLabel);
+            this.Z0ToRpColumn2FlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Z0ToRpColumn2FlowLayoutPanel.Location = new System.Drawing.Point(112, 0);
             this.Z0ToRpColumn2FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z0ToRpColumn2FlowLayoutPanel.Name = "Z0ToRpColumn2FlowLayoutPanel";
@@ -595,8 +603,8 @@
             // 
             // NLabel
             // 
-            this.NLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.NLabel.AutoSize = true;
+            this.NLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.NLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.NLabel.Location = new System.Drawing.Point(0, 25);
             this.NLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -610,6 +618,7 @@
             this.Z0ToRpColumn3FlowLayoutPanel.Controls.Add(this.S21Label);
             this.Z0ToRpColumn3FlowLayoutPanel.Controls.Add(this.RcLabel);
             this.Z0ToRpColumn3FlowLayoutPanel.Controls.Add(this.RpLabel);
+            this.Z0ToRpColumn3FlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.Z0ToRpColumn3FlowLayoutPanel.Location = new System.Drawing.Point(217, 0);
             this.Z0ToRpColumn3FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z0ToRpColumn3FlowLayoutPanel.Name = "Z0ToRpColumn3FlowLayoutPanel";
@@ -619,8 +628,8 @@
             // 
             // S21Label
             // 
-            this.S21Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.S21Label.AutoSize = true;
+            this.S21Label.Dock = System.Windows.Forms.DockStyle.Left;
             this.S21Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.S21Label.Location = new System.Drawing.Point(0, 5);
             this.S21Label.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
@@ -649,9 +658,9 @@
             this.LineToLineRadioButton.Location = new System.Drawing.Point(1, 41);
             this.LineToLineRadioButton.Name = "LineToLineRadioButton";
             this.LineToLineRadioButton.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
-            this.LineToLineRadioButton.Size = new System.Drawing.Size(187, 20);
+            this.LineToLineRadioButton.Size = new System.Drawing.Size(181, 20);
             this.LineToLineRadioButton.TabIndex = 1;
-            this.LineToLineRadioButton.Text = "Line-to-line transformation";
+            this.LineToLineRadioButton.Text = "Line-to-line transformator";
             this.LineToLineRadioButton.UseVisualStyleBackColor = true;
             // 
             // GeneralRadioButton
@@ -766,13 +775,27 @@
             // SelectDeSelectButton
             // 
             this.SelectDeSelectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.SelectDeSelectButton.Location = new System.Drawing.Point(858, 347);
+            this.SelectDeSelectButton.Location = new System.Drawing.Point(0, 220);
+            this.SelectDeSelectButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.SelectDeSelectButton.Name = "SelectDeSelectButton";
             this.SelectDeSelectButton.Size = new System.Drawing.Size(62, 23);
             this.SelectDeSelectButton.TabIndex = 59;
-            this.SelectDeSelectButton.Text = "Deselect";
+            this.SelectDeSelectButton.Text = "Select";
             this.SelectDeSelectButton.UseVisualStyleBackColor = true;
             this.SelectDeSelectButton.Click += new System.EventHandler(this.SelectDeSelectButton_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.SParamListBox);
+            this.flowLayoutPanel1.Controls.Add(this.SelectDeSelectButton);
+            this.flowLayoutPanel1.Controls.Add(this.DrawButton);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(858, 181);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(62, 304);
+            this.flowLayoutPanel1.TabIndex = 60;
             // 
             // FormForGraph
             // 
@@ -780,7 +803,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(925, 496);
-            this.Controls.Add(this.SelectDeSelectButton);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.InputFlowLayoutPanel1);
             this.Controls.Add(this.SaveS4pButton);
             this.Controls.Add(this.GraphNameLabel);
@@ -791,10 +814,8 @@
             this.Controls.Add(this.Z0ToRpFlowLayoutPanel);
             this.Controls.Add(this.Z1pToEEEFlowLayoutPanel);
             this.Controls.Add(this.ZInOutFlowLayoutPanel);
-            this.Controls.Add(this.DrawButton);
             this.Controls.Add(this.PhaseRadioButton);
             this.Controls.Add(this.MagnitudeRadioButton);
-            this.Controls.Add(this.SParamListBox);
             this.Controls.Add(this.GraphControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(941, 535);
@@ -825,6 +846,7 @@
             this.Z01Z02FlowLayoutPanel.ResumeLayout(false);
             this.Z01Z02FlowLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShematicPictureBox)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -890,5 +912,6 @@
         private System.Windows.Forms.Label GraphNameLabel;
         private System.Windows.Forms.Button SaveS4pButton;
         private System.Windows.Forms.Button SelectDeSelectButton;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

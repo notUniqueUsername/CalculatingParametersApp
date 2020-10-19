@@ -212,8 +212,6 @@ namespace ParametersApp
             SetLineWidth(_12Curve);
 
             _13Curve = _graphPane.AddCurve(sOrF + "13", _fi, sParamMagnitudeOrPhase[2], Color.Red, SymbolType.None);
-            //s13curve.Line.Style = DashStyle.Dot;
-            //s13curve.Line.IsSmooth = true;
             SetLineWidth(_13Curve);
 
             _14Curve = _graphPane.AddCurve(sOrF + "14", _fi, sParamMagnitudeOrPhase[3], Color.Black, SymbolType.None);
@@ -224,31 +222,35 @@ namespace ParametersApp
             _22Curve = _graphPane.AddCurve(sOrF + "22", _fi, sParamMagnitudeOrPhase[4], Color.Black, SymbolType.None);
             _22Curve.Line.Style = DashStyle.Dot;
             _22Curve.Line.IsSmooth = true;
+            _22Curve.Symbol.Type = SymbolType.XCross;
             SetLineWidth(_22Curve);
 
             _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Yellow, SymbolType.None);
             _23Curve.Line.Style = DashStyle.DashDot;
             _23Curve.Line.IsSmooth = true;
+            _23Curve.Symbol.Type = SymbolType.Triangle;
             SetLineWidth(_23Curve);
 
             _24Curve = _graphPane.AddCurve(sOrF + "24", _fi, sParamMagnitudeOrPhase[6], Color.Black, SymbolType.None);
-            //s24curve.Line.Style = DashStyle.Dot;
-            //s24curve.Line.IsSmooth = true;
+            _24Curve.Symbol.Type = SymbolType.Circle;
             SetLineWidth(_24Curve);
 
             _33Curve = _graphPane.AddCurve(sOrF + "33", _fi, sParamMagnitudeOrPhase[7], Color.Blue, SymbolType.None);
             _33Curve.Line.Style = DashStyle.Dot;
             _33Curve.Line.IsSmooth = true;
+            _33Curve.Symbol.Type = SymbolType.Plus;
             SetLineWidth(_33Curve);
 
             _34Curve = _graphPane.AddCurve(sOrF + "34", _fi, sParamMagnitudeOrPhase[8], Color.Green, SymbolType.None);
             _34Curve.Line.Style = DashStyle.Dash;
             _34Curve.Line.IsSmooth = true;
+            _34Curve.Symbol.Type = SymbolType.Square;
             SetLineWidth(_34Curve);
 
             _44Curve = _graphPane.AddCurve(sOrF + "44", _fi, sParamMagnitudeOrPhase[9], Color.Green, SymbolType.None);
             _44Curve.Line.Style = DashStyle.Dot;
             _44Curve.Line.IsSmooth = true;
+            _44Curve.Symbol.Type = SymbolType.Star;
             SetLineWidth(_44Curve);
 
             SParamListBox_SelectedIndexChanged(new object(), new EventArgs());
@@ -449,14 +451,6 @@ namespace ParametersApp
                 }
             }
 
-            if (0 == SParamListBox.CheckedIndices.Count)
-            {
-                SelectDeSelectButton.Text = "Select";
-            }
-            else
-            {
-                SelectDeSelectButton.Text = "Deselect";
-            }
             GraphControl.AxisChange();
             GraphControl.Invalidate();
         }
@@ -628,15 +622,13 @@ namespace ParametersApp
 
         private void SelectDeSelectButton_Click(object sender, EventArgs e)
         {
-            if (SelectDeSelectButton.Text == "Select")
+            if (SParamListBox.CheckedItems.Count == 0)
             {
                 AllCurvesCheckState(CheckState.Checked);
-                SelectDeSelectButton.Text = "Deselect";
             }
             else
             {
                 AllCurvesCheckState(CheckState.Unchecked);
-                SelectDeSelectButton.Text = "Select";
             }
             SParamListBox_SelectedIndexChanged(sender, e);
         }

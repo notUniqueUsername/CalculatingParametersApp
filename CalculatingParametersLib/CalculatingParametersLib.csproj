@@ -52,6 +52,7 @@
     <Compile Include="CalculateFromZC1ZC2ZP1ZP2.cs" />
     <Compile Include="CalculateFromPogonie.cs" />
     <Compile Include="CouplLinesInFreqRange.cs" />
+    <Compile Include="ParamFileSaveLoader.cs" />
     <Compile Include="SetOfParametersEnum.cs" />
     <Compile Include="ParametersCalculator.cs" />
     <Compile Include="Params.cs" />
