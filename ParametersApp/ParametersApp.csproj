@@ -162,4 +162,9 @@
 call C:\Users\Valeriy\Desktop\nirs\FormArch.bat
 )</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if $(ConfigurationName) == Release (
+call C:\Users\Valeriy\Desktop\nirs\ChangeVersion.bat
+)</PreBuildEvent>
+  </PropertyGroup>
 </Project>

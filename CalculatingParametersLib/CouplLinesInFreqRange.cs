@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
@@ -23,7 +25,7 @@ namespace CalculatingParametersLib
         private Matrix<double> E4 { get; }
         private Matrix<double> Zl { get; }
         private double Z1In { get; }
-        private double Z2in { get; }
+        private double Z2In { get; }
         private double Z1Out { get; }
         private double Z2Out { get; }
         private double L { get; }
@@ -72,7 +74,7 @@ namespace CalculatingParametersLib
             L = l * Math.Pow(10,-3);
             C = 0.2998;
             Z1In = z1In;
-            Z2in = z2In;
+            Z2In = z2In;
             Z1Out = z1Out;
             Z2Out = z2Out;
             Fmin = fmin;
@@ -117,7 +119,7 @@ namespace CalculatingParametersLib
             E4 = Matrix<double>.Build.DenseIdentity(4);
             Zl = Matrix<double>.Build.DenseIdentity(4);
             Zl[0, 0] = Math.Sqrt(Z1In);
-            Zl[1, 1] = Math.Sqrt(Z2in);
+            Zl[1, 1] = Math.Sqrt(Z2In);
             Zl[2, 2] = Math.Sqrt(Z1Out);
             Zl[3, 3] = Math.Sqrt(Z2Out);
             ZlComplex = Zl.ToComplex();
@@ -347,6 +349,22 @@ namespace CalculatingParametersLib
             };
             double[][][] sParams = { sParamMagnitudes, sParamPhase };
             return sParams;
+        }
+
+        public SortedList<string, double> GetRelatedData()
+        {
+            var relatedData = new SortedList<string, double>
+            {
+                { "Z1inTextBox", Z1In },
+                { "Z2inTextBox", Z2In },
+                { "Z1outTextBox", Z1Out },
+                { "Z2outTextBox", Z2Out },
+                { "FreqMinTextBox", Fmin },
+                { "FreqMaxTextBox", Fmax },
+                { "LengthTextBox", L },
+                { "NfTextBox", Nf }
+            };
+            return relatedData;
         }
     }
 }

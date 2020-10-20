@@ -60,7 +60,7 @@
             this.ZInOutFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.NfLabel = new System.Windows.Forms.Label();
             this.LengthTextBox = new System.Windows.Forms.TextBox();
-            this.InputFlowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.InputFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.EEELabel = new System.Windows.Forms.Label();
             this.Z0Label = new System.Windows.Forms.Label();
             this.Z2cLabel = new System.Windows.Forms.Label();
@@ -89,8 +89,9 @@
             this.ShematicPictureBox = new System.Windows.Forms.PictureBox();
             this.SelectDeSelectButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.ZInOutFlowLayoutPanel.SuspendLayout();
-            this.InputFlowLayoutPanel1.SuspendLayout();
+            this.InputFlowLayoutPanel.SuspendLayout();
             this.Z1pToEEEFlowLayoutPanel.SuspendLayout();
             this.Z1pToEEEColumn1FlowLayoutPanel.SuspendLayout();
             this.Z1pToEEEColumn2FlowLayoutPanel.SuspendLayout();
@@ -451,22 +452,22 @@
             this.LengthTextBox.TabIndex = 44;
             this.LengthTextBox.TextChanged += new System.EventHandler(this.textBox_TextChangedForDouble);
             // 
-            // InputFlowLayoutPanel1
+            // InputFlowLayoutPanel
             // 
-            this.InputFlowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.InputFlowLayoutPanel1.Controls.Add(this.FreqMinLabel);
-            this.InputFlowLayoutPanel1.Controls.Add(this.FreqMinTextBox);
-            this.InputFlowLayoutPanel1.Controls.Add(this.DotDotLabel);
-            this.InputFlowLayoutPanel1.Controls.Add(this.FreqMaxTextBox);
-            this.InputFlowLayoutPanel1.Controls.Add(this.LengthLabel);
-            this.InputFlowLayoutPanel1.Controls.Add(this.LengthTextBox);
-            this.InputFlowLayoutPanel1.Controls.Add(this.NfLabel);
-            this.InputFlowLayoutPanel1.Controls.Add(this.NfTextBox);
-            this.InputFlowLayoutPanel1.Location = new System.Drawing.Point(290, 100);
-            this.InputFlowLayoutPanel1.Name = "InputFlowLayoutPanel1";
-            this.InputFlowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.InputFlowLayoutPanel1.Size = new System.Drawing.Size(505, 49);
-            this.InputFlowLayoutPanel1.TabIndex = 45;
+            this.InputFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.InputFlowLayoutPanel.Controls.Add(this.FreqMinLabel);
+            this.InputFlowLayoutPanel.Controls.Add(this.FreqMinTextBox);
+            this.InputFlowLayoutPanel.Controls.Add(this.DotDotLabel);
+            this.InputFlowLayoutPanel.Controls.Add(this.FreqMaxTextBox);
+            this.InputFlowLayoutPanel.Controls.Add(this.LengthLabel);
+            this.InputFlowLayoutPanel.Controls.Add(this.LengthTextBox);
+            this.InputFlowLayoutPanel.Controls.Add(this.NfLabel);
+            this.InputFlowLayoutPanel.Controls.Add(this.NfTextBox);
+            this.InputFlowLayoutPanel.Location = new System.Drawing.Point(290, 100);
+            this.InputFlowLayoutPanel.Name = "InputFlowLayoutPanel";
+            this.InputFlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.InputFlowLayoutPanel.Size = new System.Drawing.Size(505, 49);
+            this.InputFlowLayoutPanel.TabIndex = 45;
             // 
             // EEELabel
             // 
@@ -758,7 +759,7 @@
             this.SaveS4pButton.Name = "SaveS4pButton";
             this.SaveS4pButton.Size = new System.Drawing.Size(119, 23);
             this.SaveS4pButton.TabIndex = 58;
-            this.SaveS4pButton.Text = "Save to .s4p";
+            this.SaveS4pButton.Text = "Save .s4p";
             this.SaveS4pButton.UseVisualStyleBackColor = true;
             this.SaveS4pButton.Click += new System.EventHandler(this.Test1Button_Click);
             // 
@@ -797,14 +798,25 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(62, 304);
             this.flowLayoutPanel1.TabIndex = 60;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(801, 126);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 23);
+            this.button1.TabIndex = 61;
+            this.button1.Text = "Load .s4p";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormForGraph
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(925, 496);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.InputFlowLayoutPanel1);
+            this.Controls.Add(this.InputFlowLayoutPanel);
             this.Controls.Add(this.SaveS4pButton);
             this.Controls.Add(this.GraphNameLabel);
             this.Controls.Add(this.ImageNameLabel);
@@ -822,13 +834,13 @@
             this.MinimumSize = new System.Drawing.Size(882, 462);
             this.Name = "FormForGraph";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "FormForGraph";
+            this.Text = "Graph";
             this.Load += new System.EventHandler(this.DrawButton_Click);
             this.TextChanged += new System.EventHandler(this.textBox_TextChangedForDouble);
             this.ZInOutFlowLayoutPanel.ResumeLayout(false);
             this.ZInOutFlowLayoutPanel.PerformLayout();
-            this.InputFlowLayoutPanel1.ResumeLayout(false);
-            this.InputFlowLayoutPanel1.PerformLayout();
+            this.InputFlowLayoutPanel.ResumeLayout(false);
+            this.InputFlowLayoutPanel.PerformLayout();
             this.Z1pToEEEFlowLayoutPanel.ResumeLayout(false);
             this.Z1pToEEEColumn1FlowLayoutPanel.ResumeLayout(false);
             this.Z1pToEEEColumn1FlowLayoutPanel.PerformLayout();
@@ -884,7 +896,7 @@
         private System.Windows.Forms.FlowLayoutPanel ZInOutFlowLayoutPanel;
         private System.Windows.Forms.Label NfLabel;
         private System.Windows.Forms.TextBox LengthTextBox;
-        private System.Windows.Forms.FlowLayoutPanel InputFlowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel InputFlowLayoutPanel;
         private System.Windows.Forms.Label EEELabel;
         private System.Windows.Forms.Label Z0Label;
         private System.Windows.Forms.Label Z2cLabel;
@@ -913,5 +925,6 @@
         private System.Windows.Forms.Button SaveS4pButton;
         private System.Windows.Forms.Button SelectDeSelectButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button button1;
     }
 }

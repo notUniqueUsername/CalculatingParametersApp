@@ -22,6 +22,7 @@ namespace ParametersApp
         {
             Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
             InitializeComponent();
+            ChangeVersion();
             this.MaximizeBox = false;
 #if !DEBUG
             button2.Visible = false;
@@ -36,6 +37,17 @@ namespace ParametersApp
             button1.FlatStyle = FlatStyle.System;
             button2.FlatStyle = FlatStyle.System;
             graphToolStripMenuItem.Enabled = false;
+        }
+
+        private void ChangeVersion()
+        {
+            var version = "";
+            using (StreamReader file = new StreamReader("C:\\Users\\Valeriy\\Desktop\\nirs\\Version.txt", Encoding.UTF8))
+            {
+                version = file.ReadLine();
+            }
+
+            verToolStripMenuItem.Text = "version from " + version;
         }
 
         private void FormatGridView1()
@@ -526,48 +538,6 @@ namespace ParametersApp
                 try
                 {
                     ParamFileSaveLoader.Save(dialog.FileName, _currentParams);
-                    //using (StreamWriter file = new StreamWriter(dialog.FileName, true))
-                    //{
-                    //    file.WriteLine(dataGridView1.Rows[0].Cells[0].Value.ToString() + "=" + _currentParams.C11.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[1].Cells[0].Value.ToString() + "=" + _currentParams.C22.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[2].Cells[0].Value.ToString() + "=" + _currentParams.C12.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[4].Cells[0].Value.ToString() + "=" + _currentParams.Z0.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[5].Cells[0].Value.ToString() + "=" + _currentParams.k.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[6].Cells[0].Value.ToString() + "=" + _currentParams.Rc.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[7].Cells[0].Value.ToString() + "=" + _currentParams.Rp.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[8].Cells[0].Value.ToString() + "=" + _currentParams.Erc.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[9].Cells[0].Value.ToString() + "=" + _currentParams.Erp.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[11].Cells[0].Value.ToString() + "=" + _currentParams.Zc.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[12].Cells[0].Value.ToString() + "=" + _currentParams.Zp.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[14].Cells[0].Value.ToString() + "=" + _currentParams.Z1.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[15].Cells[0].Value.ToString() + "=" + _currentParams.Z2.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[17].Cells[0].Value.ToString() + "=" + _currentParams.N.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[18].Cells[0].Value.ToString() + "=" + _currentParams.Rz.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[20].Cells[0].Value.ToString() + "=" + _currentParams.Z1c.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[21].Cells[0].Value.ToString() + "=" + _currentParams.Z2c.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[22].Cells[0].Value.ToString() + "=" + _currentParams.Zm.ToString());
-                    //    file.WriteLine(dataGridView1.Rows[24].Cells[0].Value.ToString() + "=" + _currentParams.S21.ToString());
-
-                    //    file.WriteLine(dataGridView2.Rows[0].Cells[0].Value.ToString() + "=" + _currentParams.L11.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[1].Cells[0].Value.ToString() + "=" + _currentParams.L22.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[2].Cells[0].Value.ToString() + "=" + _currentParams.L12.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[4].Cells[0].Value.ToString() + "=" + _currentParams.kl.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[5].Cells[0].Value.ToString() + "=" + _currentParams.kc.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[6].Cells[0].Value.ToString() + "=" + _currentParams.klc.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[7].Cells[0].Value.ToString() + "=" + _currentParams.ke.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[8].Cells[0].Value.ToString() + "=" + _currentParams.m.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[9].Cells[0].Value.ToString() + "=" + _currentParams.EEE.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[11].Cells[0].Value.ToString() + "=" + _currentParams.Zc1.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[12].Cells[0].Value.ToString() + "=" + _currentParams.Zp1.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[13].Cells[0].Value.ToString() + "=" + _currentParams.Zc2.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[14].Cells[0].Value.ToString() + "=" + _currentParams.Zp2.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[16].Cells[0].Value.ToString() + "=" + _currentParams.Z11.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[17].Cells[0].Value.ToString() + "=" + _currentParams.Z22.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[19].Cells[0].Value.ToString() + "=" + _currentParams.Z1p.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[20].Cells[0].Value.ToString() + "=" + _currentParams.Z2p.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[21].Cells[0].Value.ToString() + "=" + _currentParams.Z12.ToString());
-                    //    file.WriteLine(dataGridView2.Rows[23].Cells[0].Value.ToString() + "=" + _currentParams.Result.ToString());
-                    //}
                 }
                 catch (NullReferenceException exception)
                 {
@@ -634,129 +604,23 @@ namespace ParametersApp
             
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var pathToFile = dialog.FileName;
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
                 textBox4.Clear();
                 textBox5.Clear();
                 textBox6.Clear();
-                var setOfParams = SetOfParametersEnum.Pogonie_pF_nGn;
-                using (StreamReader sr = new StreamReader(pathToFile, Encoding.UTF8))
-                {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        if (line.Contains("Rп=-1e-3"))
-                        {
-                            setOfParams = SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero;
-                        }
-                    }
-                }
 
-                using (StreamReader sr = new StreamReader(pathToFile, Encoding.UTF8))
-                {
-                    string line;
-                    var c11 = "";
-                    var c22 = "";
-                    var c12 = "";
-                    var l11 = "";
-                    var l22 = "";
-                    var l12 = "";
-                    var zc1 = "";
-                    var zp2 = "";
-                    var rc = "";
-                    var rp = "";
-                    var erc = "";
-                    var erp = "";
-                    switch (setOfParams)
-                    {
-                        case SetOfParametersEnum.Pogonie_pF_nGn:
-                            radioButton2.Checked = true;
-                            while ((line = sr.ReadLine()) != null)
-                            {
-                                if (line.Contains("C11, pF/m="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    c11 = line.Substring(index + 1);
-                                }
-                                if (line.Contains("C22, pF/m="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    c22 = line.Substring(index + 1);
-                                }
-                                if (line.Contains("C12, pF/m="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    c12 = line.Substring(index + 1);
-                                }
-                                if (line.Contains("L11, μH/m="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    l11 = line.Substring(index + 1);
-                                }
-                                if (line.Contains("L22, μH/m="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    l22 = line.Substring(index + 1);
-                                }
-                                if (line.Contains("L12, μH/m="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    l12 = line.Substring(index + 1);
-                                }
-                                textBox4.Text = c11;
-                                textBox5.Text = c22;
-                                textBox6.Text = c12;
-                                textBox1.Text = l11;
-                                textBox2.Text = l22;
-                                textBox3.Text = l12;
-                            }
-                            break;
-                        case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
-                            radioButton6.Checked = true;
-                            while ((line = sr.ReadLine()) != null)
-                            {
-                                if (line.Contains("Zп1, Ω="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    zc1 = line.Substring(index + 1);
-                                }
-                                if (line.Contains("Zc2, Ω="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    zp2 = line.Substring(index + 1);
-                                }
-                                if (line.Contains("Rc="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    rc = line.Substring(index + 1);
-                                }
-                                if (line.Contains("Rп="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    rp = line.Substring(index + 1);
-                                }
-                                if (line.Contains("Erc="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    erc = line.Substring(index + 1);
-                                }
-                                if (line.Contains("Erп="))
-                                {
-                                    var index = line.IndexOf('=');
-                                    erp = line.Substring(index + 1);
-                                }
-                                textBox4.Text = rp;
-                                textBox5.Text = erc;
-                                textBox6.Text = erp;
-                                textBox1.Text = zc1;
-                                textBox2.Text = zp2;
-                                textBox3.Text = rc;
-                            }
-                            break;
-                    }
-                }
+                radioButton2.Checked = true;
+
+                var dataToLoad =  ParamFileSaveLoader.Load(dialog.FileName);
+
+                textBox4.Text = dataToLoad[label4.Text];
+                textBox5.Text = dataToLoad[label5.Text];
+                textBox6.Text = dataToLoad[label6.Text];
+                textBox1.Text = dataToLoad[label1.Text];
+                textBox2.Text = dataToLoad[label2.Text];
+                textBox3.Text = dataToLoad[label3.Text];
 
                 try
                 {
