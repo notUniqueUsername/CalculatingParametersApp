@@ -42,7 +42,7 @@ namespace ParametersApp
         private void ChangeVersion()
         {
             var version = "";
-            using (StreamReader file = new StreamReader("C:\\Users\\Valeriy\\Desktop\\nirs\\Version.txt", Encoding.UTF8))
+            using (StreamReader file = new StreamReader("Version.txt", Encoding.UTF8))
             {
                 version = file.ReadLine();
             }
