@@ -22,9 +22,10 @@ namespace ParametersApp
         {
             Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
             InitializeComponent();
-            ChangeVersion();
+            
             this.MaximizeBox = false;
 #if !DEBUG
+            ChangeVersion();
             button2.Visible = false;
             test2ToolStripMenuItem.Visible = false;
 #endif

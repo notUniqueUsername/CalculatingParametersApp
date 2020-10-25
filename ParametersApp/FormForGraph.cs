@@ -27,6 +27,12 @@ namespace ParametersApp
         private LineItem _33Curve;
         private LineItem _34Curve;
         private LineItem _44Curve;
+        private LineItem _22CurveMarker;
+        private LineItem _23CurveMarker;
+        private LineItem _24CurveMarker;
+        private LineItem _33CurveMarker;
+        private LineItem _34CurveMarker;
+        private LineItem _44CurveMarker;
         private double _z2out;
         private double _z1out;
         private double _z2in;
@@ -205,6 +211,31 @@ namespace ParametersApp
         /// </param>
         private void DrawCurves(string sOrF, double[][] sParamMagnitudeOrPhase)
         {
+            double fiMarkerCount = _fi.Count() / 10;
+            int fiM =
+                int.Parse(Math.Floor(_fi.Count() / fiMarkerCount).ToString());
+            var marker22data = new double[fiM];
+            var marker23data = new double[fiM];
+            var marker24data = new double[fiM];
+            var marker33data = new double[fiM];
+            var marker34data = new double[fiM];
+            var marker44data = new double[fiM];
+            var markerfidata = new double[fiM];
+            var k = 0;
+            for (int i = 0; i < _fi.Count(); i++)
+            {
+                if (i % fiMarkerCount == 0)
+                {
+                    markerfidata[k] = _fi[i];
+                    marker22data[k] = sParamMagnitudeOrPhase[4][i];
+                    marker23data[k] = sParamMagnitudeOrPhase[5][i];
+                    marker24data[k] = sParamMagnitudeOrPhase[6][i];
+                    marker33data[k] = sParamMagnitudeOrPhase[7][i];
+                    marker34data[k] = sParamMagnitudeOrPhase[8][i];
+                    marker44data[k] = sParamMagnitudeOrPhase[9][i];
+                    k++;
+                }
+            }
 
             _11Curve = _graphPane.AddCurve(sOrF + "11", _fi, sParamMagnitudeOrPhase[0], Color.Red, SymbolType.None);
             _11Curve.Line.Style = DashStyle.Dot;
@@ -227,36 +258,56 @@ namespace ParametersApp
             _22Curve = _graphPane.AddCurve(sOrF + "22", _fi, sParamMagnitudeOrPhase[4], Color.Black, SymbolType.None);
             _22Curve.Line.Style = DashStyle.Dot;
             _22Curve.Line.IsSmooth = true;
-            _22Curve.Symbol.Type = SymbolType.XCross;
+            //_22Curve.Symbol.Type = SymbolType.XCross;
             SetLineWidth(_22Curve);
+
 
             _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Yellow, SymbolType.None);
             _23Curve.Line.Style = DashStyle.DashDot;
             _23Curve.Line.IsSmooth = true;
-            _23Curve.Symbol.Type = SymbolType.Triangle;
+            //_23Curve.Symbol.Type = SymbolType.Triangle;
             SetLineWidth(_23Curve);
 
             _24Curve = _graphPane.AddCurve(sOrF + "24", _fi, sParamMagnitudeOrPhase[6], Color.Black, SymbolType.None);
-            _24Curve.Symbol.Type = SymbolType.Circle;
+            //_24Curve.Symbol.Type = SymbolType.Circle;
             SetLineWidth(_24Curve);
 
             _33Curve = _graphPane.AddCurve(sOrF + "33", _fi, sParamMagnitudeOrPhase[7], Color.Blue, SymbolType.None);
             _33Curve.Line.Style = DashStyle.Dot;
             _33Curve.Line.IsSmooth = true;
-            _33Curve.Symbol.Type = SymbolType.Plus;
+            //_33Curve.Symbol.Type = SymbolType.Plus;
             SetLineWidth(_33Curve);
 
             _34Curve = _graphPane.AddCurve(sOrF + "34", _fi, sParamMagnitudeOrPhase[8], Color.Green, SymbolType.None);
             _34Curve.Line.Style = DashStyle.Dash;
             _34Curve.Line.IsSmooth = true;
-            _34Curve.Symbol.Type = SymbolType.Square;
+            //_34Curve.Symbol.Type = SymbolType.Square;
             SetLineWidth(_34Curve);
 
             _44Curve = _graphPane.AddCurve(sOrF + "44", _fi, sParamMagnitudeOrPhase[9], Color.Green, SymbolType.None);
             _44Curve.Line.Style = DashStyle.Dot;
             _44Curve.Line.IsSmooth = true;
-            _44Curve.Symbol.Type = SymbolType.Star;
+            //_44Curve.Symbol.Type = SymbolType.Star;
             SetLineWidth(_44Curve);
+
+            _22CurveMarker = _graphPane.AddCurve(sOrF + "m22", markerfidata, marker22data, Color.Black, SymbolType.XCross);
+            _22CurveMarker.Line.IsVisible = false;
+            _22CurveMarker.Label.IsVisible = false;
+            _23CurveMarker = _graphPane.AddCurve(sOrF + "m23", markerfidata, marker23data, Color.Yellow, SymbolType.Triangle);
+            _23CurveMarker.Line.IsVisible = false;
+            _23CurveMarker.Label.IsVisible = false;
+            _24CurveMarker = _graphPane.AddCurve(sOrF + "m24", markerfidata, marker24data, Color.Black, SymbolType.Circle);
+            _24CurveMarker.Line.IsVisible = false;
+            _24CurveMarker.Label.IsVisible = false;
+            _33CurveMarker = _graphPane.AddCurve(sOrF + "m33", markerfidata, marker33data, Color.Blue, SymbolType.Plus);
+            _33CurveMarker.Line.IsVisible = false;
+            _33CurveMarker.Label.IsVisible = false;
+            _34CurveMarker = _graphPane.AddCurve(sOrF + "m34", markerfidata, marker34data, Color.Green, SymbolType.Square);
+            _34CurveMarker.Line.IsVisible = false;
+            _34CurveMarker.Label.IsVisible = false;
+            _44CurveMarker = _graphPane.AddCurve(sOrF + "m44", markerfidata, marker44data, Color.Green, SymbolType.Star);
+            _44CurveMarker.Line.IsVisible = false;
+            _44CurveMarker.Label.IsVisible = false;
 
             SParamListBox_SelectedIndexChanged(new object(), new EventArgs());
 
@@ -379,6 +430,12 @@ namespace ParametersApp
             _34Curve.Label.IsVisible = isVisible;
             _44Curve.IsVisible = isVisible;
             _44Curve.Label.IsVisible = isVisible;
+            _22CurveMarker.IsVisible = isVisible;
+            _23CurveMarker.IsVisible = isVisible;
+            _24CurveMarker.IsVisible = isVisible;
+            _33CurveMarker.IsVisible = isVisible;
+            _34CurveMarker.IsVisible = isVisible;
+            _44CurveMarker.IsVisible = isVisible;
         }
 
         private void SParamListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -431,26 +488,32 @@ namespace ParametersApp
                         case 4:
                             _22Curve.IsVisible = true;
                             _22Curve.Label.IsVisible = true;
+                            _22CurveMarker.IsVisible = true;
                             break;
                         case 5:
                             _23Curve.IsVisible = true;
                             _23Curve.Label.IsVisible = true;
+                            _23CurveMarker.IsVisible = true;
                             break;
                         case 6:
                             _24Curve.IsVisible = true;
                             _24Curve.Label.IsVisible = true;
+                            _24CurveMarker.IsVisible = true;
                             break;
                         case 7:
                             _33Curve.IsVisible = true;
                             _33Curve.Label.IsVisible = true;
+                            _33CurveMarker.IsVisible = true;
                             break;
                         case 8:
                             _34Curve.IsVisible = true;
                             _34Curve.Label.IsVisible = true;
+                            _34CurveMarker.IsVisible = true;
                             break;
                         case 9:
                             _44Curve.IsVisible = true;
                             _44Curve.Label.IsVisible = true;
+                            _44CurveMarker.IsVisible = true;
                             break;
                     }
                 }
