@@ -201,7 +201,7 @@ namespace CalculatingParametersLib
             var diagScIntermediate = diagSc;
             for (int i = 0; i < Nf; i++)
             {
-                yab[i] = imIntermediate.Multiply(diagScIntermediate[i]).Multiply(umIntermediate);
+                yab[i] = -imIntermediate.Multiply(diagScIntermediate[i]).Multiply(umIntermediate);
             }
 
             var yaayab1 = new Matrix<Complex>[Nf];
