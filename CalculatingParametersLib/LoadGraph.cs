@@ -6,5 +6,7 @@ namespace CalculatingParametersLib
     {
         public SortedList<string, double> RelatedData;
         public Params CurrentParams;
+        public bool inParams;
+        public double[][] data;
     }
 }

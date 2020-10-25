@@ -682,8 +682,42 @@ namespace ParametersApp
                 data = ParamFileSaveLoader.LoadS4p(dialog.FileName);
             }
 
-            var graphForm = new FormForGraph(data.CurrentParams, data.RelatedData);
-            graphForm.Show();
+            if (data.inParams)
+            {
+                var graphForm = new FormForGraph(data.CurrentParams, data.RelatedData);
+                graphForm.Show();
+            }
+            else
+            {
+            }
+        }
+        public FormForGraph(double[][] ss, double[][] ff)
+        {
+            InitializeComponent();
+            this.MaximizeBox = false;
+            _graphPane = GraphControl.GraphPane;
+            SetTextToLabels();
+            _sParamMagnitudes = ss;
+            _sParamPhases = ff;
+            Z1inTextBox.Text = "";
+            Z2inTextBox.Text = "";
+            Z1outTextBox.Text = "";
+            Z2outTextBox.Text = "";
+            LengthTextBox.Text = "";
+            NfTextBox.Text = "";
+            FreqMinTextBox.Text = "";
+            FreqMaxTextBox.Text = "";
+            //GeneralRadioButton.Checked = true;
+            //this.KeyPreview = true;
+            //DrawButton.PerformClick();
+            //AllCurvesCheckState(CheckState.Checked);
+            GeneralRadioButton.Enabled = false;
+            LineToLineRadioButton.Enabled = false;
+            DrawButton.Enabled = false;
+            SaveS4pButton.Enabled = false;
+            Z01Z02FlowLayoutPanel.Enabled = false;
+            InputFlowLayoutPanel.Enabled = false;
+            ZInOutFlowLayoutPanel.Enabled = false;
         }
         public FormForGraph(Params currentParams, SortedList<string, double> relatedData)
         {
