@@ -539,7 +539,7 @@ namespace ParametersApp
                 {
                     ParamFileSaveLoader.Save(dialog.FileName, _currentParams);
                 }
-                catch (NullReferenceException exception)
+                catch (NullReferenceException)
                 {
                     MessageBox.Show("you must first calculate the parameters","error",MessageBoxButtons.OKCancel);
                     if (File.Exists(dialog.FileName))

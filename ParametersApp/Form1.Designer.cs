@@ -491,7 +491,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(109, 16);
             this.label11.TabIndex = 41;
-            this.label11.Text = "Termination load";
+            this.label11.Text = "Double shielding";
             // 
             // label12
             // 

@@ -659,9 +659,9 @@
             this.LineToLineRadioButton.Location = new System.Drawing.Point(1, 41);
             this.LineToLineRadioButton.Name = "LineToLineRadioButton";
             this.LineToLineRadioButton.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
-            this.LineToLineRadioButton.Size = new System.Drawing.Size(181, 20);
+            this.LineToLineRadioButton.Size = new System.Drawing.Size(170, 20);
             this.LineToLineRadioButton.TabIndex = 1;
-            this.LineToLineRadioButton.Text = "Line-to-line transformator";
+            this.LineToLineRadioButton.Text = "Line-to-line transformer";
             this.LineToLineRadioButton.UseVisualStyleBackColor = true;
             // 
             // GeneralRadioButton
@@ -834,7 +834,7 @@
             this.MinimumSize = new System.Drawing.Size(882, 462);
             this.Name = "FormForGraph";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Graph";
+            this.Text = "Graphs";
             this.Load += new System.EventHandler(this.DrawButton_Click);
             this.TextChanged += new System.EventHandler(this.textBox_TextChangedForDouble);
             this.ZInOutFlowLayoutPanel.ResumeLayout(false);
