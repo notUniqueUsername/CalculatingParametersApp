@@ -485,55 +485,60 @@ namespace CalculatingParametersLib
                         if (k % 4 == 0)
                         {
                             var data = ssss(line);
-                            Fi[i] = double.Parse(data[0]);
-                            S11[i] = double.Parse(data[1]);
-                            F11[i] = double.Parse(data[2]);
-                            S12[i] = double.Parse(data[3]);
-                            F12[i] = double.Parse(data[4]);
-                            S13[i] = double.Parse(data[5]);
-                            F13[i] = double.Parse(data[6]);
-                            S14[i] = double.Parse(data[7]);
-                            F14[i] = double.Parse(data[8]);
+                            double.TryParse(data[0].Replace(".",","), out Fi[i]);
+                            double.TryParse(data[1].Replace(".",","), out S11[i]);
+                            double.TryParse(data[2].Replace(".",","), out F11[i]);
+                            double.TryParse(data[3].Replace(".",","), out S12[i]);
+                            double.TryParse(data[4].Replace(".",","), out F12[i]);
+                            double.TryParse(data[5].Replace(".",","), out S13[i]);
+                            double.TryParse(data[6].Replace(".",","), out F13[i]);
+                            double.TryParse(data[7].Replace(".",","), out S14[i]);
+                            double.TryParse(data[8].Replace(".",","), out F14[i]);
                             i++;
+                            if (i==500)
+                            {
+                                break;
+                            }
+
                         }
-                        if (i % 4 == 1)
+                        if (k % 4 == 1)
                         {
                             var data = ssss1(line);
 
-                            S21[i] = double.Parse(data[1]);
-                            F21[i] = double.Parse(data[2]);
-                            S22[i] = double.Parse(data[3]);
-                            F22[i] = double.Parse(data[4]);
-                            S23[i] = double.Parse(data[5]);
-                            F23[i] = double.Parse(data[6]);
-                            S24[i] = double.Parse(data[7]);
-                            F24[i] = double.Parse(data[8]);
+                            double.TryParse(data[0].Replace(".",","), out S21[i]);
+                            double.TryParse(data[1].Replace(".",","), out F21[i]);
+                            double.TryParse(data[2].Replace(".",","), out S22[i]);
+                            double.TryParse(data[3].Replace(".",","), out F22[i]);
+                            double.TryParse(data[4].Replace(".",","), out S23[i]);
+                            double.TryParse(data[5].Replace(".",","), out F23[i]);
+                            double.TryParse(data[6].Replace(".",","), out S24[i]);
+                            double.TryParse(data[7].Replace(".",","), out F24[i]);
                         }
-                        if (i % 4 == 2)
+                        if (k % 4 == 2)
                         {
                             var data = ssss1(line);
 
-                            S31[i] = double.Parse(data[1]);
-                            F31[i] = double.Parse(data[2]);
-                            S32[i] = double.Parse(data[3]);
-                            F32[i] = double.Parse(data[4]);
-                            S33[i] = double.Parse(data[5]);
-                            F33[i] = double.Parse(data[6]);
-                            S34[i] = double.Parse(data[7]);
-                            F34[i] = double.Parse(data[8]);
+                            double.TryParse(data[0].Replace(".",","), out S31[i]);
+                            double.TryParse(data[1].Replace(".",","), out F31[i]);
+                            double.TryParse(data[2].Replace(".",","), out S32[i]);
+                            double.TryParse(data[3].Replace(".",","), out F32[i]);
+                            double.TryParse(data[4].Replace(".",","), out S33[i]);
+                            double.TryParse(data[5].Replace(".",","), out F33[i]);
+                            double.TryParse(data[6].Replace(".",","), out S34[i]);
+                            double.TryParse(data[7].Replace(".",","), out F34[i]);
                         }
-                        if (i % 4 == 3)
+                        if (k % 4 == 3)
                         {
                             var data = ssss1(line);
 
-                            S41[i] = double.Parse(data[1]);
-                            F41[i] = double.Parse(data[2]);
-                            S42[i] = double.Parse(data[3]);
-                            F42[i] = double.Parse(data[4]);
-                            S43[i] = double.Parse(data[5]);
-                            F43[i] = double.Parse(data[6]);
-                            S44[i] = double.Parse(data[7]);
-                            F44[i] = double.Parse(data[8]);
+                            double.TryParse(data[0].Replace(".",","), out S41[i]);
+                            double.TryParse(data[1].Replace(".",","), out F41[i]);
+                            double.TryParse(data[2].Replace(".",","), out S42[i]);
+                            double.TryParse(data[3].Replace(".",","), out F42[i]);
+                            double.TryParse(data[4].Replace(".",","), out S43[i]);
+                            double.TryParse(data[5].Replace(".",","), out F43[i]);
+                            double.TryParse(data[6].Replace(".",","), out S44[i]);
+                            double.TryParse(data[7].Replace(".",","), out F44[i]);
                         }
 
                         k++;
@@ -594,14 +599,14 @@ namespace CalculatingParametersLib
             i8 = s7.IndexOf("\t");
 
             v0 = ss.Substring(i0 + 1, i1);
-            v1 = ss.Substring(i1 + 1, i2);
-            v2 = ss.Substring(i2 + 1, i3);
-            v3 = ss.Substring(i3 + 1, i4);
-            v4 = ss.Substring(i4 + 1, i5);
-            v5 = ss.Substring(i5 + 1, i6);
-            v6 = ss.Substring(i6 + 1, i7);
-            v7 = ss.Substring(i7 + 1, i8);
-            v8 = ss.Substring(i8);
+            v1 = s0.Substring(i1 + 1, i2);
+            v2 = s1.Substring(i2 + 1, i3);
+            v3 = s2.Substring(i3 + 1, i4);
+            v4 = s3.Substring(i4 + 1, i5);
+            v5 = s4.Substring(i5 + 1, i6);
+            v6 = s5.Substring(i6 + 1, i7);
+            v7 = s6.Substring(i7 + 1, i8);
+            v8 = s7.Substring(i8);
             return new string[] {v0,v1,v2,v3,v4,v5,v6,v7,v8};
         }
         private static string[] ssss1(string ss)
@@ -632,8 +637,8 @@ namespace CalculatingParametersLib
             string s5 = "";
             string s6 = "";
             string s7 = "";
-            i1 = s0.IndexOf("\t");
-            s1 = s0.Substring(i1 + 1);
+            i1 = ss.IndexOf("\t");
+            s1 = ss.Substring(i1 + 1);
             i2 = s1.IndexOf("\t");
             s2 = s1.Substring(i2 + 1);
             i3 = s2.IndexOf("\t");
@@ -649,13 +654,13 @@ namespace CalculatingParametersLib
             i8 = s7.IndexOf("\t");
             
             v1 = ss.Substring(i1 + 1, i2);
-            v2 = ss.Substring(i2 + 1, i3);
-            v3 = ss.Substring(i3 + 1, i4);
-            v4 = ss.Substring(i4 + 1, i5);
-            v5 = ss.Substring(i5 + 1, i6);
-            v6 = ss.Substring(i6 + 1, i7);
-            v7 = ss.Substring(i7 + 1, i8);
-            v8 = ss.Substring(i8);
+            v2 = s1.Substring(i2 + 1, i3);
+            v3 = s2.Substring(i3 + 1, i4);
+            v4 = s3.Substring(i4 + 1, i5);
+            v5 = s4.Substring(i5 + 1, i6);
+            v6 = s5.Substring(i6 + 1, i7);
+            v7 = s6.Substring(i7 + 1, i8);
+            v8 = s7.Substring(i8);
             return new string[] {v1, v2, v3, v4, v5, v6, v7, v8 };
         }
     }

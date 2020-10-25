@@ -689,28 +689,50 @@ namespace ParametersApp
             }
             else
             {
+                var ss = new double[][]
+                {
+                    data.data[1], data.data[3], data.data[5], data.data[7], data.data[11], data.data[13],
+                    data.data[15], data.data[21], data.data[23], data.data[31]
+                };
+                var ff = new double[][]
+                {
+                    data.data[2], data.data[4], data.data[6], data.data[8], data.data[12], data.data[14],
+                    data.data[16], data.data[22], data.data[24], data.data[32]
+                };
+                var graphForm = new FormForGraph(ss,ff, data.data[0]);
+                graphForm.Show();
             }
         }
-        public FormForGraph(double[][] ss, double[][] ff)
+        public FormForGraph(double[][] ss, double[][] ff, double[] fi)
         {
             InitializeComponent();
+            this.Load -= DrawButton_Click;
+            this.Load += SelectDeSelectButton_Click;
             this.MaximizeBox = false;
             _graphPane = GraphControl.GraphPane;
-            SetTextToLabels();
+            //SetTextToLabels();
+            _fi = fi;
+            _xMax = _fi.Max();
+            _xMin = _fi.Min();
             _sParamMagnitudes = ss;
             _sParamPhases = ff;
-            Z1inTextBox.Text = "";
-            Z2inTextBox.Text = "";
-            Z1outTextBox.Text = "";
-            Z2outTextBox.Text = "";
-            LengthTextBox.Text = "";
-            NfTextBox.Text = "";
-            FreqMinTextBox.Text = "";
-            FreqMaxTextBox.Text = "";
+            ChangeGraph();
+            DrawCurves("S", ss);
+            Z1inTextBox.Text = "50";
+            Z2inTextBox.Text = "50";
+            Z1outTextBox.Text = "50";
+            Z2outTextBox.Text = "50";
+            LengthTextBox.Text = "?";
+            NfTextBox.Text = fi.Length.ToString();
+            FreqMinTextBox.Text = fi.Min().ToString();
+            FreqMaxTextBox.Text = fi.Max().ToString();
             //GeneralRadioButton.Checked = true;
             //this.KeyPreview = true;
             //DrawButton.PerformClick();
+            //this.KeyPreview = true;
+            //PhaseRadioButton.Checked = true;
             //AllCurvesCheckState(CheckState.Checked);
+            
             GeneralRadioButton.Enabled = false;
             LineToLineRadioButton.Enabled = false;
             DrawButton.Enabled = false;
