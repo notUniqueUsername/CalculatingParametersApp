@@ -107,7 +107,7 @@
             // 
             // GraphControl
             // 
-            this.GraphControl.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GraphControl.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GraphControl.Location = new System.Drawing.Point(289, 181);
             this.GraphControl.Margin = new System.Windows.Forms.Padding(4);
             this.GraphControl.Name = "GraphControl";

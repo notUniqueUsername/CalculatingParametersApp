@@ -131,16 +131,18 @@ namespace ParametersApp
             _graphPane.YAxis.MajorGrid.Color = Color.Green;
             _graphPane.Title.IsVisible = false;
             
+            var font = new Font("Arial",10);
             var yTitle = _graphPane.YAxis.Title;
             var xTitle = _graphPane.XAxis.Title;
             xTitle.Text = "Frequency (GHz)";
-
+            xTitle.FontSpec.IsBold = false;
+            xTitle.FontSpec.Family = "Arial";
             _graphPane.XAxis.Scale.IsSkipLastLabel = false;
             _graphPane.YAxis.Scale.IsSkipLastLabel = false;
             
             if (forPhase)
             {
-                yTitle.Text = "Phase (deg)";
+                yTitle.Text = "Phase shift (deg)";
                 _graphPane.XAxis.MinorGrid.PenWidth = 0.5f;
                 _graphPane.XAxis.MinorGrid.IsVisible = false;
                 _graphPane.YAxis.MinorGrid.PenWidth = 0.5f;
@@ -148,12 +150,15 @@ namespace ParametersApp
             }
             else
             {
-                yTitle.Text = "Magnitude (dB)";
+                yTitle.Text = "S-Parameters (dB)";
+                
                 _graphPane.XAxis.MinorGrid.PenWidth = 0.5f;
                 _graphPane.XAxis.MinorGrid.IsVisible = true;
                 _graphPane.YAxis.MinorGrid.PenWidth = 0.5f;
                 _graphPane.YAxis.MinorGrid.IsVisible = true;
             }
+            yTitle.FontSpec.IsBold = false;
+            yTitle.FontSpec.Family = "Arial";
             _graphPane.ZoomStack.Push(_graphPane, ZoomState.StateType.Zoom);
             _graphPane.XAxis.ResetAutoScale(_graphPane, CreateGraphics());
         }
