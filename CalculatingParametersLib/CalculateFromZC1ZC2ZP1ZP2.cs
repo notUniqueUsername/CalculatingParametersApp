@@ -105,7 +105,7 @@ namespace CalculatingParametersLib
             _currentParams.Z1 = _calculator.Z1OrZ2(_currentParams.L11, _currentParams.C11) * 1000;
             _currentParams.Z2 = _calculator.Z1OrZ2(_currentParams.L22, _currentParams.C22) * 1000;
 
-            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+            _currentParams.Emax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
                 _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
 
             return _currentParams;
@@ -197,7 +197,7 @@ namespace CalculatingParametersLib
                 _calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
                 Math.Pow(10, 6), 4);
 
-            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+            _currentParams.Emax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
                 _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
 
             return _currentParams;

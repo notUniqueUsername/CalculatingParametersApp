@@ -4,12 +4,12 @@ namespace CalculatingParametersLib
 {
     public class Params
     {
-        private double _mMax;
+        private double _eMax;
 
-        public double Mmax
+        public double Emax
         {
-            get => _mMax;
-            set => _mMax = value;
+            get => _eMax;
+            set => _eMax = value;
         }
 
         private double _eee;

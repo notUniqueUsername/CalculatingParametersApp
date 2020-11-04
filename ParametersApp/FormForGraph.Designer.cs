@@ -90,6 +90,7 @@
             this.SelectDeSelectButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
+            this.GridButton = new System.Windows.Forms.Button();
             this.ZInOutFlowLayoutPanel.SuspendLayout();
             this.InputFlowLayoutPanel.SuspendLayout();
             this.Z1pToEEEFlowLayoutPanel.SuspendLayout();
@@ -107,9 +108,9 @@
             // 
             // GraphControl
             // 
-            this.GraphControl.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GraphControl.Location = new System.Drawing.Point(289, 181);
-            this.GraphControl.Margin = new System.Windows.Forms.Padding(4);
+            this.GraphControl.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GraphControl.Location = new System.Drawing.Point(290, 181);
+            this.GraphControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.GraphControl.Name = "GraphControl";
             this.GraphControl.ScrollGrace = 0D;
             this.GraphControl.ScrollMaxX = 0D;
@@ -118,7 +119,7 @@
             this.GraphControl.ScrollMinX = 0D;
             this.GraphControl.ScrollMinY = 0D;
             this.GraphControl.ScrollMinY2 = 0D;
-            this.GraphControl.Size = new System.Drawing.Size(562, 304);
+            this.GraphControl.Size = new System.Drawing.Size(563, 303);
             this.GraphControl.TabIndex = 0;
             this.GraphControl.UseExtendedPrintDialog = true;
             this.GraphControl.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.zedGraph_ContextMenuBuilder);
@@ -219,6 +220,7 @@
             this.RpLabel.Size = new System.Drawing.Size(70, 16);
             this.RpLabel.TabIndex = 19;
             this.RpLabel.Text = "Rп = 22.22";
+            this.RpLabel.TextChanged += new System.EventHandler(this.RpLabel_TextChanged);
             // 
             // RzLabel
             // 
@@ -407,8 +409,8 @@
             // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(0, 249);
-            this.DrawButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.DrawButton.Location = new System.Drawing.Point(858, 462);
+            this.DrawButton.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.DrawButton.Name = "DrawButton";
             this.DrawButton.Size = new System.Drawing.Size(62, 23);
             this.DrawButton.TabIndex = 40;
@@ -525,9 +527,9 @@
             this.MLabel.Location = new System.Drawing.Point(0, 45);
             this.MLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
             this.MLabel.Name = "MLabel";
-            this.MLabel.Size = new System.Drawing.Size(88, 16);
+            this.MLabel.Size = new System.Drawing.Size(86, 16);
             this.MLabel.TabIndex = 50;
-            this.MLabel.Text = "Mmax = 22,22";
+            this.MLabel.Text = "Emax = 22,22";
             // 
             // Z1pToEEEFlowLayoutPanel
             // 
@@ -650,7 +652,7 @@
             this.ShematicGroupBox.Size = new System.Drawing.Size(271, 82);
             this.ShematicGroupBox.TabIndex = 53;
             this.ShematicGroupBox.TabStop = false;
-            this.ShematicGroupBox.Text = "Select shematic";
+            this.ShematicGroupBox.Text = "Select schematic";
             // 
             // LineToLineRadioButton
             // 
@@ -759,7 +761,7 @@
             this.SaveS4pButton.Name = "SaveS4pButton";
             this.SaveS4pButton.Size = new System.Drawing.Size(119, 23);
             this.SaveS4pButton.TabIndex = 58;
-            this.SaveS4pButton.Text = "Save .s4p";
+            this.SaveS4pButton.Text = "Save .ts";
             this.SaveS4pButton.UseVisualStyleBackColor = true;
             this.SaveS4pButton.Click += new System.EventHandler(this.Test1Button_Click);
             // 
@@ -789,13 +791,13 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.SParamListBox);
             this.flowLayoutPanel1.Controls.Add(this.SelectDeSelectButton);
-            this.flowLayoutPanel1.Controls.Add(this.DrawButton);
+            this.flowLayoutPanel1.Controls.Add(this.GridButton);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(858, 181);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(62, 304);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(62, 281);
             this.flowLayoutPanel1.TabIndex = 60;
             // 
             // button1
@@ -804,9 +806,21 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 23);
             this.button1.TabIndex = 61;
-            this.button1.Text = "Load .s4p";
+            this.button1.Text = "Load .ts";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // GridButton
+            // 
+            this.GridButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.GridButton.Location = new System.Drawing.Point(0, 249);
+            this.GridButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.GridButton.Name = "GridButton";
+            this.GridButton.Size = new System.Drawing.Size(62, 23);
+            this.GridButton.TabIndex = 62;
+            this.GridButton.Text = "Grid";
+            this.GridButton.UseVisualStyleBackColor = true;
+            this.GridButton.Click += new System.EventHandler(this.GridButton_Click);
             // 
             // FormForGraph
             // 
@@ -817,6 +831,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.InputFlowLayoutPanel);
+            this.Controls.Add(this.DrawButton);
             this.Controls.Add(this.SaveS4pButton);
             this.Controls.Add(this.GraphNameLabel);
             this.Controls.Add(this.ImageNameLabel);
@@ -926,5 +941,6 @@
         private System.Windows.Forms.Button SelectDeSelectButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button GridButton;
     }
 }

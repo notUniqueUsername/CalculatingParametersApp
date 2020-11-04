@@ -17,6 +17,7 @@ namespace ParametersApp
 {
     public partial class FormForGraph : Form
     {
+        private bool _grid = false;
         private LineItem _11Curve;
         private LineItem _12Curve;
         private LineItem _13Curve;
@@ -33,6 +34,12 @@ namespace ParametersApp
         private LineItem _33CurveMarker;
         private LineItem _34CurveMarker;
         private LineItem _44CurveMarker;
+        private LineItem _22CurveLabel;
+        private LineItem _23CurveLabel;
+        private LineItem _24CurveLabel;
+        private LineItem _33CurveLabel;
+        private LineItem _34CurveLabel;
+        private LineItem _44CurveLabel;
         private double _z2out;
         private double _z1out;
         private double _z2in;
@@ -137,12 +144,12 @@ namespace ParametersApp
             _graphPane.YAxis.MajorGrid.Color = Color.Green;
             _graphPane.Title.IsVisible = false;
             
-            var font = new Font("Arial",10);
             var yTitle = _graphPane.YAxis.Title;
             var xTitle = _graphPane.XAxis.Title;
             xTitle.Text = "Frequency (GHz)";
             xTitle.FontSpec.IsBold = false;
             xTitle.FontSpec.Family = "Arial";
+            xTitle.FontSpec.Size = 16;
             _graphPane.XAxis.Scale.IsSkipLastLabel = false;
             _graphPane.YAxis.Scale.IsSkipLastLabel = false;
             
@@ -165,6 +172,7 @@ namespace ParametersApp
             }
             yTitle.FontSpec.IsBold = false;
             yTitle.FontSpec.Family = "Arial";
+            yTitle.FontSpec.Size = 16;
             _graphPane.ZoomStack.Push(_graphPane, ZoomState.StateType.Zoom);
             _graphPane.XAxis.ResetAutoScale(_graphPane, CreateGraphics());
         }
@@ -211,9 +219,12 @@ namespace ParametersApp
         /// </param>
         private void DrawCurves(string sOrF, double[][] sParamMagnitudeOrPhase)
         {
-            double fiMarkerCount = _fi.Count() / 10;
+            var fakeX = new double[] { 1 };
+            var fakeY = new double[] { 1 };
+            var count = _fi.Count() - _fi.Count() % 10;
+            double fiMarkerCount = count / 10;
             int fiM =
-                int.Parse(Math.Floor(_fi.Count() / fiMarkerCount).ToString());
+                int.Parse(Math.Floor(count / fiMarkerCount).ToString());
             var marker22data = new double[fiM];
             var marker23data = new double[fiM];
             var marker24data = new double[fiM];
@@ -222,7 +233,7 @@ namespace ParametersApp
             var marker44data = new double[fiM];
             var markerfidata = new double[fiM];
             var k = 0;
-            for (int i = 0; i < _fi.Count(); i++)
+            for (int i = 0; i < count; i++)
             {
                 if (i % fiMarkerCount == 0)
                 {
@@ -260,35 +271,46 @@ namespace ParametersApp
             _22Curve.Line.IsSmooth = true;
             //_22Curve.Symbol.Type = SymbolType.XCross;
             SetLineWidth(_22Curve);
-
+            _22CurveLabel = _graphPane.AddCurve(sOrF + "22", fakeX, fakeY, Color.Black, SymbolType.XCross);
+            _22CurveLabel.IsVisible = false;
 
             _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Yellow, SymbolType.None);
             _23Curve.Line.Style = DashStyle.DashDot;
             _23Curve.Line.IsSmooth = true;
             //_23Curve.Symbol.Type = SymbolType.Triangle;
             SetLineWidth(_23Curve);
+            _23CurveLabel = _graphPane.AddCurve(sOrF + "23", fakeX, fakeY, Color.Yellow, SymbolType.Triangle);
+            _23CurveLabel.IsVisible = false;
 
             _24Curve = _graphPane.AddCurve(sOrF + "24", _fi, sParamMagnitudeOrPhase[6], Color.Black, SymbolType.None);
             //_24Curve.Symbol.Type = SymbolType.Circle;
             SetLineWidth(_24Curve);
+            _24CurveLabel = _graphPane.AddCurve(sOrF + "24", fakeX, fakeY, Color.Black, SymbolType.Circle);
+            _24CurveLabel.IsVisible = false;
 
             _33Curve = _graphPane.AddCurve(sOrF + "33", _fi, sParamMagnitudeOrPhase[7], Color.Blue, SymbolType.None);
             _33Curve.Line.Style = DashStyle.Dot;
             _33Curve.Line.IsSmooth = true;
             //_33Curve.Symbol.Type = SymbolType.Plus;
             SetLineWidth(_33Curve);
+            _33CurveLabel = _graphPane.AddCurve(sOrF + "33", fakeX, fakeY, Color.Blue, SymbolType.Plus);
+            _33CurveLabel.IsVisible = false;
 
             _34Curve = _graphPane.AddCurve(sOrF + "34", _fi, sParamMagnitudeOrPhase[8], Color.Green, SymbolType.None);
             _34Curve.Line.Style = DashStyle.Dash;
             _34Curve.Line.IsSmooth = true;
             //_34Curve.Symbol.Type = SymbolType.Square;
             SetLineWidth(_34Curve);
+            _34CurveLabel = _graphPane.AddCurve(sOrF + "34", fakeX, fakeY, Color.Green, SymbolType.Square);
+            _34CurveLabel.IsVisible = false;
 
             _44Curve = _graphPane.AddCurve(sOrF + "44", _fi, sParamMagnitudeOrPhase[9], Color.Green, SymbolType.None);
             _44Curve.Line.Style = DashStyle.Dot;
             _44Curve.Line.IsSmooth = true;
             //_44Curve.Symbol.Type = SymbolType.Star;
             SetLineWidth(_44Curve);
+            _44CurveLabel = _graphPane.AddCurve(sOrF + "44", fakeX, fakeY, Color.Green, SymbolType.Star);
+            _44CurveLabel.IsVisible = false;
 
             _22CurveMarker = _graphPane.AddCurve(sOrF + "m22", markerfidata, marker22data, Color.Black, SymbolType.XCross);
             _22CurveMarker.Line.IsVisible = false;
@@ -331,7 +353,7 @@ namespace ParametersApp
 
             Z1pLabel.Text = "Z1п, Ω = " + Math.Round(_currentParams.Z1p, 3).ToString();
             Z2cLabel.Text = "Z2c, Ω = " + Math.Round(_currentParams.Z2c, 3).ToString();
-            MLabel.Text = "Mmax = " + Math.Round(_currentParams.Mmax, 3).ToString();
+            MLabel.Text = "Emax = " + Math.Round(_currentParams.Emax, 3).ToString();
 
             Z0Label.Text = "Z0, Ω = " + Math.Round(_currentParams.Z0, 1).ToString();
             Z1Label.Text = "Z1, Ω = " + Math.Round(_currentParams.Z1, 1).ToString();
@@ -436,6 +458,12 @@ namespace ParametersApp
             _33CurveMarker.IsVisible = isVisible;
             _34CurveMarker.IsVisible = isVisible;
             _44CurveMarker.IsVisible = isVisible;
+            _22CurveLabel.IsVisible = isVisible;
+            _23CurveLabel.IsVisible = isVisible;
+            _24CurveLabel.IsVisible = isVisible;
+            _33CurveLabel.IsVisible = isVisible;
+            _34CurveLabel.IsVisible = isVisible;
+            _44CurveLabel.IsVisible = isVisible;
         }
 
         private void SParamListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -487,33 +515,33 @@ namespace ParametersApp
                             break;
                         case 4:
                             _22Curve.IsVisible = true;
-                            _22Curve.Label.IsVisible = true;
                             _22CurveMarker.IsVisible = true;
+                            _22CurveLabel.Label.IsVisible = true;
                             break;
                         case 5:
                             _23Curve.IsVisible = true;
-                            _23Curve.Label.IsVisible = true;
                             _23CurveMarker.IsVisible = true;
+                            _23CurveLabel.Label.IsVisible = true;
                             break;
                         case 6:
                             _24Curve.IsVisible = true;
-                            _24Curve.Label.IsVisible = true;
                             _24CurveMarker.IsVisible = true;
+                            _24CurveLabel.Label.IsVisible = true;
                             break;
                         case 7:
                             _33Curve.IsVisible = true;
-                            _33Curve.Label.IsVisible = true;
                             _33CurveMarker.IsVisible = true;
+                            _33CurveLabel.Label.IsVisible = true;
                             break;
                         case 8:
                             _34Curve.IsVisible = true;
-                            _34Curve.Label.IsVisible = true;
                             _34CurveMarker.IsVisible = true;
+                            _34CurveLabel.Label.IsVisible = true;
                             break;
                         case 9:
                             _44Curve.IsVisible = true;
-                            _44Curve.Label.IsVisible = true;
                             _44CurveMarker.IsVisible = true;
+                            _44CurveLabel.Label.IsVisible = true;
                             break;
                     }
                 }
@@ -767,6 +795,24 @@ namespace ParametersApp
             Z01Z02FlowLayoutPanel.Enabled = false;
             InputFlowLayoutPanel.Enabled = false;
             ZInOutFlowLayoutPanel.Enabled = false;
+        }
+
+        private void GridButton_Click(object sender, EventArgs e)
+        {
+            _graphPane.XAxis.MajorGrid.IsVisible = _grid;
+            _graphPane.XAxis.MinorGrid.IsVisible = _grid;
+            _graphPane.YAxis.MajorGrid.IsVisible = _grid;
+            _graphPane.YAxis.MinorGrid.IsVisible = _grid;
+            _grid = !_grid;
+            GraphControl.Invalidate();
+        }
+
+        private void RpLabel_TextChanged(object sender, EventArgs e)
+        {
+            if (RpLabel.Text.Length > 10)
+            {
+                RpLabel.Font = new Font("Arial Narrow", RpLabel.Font.Size);
+            }
         }
     }
 }

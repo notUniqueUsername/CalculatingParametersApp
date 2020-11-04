@@ -52,7 +52,7 @@ namespace CalculatingParametersLib
 
             _currentParams.Zm = _calculator.Zm(_currentParams.Z12, _currentParams.Z0);
 
-            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+            _currentParams.Emax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
                 _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
         }
 

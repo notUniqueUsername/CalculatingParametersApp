@@ -116,7 +116,7 @@ namespace CalculatingParametersLib
             _currentParams.L12 = l12;
             _currentParams.L22 = l22;
 
-            _currentParams.Mmax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
+            _currentParams.Emax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
                 _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
 
             return _currentParams;
