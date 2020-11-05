@@ -615,7 +615,6 @@ namespace CalculatingParametersLib
         }
         private static string[] GetStringsWithoutFreq(string ss)
         {
-            int i0 = 0;
             int i1 = 0;
             int i2 = 0;
             int i3 = 0;
@@ -624,7 +623,6 @@ namespace CalculatingParametersLib
             int i6 = 0;
             int i7 = 0;
             int i8 = 0;
-            string v0 = "";
             string v1 = "";
             string v2 = "";
             string v3 = "";
@@ -633,7 +631,6 @@ namespace CalculatingParametersLib
             string v6 = "";
             string v7 = "";
             string v8 = "";
-            string s0 = "";
             string s1 = "";
             string s2 = "";
             string s3 = "";

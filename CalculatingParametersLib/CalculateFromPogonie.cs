@@ -81,7 +81,8 @@ namespace CalculatingParametersLib
                 _calculator.DForImpedance(_currentParams.Rc, _currentParams.Rp));
             _currentParams.k = _calculator.K(_currentParams.Z12,_currentParams.Z11,_currentParams.Z22);
 
-            _currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k, _currentParams.RzNegativeStatus);
+            //_currentParams.N = _calculator.N(_currentParams.Rc, _currentParams.Rp, _currentParams.k, _currentParams.RzNegativeStatus);
+            _currentParams.N = _calculator.N(_currentParams.Z11, _currentParams.Z22);
 
             _currentParams.kl = _calculator.Kl(_currentParams.L12, _currentParams.L11, _currentParams.L22);
             _currentParams.kc = _calculator.Kc(_currentParams.C12, _currentParams.C11, _currentParams.C22);

@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CalculatingParametersLib;
 using ZedGraph;
+using Label = System.Windows.Forms.Label;
 
 namespace ParametersApp
 {
@@ -83,12 +84,6 @@ namespace ParametersApp
         {
             GraphPane pane = sender.GraphPane;
 
-            // Для простоты примера будем ограничивать масштабирование
-            // только в сторону уменьшения размера графика
-
-            // Проверим интервал для каждой оси и
-            // при необходимости скорректируем его
-
             if (pane.XAxis.Scale.Min <= Math.Round(_xMin))
             {
                 pane.XAxis.Scale.Min = Math.Round(_xMin);
@@ -156,19 +151,15 @@ namespace ParametersApp
             if (forPhase)
             {
                 yTitle.Text = "Phase shift (deg)";
-                _graphPane.XAxis.MinorGrid.PenWidth = 0.5f;
                 _graphPane.XAxis.MinorGrid.IsVisible = false;
-                _graphPane.YAxis.MinorGrid.PenWidth = 0.5f;
                 _graphPane.YAxis.MinorGrid.IsVisible = false;
             }
             else
             {
                 yTitle.Text = "S-Parameters (dB)";
                 
-                _graphPane.XAxis.MinorGrid.PenWidth = 0.5f;
-                _graphPane.XAxis.MinorGrid.IsVisible = true;
-                _graphPane.YAxis.MinorGrid.PenWidth = 0.5f;
-                _graphPane.YAxis.MinorGrid.IsVisible = true;
+                _graphPane.XAxis.MinorGrid.IsVisible = false;
+                _graphPane.YAxis.MinorGrid.IsVisible = false;
             }
             yTitle.FontSpec.IsBold = false;
             yTitle.FontSpec.Family = "Arial";
@@ -269,9 +260,11 @@ namespace ParametersApp
             _22Curve = _graphPane.AddCurve(sOrF + "22", _fi, sParamMagnitudeOrPhase[4], Color.Black, SymbolType.None);
             _22Curve.Line.Style = DashStyle.Dot;
             _22Curve.Line.IsSmooth = true;
-            //_22Curve.Symbol.Type = SymbolType.XCross;
             SetLineWidth(_22Curve);
             _22CurveLabel = _graphPane.AddCurve(sOrF + "22", fakeX, fakeY, Color.Black, SymbolType.XCross);
+            _22CurveLabel.Line.Style = DashStyle.Dot;
+            _22CurveLabel.Line.IsSmooth = true;
+            SetLineWidth(_22CurveLabel);
             _22CurveLabel.IsVisible = false;
 
             _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Yellow, SymbolType.None);
@@ -280,29 +273,35 @@ namespace ParametersApp
             //_23Curve.Symbol.Type = SymbolType.Triangle;
             SetLineWidth(_23Curve);
             _23CurveLabel = _graphPane.AddCurve(sOrF + "23", fakeX, fakeY, Color.Yellow, SymbolType.Triangle);
+            SetLineWidth(_23CurveLabel);
             _23CurveLabel.IsVisible = false;
 
             _24Curve = _graphPane.AddCurve(sOrF + "24", _fi, sParamMagnitudeOrPhase[6], Color.Black, SymbolType.None);
-            //_24Curve.Symbol.Type = SymbolType.Circle;
             SetLineWidth(_24Curve);
             _24CurveLabel = _graphPane.AddCurve(sOrF + "24", fakeX, fakeY, Color.Black, SymbolType.Circle);
+            SetLineWidth(_24CurveLabel);
             _24CurveLabel.IsVisible = false;
 
             _33Curve = _graphPane.AddCurve(sOrF + "33", _fi, sParamMagnitudeOrPhase[7], Color.Blue, SymbolType.None);
             _33Curve.Line.Style = DashStyle.Dot;
             _33Curve.Line.IsSmooth = true;
-            //_33Curve.Symbol.Type = SymbolType.Plus;
             SetLineWidth(_33Curve);
             _33CurveLabel = _graphPane.AddCurve(sOrF + "33", fakeX, fakeY, Color.Blue, SymbolType.Plus);
+            _33CurveLabel.Line.Style = DashStyle.Dot;
+            _33CurveLabel.Line.IsSmooth = true;
+            SetLineWidth(_33CurveLabel);
             _33CurveLabel.IsVisible = false;
 
             _34Curve = _graphPane.AddCurve(sOrF + "34", _fi, sParamMagnitudeOrPhase[8], Color.Green, SymbolType.None);
             _34Curve.Line.Style = DashStyle.Dash;
             _34Curve.Line.IsSmooth = true;
-            //_34Curve.Symbol.Type = SymbolType.Square;
             SetLineWidth(_34Curve);
             _34CurveLabel = _graphPane.AddCurve(sOrF + "34", fakeX, fakeY, Color.Green, SymbolType.Square);
+            _34CurveLabel.Line.Style = DashStyle.Dash;
+            _34CurveLabel.Line.IsSmooth = true;
+            SetLineWidth(_34CurveLabel);
             _34CurveLabel.IsVisible = false;
+
 
             _44Curve = _graphPane.AddCurve(sOrF + "44", _fi, sParamMagnitudeOrPhase[9], Color.Green, SymbolType.None);
             _44Curve.Line.Style = DashStyle.Dot;
@@ -310,6 +309,9 @@ namespace ParametersApp
             //_44Curve.Symbol.Type = SymbolType.Star;
             SetLineWidth(_44Curve);
             _44CurveLabel = _graphPane.AddCurve(sOrF + "44", fakeX, fakeY, Color.Green, SymbolType.Star);
+            _44CurveLabel.Line.Style = DashStyle.Dot;
+            _44CurveLabel.Line.IsSmooth = true;
+            SetLineWidth(_44CurveLabel);
             _44CurveLabel.IsVisible = false;
 
             _22CurveMarker = _graphPane.AddCurve(sOrF + "m22", markerfidata, marker22data, Color.Black, SymbolType.XCross);
@@ -680,11 +682,13 @@ namespace ParametersApp
         }
 
 
-        private void Test1Button_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             var dialog = new SaveFileDialog();
             dialog.AddExtension = true;
-            dialog.DefaultExt = "s4p";
+            dialog.DefaultExt = "ts";
+            dialog.Filter = "ts files (*.ts)|*.ts";
+            dialog.FilterIndex = 1;
             var relatedData = _sParamData.GetRelatedData();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -705,10 +709,10 @@ namespace ParametersApp
             SParamListBox_SelectedIndexChanged(sender, e);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LoadButton_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "s4p files (*.s4p)|*.s4p";
+            dialog.Filter = "ts files (*.ts)|*.ts";
             dialog.FilterIndex = 1;
             LoadGraph data = new LoadGraph();
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -761,6 +765,7 @@ namespace ParametersApp
             Z1outTextBox.Text = data.RelatedData[Z1outTextBox.Name].ToString();
             Z2outTextBox.Text = data.RelatedData[Z2outTextBox.Name].ToString();
             LengthTextBox.Text = "?";
+            ClearAllLabels();
             NfTextBox.Text = _fi.Length.ToString();
             FreqMinTextBox.Text = _fi.Min().ToString();
             FreqMaxTextBox.Text = _fi.Max().ToString();
@@ -807,12 +812,34 @@ namespace ParametersApp
             ZInOutFlowLayoutPanel.Enabled = false;
         }
 
+        private void ClearLabel(Label label, int start, int length)
+        {
+            label.Text = label.Text.Substring(start, length);
+        }
+
+        private void ClearAllLabels()
+        {
+            ClearLabel(RcLabel,0,4);
+            ClearLabel(RpLabel,0,4);
+            ClearLabel(Z1Label, 0, 6);
+            ClearLabel(Z2Label, 0, 6);
+            ClearLabel(Z0Label, 0, 6);
+            ClearLabel(KLabel, 0, 3);
+            ClearLabel(NLabel, 0, 3);
+            ClearLabel(RzLabel, 0, 4);
+            ClearLabel(S21Label, 0, 9);
+            ClearLabel(Z1pLabel, 0, 8);
+            ClearLabel(Z2cLabel, 0, 8);
+            ClearLabel(MLabel, 0, 6);
+            ClearLabel(ErcLabel, 0, 5);
+            ClearLabel(ErpLabel, 0, 5);
+            ClearLabel(EEELabel, 0, 9);
+        }
+
         private void GridButton_Click(object sender, EventArgs e)
         {
             _graphPane.XAxis.MajorGrid.IsVisible = _grid;
-            _graphPane.XAxis.MinorGrid.IsVisible = _grid;
             _graphPane.YAxis.MajorGrid.IsVisible = _grid;
-            _graphPane.YAxis.MinorGrid.IsVisible = _grid;
             _grid = !_grid;
             GraphControl.Invalidate();
         }

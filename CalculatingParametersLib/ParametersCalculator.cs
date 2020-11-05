@@ -9,11 +9,13 @@ namespace CalculatingParametersLib
 
         public double Mmax(double rc, double rp, double erc, double erp, double zc1, double zp1)
         {
-            var m1 = zc1 / zp1;
-            var m3 = (1 / rp - 1) / (1 / rc - 1) * (zp1 / zc1);
-            var m2 = (rp - 1) / (rc - 1) * (zp1 / zc1);
-            // max(m1,+-2)
-            var mArray = new[] {Math.Pow(m1, 2), Math.Pow(m2, 2), Math.Pow(m3, 2)};
+            var m11 = zc1 / zp1;
+            var m33 = (1 / rp - 1) / (1 / rc - 1) * (zp1 / zc1);
+            var m22 = (rp - 1) / (rc - 1) * (zp1 / zc1);
+            var m1 = Math.Max(Math.Pow(m11, 2), Math.Pow(m11, -2));
+            var m2 = Math.Max(Math.Pow(m22, 2), Math.Pow(m22, -2));
+            var m3 = Math.Max(Math.Pow(m33, 2), Math.Pow(m33, -2));
+            var mArray = new[] {m1, m2, m3};
             return mArray.Min();
         }
 
@@ -47,6 +49,11 @@ namespace CalculatingParametersLib
         public double K(double rz, double n)
         {
             return (rz/n-n)/(rz-1);
+        }
+
+        public double N(double z11, double z22)
+        {
+            return Math.Sqrt(z22 / z11);
         }
 
         public double N(double rc, double rp, double k, bool rzNegativeStatus)

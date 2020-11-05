@@ -89,8 +89,8 @@
             this.ShematicPictureBox = new System.Windows.Forms.PictureBox();
             this.SelectDeSelectButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.GridButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.ZInOutFlowLayoutPanel.SuspendLayout();
             this.InputFlowLayoutPanel.SuspendLayout();
             this.Z1pToEEEFlowLayoutPanel.SuspendLayout();
@@ -110,7 +110,7 @@
             // 
             this.GraphControl.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GraphControl.Location = new System.Drawing.Point(290, 181);
-            this.GraphControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.GraphControl.Margin = new System.Windows.Forms.Padding(5);
             this.GraphControl.Name = "GraphControl";
             this.GraphControl.ScrollGrace = 0D;
             this.GraphControl.ScrollMaxX = 0D;
@@ -376,7 +376,7 @@
             "S33",
             "S34",
             "S44"});
-            this.SParamListBox.Location = new System.Drawing.Point(3, 6);
+            this.SParamListBox.Location = new System.Drawing.Point(3, 3);
             this.SParamListBox.MultiColumn = true;
             this.SParamListBox.Name = "SParamListBox";
             this.SParamListBox.Size = new System.Drawing.Size(55, 208);
@@ -409,8 +409,8 @@
             // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(858, 462);
-            this.DrawButton.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.DrawButton.Location = new System.Drawing.Point(0, 280);
+            this.DrawButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.DrawButton.Name = "DrawButton";
             this.DrawButton.Size = new System.Drawing.Size(62, 23);
             this.DrawButton.TabIndex = 40;
@@ -763,7 +763,7 @@
             this.SaveS4pButton.TabIndex = 58;
             this.SaveS4pButton.Text = "Save .ts";
             this.SaveS4pButton.UseVisualStyleBackColor = true;
-            this.SaveS4pButton.Click += new System.EventHandler(this.Test1Button_Click);
+            this.SaveS4pButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // ShematicPictureBox
             // 
@@ -778,7 +778,7 @@
             // SelectDeSelectButton
             // 
             this.SelectDeSelectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.SelectDeSelectButton.Location = new System.Drawing.Point(0, 220);
+            this.SelectDeSelectButton.Location = new System.Drawing.Point(0, 222);
             this.SelectDeSelectButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.SelectDeSelectButton.Name = "SelectDeSelectButton";
             this.SelectDeSelectButton.Size = new System.Drawing.Size(62, 23);
@@ -792,13 +792,25 @@
             this.flowLayoutPanel1.Controls.Add(this.SParamListBox);
             this.flowLayoutPanel1.Controls.Add(this.SelectDeSelectButton);
             this.flowLayoutPanel1.Controls.Add(this.GridButton);
+            this.flowLayoutPanel1.Controls.Add(this.DrawButton);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(858, 181);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(62, 281);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(62, 306);
             this.flowLayoutPanel1.TabIndex = 60;
+            // 
+            // GridButton
+            // 
+            this.GridButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.GridButton.Location = new System.Drawing.Point(0, 251);
+            this.GridButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.GridButton.Name = "GridButton";
+            this.GridButton.Size = new System.Drawing.Size(62, 23);
+            this.GridButton.TabIndex = 62;
+            this.GridButton.Text = "Grid";
+            this.GridButton.UseVisualStyleBackColor = true;
+            this.GridButton.Click += new System.EventHandler(this.GridButton_Click);
             // 
             // button1
             // 
@@ -808,19 +820,7 @@
             this.button1.TabIndex = 61;
             this.button1.Text = "Load .ts";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // GridButton
-            // 
-            this.GridButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.GridButton.Location = new System.Drawing.Point(0, 249);
-            this.GridButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.GridButton.Name = "GridButton";
-            this.GridButton.Size = new System.Drawing.Size(62, 23);
-            this.GridButton.TabIndex = 62;
-            this.GridButton.Text = "Grid";
-            this.GridButton.UseVisualStyleBackColor = true;
-            this.GridButton.Click += new System.EventHandler(this.GridButton_Click);
+            this.button1.Click += new System.EventHandler(this.LoadButton_Click);
             // 
             // FormForGraph
             // 
@@ -831,7 +831,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.InputFlowLayoutPanel);
-            this.Controls.Add(this.DrawButton);
             this.Controls.Add(this.SaveS4pButton);
             this.Controls.Add(this.GraphNameLabel);
             this.Controls.Add(this.ImageNameLabel);
