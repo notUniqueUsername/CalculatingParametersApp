@@ -459,11 +459,17 @@ namespace ParametersApp
             _34CurveMarker.IsVisible = isVisible;
             _44CurveMarker.IsVisible = isVisible;
             _22CurveLabel.IsVisible = isVisible;
+            _22CurveLabel.Label.IsVisible = isVisible;
             _23CurveLabel.IsVisible = isVisible;
+            _23CurveLabel.Label.IsVisible = isVisible;
             _24CurveLabel.IsVisible = isVisible;
+            _24CurveLabel.Label.IsVisible = isVisible;
             _33CurveLabel.IsVisible = isVisible;
+            _33CurveLabel.Label.IsVisible = isVisible;
             _34CurveLabel.IsVisible = isVisible;
-            _44CurveLabel.IsVisible = isVisible;
+            _34CurveLabel.Label.IsVisible = isVisible;
+            _34CurveLabel.IsVisible = isVisible;
+            _44CurveLabel.Label.IsVisible = isVisible;
         }
 
         private void SParamListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -727,11 +733,11 @@ namespace ParametersApp
                     data.data[2], data.data[4], data.data[6], data.data[8], data.data[12], data.data[14],
                     data.data[16], data.data[22], data.data[24], data.data[32]
                 };
-                var graphForm = new FormForGraph(ss,ff, data.data[0]);
+                var graphForm = new FormForGraph(ss,ff, data);
                 graphForm.Show();
             }
         }
-        public FormForGraph(double[][] ss, double[][] ff, double[] fi)
+        public FormForGraph(double[][] ss, double[][] ff, LoadGraph data)
         {
             InitializeComponent();
             this.Load -= DrawButton_Click;
@@ -739,21 +745,25 @@ namespace ParametersApp
             this.MaximizeBox = false;
             _graphPane = GraphControl.GraphPane;
             //SetTextToLabels();
-            _fi = fi;
+            _fi = data.data[0];
             _xMax = _fi.Max();
             _xMin = _fi.Min();
             _sParamMagnitudes = ss;
             _sParamPhases = ff;
             ChangeGraph();
             DrawCurves("S", ss);
-            Z1inTextBox.Text = "50";
-            Z2inTextBox.Text = "50";
-            Z1outTextBox.Text = "50";
-            Z2outTextBox.Text = "50";
+            //Z1inTextBox.Text = "50";
+            //Z2inTextBox.Text = "50";
+            //Z1outTextBox.Text = "50";
+            //Z2outTextBox.Text = "50";
+            Z1inTextBox.Text = data.RelatedData[Z1inTextBox.Name].ToString();
+            Z2inTextBox.Text = data.RelatedData[Z2inTextBox.Name].ToString();
+            Z1outTextBox.Text = data.RelatedData[Z1outTextBox.Name].ToString();
+            Z2outTextBox.Text = data.RelatedData[Z2outTextBox.Name].ToString();
             LengthTextBox.Text = "?";
-            NfTextBox.Text = fi.Length.ToString();
-            FreqMinTextBox.Text = fi.Min().ToString();
-            FreqMaxTextBox.Text = fi.Max().ToString();
+            NfTextBox.Text = _fi.Length.ToString();
+            FreqMinTextBox.Text = _fi.Min().ToString();
+            FreqMaxTextBox.Text = _fi.Max().ToString();
             //GeneralRadioButton.Checked = true;
             //this.KeyPreview = true;
             //DrawButton.PerformClick();

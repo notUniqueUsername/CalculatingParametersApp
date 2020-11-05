@@ -12,6 +12,7 @@ namespace CalculatingParametersLib
             var m1 = zc1 / zp1;
             var m3 = (1 / rp - 1) / (1 / rc - 1) * (zp1 / zc1);
             var m2 = (rp - 1) / (rc - 1) * (zp1 / zc1);
+            // max(m1,+-2)
             var mArray = new[] {Math.Pow(m1, 2), Math.Pow(m2, 2), Math.Pow(m3, 2)};
             return mArray.Min();
         }
