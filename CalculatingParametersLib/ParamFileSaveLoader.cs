@@ -500,7 +500,7 @@ namespace CalculatingParametersLib
                             double.TryParse(data[7].Replace(".",","), out S14[i]);
                             double.TryParse(data[8].Replace(".",","), out F14[i]);
                             i++;
-                            if (i==500)
+                            if (i==nf)
                             {
                                 break;
                             }
