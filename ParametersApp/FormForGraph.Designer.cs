@@ -233,6 +233,7 @@
             this.RzLabel.Size = new System.Drawing.Size(68, 16);
             this.RzLabel.TabIndex = 20;
             this.RzLabel.Text = "Rz = 22.22";
+            this.RzLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z1Label
             // 
@@ -409,7 +410,7 @@
             // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(0, 280);
+            this.DrawButton.Location = new System.Drawing.Point(0, 275);
             this.DrawButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.DrawButton.Name = "DrawButton";
             this.DrawButton.Size = new System.Drawing.Size(62, 23);
@@ -530,6 +531,7 @@
             this.MLabel.Size = new System.Drawing.Size(86, 16);
             this.MLabel.TabIndex = 50;
             this.MLabel.Text = "Emax = 22,22";
+            this.MLabel.TextChanged += new System.EventHandler(this.MLabel_TextChanged);
             // 
             // Z1pToEEEFlowLayoutPanel
             // 
@@ -778,7 +780,7 @@
             // SelectDeSelectButton
             // 
             this.SelectDeSelectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.SelectDeSelectButton.Location = new System.Drawing.Point(0, 222);
+            this.SelectDeSelectButton.Location = new System.Drawing.Point(0, 217);
             this.SelectDeSelectButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.SelectDeSelectButton.Name = "SelectDeSelectButton";
             this.SelectDeSelectButton.Size = new System.Drawing.Size(62, 23);
@@ -803,7 +805,7 @@
             // GridButton
             // 
             this.GridButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.GridButton.Location = new System.Drawing.Point(0, 251);
+            this.GridButton.Location = new System.Drawing.Point(0, 246);
             this.GridButton.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.GridButton.Name = "GridButton";
             this.GridButton.Size = new System.Drawing.Size(62, 23);

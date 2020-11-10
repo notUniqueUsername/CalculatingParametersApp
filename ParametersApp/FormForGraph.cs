@@ -267,12 +267,12 @@ namespace ParametersApp
             SetLineWidth(_22CurveLabel);
             _22CurveLabel.IsVisible = false;
 
-            _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Yellow, SymbolType.None);
+            _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Green, SymbolType.None);
             _23Curve.Line.Style = DashStyle.DashDot;
             _23Curve.Line.IsSmooth = true;
             //_23Curve.Symbol.Type = SymbolType.Triangle;
             SetLineWidth(_23Curve);
-            _23CurveLabel = _graphPane.AddCurve(sOrF + "23", fakeX, fakeY, Color.Yellow, SymbolType.Triangle);
+            _23CurveLabel = _graphPane.AddCurve(sOrF + "23", fakeX, fakeY, Color.Green, SymbolType.Triangle);
             SetLineWidth(_23CurveLabel);
             _23CurveLabel.IsVisible = false;
 
@@ -286,7 +286,7 @@ namespace ParametersApp
             _33Curve.Line.Style = DashStyle.Dot;
             _33Curve.Line.IsSmooth = true;
             SetLineWidth(_33Curve);
-            _33CurveLabel = _graphPane.AddCurve(sOrF + "33", fakeX, fakeY, Color.Blue, SymbolType.Plus);
+            _33CurveLabel = _graphPane.AddCurve(sOrF + "33", fakeX, fakeY, Color.Blue, SymbolType.Star);
             _33CurveLabel.Line.Style = DashStyle.Dot;
             _33CurveLabel.Line.IsSmooth = true;
             SetLineWidth(_33CurveLabel);
@@ -308,7 +308,7 @@ namespace ParametersApp
             _44Curve.Line.IsSmooth = true;
             //_44Curve.Symbol.Type = SymbolType.Star;
             SetLineWidth(_44Curve);
-            _44CurveLabel = _graphPane.AddCurve(sOrF + "44", fakeX, fakeY, Color.Green, SymbolType.Star);
+            _44CurveLabel = _graphPane.AddCurve(sOrF + "44", fakeX, fakeY, Color.Green, SymbolType.Plus);
             _44CurveLabel.Line.Style = DashStyle.Dot;
             _44CurveLabel.Line.IsSmooth = true;
             SetLineWidth(_44CurveLabel);
@@ -317,19 +317,20 @@ namespace ParametersApp
             _22CurveMarker = _graphPane.AddCurve(sOrF + "m22", markerfidata, marker22data, Color.Black, SymbolType.XCross);
             _22CurveMarker.Line.IsVisible = false;
             _22CurveMarker.Label.IsVisible = false;
-            _23CurveMarker = _graphPane.AddCurve(sOrF + "m23", markerfidata, marker23data, Color.Yellow, SymbolType.Triangle);
+            _23CurveMarker = _graphPane.AddCurve(sOrF + "m23", markerfidata, marker23data, Color.Green, SymbolType.Triangle);
+            _23Curve.Symbol.Size = 2.0f;
             _23CurveMarker.Line.IsVisible = false;
             _23CurveMarker.Label.IsVisible = false;
             _24CurveMarker = _graphPane.AddCurve(sOrF + "m24", markerfidata, marker24data, Color.Black, SymbolType.Circle);
             _24CurveMarker.Line.IsVisible = false;
             _24CurveMarker.Label.IsVisible = false;
-            _33CurveMarker = _graphPane.AddCurve(sOrF + "m33", markerfidata, marker33data, Color.Blue, SymbolType.Plus);
+            _33CurveMarker = _graphPane.AddCurve(sOrF + "m33", markerfidata, marker33data, Color.Blue, SymbolType.Star);
             _33CurveMarker.Line.IsVisible = false;
             _33CurveMarker.Label.IsVisible = false;
             _34CurveMarker = _graphPane.AddCurve(sOrF + "m34", markerfidata, marker34data, Color.Green, SymbolType.Square);
             _34CurveMarker.Line.IsVisible = false;
             _34CurveMarker.Label.IsVisible = false;
-            _44CurveMarker = _graphPane.AddCurve(sOrF + "m44", markerfidata, marker44data, Color.Green, SymbolType.Star);
+            _44CurveMarker = _graphPane.AddCurve(sOrF + "m44", markerfidata, marker44data, Color.Green, SymbolType.Plus);
             _44CurveMarker.Line.IsVisible = false;
             _44CurveMarker.Label.IsVisible = false;
 
@@ -849,6 +850,22 @@ namespace ParametersApp
             if (RpLabel.Text.Length > 10)
             {
                 RpLabel.Font = new Font("Arial Narrow", RpLabel.Font.Size);
+            }
+        }
+
+        private void MLabel_TextChanged(object sender, EventArgs e)
+        {
+            if (MLabel.Text.Length > 10)
+            {
+                MLabel.Font = new Font("Arial Narrow", RpLabel.Font.Size);
+            }
+        }
+
+        private void RzLabel_TextChanged(object sender, EventArgs e)
+        {
+            if (RzLabel.Text.Length > 10)
+            {
+                RzLabel.Font = new Font("Arial Narrow", RpLabel.Font.Size);
             }
         }
     }

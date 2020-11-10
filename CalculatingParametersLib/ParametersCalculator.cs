@@ -12,10 +12,22 @@ namespace CalculatingParametersLib
             var m11 = zc1 / zp1;
             var m33 = (1 / rp - 1) / (1 / rc - 1) * (zp1 / zc1);
             var m22 = (rp - 1) / (rc - 1) * (zp1 / zc1);
-            var m1 = Math.Max(Math.Pow(m11, 2), Math.Pow(m11, -2));
-            var m2 = Math.Max(Math.Pow(m22, 2), Math.Pow(m22, -2));
-            var m3 = Math.Max(Math.Pow(m33, 2), Math.Pow(m33, -2));
-            var mArray = new[] {m1, m2, m3};
+            var m1 = Math.Max(Math.Pow(m11, 1), Math.Pow(m11, -1));
+            var m2 = Math.Max(Math.Pow(m22, 1), Math.Pow(m22, -1));
+            var m3 = Math.Max(Math.Pow(m33, 1), Math.Pow(m33, -1));
+            if (m1 < 0)
+            {
+                m1 = 1e10;
+            }
+            if (m2 < 0)
+            {
+                m2 = 1e10;
+            }
+            if (m3 < 0)
+            {
+                m3 = 1e10;
+            }
+            var mArray = new[] { Math.Pow(m1, 2), Math.Pow(m2, 2), Math.Pow(m3, 2) };
             return mArray.Min();
         }
 
