@@ -15,15 +15,15 @@ namespace CalculatingParametersLib
             var m1 = Math.Max(Math.Pow(m11, 1), Math.Pow(m11, -1));
             var m2 = Math.Max(Math.Pow(m22, 1), Math.Pow(m22, -1));
             var m3 = Math.Max(Math.Pow(m33, 1), Math.Pow(m33, -1));
-            if (m1 < 0)
+            if (m1 <= 0)
             {
                 m1 = 1e10;
             }
-            if (m2 < 0)
+            if (m2 <= 0)
             {
                 m2 = 1e10;
             }
-            if (m3 < 0)
+            if (m3 <= 0)
             {
                 m3 = 1e10;
             }
@@ -345,7 +345,8 @@ namespace CalculatingParametersLib
 
         public double L12(double erc, double erp, double zp1, double zc1, double rc, double rp)
         {
-            return (Math.Sqrt(erp) * zp1 - Math.Sqrt(erc) * zc1) * rc * rp * Math.Pow(rc - rp, -1) / SpeedOfLight;
+            var x = (Math.Sqrt(erp) * zp1 - Math.Sqrt(erc) * zc1) * rc * rp * Math.Pow(rc - rp, -1) / SpeedOfLight;
+            return x;
         }
 
         public double C11(double erc, double erp, double zp1, double zc1, double rc, double rp)

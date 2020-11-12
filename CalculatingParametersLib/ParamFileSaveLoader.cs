@@ -123,7 +123,7 @@ namespace CalculatingParametersLib
                 file.WriteLine("[Version] 2.0");
                 file.WriteLine("# GHz S DB R 50");
                 file.WriteLine("[Number of Ports] 4");
-                file.WriteLine("[Number of Frequencies] 1");
+                file.WriteLine("[Number of Frequencies] " + relatedData["NfTextBox"]);
                 file.WriteLine("[Reference] " + relatedData["Z1inTextBox"] + " " + relatedData["Z1outTextBox"] + " " + relatedData["Z2inTextBox"] + " " + relatedData["Z2outTextBox"]);
                 file.WriteLine("[Matrix Format] Full");
                 file.WriteLine("! ParamApp");
@@ -770,7 +770,7 @@ namespace CalculatingParametersLib
                             double.TryParse(data[7].Replace(".", ","), out S14[i]);
                             double.TryParse(data[8].Replace(".", ","), out F14[i]);
                             i++;
-                            if (i == 500)
+                            if (i == nf)
                             {
                                 break;
                             }

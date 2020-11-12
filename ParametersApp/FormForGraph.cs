@@ -212,8 +212,15 @@ namespace ParametersApp
         {
             var fakeX = new double[] { 1 };
             var fakeY = new double[] { 1 };
-            var count = _fi.Count() - _fi.Count() % 10;
-            double fiMarkerCount = count / 10;
+            var count = _fi.Count();
+            double fiMarkerCount = 1;
+
+            if (_fi.Count() >= 20)
+            {
+                count = _fi.Count() - _fi.Count() % 20;
+                fiMarkerCount = count / 20;
+            }
+            
             int fiM =
                 int.Parse(Math.Floor(count / fiMarkerCount).ToString());
             var marker22data = new double[fiM];

@@ -84,25 +84,17 @@ namespace CalculatingParametersLib
 
             _currentParams.S21 = _calculator.S21(_currentParams.k);
 
-            _currentParams.C11 = Math.Round(
-                _currentParams.C11 *
-                Math.Pow(10, 12), 3);
-            _currentParams.L11 = Math.Round(
-                _calculator.L11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 6), 3);
-            _currentParams.C22 = Math.Round(
-                _calculator.C22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 12), 3);
-            _currentParams.L22 =
-                Math.Round(
-                    _calculator.L22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                    Math.Pow(10, 6), 3);
-            _currentParams.C12 = Math.Round(
-                _calculator.C12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 12), 3);
-            _currentParams.L12 = Math.Round(
-                _calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 6), 3);
+            _currentParams.C11 = _currentParams.C11 * Math.Pow(10, 12);
+            _currentParams.L11 = _calculator.L11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1,
+                                     _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 6);
+            _currentParams.C22 = _calculator.C22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1,
+                                     _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 12);
+            _currentParams.L22 = _calculator.L22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1,
+                                     _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 6);
+            _currentParams.C12 = _calculator.C12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1,
+                                     _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 12);
+            _currentParams.L12 = _calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1,
+                                     _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 6);
             _currentParams.Z1 = _calculator.Z1OrZ2(_currentParams.L11, _currentParams.C11) * 1000;
             _currentParams.Z2 = _calculator.Z1OrZ2(_currentParams.L22, _currentParams.C22) * 1000;
 
@@ -179,25 +171,12 @@ namespace CalculatingParametersLib
             _currentParams.S21 = _calculator.S21(_currentParams.k);
             _currentParams.Z1 = _calculator.Z1OrZ2(_currentParams.L11, _currentParams.C11);
             _currentParams.Z2 = _calculator.Z1OrZ2(_currentParams.L22, _currentParams.C22);
-            _currentParams.C11 = Math.Round(
-                _currentParams.C11 *
-                Math.Pow(10, 12), 3);
-            _currentParams.L11 = Math.Round(
-                _calculator.L11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 6), 4);
-            _currentParams.C22 = Math.Round(
-                _calculator.C22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 12), 3);
-            _currentParams.L22 =
-                Math.Round(
-                    _calculator.L22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                    Math.Pow(10, 6), 4);
-            _currentParams.C12 = Math.Round(
-                _calculator.C12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 12), 3);
-            _currentParams.L12 = Math.Round(
-                _calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) *
-                Math.Pow(10, 6), 4);
+            _currentParams.C11 = _currentParams.C11 * Math.Pow(10, 12);
+            _currentParams.L11 = _calculator.L11(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 6);
+            _currentParams.C22 = _calculator.C22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 12);
+            _currentParams.L22 = _calculator.L22(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 6);
+            _currentParams.C12 = _calculator.C12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 12);
+            _currentParams.L12 = _calculator.L12(_currentParams.Erc, _currentParams.Erp, _currentParams.Zp1, _currentParams.Zc1, _currentParams.Rc, _currentParams.Rp) * Math.Pow(10, 6);
 
             _currentParams.Emax = _calculator.Mmax(_currentParams.Rc, _currentParams.Rp, _currentParams.Erc,
                 _currentParams.Erp, _currentParams.Zc1, _currentParams.Zp1);
