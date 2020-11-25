@@ -196,6 +196,7 @@
             this.ErpLabel.Size = new System.Drawing.Size(73, 16);
             this.ErpLabel.TabIndex = 17;
             this.ErpLabel.Text = "Erп = 22,22";
+            this.ErpLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // KLabel
             // 
@@ -208,19 +209,20 @@
             this.KLabel.Size = new System.Drawing.Size(59, 16);
             this.KLabel.TabIndex = 18;
             this.KLabel.Text = "k = 22.22";
+            this.KLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // RpLabel
             // 
             this.RpLabel.AutoSize = true;
             this.RpLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.RpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.RpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.RpLabel.Location = new System.Drawing.Point(0, 45);
             this.RpLabel.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
             this.RpLabel.Name = "RpLabel";
-            this.RpLabel.Size = new System.Drawing.Size(70, 16);
+            this.RpLabel.Size = new System.Drawing.Size(67, 15);
             this.RpLabel.TabIndex = 19;
             this.RpLabel.Text = "Rп = 22.22";
-            this.RpLabel.TextChanged += new System.EventHandler(this.RpLabel_TextChanged);
+            this.RpLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // RzLabel
             // 
@@ -246,6 +248,7 @@
             this.Z1Label.Size = new System.Drawing.Size(83, 16);
             this.Z1Label.TabIndex = 21;
             this.Z1Label.Text = "Z1, Ω = 222.2";
+            this.Z1Label.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // ErcLabel
             // 
@@ -258,6 +261,7 @@
             this.ErcLabel.Size = new System.Drawing.Size(72, 16);
             this.ErcLabel.TabIndex = 22;
             this.ErcLabel.Text = "Erc = 22,22";
+            this.ErcLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // RcLabel
             // 
@@ -270,6 +274,7 @@
             this.RcLabel.Size = new System.Drawing.Size(69, 16);
             this.RcLabel.TabIndex = 23;
             this.RcLabel.Text = "Rc = 22.22";
+            this.RcLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z2Label
             // 
@@ -282,6 +287,7 @@
             this.Z2Label.Size = new System.Drawing.Size(83, 16);
             this.Z2Label.TabIndex = 24;
             this.Z2Label.Text = "Z2, Ω = 222.2";
+            this.Z2Label.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z1outTextBox
             // 
@@ -483,6 +489,7 @@
             this.EEELabel.Size = new System.Drawing.Size(90, 16);
             this.EEELabel.TabIndex = 46;
             this.EEELabel.Text = "Erп/Erc = 22,2";
+            this.EEELabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z0Label
             // 
@@ -495,6 +502,7 @@
             this.Z0Label.Size = new System.Drawing.Size(83, 16);
             this.Z0Label.TabIndex = 49;
             this.Z0Label.Text = "Z0, Ω = 222.2";
+            this.Z0Label.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z2cLabel
             // 
@@ -507,6 +515,7 @@
             this.Z2cLabel.Size = new System.Drawing.Size(90, 16);
             this.Z2cLabel.TabIndex = 48;
             this.Z2cLabel.Text = "Z2c, Ω = 22,22";
+            this.Z2cLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z1pLabel
             // 
@@ -519,6 +528,7 @@
             this.Z1pLabel.Size = new System.Drawing.Size(91, 16);
             this.Z1pLabel.TabIndex = 47;
             this.Z1pLabel.Text = "Z1п, Ω = 22,22";
+            this.Z1pLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // MLabel
             // 
@@ -531,16 +541,16 @@
             this.MLabel.Size = new System.Drawing.Size(86, 16);
             this.MLabel.TabIndex = 50;
             this.MLabel.Text = "Emax = 22,22";
-            this.MLabel.TextChanged += new System.EventHandler(this.MLabel_TextChanged);
+            this.MLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z1pToEEEFlowLayoutPanel
             // 
             this.Z1pToEEEFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Z1pToEEEFlowLayoutPanel.Controls.Add(this.Z1pToEEEColumn1FlowLayoutPanel);
             this.Z1pToEEEFlowLayoutPanel.Controls.Add(this.Z1pToEEEColumn2FlowLayoutPanel);
-            this.Z1pToEEEFlowLayoutPanel.Location = new System.Drawing.Point(633, 12);
+            this.Z1pToEEEFlowLayoutPanel.Location = new System.Drawing.Point(647, 12);
             this.Z1pToEEEFlowLayoutPanel.Name = "Z1pToEEEFlowLayoutPanel";
-            this.Z1pToEEEFlowLayoutPanel.Size = new System.Drawing.Size(287, 82);
+            this.Z1pToEEEFlowLayoutPanel.Size = new System.Drawing.Size(273, 82);
             this.Z1pToEEEFlowLayoutPanel.TabIndex = 51;
             // 
             // Z1pToEEEColumn1FlowLayoutPanel
@@ -553,7 +563,7 @@
             this.Z1pToEEEColumn1FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z1pToEEEColumn1FlowLayoutPanel.Name = "Z1pToEEEColumn1FlowLayoutPanel";
             this.Z1pToEEEColumn1FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.Z1pToEEEColumn1FlowLayoutPanel.Size = new System.Drawing.Size(160, 80);
+            this.Z1pToEEEColumn1FlowLayoutPanel.Size = new System.Drawing.Size(146, 80);
             this.Z1pToEEEColumn1FlowLayoutPanel.TabIndex = 57;
             // 
             // Z1pToEEEColumn2FlowLayoutPanel
@@ -562,7 +572,7 @@
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.ErpLabel);
             this.Z1pToEEEColumn2FlowLayoutPanel.Controls.Add(this.EEELabel);
             this.Z1pToEEEColumn2FlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.Z1pToEEEColumn2FlowLayoutPanel.Location = new System.Drawing.Point(160, 0);
+            this.Z1pToEEEColumn2FlowLayoutPanel.Location = new System.Drawing.Point(146, 0);
             this.Z1pToEEEColumn2FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z1pToEEEColumn2FlowLayoutPanel.Name = "Z1pToEEEColumn2FlowLayoutPanel";
             this.Z1pToEEEColumn2FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
@@ -577,7 +587,7 @@
             this.Z0ToRpFlowLayoutPanel.Controls.Add(this.Z0ToRpColumn3FlowLayoutPanel);
             this.Z0ToRpFlowLayoutPanel.Location = new System.Drawing.Point(290, 12);
             this.Z0ToRpFlowLayoutPanel.Name = "Z0ToRpFlowLayoutPanel";
-            this.Z0ToRpFlowLayoutPanel.Size = new System.Drawing.Size(338, 82);
+            this.Z0ToRpFlowLayoutPanel.Size = new System.Drawing.Size(356, 82);
             this.Z0ToRpFlowLayoutPanel.TabIndex = 52;
             // 
             // Z0ToRpColumn1FlowLayoutPanel
@@ -617,6 +627,7 @@
             this.NLabel.Size = new System.Drawing.Size(59, 16);
             this.NLabel.TabIndex = 25;
             this.NLabel.Text = "n = 22.22";
+            this.NLabel.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // Z0ToRpColumn3FlowLayoutPanel
             // 
@@ -628,7 +639,7 @@
             this.Z0ToRpColumn3FlowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.Z0ToRpColumn3FlowLayoutPanel.Name = "Z0ToRpColumn3FlowLayoutPanel";
             this.Z0ToRpColumn3FlowLayoutPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.Z0ToRpColumn3FlowLayoutPanel.Size = new System.Drawing.Size(114, 80);
+            this.Z0ToRpColumn3FlowLayoutPanel.Size = new System.Drawing.Size(132, 80);
             this.Z0ToRpColumn3FlowLayoutPanel.TabIndex = 57;
             // 
             // S21Label
@@ -642,6 +653,7 @@
             this.S21Label.Size = new System.Drawing.Size(91, 16);
             this.S21Label.TabIndex = 53;
             this.S21Label.Text = "S21, dB = 22,2";
+            this.S21Label.TextChanged += new System.EventHandler(this.RzLabel_TextChanged);
             // 
             // ShematicGroupBox
             // 
@@ -763,7 +775,7 @@
             this.SaveS4pButton.Name = "SaveS4pButton";
             this.SaveS4pButton.Size = new System.Drawing.Size(119, 23);
             this.SaveS4pButton.TabIndex = 58;
-            this.SaveS4pButton.Text = "Save .ts";
+            this.SaveS4pButton.Text = "Save .ts/.s4p";
             this.SaveS4pButton.UseVisualStyleBackColor = true;
             this.SaveS4pButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
@@ -820,7 +832,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 23);
             this.button1.TabIndex = 61;
-            this.button1.Text = "Load .ts";
+            this.button1.Text = "Load .ts/.s4p";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.LoadButton_Click);
             // 

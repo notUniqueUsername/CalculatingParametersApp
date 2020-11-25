@@ -551,7 +551,7 @@ namespace CalculatingParametersLib
                 klc = Math.Round(klc, 3),
                 ke = Math.Round(ke, 3),
                 m = Math.Round(m, 3),
-                EEE = Math.Round(EEE, 3),
+                EEE = Math.Round(EEE, 5),
                 Zc1 = Math.Round(Zc1, 3),
                 Zp1 = Math.Round(Zp1, 3),
                 Zc2 = Math.Round(Zc2, 3),
@@ -561,6 +561,7 @@ namespace CalculatingParametersLib
                 Z1p = Math.Round(Z1p, 3),
                 Z2p = Math.Round(Z2p, 3),
                 Z12 = Math.Round(Z12, 3),
+                Emax = Math.Round(Emax, 2),
                 Result = Result
             };
             return formattedParams;

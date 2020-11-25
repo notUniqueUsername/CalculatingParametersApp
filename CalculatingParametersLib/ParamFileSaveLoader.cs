@@ -114,7 +114,7 @@ namespace CalculatingParametersLib
             return returningString;
         }
 
-        public static void SaveToS4p(string fileName, Params currentParams, double[][][] s4pData, double[] fi,
+        public static void SaveToTs(string fileName, Params currentParams, double[][][] s4pData, double[] fi,
             SortedList<string, double> relatedData)
         {
             var data = formListForSave(currentParams, true);
@@ -254,7 +254,7 @@ namespace CalculatingParametersLib
             return returnungList;
         }
 
-        public static LoadGraph LoadS4p(string fileName)
+        public static LoadGraph LoadTs(string fileName)
         {
             var loadedParams = new LoadGraph();
             string line;
@@ -442,6 +442,8 @@ namespace CalculatingParametersLib
             loadedParams.inParams = s4pright;
             return loadedParams;
         }
+
+        
 
         public static double[][] LoadLefts4p(string fileName, int nf)
         {
@@ -828,6 +830,198 @@ namespace CalculatingParametersLib
             };
             return dataLoadGraph;
             
+        }
+
+        public static void SaveToS4p(string fileName, Params currentParams, double[][][] s4pData, double[] fi,
+            SortedList<string, double> relatedData)
+        {
+            var data = formListForSave(currentParams, true);
+            using (StreamWriter file = new StreamWriter(fileName, true))
+            {
+                file.WriteLine("# GHz S DB R 50");
+                file.WriteLine("! ParamApp");
+                file.WriteLine("! Calculation date:" + DateTime.Now.ToString());
+                file.WriteLine("! Start ParamBlock");
+                foreach (var dataString in data)
+                {
+                    file.WriteLine(dataString);
+                }
+                file.WriteLine("! End ParamBlock");
+                file.WriteLine("! Start RelatedDataBlock");
+                file.WriteLine("!Z1in, Ω=" + relatedData["Z1inTextBox"]);
+                file.WriteLine("!Z2in, Ω=" + relatedData["Z2inTextBox"]);
+                file.WriteLine("!Z1out, Ω=" + relatedData["Z1outTextBox"]);
+                file.WriteLine("!Z2out, Ω=" + relatedData["Z2outTextBox"]);
+                file.WriteLine("!FreqMin, GHz=" + relatedData["FreqMinTextBox"]);
+                file.WriteLine("!FreqMax, GHz=" + relatedData["FreqMaxTextBox"]);
+                file.WriteLine("!L, mm=" + (relatedData["LengthTextBox"] * 1000));
+                file.WriteLine("!Nf=" + relatedData["NfTextBox"]);
+                file.WriteLine("! End RelatedDataBlock");
+                for (int i = 0; i < fi.Length; i++)
+                {
+                    file.WriteLine(FormStringWithFreq(fi[i], s4pData[0][0][i], s4pData[1][0][i], s4pData[0][1][i],
+                        s4pData[1][1][i], s4pData[0][2][i],
+                        s4pData[1][2][i], s4pData[0][3][i], s4pData[1][3][i]));
+                    file.WriteLine(FormString(s4pData[0][4][i], s4pData[1][4][i], s4pData[0][5][i], s4pData[1][5][i],
+                        s4pData[0][6][i],
+                        s4pData[1][6][i], s4pData[0][7][i], s4pData[1][7][i]));
+                    file.WriteLine(FormString(s4pData[0][8][i], s4pData[1][8][i], s4pData[0][9][i], s4pData[1][9][i],
+                        s4pData[0][10][i],
+                        s4pData[1][10][i], s4pData[0][11][i], s4pData[1][11][i]));
+                    file.WriteLine(FormString(s4pData[0][12][i], s4pData[1][12][i], s4pData[0][13][i],
+                        s4pData[1][13][i], s4pData[0][14][i],
+                        s4pData[1][14][i], s4pData[0][15][i], s4pData[1][15][i]));
+                }
+            }
+        }
+
+        public static LoadGraph LoadS4p(string fileName)
+        {
+            var loadedParams = new LoadGraph();
+            string line;
+            double c11 = 0;
+            double c22 = 0;
+            double c12 = 0;
+            double l11 = 0;
+            double l22 = 0;
+            double l12 = 0;
+            double z2Out = 50;
+            double z1Out = 50;
+            double z2In = 50;
+            double z1In = 50;
+            double nf = 0;
+            double l = 0;
+            double fmin = 0;
+            double fmax = 0;
+            var i = 0;
+            var stringCounts = 0;
+            bool s4pright = false;
+            using (StreamReader sr = new StreamReader(fileName, Encoding.UTF8))
+            {
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line.Contains("! ParamApp"))
+                    {
+                        s4pright = true;
+                        break;
+                    }
+                    else
+                    {
+                        if (!line.Contains("#") && !line.Contains("!"))
+                        {
+                            stringCounts++;
+                        }
+                    }
+                }
+
+                sr.Close();
+            }
+
+            if (s4pright)
+            {
+                using (StreamReader sr = new StreamReader(fileName, Encoding.UTF8))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (line.Contains("C11, pF/m="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out c11);
+                            i++;
+                        }
+
+                        if (line.Contains("C22, pF/m="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out c22);
+                            i++;
+                        }
+
+                        if (line.Contains("C12, pF/m="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out c12);
+                            i++;
+                        }
+
+                        if (line.Contains("L11, μH/m="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out l11);
+                            i++;
+                        }
+
+                        if (line.Contains("L22, μH/m="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out l22);
+                            i++;
+                        }
+
+                        if (line.Contains("L12, μH/m="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out l12);
+                            i++;
+                        }
+
+                        if (line.Contains("Nf="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out nf);
+                            i++;
+                        }
+
+                        if (line.Contains("L, mm="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out l);
+                            i++;
+                        }
+
+                        if (line.Contains("FreqMax, GHz="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out fmax);
+                            i++;
+                        }
+
+                        if (line.Contains("FreqMin, GHz="))
+                        {
+                            var index = line.IndexOf('=');
+                            double.TryParse(line.Substring(index + 1), out fmin);
+                            i++;
+                        }
+
+                        if (i == 10)
+                        {
+                            sr.Close();
+                            break;
+                        }
+                    }
+                }
+
+                var calculator = new CalculateFromPogonie();
+                loadedParams.CurrentParams = calculator.Calculate(c11, c12, c22, l11, l12, l22);
+                loadedParams.RelatedData = new SortedList<string, double>
+                {
+                    {"Z1inTextBox", z1In},
+                    {"Z2inTextBox", z2In},
+                    {"Z1outTextBox", z1Out},
+                    {"Z2outTextBox", z2Out},
+                    {"FreqMinTextBox", fmin},
+                    {"FreqMaxTextBox", fmax},
+                    {"LengthTextBox", l},
+                    {"NfTextBox", nf}
+                };
+            }
+            else
+            {
+                loadedParams = LoadLeftTs(fileName, stringCounts / 4);
+            }
+
+            loadedParams.inParams = s4pright;
+            return loadedParams;
         }
     }
     

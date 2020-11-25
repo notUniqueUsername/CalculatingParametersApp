@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace ParametersApp
 {
     public partial class FormForGraph : Form
     {
-        private bool _grid = false;
+        private bool _grid = true;
         private LineItem _11Curve;
         private LineItem _12Curve;
         private LineItem _13Curve;
@@ -137,6 +138,7 @@ namespace ParametersApp
             _graphPane.YAxis.MajorGrid.IsVisible = true;
             _graphPane.YAxis.MajorGrid.DashOff = 0;
             _graphPane.YAxis.MajorGrid.Color = Color.Green;
+            _grid = !_grid;
             _graphPane.Title.IsVisible = false;
             
             var yTitle = _graphPane.YAxis.Title;
@@ -170,8 +172,8 @@ namespace ParametersApp
 
         private void SetMaxMinAxes(double xMin, double xMax, double[][] sParamMagnitudeOrPhase)
         {
-            _graphPane.XAxis.Scale.Max = Math.Round(xMax);
-            _graphPane.XAxis.Scale.Min = Math.Round(xMin);
+            _graphPane.XAxis.Scale.Max = xMax;
+            _graphPane.XAxis.Scale.Min = xMin;
             _yMax = sParamMagnitudeOrPhase[0].Max();
             _yMin = sParamMagnitudeOrPhase[0].Min();
             for (int i = 1; i < sParamMagnitudeOrPhase.GetLength(0); i++)
@@ -185,8 +187,13 @@ namespace ParametersApp
                     _yMin = sParamMagnitudeOrPhase[i].Min();
                 }
             }
-            _graphPane.YAxis.Scale.Max = Math.Round(_yMax);
-            _graphPane.YAxis.Scale.Min = Math.Round(_yMin);
+            _graphPane.YAxis.Scale.Max = _yMax;
+            _graphPane.YAxis.Scale.Min = _yMin;
+            //_graphPane.XAxis.Scale.MajorStep = 0.05;
+            _graphPane.XAxis.Scale.MajorStepAuto = true;
+            _graphPane.XAxis.Scale.FormatAuto = true;
+            _graphPane.XAxis.Scale.IsSkipLastLabel = false;
+            _graphPane.XAxis.Scale.IsSkipFirstLabel = false;
             _graphPane.ZoomStack.Clear();
         }
 
@@ -349,25 +356,25 @@ namespace ParametersApp
 
         private void SetTextToLabels()
         {
-            ErcLabel.Text = "Erc = " + Math.Round(_currentParams.Erc, 3).ToString();
-            ErpLabel.Text = "Erп = " + Math.Round(_currentParams.Erp, 3).ToString();
-            EEELabel.Text = "Erп/Erc = " + Math.Round(_currentParams.EEE, 1).ToString();
+            var visibleParams = _currentParams.GetForamttedParams();
+            ErcLabel.Text = "Erc = " + visibleParams.Erc.ToString("G12");
+            ErpLabel.Text = "Erп = " + visibleParams.Erp.ToString("G12");
+            EEELabel.Text = "Erп/Erc = " + visibleParams.EEE.ToString("G12");
+            S21Label.Text = "S21, dB = " + visibleParams.S21.ToString("G12");
+            RcLabel.Text = "Rc = " + visibleParams.Rc.ToString("g12");
+            RpLabel.Text = "Rп = " + visibleParams.Rp.ToString("G12");
 
-            S21Label.Text = "S21, dB = " + Math.Round(_currentParams.S21, 1).ToString();
-            RcLabel.Text = "Rc = " + Math.Round(_currentParams.Rc, 3).ToString();
-            RpLabel.Text = "Rп = " + Math.Round(_currentParams.Rp, 3).ToString();
+            KLabel.Text = "k = " + visibleParams.k.ToString("G12");
+            NLabel.Text = "n = " + visibleParams.N.ToString("G12");
+            RzLabel.Text = "Rz = " + visibleParams.Rz.ToString("G12");
 
-            KLabel.Text = "k = " + Math.Round(_currentParams.k, 3).ToString();
-            NLabel.Text = "n = " + Math.Round(_currentParams.N, 3).ToString();
-            RzLabel.Text = "Rz = " + Math.Round(_currentParams.Rz, 3).ToString();
+            Z1pLabel.Text = "Z1п, Ω = " + visibleParams.Z1p.ToString("G12");
+            Z2cLabel.Text = "Z2c, Ω = " + visibleParams.Z2c.ToString("G12");
+            MLabel.Text = "Emax = " + visibleParams.Emax.ToString("G12");
 
-            Z1pLabel.Text = "Z1п, Ω = " + Math.Round(_currentParams.Z1p, 3).ToString();
-            Z2cLabel.Text = "Z2c, Ω = " + Math.Round(_currentParams.Z2c, 3).ToString();
-            MLabel.Text = "Emax = " + Math.Round(_currentParams.Emax, 3).ToString();
-
-            Z0Label.Text = "Z0, Ω = " + Math.Round(_currentParams.Z0, 1).ToString();
-            Z1Label.Text = "Z1, Ω = " + Math.Round(_currentParams.Z1, 1).ToString();
-            Z2Label.Text = "Z2, Ω = " + Math.Round(_currentParams.Z2, 1).ToString();
+            Z0Label.Text = "Z0, Ω = " + visibleParams.Z0.ToString("G12");
+            Z1Label.Text = "Z1, Ω = " + visibleParams.Z1.ToString("G12");
+            Z2Label.Text = "Z2, Ω = " + visibleParams.Z2.ToString("G12");
             
         }
 
@@ -695,12 +702,15 @@ namespace ParametersApp
             var dialog = new SaveFileDialog();
             dialog.AddExtension = true;
             dialog.DefaultExt = "ts";
-            dialog.Filter = "ts files (*.ts)|*.ts";
+            dialog.Filter = "ts and s4p files (*.ts;*.s4p)|*.ts;*.s4p";
             dialog.FilterIndex = 1;
             var relatedData = _sParamData.GetRelatedData();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                ParamFileSaveLoader.SaveToS4p(dialog.FileName, _currentParams, _sParamData.GetS4pFile(), _fi, relatedData);
+                ParamFileSaveLoader.SaveToTs(dialog.FileName, _currentParams, _sParamData.GetS4pFile(), _fi, relatedData);
+                var sParamData = new CouplLinesInFreqRange(_currentParams, _l, _fmin, _fmax, _nf, 50, 50, 50, 50);
+                relatedData = sParamData.GetRelatedData();
+                ParamFileSaveLoader.SaveToS4p(dialog.FileName.Replace(".ts",".s4p"), _currentParams, sParamData.GetS4pFile(), _fi, relatedData);
             }
         }
 
@@ -720,33 +730,40 @@ namespace ParametersApp
         private void LoadButton_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "ts files (*.ts)|*.ts";
+            dialog.Filter = "ts files (*.ts)|*.ts|s4p files (*.s4p)|*.s4p";
             dialog.FilterIndex = 1;
             LoadGraph data = new LoadGraph();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                data = ParamFileSaveLoader.LoadS4p(dialog.FileName);
-            }
+                if (dialog.FileName.Contains(".s4p"))
+                {
+                    data = ParamFileSaveLoader.LoadS4p(dialog.FileName);
+                }
+                if (dialog.FileName.Contains(".ts"))
+                {
+                    data = ParamFileSaveLoader.LoadTs(dialog.FileName);
+                }
 
-            if (data.inParams)
-            {
-                var graphForm = new FormForGraph(data.CurrentParams, data.RelatedData);
-                graphForm.Show();
-            }
-            else
-            {
-                var ss = new double[][]
+                if (data.inParams)
                 {
-                    data.data[1], data.data[3], data.data[5], data.data[7], data.data[11], data.data[13],
-                    data.data[15], data.data[21], data.data[23], data.data[31]
-                };
-                var ff = new double[][]
+                    var graphForm = new FormForGraph(data.CurrentParams, data.RelatedData);
+                    graphForm.Show();
+                }
+                else
                 {
-                    data.data[2], data.data[4], data.data[6], data.data[8], data.data[12], data.data[14],
-                    data.data[16], data.data[22], data.data[24], data.data[32]
-                };
-                var graphForm = new FormForGraph(ss,ff, data);
-                graphForm.Show();
+                    var ss = new double[][]
+                    {
+                        data.data[1], data.data[3], data.data[5], data.data[7], data.data[11], data.data[13],
+                        data.data[15], data.data[21], data.data[23], data.data[31]
+                    };
+                    var ff = new double[][]
+                    {
+                        data.data[2], data.data[4], data.data[6], data.data[8], data.data[12], data.data[14],
+                        data.data[16], data.data[22], data.data[24], data.data[32]
+                    };
+                    var graphForm = new FormForGraph(ss, ff, data);
+                    graphForm.Show();
+                }
             }
         }
         public FormForGraph(double[][] ss, double[][] ff, LoadGraph data)
@@ -852,27 +869,13 @@ namespace ParametersApp
             GraphControl.Invalidate();
         }
 
-        private void RpLabel_TextChanged(object sender, EventArgs e)
-        {
-            if (RpLabel.Text.Length > 10)
-            {
-                RpLabel.Font = new Font("Arial Narrow", RpLabel.Font.Size);
-            }
-        }
-
-        private void MLabel_TextChanged(object sender, EventArgs e)
-        {
-            if (MLabel.Text.Length > 10)
-            {
-                MLabel.Font = new Font("Arial Narrow", RpLabel.Font.Size);
-            }
-        }
 
         private void RzLabel_TextChanged(object sender, EventArgs e)
         {
-            if (RzLabel.Text.Length > 10)
+            var label = (Label)sender;
+            if (label.Text.Length > 6)
             {
-                RzLabel.Font = new Font("Arial Narrow", RpLabel.Font.Size);
+                label.Font = new Font("Arial Narrow", label.Font.Size);
             }
         }
     }
