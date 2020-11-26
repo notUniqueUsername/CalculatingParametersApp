@@ -664,9 +664,7 @@ namespace ParametersApp
 
         private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Params testParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(64.142136, 24.142136, 1, -0.2, 1.1, 9.9);
-
-            var graphForm = new FormForGraph(testParams);
+            var graphForm = new Form2();
             graphForm.Show();
         }
 

@@ -16,7 +16,13 @@ namespace ParametersApp
         {
             //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+#if !DEBUG
             Application.Run(new MainForm());
+#endif
+#if DEBUG
+            Application.Run(new Form2());
+#endif
+            
         }
     }
 }
