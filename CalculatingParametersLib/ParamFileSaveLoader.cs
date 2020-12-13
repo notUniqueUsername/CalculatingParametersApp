@@ -39,7 +39,7 @@ namespace CalculatingParametersLib
                         i++;
                     }
 
-                    if (line.Contains("C12, pF/m="))
+                    if (line.Contains("C12, pF/m=") || line.Contains("-C12, pF/m="))
                     {
                         var index = line.IndexOf('=');
                         c12 = line.Substring(index + 1);

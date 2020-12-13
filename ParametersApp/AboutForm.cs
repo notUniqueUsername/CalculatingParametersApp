@@ -20,7 +20,37 @@ namespace ParametersApp
         private void label3_Click(object sender, EventArgs e)
         {
             Process.Start(
-                "https://journal.tusur.ru/storage/124967/1-%D0%A1%D1%8B%D1%87%D0%B5%D0%B2-%D0%A0%D1%83%D0%B4%D1%8B%D0%B9.pdf?1553238272");
+                "https://elibrary.ru/item.asp?id=30006562");
+        }
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Process.Start(
+                "https://elibrary.ru/item.asp?id=21633543");
+        }
+        private void label4_Click(object sender, EventArgs e)
+        {
+            Process.Start(
+                "https://elibrary.ru/item.asp?id=30070189");
+        }
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Process.Start(
+                "https://elibrary.ru/item.asp?id=37605508");
+        }
+        private void label6_Click(object sender, EventArgs e)
+        {
+            Process.Start(
+                "https://elibrary.ru/item.asp?id=38527010");
+        }
+        private void label7_Click(object sender, EventArgs e)
+        {
+            Process.Start(
+                "https://journal.tusur.ru/storage/140608/2-Sychev-Bondar-Zharov__.pdf?1606386094");
+        }
+        private void label8_Click(object sender, EventArgs e)
+        {
+            Process.Start(
+                "https://journal.tusur.ru/storage/140610/3-Sychev-Anisimov-Bondar__.pdf?1606387373");
         }
     }
 }

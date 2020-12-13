@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -77,6 +76,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SParamListBox = new System.Windows.Forms.CheckedListBox();
@@ -140,12 +140,12 @@
             this.GraphControl = new ZedGraph.ZedGraphControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.InputFlowLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShematicPictureBox)).BeginInit();
@@ -215,31 +215,6 @@
             this.tabPage1.Size = new System.Drawing.Size(968, 547);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Params";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.flowLayoutPanel1);
-            this.tabPage2.Controls.Add(this.InputFlowLayoutPanel);
-            this.tabPage2.Controls.Add(this.SaveS4pButton);
-            this.tabPage2.Controls.Add(this.GraphNameLabel);
-            this.tabPage2.Controls.Add(this.ImageNameLabel);
-            this.tabPage2.Controls.Add(this.ShematicPictureBox);
-            this.tabPage2.Controls.Add(this.Z01Z02FlowLayoutPanel);
-            this.tabPage2.Controls.Add(this.ShematicGroupBox);
-            this.tabPage2.Controls.Add(this.Z0ToRpFlowLayoutPanel);
-            this.tabPage2.Controls.Add(this.Z1pToEEEFlowLayoutPanel);
-            this.tabPage2.Controls.Add(this.ZInOutFlowLayoutPanel);
-            this.tabPage2.Controls.Add(this.PhaseRadioButton);
-            this.tabPage2.Controls.Add(this.MagnitudeRadioButton);
-            this.tabPage2.Controls.Add(this.GraphControl);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(968, 547);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Graphs";
             // 
             // label12
             // 
@@ -441,9 +416,9 @@
             this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.radioButton2.Location = new System.Drawing.Point(12, 386);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(270, 19);
+            this.radioButton2.Size = new System.Drawing.Size(274, 19);
             this.radioButton2.TabIndex = 60;
-            this.radioButton2.Text = "(L11; L22; L12), μH/m; (C11; C22; C12), pF/m";
+            this.radioButton2.Text = "(L11; L22; L12), μH/m; (C11; C22; -C12), pF/m";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
@@ -635,28 +610,28 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.closeToolStripMenuItem.Text = "Exit";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // test2ToolStripMenuItem
             // 
             this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
-            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.test2ToolStripMenuItem.Text = "Test2";
             this.test2ToolStripMenuItem.Visible = false;
             this.test2ToolStripMenuItem.Click += new System.EventHandler(this.test2ToolStripMenuItem_Click);
@@ -672,7 +647,7 @@
             // сalculateToolStripMenuItem
             // 
             this.сalculateToolStripMenuItem.Name = "сalculateToolStripMenuItem";
-            this.сalculateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сalculateToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.сalculateToolStripMenuItem.Text = "Сalculate";
             this.сalculateToolStripMenuItem.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -705,6 +680,31 @@
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
             this.verToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verToolStripMenuItem.Text = "version from 6.10.20";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.flowLayoutPanel1);
+            this.tabPage2.Controls.Add(this.InputFlowLayoutPanel);
+            this.tabPage2.Controls.Add(this.SaveS4pButton);
+            this.tabPage2.Controls.Add(this.GraphNameLabel);
+            this.tabPage2.Controls.Add(this.ImageNameLabel);
+            this.tabPage2.Controls.Add(this.ShematicPictureBox);
+            this.tabPage2.Controls.Add(this.Z01Z02FlowLayoutPanel);
+            this.tabPage2.Controls.Add(this.ShematicGroupBox);
+            this.tabPage2.Controls.Add(this.Z0ToRpFlowLayoutPanel);
+            this.tabPage2.Controls.Add(this.Z1pToEEEFlowLayoutPanel);
+            this.tabPage2.Controls.Add(this.ZInOutFlowLayoutPanel);
+            this.tabPage2.Controls.Add(this.PhaseRadioButton);
+            this.tabPage2.Controls.Add(this.MagnitudeRadioButton);
+            this.tabPage2.Controls.Add(this.GraphControl);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(968, 547);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Graphs";
             // 
             // button3
             // 
@@ -1449,14 +1449,14 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.InputFlowLayoutPanel.ResumeLayout(false);
             this.InputFlowLayoutPanel.PerformLayout();
