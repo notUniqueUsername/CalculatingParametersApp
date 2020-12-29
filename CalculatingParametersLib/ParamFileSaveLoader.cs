@@ -170,7 +170,7 @@ namespace CalculatingParametersLib
             {
                 returnungList.Add("!C11, pF/m=" + currentParams.C11.ToString());
                 returnungList.Add("!C22, pF/m=" + currentParams.C22.ToString());
-                returnungList.Add("!C12, pF/m=" + currentParams.C12.ToString());
+                returnungList.Add("!-C12, pF/m=" + currentParams.C12.ToString());
                 returnungList.Add("!Z0, Ω=" + currentParams.Z0.ToString());
                 returnungList.Add("!k=" + currentParams.k.ToString());
                 returnungList.Add("!Rc=" + currentParams.Rc.ToString());
@@ -212,7 +212,7 @@ namespace CalculatingParametersLib
             {
                 returnungList.Add("C11, pF/m=" + currentParams.C11.ToString());
                 returnungList.Add("C22, pF/m=" + currentParams.C22.ToString());
-                returnungList.Add("C12, pF/m=" + currentParams.C12.ToString());
+                returnungList.Add("-C12, pF/m=" + currentParams.C12.ToString());
                 returnungList.Add("Z0, Ω=" + currentParams.Z0.ToString());
                 returnungList.Add("k=" + currentParams.k.ToString());
                 returnungList.Add("Rc=" + currentParams.Rc.ToString());

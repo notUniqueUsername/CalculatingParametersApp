@@ -20,6 +20,7 @@ namespace ParametersApp
     public partial class FormForGraph : Form
     {
         private bool _grid = true;
+        private SetOfShematicEnum _selectedShema;
         private LineItem _11Curve;
         private LineItem _12Curve;
         private LineItem _13Curve;
@@ -412,20 +413,41 @@ namespace ParametersApp
             double.TryParse(FreqMinTextBox.Text.Replace(".", ","), out _fmin);
             double.TryParse(FreqMaxTextBox.Text.Replace(".", ","), out _fmax);
             int.TryParse(NfTextBox.Text, out _nf);
-            if (GeneralRadioButton.Checked)
+            switch (_selectedShema)
             {
-                double.TryParse(Z1inTextBox.Text.Replace(".", ","), out _z1in);
-                double.TryParse(Z2inTextBox.Text.Replace(".", ","), out _z2in);
-                double.TryParse(Z1outTextBox.Text.Replace(".", ","), out _z1out);
-                double.TryParse(Z2outTextBox.Text.Replace(".", ","), out _z2out);
+                case SetOfShematicEnum.General:
+                    double.TryParse(Z1inTextBox.Text.Replace(".", ","), out _z1in);
+                    double.TryParse(Z2inTextBox.Text.Replace(".", ","), out _z2in);
+                    double.TryParse(Z1outTextBox.Text.Replace(".", ","), out _z1out);
+                    double.TryParse(Z2outTextBox.Text.Replace(".", ","), out _z2out);
+                    break;
+                case SetOfShematicEnum.LineToLine:
+                    double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1in);
+                    double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2in);
+                    double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1out);
+                    double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2out);
+                    break;
+                case SetOfShematicEnum.CLike:
+                    double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1in);
+                    double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2in);
+                    _z1out = Math.Pow(10, 10);
+                    _z2out = Math.Pow(10, 10);
+                    break;
             }
-            else if (LineToLineRadioButton.Checked)
-            {
-                double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1in);
-                double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2in);
-                double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1out);
-                double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2out);
-            }
+            //if (GeneralRadioButton.Checked)
+            //{
+            //    double.TryParse(Z1inTextBox.Text.Replace(".", ","), out _z1in);
+            //    double.TryParse(Z2inTextBox.Text.Replace(".", ","), out _z2in);
+            //    double.TryParse(Z1outTextBox.Text.Replace(".", ","), out _z1out);
+            //    double.TryParse(Z2outTextBox.Text.Replace(".", ","), out _z2out);
+            //}
+            //else if (LineToLineRadioButton.Checked)
+            //{
+            //    double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1in);
+            //    double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2in);
+            //    double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1out);
+            //    double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2out);
+            //}
 
             CalculateSParamData();
             double.TryParse(FreqMinTextBox.Text.Replace(".", ","), out _xMin);
@@ -586,22 +608,6 @@ namespace ParametersApp
             SetTextToListBox("Φ");
             //DrawButton.PerformClick();
             ChangeGraph();
-        }
-
-        private void GeneralRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            var ss = (RadioButton) sender;
-            ZInOutFlowLayoutPanel.Enabled = ss.Checked;
-            Z01Z02FlowLayoutPanel.Enabled = !ss.Checked;
-            DrawButton.Enabled = TextBoxValidator();
-            if (ss.Checked)
-            {
-                ShematicPictureBox.Image = Properties.Resources.String_low_MidlZInOut;
-            }
-            else
-            {
-                ShematicPictureBox.Image = Properties.Resources.String_low_MidlZ02Z01;
-            }
         }
 
         private bool TextBoxValidator()
@@ -876,6 +882,42 @@ namespace ParametersApp
             if (label.Text.Length > 6)
             {
                 label.Font = new Font("Arial Narrow", label.Font.Size);
+            }
+        }
+
+        private void LineToLineRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = (RadioButton)sender;
+            if (check.Checked)
+            {
+                _selectedShema = SetOfShematicEnum.LineToLine;
+                ShematicPictureBox.Image = Properties.Resources.String_low_MidlZ02Z01;
+                Z01Label.Text = "Z01, Ω";
+                Z02Label.Text = "Z02, Ω";
+            }
+        }
+
+        private void CLikeradioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = (RadioButton) sender;
+            if (check.Checked)
+            {
+                _selectedShema = SetOfShematicEnum.CLike;
+                ShematicPictureBox.Image = Properties.Resources.String_CLike;
+                Z01Label.Text = "Z1in, Ω";
+                Z02Label.Text = "Z2in, Ω";
+            }
+        }
+        private void GeneralRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            var ss = (RadioButton)sender;
+            ZInOutFlowLayoutPanel.Enabled = ss.Checked;
+            Z01Z02FlowLayoutPanel.Enabled = !ss.Checked;
+            DrawButton.Enabled = TextBoxValidator();
+            if (ss.Checked)
+            {
+                _selectedShema = SetOfShematicEnum.General;
+                ShematicPictureBox.Image = Properties.Resources.String_low_MidlZInOut;
             }
         }
     }

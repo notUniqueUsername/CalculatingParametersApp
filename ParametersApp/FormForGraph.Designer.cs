@@ -76,6 +76,7 @@
             this.Z0ToRpColumn3FlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.S21Label = new System.Windows.Forms.Label();
             this.ShematicGroupBox = new System.Windows.Forms.GroupBox();
+            this.CLikeRadioButton = new System.Windows.Forms.RadioButton();
             this.LineToLineRadioButton = new System.Windows.Forms.RadioButton();
             this.GeneralRadioButton = new System.Windows.Forms.RadioButton();
             this.Z01Z02FlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -86,11 +87,11 @@
             this.ImageNameLabel = new System.Windows.Forms.Label();
             this.GraphNameLabel = new System.Windows.Forms.Label();
             this.SaveS4pButton = new System.Windows.Forms.Button();
-            this.ShematicPictureBox = new System.Windows.Forms.PictureBox();
             this.SelectDeSelectButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.GridButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.ShematicPictureBox = new System.Windows.Forms.PictureBox();
             this.ZInOutFlowLayoutPanel.SuspendLayout();
             this.InputFlowLayoutPanel.SuspendLayout();
             this.Z1pToEEEFlowLayoutPanel.SuspendLayout();
@@ -102,8 +103,8 @@
             this.Z0ToRpColumn3FlowLayoutPanel.SuspendLayout();
             this.ShematicGroupBox.SuspendLayout();
             this.Z01Z02FlowLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShematicPictureBox)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShematicPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // GraphControl
@@ -657,16 +658,30 @@
             // 
             // ShematicGroupBox
             // 
+            this.ShematicGroupBox.Controls.Add(this.CLikeRadioButton);
             this.ShematicGroupBox.Controls.Add(this.LineToLineRadioButton);
             this.ShematicGroupBox.Controls.Add(this.GeneralRadioButton);
             this.ShematicGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.ShematicGroupBox.Location = new System.Drawing.Point(11, 12);
             this.ShematicGroupBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 3);
             this.ShematicGroupBox.Name = "ShematicGroupBox";
-            this.ShematicGroupBox.Size = new System.Drawing.Size(271, 82);
+            this.ShematicGroupBox.Size = new System.Drawing.Size(271, 89);
             this.ShematicGroupBox.TabIndex = 53;
             this.ShematicGroupBox.TabStop = false;
             this.ShematicGroupBox.Text = "Select schematic";
+            // 
+            // CLikeRadioButton
+            // 
+            this.CLikeRadioButton.AutoSize = true;
+            this.CLikeRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.CLikeRadioButton.Location = new System.Drawing.Point(1, 64);
+            this.CLikeRadioButton.Name = "CLikeRadioButton";
+            this.CLikeRadioButton.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.CLikeRadioButton.Size = new System.Drawing.Size(139, 20);
+            this.CLikeRadioButton.TabIndex = 2;
+            this.CLikeRadioButton.Text = "C-like transformer";
+            this.CLikeRadioButton.UseVisualStyleBackColor = true;
+            this.CLikeRadioButton.CheckedChanged += new System.EventHandler(this.CLikeradioButton_CheckedChanged);
             // 
             // LineToLineRadioButton
             // 
@@ -679,6 +694,7 @@
             this.LineToLineRadioButton.TabIndex = 1;
             this.LineToLineRadioButton.Text = "Line-to-line transformer";
             this.LineToLineRadioButton.UseVisualStyleBackColor = true;
+            this.LineToLineRadioButton.CheckedChanged += new System.EventHandler(this.LineToLineRadioButton_CheckedChanged);
             // 
             // GeneralRadioButton
             // 
@@ -779,16 +795,6 @@
             this.SaveS4pButton.UseVisualStyleBackColor = true;
             this.SaveS4pButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // ShematicPictureBox
-            // 
-            this.ShematicPictureBox.Image = global::ParametersApp.Properties.Resources.String_low_MidlZInOut;
-            this.ShematicPictureBox.Location = new System.Drawing.Point(12, 100);
-            this.ShematicPictureBox.Name = "ShematicPictureBox";
-            this.ShematicPictureBox.Size = new System.Drawing.Size(271, 242);
-            this.ShematicPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ShematicPictureBox.TabIndex = 55;
-            this.ShematicPictureBox.TabStop = false;
-            // 
             // SelectDeSelectButton
             // 
             this.SelectDeSelectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
@@ -835,6 +841,16 @@
             this.button1.Text = "Load .ts/.s4p";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.LoadButton_Click);
+            // 
+            // ShematicPictureBox
+            // 
+            this.ShematicPictureBox.Image = global::ParametersApp.Properties.Resources.String_low_MidlZInOut;
+            this.ShematicPictureBox.Location = new System.Drawing.Point(12, 107);
+            this.ShematicPictureBox.Name = "ShematicPictureBox";
+            this.ShematicPictureBox.Size = new System.Drawing.Size(271, 235);
+            this.ShematicPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ShematicPictureBox.TabIndex = 55;
+            this.ShematicPictureBox.TabStop = false;
             // 
             // FormForGraph
             // 
@@ -885,8 +901,8 @@
             this.ShematicGroupBox.PerformLayout();
             this.Z01Z02FlowLayoutPanel.ResumeLayout(false);
             this.Z01Z02FlowLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShematicPictureBox)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ShematicPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -955,5 +971,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button GridButton;
+        private System.Windows.Forms.RadioButton CLikeRadioButton;
     }
 }

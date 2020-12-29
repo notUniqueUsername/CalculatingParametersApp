@@ -73,6 +73,16 @@ namespace ParametersApp.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap String_CLike {
+            get {
+                object obj = ResourceManager.GetObject("String_CLike", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap String_low_ {
             get {
                 object obj = ResourceManager.GetObject("String_low_", resourceCulture);

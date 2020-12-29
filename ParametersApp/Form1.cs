@@ -65,7 +65,7 @@ namespace ParametersApp
             dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridView1.Rows[0].SetValues("C11, pF/m");
             dataGridView1.Rows[1].SetValues("C22, pF/m");
-            dataGridView1.Rows[2].SetValues("C12, pF/m");
+            dataGridView1.Rows[2].SetValues("-C12, pF/m");
             dataGridView1.Rows[3].Height = 5;
             dataGridView1.Rows[3].DividerHeight = 5;
             dataGridView1.Rows[4].SetValues("Z0, Ω");
@@ -418,7 +418,6 @@ namespace ParametersApp
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("L11/μ\u2080", "L22/μ\u2080", "L12/μ\u2080", "C11/ε\u2080", "C22/ε\u2080", "-C12/ε\u2080");
-            dataGridView1.Rows[2].SetValues("-C12, pF/m");
             ClearTextBoxs();
             _setOfParameters = SetOfParametersEnum.Pogonie;
             textBox3.ReadOnly = false;
@@ -433,7 +432,6 @@ namespace ParametersApp
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("L11, μH/m", "L22, μH/m", "L12, μH/m", "C11, pF/m", "C22, pF/m", "-C12, pF/m");
-            dataGridView1.Rows[2].SetValues("-C12, pF/m");
             ClearTextBoxs();
             _setOfParameters = SetOfParametersEnum.Pogonie_pF_nGn;
             label1.Location = new Point(label1.Location.X - 9, label1.Location.Y);
@@ -453,7 +451,6 @@ namespace ParametersApp
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Z0, Ω", "k", "Rc", "Rп", "Erc", "Erп");
-            dataGridView1.Rows[2].SetValues("C12, pF/m");
             ClearTextBoxs();
             _setOfParameters = SetOfParametersEnum.Modalnie;
             textBox3.ReadOnly = false;
@@ -468,7 +465,6 @@ namespace ParametersApp
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Zc1, Ω", "Zп1, Ω", "Rc", "Rп", "Erc", "Erп");
-            dataGridView1.Rows[2].SetValues("C12, pF/m");
             ClearTextBoxs();
             _setOfParameters = SetOfParametersEnum.Zc1_Zp1;
             textBox3.ReadOnly = false;
@@ -483,7 +479,6 @@ namespace ParametersApp
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Zп1, Ω", "Zc2, Ω", "Rc", "Rп", "Erc", "Erп");
-            dataGridView1.Rows[2].SetValues("C12, pF/m");
             ClearTextBoxs();
             _setOfParameters = SetOfParametersEnum.Zp1_Zc2;
             textBox3.ReadOnly = false;
@@ -498,7 +493,6 @@ namespace ParametersApp
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Zп1, Ω", "Zc2, Ω", "Rc", "Rп", "Erc", "Erп");
-            dataGridView1.Rows[2].SetValues("C12, pF/m");
             ClearTextBoxs();
             textBox3.Text = "1";
             textBox3.ReadOnly = true;
@@ -515,7 +509,6 @@ namespace ParametersApp
         private void radioButton7_CheckedChanged(object sender, EventArgs e)
         {
             ModaleNameTextBox("Z0, Ω", "k", "Rc", "Rп", "Erc", "Erп");
-            dataGridView1.Rows[2].SetValues("C12, pF/m");
             ClearTextBoxs();
             textBox3.Text = "1";
             textBox4.Text = "-1";

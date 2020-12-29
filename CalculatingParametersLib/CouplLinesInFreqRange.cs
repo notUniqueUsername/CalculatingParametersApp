@@ -214,6 +214,20 @@ namespace CalculatingParametersLib
                 yo[i] = yaayab1[i].Stack(yaayab2[i]);
             }
 
+            if (Z1Out > Math.Pow(10, 9) && Z2Out > Math.Pow(10, 9))
+            {
+                var additionMatrix = Matrix<double>.Build.Dense(4, 4);
+                additionMatrix[3, 3] = Math.Pow(10, 10);
+                additionMatrix[2, 2] = Math.Pow(10, 10);
+                additionMatrix[3, 2] = -Math.Pow(10, 10);
+                additionMatrix[2, 3] = -Math.Pow(10, 10);
+                var complexAddMatrix = additionMatrix.ToComplex();
+                for (int i = 0; i < Nf; i++)
+                {
+                    yo[i] = yo[i] + complexAddMatrix;
+                }
+                
+            }
             for (int i = 0; i < Nf; i++)
             {
                 Y[i] = ZlComplex.Multiply(yo[i]).Multiply(ZlComplex);

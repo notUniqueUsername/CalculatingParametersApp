@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Paramico1.ico</ApplicationIcon>
+    <ApplicationIcon>ACLP4.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
@@ -146,8 +146,10 @@
     <None Include="Resources\8.JPG" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ACLP4.ico" />
     <Content Include="License-LGPL.txt" />
     <Content Include="Paramico1.ico" />
+    <None Include="Resources\String_CLike.png" />
     <Content Include="Resources\String_low_.png" />
     <None Include="Resources\String_up1.png" />
     <None Include="Resources\String_low_1.png" />

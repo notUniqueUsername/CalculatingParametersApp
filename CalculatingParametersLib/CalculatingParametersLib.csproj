@@ -57,6 +57,7 @@
     <Compile Include="ParametersCalculator.cs" />
     <Compile Include="Params.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetOfShematicEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
