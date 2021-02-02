@@ -128,7 +128,7 @@ namespace ParametersApp
         /// <summary>
         /// Форматирует график
         /// </summary>
-        /// <param name="phase">
+        /// <param name="forPhase">
         /// true = формат для фазы, false = формат для амплитуды
         /// </param>
         private void FormatAxis(bool forPhase)
@@ -190,7 +190,6 @@ namespace ParametersApp
             }
             _graphPane.YAxis.Scale.Max = _yMax;
             _graphPane.YAxis.Scale.Min = _yMin;
-            //_graphPane.XAxis.Scale.MajorStep = 0.05;
             _graphPane.XAxis.Scale.MajorStepAuto = true;
             _graphPane.XAxis.Scale.FormatAuto = true;
             _graphPane.XAxis.Scale.IsSkipLastLabel = false;
@@ -285,7 +284,6 @@ namespace ParametersApp
             _23Curve = _graphPane.AddCurve(sOrF + "23", _fi, sParamMagnitudeOrPhase[5], Color.Green, SymbolType.None);
             _23Curve.Line.Style = DashStyle.DashDot;
             _23Curve.Line.IsSmooth = true;
-            //_23Curve.Symbol.Type = SymbolType.Triangle;
             SetLineWidth(_23Curve);
             _23CurveLabel = _graphPane.AddCurve(sOrF + "23", fakeX, fakeY, Color.Green, SymbolType.Triangle);
             SetLineWidth(_23CurveLabel);
@@ -321,7 +319,6 @@ namespace ParametersApp
             _44Curve = _graphPane.AddCurve(sOrF + "44", _fi, sParamMagnitudeOrPhase[9], Color.Green, SymbolType.None);
             _44Curve.Line.Style = DashStyle.Dot;
             _44Curve.Line.IsSmooth = true;
-            //_44Curve.Symbol.Type = SymbolType.Star;
             SetLineWidth(_44Curve);
             _44CurveLabel = _graphPane.AddCurve(sOrF + "44", fakeX, fakeY, Color.Green, SymbolType.Plus);
             _44CurveLabel.Line.Style = DashStyle.Dot;
@@ -434,20 +431,6 @@ namespace ParametersApp
                     _z2out = Math.Pow(10, 10);
                     break;
             }
-            //if (GeneralRadioButton.Checked)
-            //{
-            //    double.TryParse(Z1inTextBox.Text.Replace(".", ","), out _z1in);
-            //    double.TryParse(Z2inTextBox.Text.Replace(".", ","), out _z2in);
-            //    double.TryParse(Z1outTextBox.Text.Replace(".", ","), out _z1out);
-            //    double.TryParse(Z2outTextBox.Text.Replace(".", ","), out _z2out);
-            //}
-            //else if (LineToLineRadioButton.Checked)
-            //{
-            //    double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1in);
-            //    double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2in);
-            //    double.TryParse(Z01TextBox.Text.Replace(".", ","), out _z1out);
-            //    double.TryParse(Z02TextBox.Text.Replace(".", ","), out _z2out);
-            //}
 
             CalculateSParamData();
             double.TryParse(FreqMinTextBox.Text.Replace(".", ","), out _xMin);
@@ -599,14 +582,12 @@ namespace ParametersApp
         private void MagnitudeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             SetTextToListBox("S");
-            //DrawButton.PerformClick();
             ChangeGraph();
         }
 
         private void PhaseRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             SetTextToListBox("Φ");
-            //DrawButton.PerformClick();
             ChangeGraph();
         }
 
@@ -779,7 +760,6 @@ namespace ParametersApp
             this.Load += SelectDeSelectButton_Click;
             this.MaximizeBox = false;
             _graphPane = GraphControl.GraphPane;
-            //SetTextToLabels();
             _fi = data.data[0];
             _xMax = _fi.Max();
             _xMin = _fi.Min();
@@ -787,10 +767,6 @@ namespace ParametersApp
             _sParamPhases = ff;
             ChangeGraph();
             DrawCurves("S", ss);
-            //Z1inTextBox.Text = "50";
-            //Z2inTextBox.Text = "50";
-            //Z1outTextBox.Text = "50";
-            //Z2outTextBox.Text = "50";
             Z1inTextBox.Text = data.RelatedData[Z1inTextBox.Name].ToString();
             Z2inTextBox.Text = data.RelatedData[Z2inTextBox.Name].ToString();
             Z1outTextBox.Text = data.RelatedData[Z1outTextBox.Name].ToString();
@@ -800,15 +776,9 @@ namespace ParametersApp
             NfTextBox.Text = _fi.Length.ToString();
             FreqMinTextBox.Text = _fi.Min().ToString();
             FreqMaxTextBox.Text = _fi.Max().ToString();
-            //GeneralRadioButton.Checked = true;
-            //this.KeyPreview = true;
-            //DrawButton.PerformClick();
-            //this.KeyPreview = true;
-            //PhaseRadioButton.Checked = true;
-            //AllCurvesCheckState(CheckState.Checked);
-            
             GeneralRadioButton.Enabled = false;
             LineToLineRadioButton.Enabled = false;
+            CLikeRadioButton.Enabled = false;
             DrawButton.Enabled = false;
             SaveS4pButton.Enabled = false;
             Z01Z02FlowLayoutPanel.Enabled = false;
@@ -831,11 +801,10 @@ namespace ParametersApp
             FreqMinTextBox.Text = relatedData[FreqMinTextBox.Name].ToString();
             FreqMaxTextBox.Text = relatedData[FreqMaxTextBox.Name].ToString();
             GeneralRadioButton.Checked = true;
-            //this.KeyPreview = true;
-            //DrawButton.PerformClick();
             AllCurvesCheckState(CheckState.Checked);
             GeneralRadioButton.Enabled = false;
             LineToLineRadioButton.Enabled = false;
+            CLikeRadioButton.Enabled = false;
             DrawButton.Enabled = false;
             SaveS4pButton.Enabled = false;
             Z01Z02FlowLayoutPanel.Enabled = false;

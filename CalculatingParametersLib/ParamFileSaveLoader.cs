@@ -443,66 +443,83 @@ namespace CalculatingParametersLib
             return loadedParams;
         }
 
-        
-
-        public static double[][] LoadLefts4p(string fileName, int nf)
+        public static LoadGraph LoadLeftS4p(string fileName, int nf)
         {
-            double[] S11= new double[nf];
-            double[] S12= new double[nf];
-            double[] S13= new double[nf];
-            double[] S14= new double[nf];
-            double[] S22= new double[nf];
-            double[] S23= new double[nf];
-            double[] S24= new double[nf];
-            double[] S33= new double[nf];
-            double[] S34= new double[nf];
-            double[] S44= new double[nf];
-            double[] S21= new double[nf];
-            double[] S31= new double[nf];
-            double[] S32= new double[nf];
-            double[] S41= new double[nf];
-            double[] S42= new double[nf];
-            double[] S43= new double[nf];
-            double[] F11= new double[nf];
-            double[] F12= new double[nf];
-            double[] F13= new double[nf];
-            double[] F14= new double[nf];
-            double[] F22= new double[nf];
-            double[] F23= new double[nf];
-            double[] F24= new double[nf];
-            double[] F33= new double[nf];
-            double[] F34= new double[nf];
-            double[] F44= new double[nf];
-            double[] F21= new double[nf];
-            double[] F31= new double[nf];
-            double[] F32= new double[nf];
-            double[] F41= new double[nf];
-            double[] F42= new double[nf];
-            double[] F43= new double[nf];
+            double[] S11 = new double[nf];
+            double[] S12 = new double[nf];
+            double[] S13 = new double[nf];
+            double[] S14 = new double[nf];
+            double[] S22 = new double[nf];
+            double[] S23 = new double[nf];
+            double[] S24 = new double[nf];
+            double[] S33 = new double[nf];
+            double[] S34 = new double[nf];
+            double[] S44 = new double[nf];
+            double[] S21 = new double[nf];
+            double[] S31 = new double[nf];
+            double[] S32 = new double[nf];
+            double[] S41 = new double[nf];
+            double[] S42 = new double[nf];
+            double[] S43 = new double[nf];
+            double[] F11 = new double[nf];
+            double[] F12 = new double[nf];
+            double[] F13 = new double[nf];
+            double[] F14 = new double[nf];
+            double[] F22 = new double[nf];
+            double[] F23 = new double[nf];
+            double[] F24 = new double[nf];
+            double[] F33 = new double[nf];
+            double[] F34 = new double[nf];
+            double[] F44 = new double[nf];
+            double[] F21 = new double[nf];
+            double[] F31 = new double[nf];
+            double[] F32 = new double[nf];
+            double[] F41 = new double[nf];
+            double[] F42 = new double[nf];
+            double[] F43 = new double[nf];
             double[] Fi = new double[nf];
             var line = "";
             var i = 0;
             var k = 0;
+            int indexOfLoad = 0;
+            double terminationLoad = 0;
+            var dataLoadGraph = new LoadGraph();
             using (StreamReader sr = new StreamReader(fileName, Encoding.UTF8))
             {
                 while ((line = sr.ReadLine()) != null)
                 {
+                    if (line.Contains("#") && line.Contains("GHz"))
+                    {
+                        indexOfLoad = line.IndexOf("R", StringComparison.Ordinal) + 2;
+                        double.TryParse(line.Substring(indexOfLoad), out terminationLoad);
+                        dataLoadGraph.RelatedData = new SortedList<string, double>
+                        {
+                            {"Z1inTextBox", terminationLoad},
+                            {"Z2inTextBox", terminationLoad},
+                            {"Z1outTextBox", terminationLoad},
+                            {"Z2outTextBox", terminationLoad},
+                            {"FreqMinTextBox", 0},
+                            {"FreqMaxTextBox", 0},
+                            {"LengthTextBox", 0},
+                            {"NfTextBox", 0}
+                        };
+                    }
                     if (!line.Contains("#") && !line.Contains("!"))
                     {
                         if (k % 4 == 0)
                         {
                             var data = GetStringsWithFreq(line);
-                            double.TryParse(data[0].Replace(".",","), out Fi[i]);
-                            double.TryParse(data[1].Replace(".",","), out S11[i]);
-                            double.TryParse(data[2].Replace(".",","), out F11[i]);
-                            double.TryParse(data[3].Replace(".",","), out S12[i]);
-                            double.TryParse(data[4].Replace(".",","), out F12[i]);
-                            double.TryParse(data[5].Replace(".",","), out S13[i]);
-                            double.TryParse(data[6].Replace(".",","), out F13[i]);
-                            double.TryParse(data[7].Replace(".",","), out S14[i]);
-                            double.TryParse(data[8].Replace(".",","), out F14[i]);
+                            double.TryParse(data[0].Replace(".", ","), out Fi[i]);
+                            double.TryParse(data[1].Replace(".", ","), out S11[i]);
+                            double.TryParse(data[2].Replace(".", ","), out F11[i]);
+                            double.TryParse(data[3].Replace(".", ","), out S12[i]);
+                            double.TryParse(data[4].Replace(".", ","), out F12[i]);
+                            double.TryParse(data[5].Replace(".", ","), out S13[i]);
+                            double.TryParse(data[6].Replace(".", ","), out F13[i]);
+                            double.TryParse(data[7].Replace(".", ","), out S14[i]);
+                            double.TryParse(data[8].Replace(".", ","), out F14[i]);
                             i++;
-                            if (i==nf)
+                            if (i == nf)
                             {
                                 break;
                             }
@@ -512,40 +529,40 @@ namespace CalculatingParametersLib
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".",","), out S21[i]);
-                            double.TryParse(data[1].Replace(".",","), out F21[i]);
-                            double.TryParse(data[2].Replace(".",","), out S22[i]);
-                            double.TryParse(data[3].Replace(".",","), out F22[i]);
-                            double.TryParse(data[4].Replace(".",","), out S23[i]);
-                            double.TryParse(data[5].Replace(".",","), out F23[i]);
-                            double.TryParse(data[6].Replace(".",","), out S24[i]);
-                            double.TryParse(data[7].Replace(".",","), out F24[i]);
+                            double.TryParse(data[0].Replace(".", ","), out S21[i]);
+                            double.TryParse(data[1].Replace(".", ","), out F21[i]);
+                            double.TryParse(data[2].Replace(".", ","), out S22[i]);
+                            double.TryParse(data[3].Replace(".", ","), out F22[i]);
+                            double.TryParse(data[4].Replace(".", ","), out S23[i]);
+                            double.TryParse(data[5].Replace(".", ","), out F23[i]);
+                            double.TryParse(data[6].Replace(".", ","), out S24[i]);
+                            double.TryParse(data[7].Replace(".", ","), out F24[i]);
                         }
                         if (k % 4 == 2)
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".",","), out S31[i]);
-                            double.TryParse(data[1].Replace(".",","), out F31[i]);
-                            double.TryParse(data[2].Replace(".",","), out S32[i]);
-                            double.TryParse(data[3].Replace(".",","), out F32[i]);
-                            double.TryParse(data[4].Replace(".",","), out S33[i]);
-                            double.TryParse(data[5].Replace(".",","), out F33[i]);
-                            double.TryParse(data[6].Replace(".",","), out S34[i]);
-                            double.TryParse(data[7].Replace(".",","), out F34[i]);
+                            double.TryParse(data[0].Replace(".", ","), out S31[i]);
+                            double.TryParse(data[1].Replace(".", ","), out F31[i]);
+                            double.TryParse(data[2].Replace(".", ","), out S32[i]);
+                            double.TryParse(data[3].Replace(".", ","), out F32[i]);
+                            double.TryParse(data[4].Replace(".", ","), out S33[i]);
+                            double.TryParse(data[5].Replace(".", ","), out F33[i]);
+                            double.TryParse(data[6].Replace(".", ","), out S34[i]);
+                            double.TryParse(data[7].Replace(".", ","), out F34[i]);
                         }
                         if (k % 4 == 3)
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".",","), out S41[i]);
-                            double.TryParse(data[1].Replace(".",","), out F41[i]);
-                            double.TryParse(data[2].Replace(".",","), out S42[i]);
-                            double.TryParse(data[3].Replace(".",","), out F42[i]);
-                            double.TryParse(data[4].Replace(".",","), out S43[i]);
-                            double.TryParse(data[5].Replace(".",","), out F43[i]);
-                            double.TryParse(data[6].Replace(".",","), out S44[i]);
-                            double.TryParse(data[7].Replace(".",","), out F44[i]);
+                            double.TryParse(data[0].Replace(".", ","), out S41[i]);
+                            double.TryParse(data[1].Replace(".", ","), out F41[i]);
+                            double.TryParse(data[2].Replace(".", ","), out S42[i]);
+                            double.TryParse(data[3].Replace(".", ","), out F42[i]);
+                            double.TryParse(data[4].Replace(".", ","), out S43[i]);
+                            double.TryParse(data[5].Replace(".", ","), out F43[i]);
+                            double.TryParse(data[6].Replace(".", ","), out S44[i]);
+                            double.TryParse(data[7].Replace(".", ","), out F44[i]);
                         }
 
                         k++;
@@ -553,11 +570,12 @@ namespace CalculatingParametersLib
                 }
             }
 
-            return new double[][]
+            dataLoadGraph.data = new double[][]
             {
                 Fi, S11, F11, S12, F12, S13, F13, S14, F14, S21, F21, S22, F22, S23, F23, S24, F24, S31, F31, S32, F32,
                 S33, F33, S34, F34, S41, F41, S42, F42, S43, F43, S44, F44
             };
+            return dataLoadGraph;
         }
         private static string[] GetStringsWithFreq(string ss)
         {
@@ -1017,7 +1035,7 @@ namespace CalculatingParametersLib
             }
             else
             {
-                loadedParams = LoadLeftTs(fileName, stringCounts / 4);
+                loadedParams = LoadLeftS4p(fileName, stringCounts / 4);
             }
 
             loadedParams.inParams = s4pright;
