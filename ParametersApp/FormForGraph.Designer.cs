@@ -677,9 +677,9 @@
             this.CLikeRadioButton.Location = new System.Drawing.Point(1, 64);
             this.CLikeRadioButton.Name = "CLikeRadioButton";
             this.CLikeRadioButton.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
-            this.CLikeRadioButton.Size = new System.Drawing.Size(139, 20);
+            this.CLikeRadioButton.Size = new System.Drawing.Size(91, 20);
             this.CLikeRadioButton.TabIndex = 2;
-            this.CLikeRadioButton.Text = "C-like transformer";
+            this.CLikeRadioButton.Text = "C-section";
             this.CLikeRadioButton.UseVisualStyleBackColor = true;
             this.CLikeRadioButton.CheckedChanged += new System.EventHandler(this.CLikeradioButton_CheckedChanged);
             // 

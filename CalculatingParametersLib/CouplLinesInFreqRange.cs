@@ -226,7 +226,6 @@ namespace CalculatingParametersLib
                 {
                     yo[i] = yo[i] + complexAddMatrix;
                 }
-                
             }
             for (int i = 0; i < Nf; i++)
             {
