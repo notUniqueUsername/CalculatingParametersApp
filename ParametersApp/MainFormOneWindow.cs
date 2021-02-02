@@ -12,7 +12,7 @@ using Label = System.Windows.Forms.Label;
 
 namespace ParametersApp
 {
-    public partial class Form2 : Form
+    public partial class MainFormOneWindow : Form
     {
         private Params _currentParams = new Params();
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
@@ -63,7 +63,7 @@ namespace ParametersApp
         private CouplLinesInFreqRange _sParamData;
         private double[] _fi;
 
-        public Form2()
+        public MainFormOneWindow()
         {
             Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
             InitializeComponent();

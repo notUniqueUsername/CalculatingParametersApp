@@ -445,7 +445,7 @@ namespace CalculatingParametersLib
 
         
 
-        public static double[][] LoadLefts4p(string fileName, int nf)
+        public static LoadGraph LoadLeftS4p(string fileName, int nf)
         {
             double[] S11= new double[nf];
             double[] S12= new double[nf];
@@ -483,10 +483,29 @@ namespace CalculatingParametersLib
             var line = "";
             var i = 0;
             var k = 0;
+            int indexOfLoad = 0;
+            double terminationLoad = 0;
+            var dataLoadGraph = new LoadGraph();
             using (StreamReader sr = new StreamReader(fileName, Encoding.UTF8))
             {
                 while ((line = sr.ReadLine()) != null)
                 {
+                    if (line.Contains("#") && line.Contains("GHz"))
+                    {
+                        indexOfLoad = line.IndexOf("R", StringComparison.Ordinal)+2;
+                        double.TryParse(line.Substring(indexOfLoad),out terminationLoad);
+                        dataLoadGraph.RelatedData = new SortedList<string, double>
+                        {
+                            {"Z1inTextBox", terminationLoad},
+                            {"Z2inTextBox", terminationLoad},
+                            {"Z1outTextBox", terminationLoad},
+                            {"Z2outTextBox", terminationLoad},
+                            {"FreqMinTextBox", 0},
+                            {"FreqMaxTextBox", 0},
+                            {"LengthTextBox", 0},
+                            {"NfTextBox", 0}
+                        };
+                    }
                     if (!line.Contains("#") && !line.Contains("!"))
                     {
                         if (k % 4 == 0)
@@ -553,11 +572,12 @@ namespace CalculatingParametersLib
                 }
             }
 
-            return new double[][]
+            dataLoadGraph.data = new double[][]
             {
                 Fi, S11, F11, S12, F12, S13, F13, S14, F14, S21, F21, S22, F22, S23, F23, S24, F24, S31, F31, S32, F32,
                 S33, F33, S34, F34, S41, F41, S42, F42, S43, F43, S44, F44
             };
+            return dataLoadGraph;
         }
         private static string[] GetStringsWithFreq(string ss)
         {
@@ -1017,7 +1037,7 @@ namespace CalculatingParametersLib
             }
             else
             {
-                loadedParams = LoadLeftTs(fileName, stringCounts / 4);
+                loadedParams = LoadLeftS4p(fileName, stringCounts / 4);
             }
 
             loadedParams.inParams = s4pright;

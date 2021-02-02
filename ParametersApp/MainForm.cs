@@ -664,7 +664,7 @@ namespace ParametersApp
 
         private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var graphForm = new Form2();
+            var graphForm = new MainFormOneWindow();
             graphForm.Show();
         }
 
