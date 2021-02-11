@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -10,6 +11,8 @@ namespace CalculatingParametersLib
 {
     public static class ParamFileSaveLoader
     {
+        private static CultureInfo _culture = CultureInfo.CreateSpecificCulture("ru-RU");
+        private static NumberStyles _styles = System.Globalization.NumberStyles.Float;
         public static SortedList<string, string> Load(string fileName)
         {
             var loadedParams = new SortedList<string, string>();
@@ -305,98 +308,98 @@ namespace CalculatingParametersLib
                         if (line.Contains("C11, pF/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out c11);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out c11);
                             i++;
                         }
 
                         if (line.Contains("C22, pF/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out c22);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out c22);
                             i++;
                         }
 
                         if (line.Contains("C12, pF/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out c12);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out c12);
                             i++;
                         }
 
                         if (line.Contains("L11, μH/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l11);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l11);
                             i++;
                         }
 
                         if (line.Contains("L22, μH/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l22);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l22);
                             i++;
                         }
 
                         if (line.Contains("L12, μH/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l12);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l12);
                             i++;
                         }
 
                         if (line.Contains("Nf="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out nf);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out nf);
                             i++;
                         }
 
                         if (line.Contains("L, mm="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l);
                             i++;
                         }
 
                         if (line.Contains("FreqMax, GHz="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out fmax);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out fmax);
                             i++;
                         }
 
                         if (line.Contains("FreqMin, GHz="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out fmin);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out fmin);
                             i++;
                         }
 
                         if (line.Contains("Z2out, Ω="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out z2Out);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out z2Out);
                             i++;
                         }
 
                         if (line.Contains("Z1out, Ω="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out z1Out);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out z1Out);
                             i++;
                         }
 
                         if (line.Contains("Z2in, Ω="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out z2In);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out z2In);
                             i++;
                         }
 
                         if (line.Contains("Z1in, Ω="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out z1In);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out z1In);
                             i++;
                         }
 
@@ -511,15 +514,15 @@ namespace CalculatingParametersLib
                         if (k % 4 == 0)
                         {
                             var data = GetStringsWithFreq(line);
-                            double.TryParse(data[0].Replace(".",","), out Fi[i]);
-                            double.TryParse(data[1].Replace(".",","), out S11[i]);
-                            double.TryParse(data[2].Replace(".",","), out F11[i]);
-                            double.TryParse(data[3].Replace(".",","), out S12[i]);
-                            double.TryParse(data[4].Replace(".",","), out F12[i]);
-                            double.TryParse(data[5].Replace(".",","), out S13[i]);
-                            double.TryParse(data[6].Replace(".",","), out F13[i]);
-                            double.TryParse(data[7].Replace(".",","), out S14[i]);
-                            double.TryParse(data[8].Replace(".",","), out F14[i]);
+                            double.TryParse(data[0].Replace(".",","), _styles, _culture, out Fi[i]);
+                            double.TryParse(data[1].Replace(".",","), _styles, _culture, out S11[i]);
+                            double.TryParse(data[2].Replace(".",","), _styles, _culture, out F11[i]);
+                            double.TryParse(data[3].Replace(".",","), _styles, _culture, out S12[i]);
+                            double.TryParse(data[4].Replace(".",","), _styles, _culture, out F12[i]);
+                            double.TryParse(data[5].Replace(".",","), _styles, _culture, out S13[i]);
+                            double.TryParse(data[6].Replace(".",","), _styles, _culture, out F13[i]);
+                            double.TryParse(data[7].Replace(".",","), _styles, _culture, out S14[i]);
+                            double.TryParse(data[8].Replace(".",","), _styles, _culture, out F14[i]);
                             i++;
                             if (i==nf)
                             {
@@ -531,40 +534,40 @@ namespace CalculatingParametersLib
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".",","), out S21[i]);
-                            double.TryParse(data[1].Replace(".",","), out F21[i]);
-                            double.TryParse(data[2].Replace(".",","), out S22[i]);
-                            double.TryParse(data[3].Replace(".",","), out F22[i]);
-                            double.TryParse(data[4].Replace(".",","), out S23[i]);
-                            double.TryParse(data[5].Replace(".",","), out F23[i]);
-                            double.TryParse(data[6].Replace(".",","), out S24[i]);
-                            double.TryParse(data[7].Replace(".",","), out F24[i]);
+                            double.TryParse(data[0].Replace(".",","), _styles, _culture, out S21[i]);
+                            double.TryParse(data[1].Replace(".",","), _styles, _culture, out F21[i]);
+                            double.TryParse(data[2].Replace(".",","), _styles, _culture, out S22[i]);
+                            double.TryParse(data[3].Replace(".",","), _styles, _culture, out F22[i]);
+                            double.TryParse(data[4].Replace(".",","), _styles, _culture, out S23[i]);
+                            double.TryParse(data[5].Replace(".",","), _styles, _culture, out F23[i]);
+                            double.TryParse(data[6].Replace(".",","), _styles, _culture, out S24[i]);
+                            double.TryParse(data[7].Replace(".",","), _styles, _culture, out F24[i]);
                         }
                         if (k % 4 == 2)
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".",","), out S31[i]);
-                            double.TryParse(data[1].Replace(".",","), out F31[i]);
-                            double.TryParse(data[2].Replace(".",","), out S32[i]);
-                            double.TryParse(data[3].Replace(".",","), out F32[i]);
-                            double.TryParse(data[4].Replace(".",","), out S33[i]);
-                            double.TryParse(data[5].Replace(".",","), out F33[i]);
-                            double.TryParse(data[6].Replace(".",","), out S34[i]);
-                            double.TryParse(data[7].Replace(".",","), out F34[i]);
+                            double.TryParse(data[0].Replace(".",","), _styles, _culture, out S31[i]);
+                            double.TryParse(data[1].Replace(".",","), _styles, _culture, out F31[i]);
+                            double.TryParse(data[2].Replace(".",","), _styles, _culture, out S32[i]);
+                            double.TryParse(data[3].Replace(".",","), _styles, _culture, out F32[i]);
+                            double.TryParse(data[4].Replace(".",","), _styles, _culture, out S33[i]);
+                            double.TryParse(data[5].Replace(".",","), _styles, _culture, out F33[i]);
+                            double.TryParse(data[6].Replace(".",","), _styles, _culture, out S34[i]);
+                            double.TryParse(data[7].Replace(".",","), _styles, _culture, out F34[i]);
                         }
                         if (k % 4 == 3)
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".",","), out S41[i]);
-                            double.TryParse(data[1].Replace(".",","), out F41[i]);
-                            double.TryParse(data[2].Replace(".",","), out S42[i]);
-                            double.TryParse(data[3].Replace(".",","), out F42[i]);
-                            double.TryParse(data[4].Replace(".",","), out S43[i]);
-                            double.TryParse(data[5].Replace(".",","), out F43[i]);
-                            double.TryParse(data[6].Replace(".",","), out S44[i]);
-                            double.TryParse(data[7].Replace(".",","), out F44[i]);
+                            double.TryParse(data[0].Replace(".",","), _styles, _culture, out S41[i]);
+                            double.TryParse(data[1].Replace(".",","), _styles, _culture, out F41[i]);
+                            double.TryParse(data[2].Replace(".",","), _styles, _culture, out S42[i]);
+                            double.TryParse(data[3].Replace(".",","), _styles, _culture, out F42[i]);
+                            double.TryParse(data[4].Replace(".",","), _styles, _culture, out S43[i]);
+                            double.TryParse(data[5].Replace(".",","), _styles, _culture, out F43[i]);
+                            double.TryParse(data[6].Replace(".",","), _styles, _culture, out S44[i]);
+                            double.TryParse(data[7].Replace(".",","), _styles, _culture, out F44[i]);
                         }
 
                         k++;
@@ -760,10 +763,10 @@ namespace CalculatingParametersLib
                         v1 = s0.Substring(i1 + 1, i2).Replace(".", ",");
                         v2 = s1.Substring(i2 + 1, i3).Replace(".", ",");
                         v3 = s2.Substring(i3 + 1).Replace(".", ",");
-                        double.TryParse(v0, out z1in);
-                        double.TryParse(v1, out z1out);
-                        double.TryParse(v2, out z2in);
-                        double.TryParse(v3, out z2out);
+                        double.TryParse(v0, _styles, _culture, out z1in);
+                        double.TryParse(v1, _styles, _culture, out z1out);
+                        double.TryParse(v2, _styles, _culture, out z2in);
+                        double.TryParse(v3, _styles, _culture, out z2out);
                         dataLoadGraph.RelatedData = new SortedList<string, double>
                         {
                             {"Z1inTextBox", z1in},
@@ -782,15 +785,15 @@ namespace CalculatingParametersLib
                         if (k % 4 == 0)
                         {
                             var data = GetStringsWithFreq(line);
-                            double.TryParse(data[0].Replace(".", ","), out Fi[i]);
-                            double.TryParse(data[1].Replace(".", ","), out S11[i]);
-                            double.TryParse(data[2].Replace(".", ","), out F11[i]);
-                            double.TryParse(data[3].Replace(".", ","), out S12[i]);
-                            double.TryParse(data[4].Replace(".", ","), out F12[i]);
-                            double.TryParse(data[5].Replace(".", ","), out S13[i]);
-                            double.TryParse(data[6].Replace(".", ","), out F13[i]);
-                            double.TryParse(data[7].Replace(".", ","), out S14[i]);
-                            double.TryParse(data[8].Replace(".", ","), out F14[i]);
+                            double.TryParse(data[0].Replace(".", ","), _styles, _culture, out Fi[i]);
+                            double.TryParse(data[1].Replace(".", ","), _styles, _culture, out S11[i]);
+                            double.TryParse(data[2].Replace(".", ","), _styles, _culture, out F11[i]);
+                            double.TryParse(data[3].Replace(".", ","), _styles, _culture, out S12[i]);
+                            double.TryParse(data[4].Replace(".", ","), _styles, _culture, out F12[i]);
+                            double.TryParse(data[5].Replace(".", ","), _styles, _culture, out S13[i]);
+                            double.TryParse(data[6].Replace(".", ","), _styles, _culture, out F13[i]);
+                            double.TryParse(data[7].Replace(".", ","), _styles, _culture, out S14[i]);
+                            double.TryParse(data[8].Replace(".", ","), _styles, _culture, out F14[i]);
                             i++;
                             if (i == nf)
                             {
@@ -802,40 +805,40 @@ namespace CalculatingParametersLib
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".", ","), out S21[i-1]);
-                            double.TryParse(data[1].Replace(".", ","), out F21[i-1]);
-                            double.TryParse(data[2].Replace(".", ","), out S22[i-1]);
-                            double.TryParse(data[3].Replace(".", ","), out F22[i-1]);
-                            double.TryParse(data[4].Replace(".", ","), out S23[i-1]);
-                            double.TryParse(data[5].Replace(".", ","), out F23[i-1]);
-                            double.TryParse(data[6].Replace(".", ","), out S24[i-1]);
-                            double.TryParse(data[7].Replace(".", ","), out F24[i-1]);
+                            double.TryParse(data[0].Replace(".", ","), _styles, _culture, out S21[i-1]);
+                            double.TryParse(data[1].Replace(".", ","), _styles, _culture, out F21[i-1]);
+                            double.TryParse(data[2].Replace(".", ","), _styles, _culture, out S22[i-1]);
+                            double.TryParse(data[3].Replace(".", ","), _styles, _culture, out F22[i-1]);
+                            double.TryParse(data[4].Replace(".", ","), _styles, _culture, out S23[i-1]);
+                            double.TryParse(data[5].Replace(".", ","), _styles, _culture, out F23[i-1]);
+                            double.TryParse(data[6].Replace(".", ","), _styles, _culture, out S24[i-1]);
+                            double.TryParse(data[7].Replace(".", ","), _styles, _culture, out F24[i-1]);
                         }
                         if (k % 4 == 2)
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".", ","), out S31[i-1]);
-                            double.TryParse(data[1].Replace(".", ","), out F31[i-1]);
-                            double.TryParse(data[2].Replace(".", ","), out S32[i-1]);
-                            double.TryParse(data[3].Replace(".", ","), out F32[i-1]);
-                            double.TryParse(data[4].Replace(".", ","), out S33[i-1]);
-                            double.TryParse(data[5].Replace(".", ","), out F33[i-1]);
-                            double.TryParse(data[6].Replace(".", ","), out S34[i-1]);
-                            double.TryParse(data[7].Replace(".", ","), out F34[i-1]);
+                            double.TryParse(data[0].Replace(".", ","), _styles, _culture, out S31[i-1]);
+                            double.TryParse(data[1].Replace(".", ","), _styles, _culture, out F31[i-1]);
+                            double.TryParse(data[2].Replace(".", ","), _styles, _culture, out S32[i-1]);
+                            double.TryParse(data[3].Replace(".", ","), _styles, _culture, out F32[i-1]);
+                            double.TryParse(data[4].Replace(".", ","), _styles, _culture, out S33[i-1]);
+                            double.TryParse(data[5].Replace(".", ","), _styles, _culture, out F33[i-1]);
+                            double.TryParse(data[6].Replace(".", ","), _styles, _culture, out S34[i-1]);
+                            double.TryParse(data[7].Replace(".", ","), _styles, _culture, out F34[i-1]);
                         }
                         if (k % 4 == 3)
                         {
                             var data = GetStringsWithoutFreq(line);
 
-                            double.TryParse(data[0].Replace(".", ","), out S41[i-1]);
-                            double.TryParse(data[1].Replace(".", ","), out F41[i-1]);
-                            double.TryParse(data[2].Replace(".", ","), out S42[i-1]);
-                            double.TryParse(data[3].Replace(".", ","), out F42[i-1]);
-                            double.TryParse(data[4].Replace(".", ","), out S43[i-1]);
-                            double.TryParse(data[5].Replace(".", ","), out F43[i-1]);
-                            double.TryParse(data[6].Replace(".", ","), out S44[i-1]);
-                            double.TryParse(data[7].Replace(".", ","), out F44[i-1]);
+                            double.TryParse(data[0].Replace(".", ","), _styles, _culture, out S41[i-1]);
+                            double.TryParse(data[1].Replace(".", ","), _styles, _culture, out F41[i-1]);
+                            double.TryParse(data[2].Replace(".", ","), _styles, _culture, out S42[i-1]);
+                            double.TryParse(data[3].Replace(".", ","), _styles, _culture, out F42[i-1]);
+                            double.TryParse(data[4].Replace(".", ","), _styles, _culture, out S43[i-1]);
+                            double.TryParse(data[5].Replace(".", ","), _styles, _culture, out F43[i-1]);
+                            double.TryParse(data[6].Replace(".", ","), _styles, _culture, out S44[i-1]);
+                            double.TryParse(data[7].Replace(".", ","), _styles, _culture, out F44[i-1]);
                         }
 
                         k++;
@@ -946,70 +949,70 @@ namespace CalculatingParametersLib
                         if (line.Contains("C11, pF/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out c11);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out c11);
                             i++;
                         }
 
                         if (line.Contains("C22, pF/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out c22);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out c22);
                             i++;
                         }
 
                         if (line.Contains("C12, pF/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out c12);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out c12);
                             i++;
                         }
 
                         if (line.Contains("L11, μH/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l11);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l11);
                             i++;
                         }
 
                         if (line.Contains("L22, μH/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l22);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l22);
                             i++;
                         }
 
                         if (line.Contains("L12, μH/m="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l12);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l12);
                             i++;
                         }
 
                         if (line.Contains("Nf="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out nf);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out nf);
                             i++;
                         }
 
                         if (line.Contains("L, mm="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out l);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out l);
                             i++;
                         }
 
                         if (line.Contains("FreqMax, GHz="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out fmax);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out fmax);
                             i++;
                         }
 
                         if (line.Contains("FreqMin, GHz="))
                         {
                             var index = line.IndexOf('=');
-                            double.TryParse(line.Substring(index + 1), out fmin);
+                            double.TryParse(line.Substring(index + 1), _styles, _culture, out fmin);
                             i++;
                         }
 

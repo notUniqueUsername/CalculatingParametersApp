@@ -1,6 +1,7 @@
 ﻿using CalculatingParametersLib;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,6 +12,7 @@ namespace ParametersApp
     public partial class MainForm : Form
     {
         private Params _currentParams = new Params();
+        private CultureInfo Culture = CultureInfo.CreateSpecificCulture("ru-RU");
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
         private CalculateFromZC1ZC2ZP1ZP2 _calculatorFromZc1Zc2Zp1Zp2 = new CalculateFromZC1ZC2ZP1ZP2();
         private CalculateFromModal _calculateFromModal = new CalculateFromModal();
@@ -242,12 +244,12 @@ namespace ParametersApp
             switch (_setOfParameters)
             {
                 case SetOfParametersEnum.Pogonie:
-                    _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ",")) * epsilon;
-                    _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ",")) * epsilon;
-                    _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ",")) * epsilon;
-                    _currentParams.L11 = double.Parse(textBox1.Text.Replace(".", ",")) * mu;
-                    _currentParams.L12 = double.Parse(textBox3.Text.Replace(".", ",")) * mu;
-                    _currentParams.L22 = double.Parse(textBox2.Text.Replace(".", ",")) * mu;
+                    _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ","), Culture) * epsilon;
+                    _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ","), Culture) * epsilon;
+                    _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ","), Culture) * epsilon;
+                    _currentParams.L11 = double.Parse(textBox1.Text.Replace(".", ","), Culture) * mu;
+                    _currentParams.L12 = double.Parse(textBox3.Text.Replace(".", ","), Culture) * mu;
+                    _currentParams.L22 = double.Parse(textBox2.Text.Replace(".", ","), Culture) * mu;
 
                     _currentParams = _calculatorFromPogonie.Calculate(_currentParams.C11, _currentParams.C12,
                         _currentParams.C22, _currentParams.L11, _currentParams.L12, _currentParams.L22);
@@ -256,12 +258,12 @@ namespace ParametersApp
                     graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Pogonie_pF_nGn:
-                    _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ","));
-                    _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ","));
-                    _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ","));
-                    _currentParams.L11 = double.Parse(textBox1.Text.Replace(".", ","));
-                    _currentParams.L12 = double.Parse(textBox3.Text.Replace(".", ","));
-                    _currentParams.L22 = double.Parse(textBox2.Text.Replace(".", ","));
+                    _currentParams.C11 = double.Parse(textBox4.Text.Replace(".", ","), Culture);
+                    _currentParams.C12 = double.Parse(textBox6.Text.Replace(".", ","), Culture);
+                    _currentParams.C22 = double.Parse(textBox5.Text.Replace(".", ","), Culture);
+                    _currentParams.L11 = double.Parse(textBox1.Text.Replace(".", ","), Culture);
+                    _currentParams.L12 = double.Parse(textBox3.Text.Replace(".", ","), Culture);
+                    _currentParams.L22 = double.Parse(textBox2.Text.Replace(".", ","), Culture);
 
                     _currentParams = _calculatorFromPogonie.Calculate(_currentParams.C11, _currentParams.C12, _currentParams.C22,
                         _currentParams.L11, _currentParams.L12, _currentParams.L22);
@@ -270,24 +272,24 @@ namespace ParametersApp
                     graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Modalnie:
-                    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
-                    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
-                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+                    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","), Culture);
+                    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","), Culture);
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","), Culture);
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","), Culture);
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","), Culture);
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","), Culture);
 
                     _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
                     WriteParams(_currentParams.GetForamttedParams());
                     graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Zc1_Zp1:
-                    _currentParams.Zc1 = double.Parse(textBox1.Text.Replace(".", ","));
-                    _currentParams.Zp1 = double.Parse(textBox2.Text.Replace(".", ","));
-                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+                    _currentParams.Zc1 = double.Parse(textBox1.Text.Replace(".", ","), Culture);
+                    _currentParams.Zp1 = double.Parse(textBox2.Text.Replace(".", ","), Culture);
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","), Culture);
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","), Culture);
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","), Culture);
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","), Culture);
 
                     _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateWithZc1Zp1(_currentParams.Zc1, _currentParams.Zp1, _currentParams.Rc,
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
@@ -296,12 +298,12 @@ namespace ParametersApp
                     graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Zp1_Zc2:
-                    _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
-                    _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
-                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+                    _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","), Culture);
+                    _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","), Culture);
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","), Culture);
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","), Culture);
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","), Culture);
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","), Culture);
 
                     _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
@@ -310,12 +312,12 @@ namespace ParametersApp
                     graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
-                    _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","));
-                    _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","));
-                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+                    _currentParams.Zc2 = double.Parse(textBox2.Text.Replace(".", ","), Culture);
+                    _currentParams.Zp1 = double.Parse(textBox1.Text.Replace(".", ","), Culture);
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","), Culture);
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","), Culture);
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","), Culture);
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","), Culture);
 
                     _currentParams = _calculatorFromZc1Zc2Zp1Zp2.CalculateZc2Zp1(_currentParams.Zc2, _currentParams.Zp1,
                         _currentParams.Rc, _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
@@ -324,12 +326,12 @@ namespace ParametersApp
                     graphToolStripMenuItem.Enabled = true;
                     break;
                 case SetOfParametersEnum.ModalnieSymm:
-                    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","));
-                    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","));
-                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","));
-                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","));
-                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","));
-                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","));
+                    _currentParams.Z0 = double.Parse(textBox1.Text.Replace(".", ","), Culture);
+                    _currentParams.k = double.Parse(textBox2.Text.Replace(".", ","), Culture);
+                    _currentParams.Rc = double.Parse(textBox3.Text.Replace(".", ","), Culture);
+                    _currentParams.Rp = double.Parse(textBox4.Text.Replace(".", ","), Culture);
+                    _currentParams.Erc = double.Parse(textBox5.Text.Replace(".", ","), Culture);
+                    _currentParams.Erp = double.Parse(textBox6.Text.Replace(".", ","), Culture);
 
                     _currentParams = _calculateFromModal.CalculateAll(_currentParams.Z0, _currentParams.k, _currentParams.Rc,
                         _currentParams.Rp, _currentParams.Erc, _currentParams.Erp);
