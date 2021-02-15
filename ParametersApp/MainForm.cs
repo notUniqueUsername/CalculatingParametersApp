@@ -441,7 +441,7 @@ namespace ParametersApp
             label3.Location = new Point(label3.Location.X - 9, label3.Location.Y);
             label4.Location = new Point(label4.Location.X - 9, label4.Location.Y);
             label5.Location = new Point(label5.Location.X - 9, label5.Location.Y);
-            label6.Location = new Point(label6.Location.X - 9, label6.Location.Y);
+            label6.Location = new Point(label6.Location.X - 12, label6.Location.Y);
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
         }
