@@ -20,7 +20,7 @@ namespace ParametersApp
         private readonly double epsilon = 8.8541878128;
         private SetOfParametersEnum _setOfParameters = SetOfParametersEnum.Modalnie;
 
-        public MainForm()
+        public MainForm(string[] args)
         {
             Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
             InitializeComponent();
@@ -34,12 +34,57 @@ namespace ParametersApp
             ModaleNameTextBox("Z0", "k", "Rc", "Rп", "Erc", "Erп");
             FormatRadioButton1();
             FormatGridView1();
-            
             FormatGridView2();
-            button2_Click(null,null);
+
             button1.FlatStyle = FlatStyle.System;
             button2.FlatStyle = FlatStyle.System;
             graphToolStripMenuItem.Enabled = false;
+            
+            if (args.Length == 7)
+            {
+                if (Enum.TryParse(args[6], out _setOfParameters))
+                {
+                    switch (_setOfParameters)
+                    {
+                        case SetOfParametersEnum.Pogonie:
+                            radioButton1.Checked = true;
+                            break;
+                        case SetOfParametersEnum.Pogonie_pF_nGn:
+                            radioButton2.Checked = true;
+                            break;
+                        case SetOfParametersEnum.Modalnie:
+                            radioButton3.Checked = true;
+                            break;
+                        case SetOfParametersEnum.Zc1_Zp1:
+                            radioButton4.Checked = true;
+                            break;
+                        case SetOfParametersEnum.Zp1_Zc2:
+                            radioButton5.Checked = true;
+                            break;
+                        case SetOfParametersEnum.Zp1_Zc2_RcOne_RpZero:
+                            radioButton6.Checked = true;
+                            break;
+                        case SetOfParametersEnum.ModalnieSymm:
+                            radioButton7.Checked = true;
+                            break;
+                    }
+                }
+                textBox1.Text = args[0]; //L11
+                textBox2.Text = args[1]; //L22
+                textBox3.Text = args[2]; //L12
+                textBox4.Text = args[3]; //C11
+                textBox5.Text = args[4]; //C22
+                textBox6.Text = args[5]; //C12
+                button1_Click(null,null);
+                graphToolStripMenuItem_Click(null, null);
+            }
+            else
+            {
+                button2_Click(null,null);
+            }
+            
+
+
         }
 
         private void ChangeVersion()
