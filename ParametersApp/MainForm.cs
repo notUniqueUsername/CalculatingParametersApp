@@ -11,6 +11,7 @@ namespace ParametersApp
 {
     public partial class MainForm : Form
     {
+        //Тест выторизации гитхаба
         private Params _currentParams = new Params();
         private CultureInfo Culture = CultureInfo.CreateSpecificCulture("ru-RU");
         private CalculateFromPogonie _calculatorFromPogonie = new CalculateFromPogonie();
