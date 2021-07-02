@@ -135,6 +135,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="BatForMake\ChangeVersion.bat" />
+    <None Include="BatForMake\FormArch.bat" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -165,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ACLP4.ico" />
+    <Content Include="BatForMake\Version.txt" />
     <Content Include="License-LGPL.txt" />
     <Content Include="Paramico1.ico" />
     <None Include="Resources\String_CLike.png" />
@@ -186,14 +189,20 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
-  cd C:\Users\Valeriy\Desktop\nirs
-call C:\Users\Valeriy\Desktop\nirs\FormArch.bat
+  
+cd $(TargetDir)BatForMake\
+
+call FormArch.bat
 )</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>if $(ConfigurationName) == Release (
-call C:\Users\Valeriy\Desktop\nirs\ChangeVersion.bat
-COPY C:\Users\Valeriy\Desktop\nirs\Version.txt $(TargetDir)Version.txt
+cd $(TargetDir)
+cd ..
+cd ..
+xcopy /y BatForMake $(TargetDir)BatForMake
+cd $(TargetDir)BatForMake\
+call ChangeVersion.bat
 )</PreBuildEvent>
   </PropertyGroup>
 </Project>

@@ -4,6 +4,47 @@ namespace CalculatingParametersLib
 {
     public class Params
     {
+        public double _z2out;
+        public double _z1out;
+        public double _z2in;
+        public double _z1in;
+
+        public string SetOfParameters
+        {
+            get;
+            set;
+        }
+
+        public int Points
+        {
+            get;
+            set;
+        }
+
+        public double[] FreqRange
+        {
+            get;
+            set;
+        }
+
+        public double Length
+        {
+            get;
+            set;
+        }
+
+        public double[][] SParamPhases
+        {
+            get;
+            set;
+        }
+
+        public double[][] SParamMagnitudes
+        {
+            get;
+            set;
+        }
+
         private double _eMax;
 
         public double Emax
