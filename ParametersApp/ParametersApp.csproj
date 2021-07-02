@@ -198,6 +198,8 @@ call FormArch.bat
   <PropertyGroup>
     <PreBuildEvent>if $(ConfigurationName) == Release (
 cd $(TargetDir)
+RD /s /q BatForMake
+MD BatForMake
 cd ..
 cd ..
 xcopy /y BatForMake $(TargetDir)BatForMake
